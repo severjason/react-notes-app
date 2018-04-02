@@ -1,0 +1,15 @@
+@import 'scss/variables';
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.app-loader {
+  padding-top: 4 * $basic-margin-padding;
+}
+
+img {
+  max-width: 100%;
+}
