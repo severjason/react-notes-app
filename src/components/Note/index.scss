@@ -1,0 +1,51 @@
+// sass-lint:disable force-element-nesting
+@import '../../scss/variables';
+
+%app-note-title-element {
+  height: $app-title-height;
+  line-height: $app-title-height;
+}
+
+.ui.app-note-container {
+  margin: $app-note-margin;
+  width: $app-note-container-width;
+
+  &:first-child,
+  &:last-child {
+    margin: $app-note-margin;
+  }
+
+  .app-note-trash-icon {
+    @extend %app-note-title-element;
+    margin-left: $app-note-container-width - $app-title-height;
+    margin-top: $app-title-height / 2;
+    opacity: .5;
+    position: absolute;
+    width: $app-title-height;
+    z-index: 100;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 1;
+    }
+  }
+}
+
+.app-note-title-container {
+  &:hover {
+    background-color: $app-note-title-hover-color;
+    cursor: pointer;
+  }
+
+  .app-note-title-text {
+    @extend %app-note-title-element;
+  }
+}
+
+.app-note-info {
+  display: none;
+
+  &.expanded {
+    display: block;
+  }
+}
