@@ -1,27 +1,54 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
+import { Container, Grid, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import * as actions from '../../actions';
-import { AppAction, AppState } from '../../interfaces';
+import { AppAction, AppActions, AppNote, AppState } from '../../interfaces';
 import { NotesList } from '../../components';
+import './index.css';
+import { ModalManager } from '../../containers';
 
-class Home extends React.Component<AppState, Dispatch<AppAction>> {
+interface AppHomeProps {
+    notes: AppNote[];
+}
+
+interface AppHomeDispatch {
+    actions: AppActions;
+}
+
+class Home extends React.Component<AppHomeProps & AppHomeDispatch, {}> {
     render() {
         return (
-            <div>
+            <Container>
                 <Helmet>
                     <title>Notes app</title>
                 </Helmet>
-                <div className="ui container">
-                    <NotesList {...this.props}/>
-                </div>
-            </div>
+                <Grid>
+                    <Grid.Column width={16}>
+                        <Icon
+                            className="app-note-add-icon"
+                            name="plus"
+                            onClick={() => this.props.actions.openModal({
+                                header: 'Test content',
+                                content: 'Test content 2',
+                            })}
+                        />
+                    </Grid.Column>
+                    <Grid.Column width={4}>
+                        NavList
+                    </Grid.Column>
+                    <Grid.Column width={12}>
+                        <NotesList {...this.props}/>
+                    </Grid.Column>
+                </Grid>
+                <ModalManager/>
+            </Container>
         );
     }
 }
 
-export default connect<AppState, Dispatch<AppAction>>(
+export default connect<AppHomeProps, AppHomeDispatch>(
     (state: AppState) => ({
         notes: state.notes,
     }),
