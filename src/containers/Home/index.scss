@@ -1,0 +1,23 @@
+// sass-lint:disable force-element-nesting
+@import '../../scss/variables';
+
+.icon.app-note-add-icon {
+  border: $app-note-add-icon-border;
+  border-radius: $app-note-add-icon-width / 2;
+  box-shadow: $app-note-add-icon-box-shadow;
+  display: block;
+  font-size: $app-note-add-icon-font-size;
+  height: $app-note-add-icon-width;
+  margin: .2rem auto;
+  width: $app-note-add-icon-width;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+
+  &::before {
+    position: relative;
+    top: 1.1rem;
+  }
+}
