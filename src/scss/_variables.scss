@@ -1,11 +1,15 @@
 // colors
-
+$app-note-title-hover-color: #f3f4f5;
+$app-note-add-icon-border-color: rgba(34, 36, 38, .15);
 
 // base
-$basic-margin-padding: 15px;
+$basic-margin-padding: 1rem;
 
-// inputs
-$search-input-max-width: 400px;
-$search-input-radius: .3rem 0 0 .3rem;
-$search-input-font-size: .9rem;
-
+// note
+$app-note-margin: .5rem;
+$app-note-container-width: 18.9rem;
+$app-title-height: 2rem;
+$app-note-add-icon-width: 3.5rem;
+$app-note-add-icon-font-size: 1.5rem;
+$app-note-add-icon-border: 1px solid $app-note-add-icon-border-color;
+$app-note-add-icon-box-shadow: 0 1px 2px 0 $app-note-add-icon-border-color;
