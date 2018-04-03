@@ -1,14 +1,15 @@
 import * as React from 'react';
 import './index.css';
+import { Container, Icon } from 'semantic-ui-react';
 
 const Header: React.StatelessComponent<{}> = () => {
     return (
-        <header className="ui container app-header">
+        <Container className="app-header">
             <h3 className="ui center aligned icon header">
-                <i className="sticky note outline icon"/>
+                <Icon name="sticky note outline"/>
                 Notes app
             </h3>
-        </header>
+        </Container>
     );
 };
 
