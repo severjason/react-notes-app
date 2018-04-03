@@ -1,23 +1,29 @@
 import * as React from 'react';
-import { AppNote } from '../../interfaces';
-import { Note } from '../../components';
+import { AppActions, AppNote } from '../../interfaces';
+import { Note, EmptyPage } from '../../components';
+import './index.css';
+import { ReactNode } from 'react';
 
-const NotesList: React.StatelessComponent = (props: any) => {
+interface AppNoteListProps {
+    notes: AppNote[];
+    actions: AppActions;
+}
 
-    const notes: AppNote[] = props.notes.map((note: AppNote, index: number) => {
+const NotesList: React.StatelessComponent<AppNoteListProps> = (props: AppNoteListProps) => {
+
+    const notes: ReactNode[] = props.notes.map((note: AppNote, index: number) => {
         return (
             <Note
                 key={index}
                 content={note}
+                actions={props.actions}
             />
         );
     });
 
-    return (
-        <div>
-            {notes}
-        </div>
-    );
+    return (notes.length > 0)
+        ? (<div className="app-notes-container">{notes}</div>)
+        : (<EmptyPage/>);
 };
 
 export default NotesList;
