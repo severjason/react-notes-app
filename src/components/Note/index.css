@@ -1,0 +1,28 @@
+.ui.app-note-container .app-note-trash-icon, .app-note-title-container .app-note-title-text {
+  height: 2rem;
+  line-height: 2rem; }
+
+.ui.app-note-container {
+  margin: 0.5rem;
+  width: 18.9rem; }
+  .ui.app-note-container:first-child, .ui.app-note-container:last-child {
+    margin: 0.5rem; }
+  .ui.app-note-container .app-note-trash-icon {
+    margin-left: 16.9rem;
+    margin-top: 1rem;
+    opacity: .5;
+    position: absolute;
+    width: 2rem;
+    z-index: 100; }
+    .ui.app-note-container .app-note-trash-icon:hover {
+      cursor: pointer;
+      opacity: 1; }
+
+.app-note-title-container:hover {
+  background-color: #f3f4f5;
+  cursor: pointer; }
+
+.app-note-info {
+  display: none; }
+  .app-note-info.expanded {
+    display: block; }
