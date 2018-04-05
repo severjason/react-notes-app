@@ -1,15 +1,32 @@
 import { types } from '../constants/types';
-import { AppAction } from '../interfaces';
+import { AppAction, AppNoteModal } from '../interfaces';
 
-export default function modalReducer(state: any = null, action: AppAction) {
+const INITIAL_STATE: AppNoteModal = {
+    opened: false,
+    openedForUpdate: false,
+    modalProps: {},
+};
+
+export default function modalReducer(state: AppNoteModal = INITIAL_STATE, action: AppAction) {
     switch (action.type) {
         case types.modal.OPEN_MODAL: {
             return {
-                modalProps: action.payload,
+                opened: true,
+            };
+        }
+        case types.modal.OPEN_MODAL_FOR_UPDATE: {
+            return {
+                opened: true,
+                openedForUpdate: true,
+                modalProps: action.modalProps,
             };
         }
         case types.modal.CLOSE_MODAL: {
-            return {};
+            return {
+                opened: false,
+                openedForUpdate: false,
+                modalProps: {},
+            };
         }
         default: {
             return state;
