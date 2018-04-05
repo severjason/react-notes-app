@@ -1,5 +1,5 @@
 import { types } from '../constants/types';
-import { AppAction, AppNote } from '../interfaces';
+import { AppAction, AppActionAddNote, AppNote } from '../interfaces';
 
 const INITIAL_STATE: AppNote[] = [
     {
@@ -8,7 +8,7 @@ const INITIAL_STATE: AppNote[] = [
         categories: [''],
         color: 'red',
         tags: [''],
-        text: 'some textdsadsa afasd asdas ads asdasdas asd ad asd',
+        text: 'First node text',
         expanded: true,
     },
     {
@@ -17,7 +17,7 @@ const INITIAL_STATE: AppNote[] = [
         categories: [''],
         color: 'black',
         tags: [''],
-        text: 'some text 2',
+        text: 'First node text',
         expanded: true,
     },
     {
@@ -26,12 +26,12 @@ const INITIAL_STATE: AppNote[] = [
         categories: [''],
         color: 'yellow',
         tags: [''],
-        text: 'some text 3',
+        text: 'Third node text',
         expanded: false,
     }
 ];
 
-export default function notesReducer(state: AppNote[] = INITIAL_STATE, action: AppAction) {
+export default function notesReducer(state: AppNote[] = INITIAL_STATE, action: AppAction & AppActionAddNote) {
     switch (action.type) {
         case types.notes.GET_NOTES: {
             return state;
@@ -44,6 +44,17 @@ export default function notesReducer(state: AppNote[] = INITIAL_STATE, action: A
         }
         case types.notes.DELETE_NOTE: {
             return state.filter((note: AppNote) => note.id !== action.id);
+        }
+        case types.notes.ADD_NOTE: {
+            return state.concat(action.note);
+        }
+        case types.notes.UPDATE_NOTE: {
+            const noteIndex: number = state.findIndex((n: AppNote) => n.id === action.note.id);
+            return [
+                ...state.slice(0, noteIndex),
+                action.note,
+                ...state.slice(noteIndex + 1, state.length),
+            ];
         }
         default: {
             return state;
