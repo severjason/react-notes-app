@@ -15,7 +15,7 @@ const NotesList: React.StatelessComponent<AppNoteListProps> = (props: AppNoteLis
         return (
             <Note
                 key={index}
-                content={note}
+                note={note}
                 actions={props.actions}
             />
         );
