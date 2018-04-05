@@ -15,23 +15,58 @@
     margin: $app-note-margin;
   }
 
-  .app-note-trash-icon {
+  %app-note-icon {
     @extend %app-note-title-element;
-    margin-left: $app-note-container-width - $app-title-height;
+    margin-left: 90%;
     margin-top: $app-title-height / 2;
     opacity: .5;
     position: absolute;
     width: $app-title-height;
     z-index: 100;
 
+
     &:hover {
       cursor: pointer;
       opacity: 1;
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(1);
     }
   }
+
+  .app-note-trash-icon {
+    @extend %app-note-icon;
+
+    &:hover {
+      color: $app-red-color;
+    }
+  }
+
+  .app-note-edit-icon {
+    @extend %app-note-icon;
+    margin-left: 80%;
+
+    &:hover {
+      color: $app-blue-color;
+    }
+  }
+
+  .app-note-expand-icon {
+    @extend %app-note-icon;
+    margin-left: 70%;
+
+    &:hover {
+      color: $app-black-color;
+    }
+  }
+
 }
 
 .app-note-title-container {
+  padding: 1rem;
+
   &:hover {
     background-color: $app-note-title-hover-color;
     cursor: pointer;
@@ -39,6 +74,7 @@
 
   .app-note-title-text {
     @extend %app-note-title-element;
+    word-wrap: break-word;
   }
 }
 
