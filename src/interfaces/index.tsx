@@ -1,15 +1,22 @@
 export interface AppAction {
     type: string;
     id?: string;
-    payload?: any;
+    modalProps?: AppNote;
+}
+
+export interface AppActionAddNote extends AppAction {
+    note: AppNote;
 }
 
 export interface AppActions {
     getNotes(): AppAction;
     toggleNote(id: string): AppAction;
+    addNote (note: AppNote): AppActionAddNote;
+    updateNote (note: AppNote): AppActionAddNote;
     deleteNote(id: string): AppAction;
-    openModal(modalProps: any): AppAction;
+    openModal(): AppAction;
     closeModal(): AppAction;
+    openModalForUpdate(modalProps: AppNote): AppAction;
 }
 
 export interface AppNote {
@@ -24,5 +31,17 @@ export interface AppNote {
 
 export interface AppState {
     notes: AppNote[];
-    modals: any;
+    modal: AppNoteModal;
+    categories: AppCategories;
+}
+
+export interface AppNoteModal {
+    opened: boolean;
+    openedForUpdate: boolean;
+    modalProps: any;
+}
+
+export interface AppCategories {
+    active: string;
+    categoriesList: string[];
 }
