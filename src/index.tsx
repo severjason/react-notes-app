@@ -1,27 +1,14 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { createStore, Store, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { createLogger } from 'redux-logger';
-import thunkMiddleware from 'redux-thunk';
+// import { PersistGate } from 'redux-persist/integration/react';
 import 'semantic-ui-css/semantic.min.css';
 import { App } from './containers';
-import rootReducer from './reducers';
-import { AppState } from './interfaces';
+import { /* persistor,*/ store } from './store';
 
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
-
-const loggerMiddleware = createLogger();
-
-const store: Store<AppState> = createStore(
-    rootReducer,
-    applyMiddleware (
-        thunkMiddleware,
-        loggerMiddleware
-    )
-);
 
 ReactDOM.render(
     <Provider store={store}>
@@ -33,3 +20,17 @@ ReactDOM.render(
 );
 
 registerServiceWorker();
+
+/*
+ReactDOM.render(
+    <Provider store={store}>
+        <PersistGate persistor={persistor}>
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
+        </PersistGate>
+    </Provider>,
+    document.getElementById('root') as HTMLElement
+);
+
+ */
