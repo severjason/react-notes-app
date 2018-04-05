@@ -1,0 +1,16 @@
+.ui.modal.app-note-modal-container {
+  left: 50%;
+  margin: 0 0 0 -350px;
+  position: fixed;
+  top: 50%;
+  width: 700px;
+  z-index: 1001; }
+  .ui.modal.app-note-modal-container textarea {
+    margin-top: 1rem; }
+  .ui.modal.app-note-modal-container .app-checkbox-label:hover {
+    cursor: pointer; }
+
+@media all and (max-width: 768px) {
+  .ui.modal.app-note-modal-container {
+    margin: 0 0 0 -45.5%;
+    width: 91%; } }
