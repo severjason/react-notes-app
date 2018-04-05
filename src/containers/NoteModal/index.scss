@@ -1,0 +1,32 @@
+// sass-lint:disable force-element-nesting
+@import '../../scss/variables';
+
+.ui.modal.app-note-modal-container {
+  left: 50%;
+  margin: 0 0 0 -350px;
+  position: fixed;
+  top: 50%;
+  width: 700px;
+  z-index: 1001;
+
+  .app-note-form--info {
+    // color: $app-grey-color;
+  }
+
+  textarea {
+    margin-top: 1rem;
+  }
+
+  .app-checkbox-label {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+@media all and (max-width: 768px) {
+  .ui.modal.app-note-modal-container {
+    margin: 0 0 0 -45.5%;
+    width: 91%;
+  }
+}

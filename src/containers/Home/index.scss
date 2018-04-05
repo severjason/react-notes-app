@@ -16,6 +16,10 @@
     transform: scale(1.1);
   }
 
+  &:active {
+    transform: scale(1);
+  }
+
   &::before {
     position: relative;
     top: 1.1rem;

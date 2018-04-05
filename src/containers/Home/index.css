@@ -10,6 +10,8 @@
   .icon.app-note-add-icon:hover {
     cursor: pointer;
     transform: scale(1.1); }
+  .icon.app-note-add-icon:active {
+    transform: scale(1); }
   .icon.app-note-add-icon::before {
     position: relative;
     top: 1.1rem; }
