@@ -4,19 +4,43 @@ export interface AppAction {
     modalProps?: AppNote;
 }
 
-export interface AppActionAddNote extends AppAction {
+export interface AppActionNote extends AppAction {
     note: AppNote;
 }
 
+export interface AppActionCategory extends AppAction {
+    category: string;
+}
+
+export interface AppActionTags extends AppAction {
+    tag: string;
+}
+
 export interface AppActions {
+
     getNotes(): AppAction;
+
     toggleNote(id: string): AppAction;
-    addNote (note: AppNote): AppActionAddNote;
-    updateNote (note: AppNote): AppActionAddNote;
+
+    addNote(note: AppNote): AppActionNote;
+
+    updateNote(note: AppNote): AppActionNote;
+
     deleteNote(id: string): AppAction;
+
     openModal(): AppAction;
+
     closeModal(): AppAction;
+
     openModalForUpdate(modalProps: AppNote): AppAction;
+
+    addCustomTag(tag: string): AppActionTags;
+
+    deleteCustomTag(tag: string): AppActionTags;
+
+    toggleCategories(): AppAction;
+
+    activateCategory(category: string): AppActionCategory;
 }
 
 export interface AppNote {
@@ -33,6 +57,7 @@ export interface AppState {
     notes: AppNote[];
     modal: AppNoteModal;
     categories: AppCategories;
+    tags: AppTags;
 }
 
 export interface AppNoteModal {
@@ -42,6 +67,12 @@ export interface AppNoteModal {
 }
 
 export interface AppCategories {
-    active: string;
+    activated: string;
     categoriesList: string[];
+    expanded: boolean;
+}
+
+export interface AppTags {
+    basicTags: string[];
+    customTags: string[];
 }
