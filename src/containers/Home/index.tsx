@@ -31,9 +31,9 @@ class Home extends React.Component<AppState & AppHomeDispatch, {}> {
                             title="Create note"
                         />
                     </Grid.Column>
-                    <Grid.Column width={16} className="app-categories-container">
+                    <Grid className="app-categories-container">
                         <CategoriesList {...this.props.categories} actions={this.props.actions}/>
-                    </Grid.Column>
+                    </Grid>
                     <Grid.Column width={16}>
                         <Switch>
                             <Route path="/notes/:category" render={() => <NotesList {...this.props}/>}/>
