@@ -2,7 +2,7 @@ import { types } from '../constants/types';
 import { AppAction, AppNoteModal } from '../interfaces';
 
 const INITIAL_STATE: AppNoteModal = {
-    opened: true,
+    opened: false,
     openedForUpdate: false,
     modalProps: {},
 };
