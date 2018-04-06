@@ -3,7 +3,8 @@ import { types } from '../constants/types';
 
 const INITIAL_STATE: AppCategories = {
     activated: 'all',
-    categoriesList: ['all', 'work', 'private', 'health'],
+    categoriesList: ['all', 'work', 'private', 'health', 'work1', 'private1',
+        'health1'],
     expanded: true,
 };
 
@@ -21,6 +22,12 @@ export default function categoriesReducer(
             return {
                 ...state,
                 activated: (state.categoriesList.includes(action.category) ? action.category : state.activated),
+            };
+        }
+        case types.categories.DELETE_CATEGORY: {
+            return {
+                ...state,
+                categoriesList: state.categoriesList.filter((c: string) => c !== action.category),
             };
         }
         default: {

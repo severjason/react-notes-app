@@ -1,5 +1,5 @@
 import { types } from '../constants/types';
-import { AppAction, AppActionNote, AppActionTags, AppNote } from '../interfaces';
+import { AppAction, AppActionCategory, AppActionNote, AppActionTags, AppNote } from '../interfaces';
 
 const INITIAL_STATE: AppNote[] = [
     {
@@ -14,7 +14,7 @@ const INITIAL_STATE: AppNote[] = [
     {
         id: '2',
         title: 'Second note',
-        categories: [''],
+        categories: [],
         color: 'black',
         tags: [],
         text: 'First node text',
@@ -32,7 +32,7 @@ const INITIAL_STATE: AppNote[] = [
 ];
 
 export default function notesReducer(state: AppNote[] = INITIAL_STATE,
-                                     action: AppAction & AppActionNote & AppActionTags) {
+                                     action: AppAction & AppActionNote & AppActionTags & AppActionCategory) {
     switch (action.type) {
         case types.notes.GET_NOTES: {
             return state;
@@ -62,6 +62,14 @@ export default function notesReducer(state: AppNote[] = INITIAL_STATE,
                 return {
                     ...note,
                     tags: note.tags.filter((tag: string) => tag !== action.tag),
+                };
+            });
+        }
+        case types.categories.DELETE_CATEGORY: {
+            return state.map((note: AppNote) => {
+                return {
+                    ...note,
+                    categories: note.categories.filter((c: string) => c !== action.category),
                 };
             });
         }
