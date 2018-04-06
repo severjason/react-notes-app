@@ -2,7 +2,7 @@ import { types } from '../constants/types';
 import { AppAction, AppNoteModal } from '../interfaces';
 
 const INITIAL_STATE: AppNoteModal = {
-    opened: false,
+    opened: true,
     openedForUpdate: false,
     modalProps: {},
 };
@@ -11,6 +11,7 @@ export default function modalReducer(state: AppNoteModal = INITIAL_STATE, action
     switch (action.type) {
         case types.modal.OPEN_MODAL: {
             return {
+                ...state,
                 opened: true,
             };
         }
