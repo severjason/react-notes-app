@@ -1,9 +1,13 @@
 import * as React from 'react';
 
-const EmptyPage: React.StatelessComponent = () => {
+interface AppEmptyPage {
+    category?: string;
+}
+
+const EmptyPage: React.StatelessComponent<AppEmptyPage> = (props: AppEmptyPage) => {
     return (
         <div>
-            No notes...
+            {(props.category === 'all') ? `No notes...` : `No notes in ${props.category} category...`}
         </div>
     );
 };
