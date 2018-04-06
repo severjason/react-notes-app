@@ -10,5 +10,13 @@ export const types = {
         OPEN_MODAL: 'OPEN_MODAL',
         OPEN_MODAL_FOR_UPDATE: 'OPEN_MODAL_FOR_UPDATE',
         CLOSE_MODAL: 'CLOSE_MODAL',
+    },
+    categories: {
+        TOGGLE_CATEGORIES: 'TOGGLE_CATEGORIES',
+        ACTIVATE_CATEGORY: 'ACTIVATE_CATEGORY',
+    },
+    tags: {
+        ADD_CUSTOM_TAG: 'ADD_CUSTOM_TAG',
+        DELETE_CUSTOM_TAG: 'DELETE_CUSTOM_TAG',
     }
 };
