@@ -38,9 +38,6 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
 
     private colors: string[] = ['black', 'red', 'green', 'orange', 'blue', 'purple', 'brown', 'violet', 'teal', 'pink'];
 
-    private categoriesList: string[] = this.props.categories.categoriesList
-        .filter((category: string) => category !== 'all');
-
     private maxTitleLength: number = 20;
 
     private maxNewTagLength: number = 15;
@@ -109,6 +106,9 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
 
     public render() {
 
+        const categoriesList: string[] = this.props.categories.categoriesList
+            .filter((category: string) => category !== 'all');
+
         const noteForUpdate: boolean = this.props.modal.openedForUpdate;
 
         const colorCheckboxes = this.colors.map((color: string, index: number) => {
@@ -130,7 +130,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
             );
         });
 
-        const categoriesCheckboxes = this.categoriesList.map((category: string, index: number) => {
+        const categoriesCheckboxes = categoriesList.map((category: string, index: number) => {
             return (
                 <Form.Field key={index}>
                     <label
@@ -197,21 +197,24 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                     </Modal.Header>
                     <Modal.Content>
                         <Form>
-                            <Form.Group >
-                                    <Label className={`right pointing basic grey app-modal-label`}>Title:
-                                        <span className="app-note-form--info">
+                            <Form.Group>
+                                <Label className={`right pointing basic grey app-modal-label required`}>Title:
+                                    <span className="app-note-form--info">
                                             (max length - {this.maxTitleLength})
                                         </span>
-                                    </Label>
-                                    <Input
-                                        value={this.state.title}
-                                        placeholder="Note title"
-                                        maxLength={this.maxTitleLength}
-                                        onChange={this.handleTitleChange}
-                                        className="app-modal-input"
+                                </Label>
+                                <Input
+                                    value={this.state.title}
+                                    placeholder="Note title"
+                                    maxLength={this.maxTitleLength}
+                                    onChange={this.handleTitleChange}
+                                    className="app-modal-input"
 
-                                    />
+                                />
                             </Form.Group>
+                            <div className="app-required-text">
+                                <strong>Title</strong> is required
+                            </div>
                             <Divider hidden={true}/>
                             <Form.Group inline={true}>
                                 <Label className={`right pointing basic grey app-modal-label`}>Color:</Label>
@@ -227,7 +230,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                                 {categoriesCheckboxes}
                             </Form.Group>
                             <Divider hidden={true}/>
-                            <Form.Group >
+                            <Form.Group>
                                 <Label className={`right pointing basic grey app-modal-label`}>Tags:</Label>
                                 <Label.Group tag={true}>
                                     {basicTags}
@@ -236,27 +239,27 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                             </Form.Group>
                             <Divider hidden={true}/>
                             <Form.Group>
-                                    <Label className={`right pointing basic grey middle aligned app-modal-label`}>
-                                        Custom tag:
-                                    </Label>
-                                    <Input
-                                        placeholder="Add your tag here..."
-                                        value={this.state.newTag}
-                                        maxLength={this.maxNewTagLength}
-                                        className="app-modal-input"
-                                        onChange={this.handleNewTagChange}
-                                    />
-                                    <Button
-                                        className="app-modal-button basic"
-                                        disabled={this.addTagIsDisabled(allTags)}
-                                        onClick={() => {
-                                            this.props.actions.addCustomTag(this.state.newTag);
-                                            this.setState({tags: this.state.tags.concat(this.state.newTag)});
-                                            this.resetNewTag();
-                                        }}
-                                    >
-                                        Add tag
-                                    </Button>
+                                <Label className={`right pointing basic grey middle aligned app-modal-label`}>
+                                    Custom tag:
+                                </Label>
+                                <Input
+                                    placeholder="Add your tag here..."
+                                    value={this.state.newTag}
+                                    maxLength={this.maxNewTagLength}
+                                    className="app-modal-input"
+                                    onChange={this.handleNewTagChange}
+                                />
+                                <Button
+                                    className="app-modal-button basic"
+                                    disabled={this.addTagIsDisabled(allTags)}
+                                    onClick={() => {
+                                        this.props.actions.addCustomTag(this.state.newTag);
+                                        this.setState({tags: this.state.tags.concat(this.state.newTag)});
+                                        this.resetNewTag();
+                                    }}
+                                >
+                                    Add tag
+                                </Button>
                             </Form.Group>
                             <Divider hidden={true}/>
                             <Form.Field inline={true}>
