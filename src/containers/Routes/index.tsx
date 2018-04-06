@@ -6,8 +6,8 @@ const Routes: React.StatelessComponent<{}> = () => {
     return (
         <Switch>
             <Route path="/notes" component={Home}/>
-            <Route exact={true} path="/" render={() => <Redirect to="/notes"/>}/>
-            <Route path="*" render={() => <Redirect to="/notes"/>}/>
+            <Route exact={true} path="/" render={() => <Redirect to="/notes/all"/>}/>
+            <Route path="*" render={() => <Redirect to="/notes/all"/>}/>
         </Switch>
     );
 };
