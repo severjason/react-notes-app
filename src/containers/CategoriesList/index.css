@@ -1,2 +1,46 @@
 .app-activated-category {
   color: #1b1c1d; }
+
+.ui.stackable.menu.app-categories-menu {
+  flex-wrap: wrap;
+  margin: 1rem 0;
+  padding: 0; }
+  .ui.stackable.menu.app-categories-menu .app-categories-menu-item {
+    display: none;
+    height: 3.5rem;
+    padding: 0; }
+    .ui.stackable.menu.app-categories-menu .app-categories-menu-item.expanded {
+      display: flex; }
+  .ui.stackable.menu.app-categories-menu .app-categories-menu-link {
+    color: #1b1c1d;
+    height: 3.5rem;
+    line-height: 3.5rem;
+    padding: 0 3rem 0 1rem; }
+    .ui.stackable.menu.app-categories-menu .app-categories-menu-link.app-all {
+      padding: 0 2rem; }
+    .ui.stackable.menu.app-categories-menu .app-categories-menu-link::first-letter {
+      text-transform: capitalize; }
+    .ui.stackable.menu.app-categories-menu .app-categories-menu-link:hover {
+      color: #1b1c1d; }
+  .ui.stackable.menu.app-categories-menu .app-categories-menu-logo {
+    font-size: 1.5rem;
+    height: 3.5rem;
+    padding: 0;
+    width: 3.5rem; }
+    .ui.stackable.menu.app-categories-menu .app-categories-menu-logo .icon {
+      margin: 0 auto; }
+    .ui.stackable.menu.app-categories-menu .app-categories-menu-logo:hover {
+      cursor: pointer; }
+  .ui.stackable.menu.app-categories-menu .icon.app-category-delete-icon {
+    height: 2rem;
+    line-height: 2rem;
+    opacity: .2;
+    position: absolute;
+    right: 0;
+    width: 2rem;
+    z-index: 1001; }
+    .ui.stackable.menu.app-categories-menu .icon.app-category-delete-icon.hidden {
+      display: none; }
+    .ui.stackable.menu.app-categories-menu .icon.app-category-delete-icon:hover {
+      cursor: pointer;
+      opacity: .8; }

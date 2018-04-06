@@ -4,3 +4,75 @@
 .app-activated-category {
   color: $app-black-color;
 }
+
+
+.ui.stackable.menu.app-categories-menu {
+  flex-wrap: wrap;
+  margin: 1rem 0;
+  padding: 0;
+
+  .app-categories-menu-item {
+    display: none;
+    height: $app-categories-menu-height;
+    padding: 0;
+
+    &.expanded {
+      display: flex;
+    }
+  }
+
+  .app-categories-menu-link {
+    color: $app-black-color;
+    height: $app-categories-menu-height;
+    line-height: $app-categories-menu-height;
+    padding: 0 3rem 0 1rem;
+
+    &.app-all {
+      padding: 0 2rem;
+    }
+
+
+    &::first-letter {
+      text-transform: capitalize;
+    }
+
+    &:hover {
+      color: $app-black-color;
+    }
+  }
+
+  .app-categories-menu-logo {
+    // color: $app-black-color;
+    font-size: 1.5rem;
+    height: $app-categories-menu-height;
+    padding: 0;
+    width: $app-categories-menu-height;
+
+    .icon {
+      margin: 0 auto;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .icon.app-category-delete-icon {
+    height: $app-categories-menu-delete-icon-width;
+    line-height: $app-categories-menu-delete-icon-width;
+    opacity: .2;
+    position: absolute;
+    right: 0;
+    width: $app-categories-menu-delete-icon-width;
+    z-index: 1001;
+
+    &.hidden {
+      display: none;
+    }
+
+    &:hover {
+      cursor: pointer;
+      opacity: .8;
+    }
+  }
+}
