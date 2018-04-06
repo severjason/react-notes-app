@@ -1,13 +1,13 @@
 import { types } from '../constants/types';
-import { AppAction, AppActionAddNote, AppNote } from '../interfaces';
+import { AppAction, AppActionNote, AppActionTags, AppNote } from '../interfaces';
 
 const INITIAL_STATE: AppNote[] = [
     {
         id: '1',
         title: 'First note',
-        categories: [''],
+        categories: ['work'],
         color: 'red',
-        tags: [''],
+        tags: [],
         text: 'First node text',
         expanded: true,
     },
@@ -16,22 +16,23 @@ const INITIAL_STATE: AppNote[] = [
         title: 'Second note',
         categories: [''],
         color: 'black',
-        tags: [''],
+        tags: [],
         text: 'First node text',
         expanded: true,
     },
     {
         id: '3',
         title: 'Third note',
-        categories: [''],
+        categories: ['work'],
         color: 'yellow',
-        tags: [''],
+        tags: [],
         text: 'Third node text',
         expanded: false,
     }
 ];
 
-export default function notesReducer(state: AppNote[] = INITIAL_STATE, action: AppAction & AppActionAddNote) {
+export default function notesReducer(state: AppNote[] = INITIAL_STATE,
+                                     action: AppAction & AppActionNote & AppActionTags) {
     switch (action.type) {
         case types.notes.GET_NOTES: {
             return state;
@@ -55,6 +56,14 @@ export default function notesReducer(state: AppNote[] = INITIAL_STATE, action: A
                 action.note,
                 ...state.slice(noteIndex + 1, state.length),
             ];
+        }
+        case types.tags.DELETE_CUSTOM_TAG: {
+            return state.map((note: AppNote) => {
+                return {
+                    ...note,
+                    tags: note.tags.filter((tag: string) => tag !== action.tag),
+                };
+            });
         }
         default: {
             return state;
