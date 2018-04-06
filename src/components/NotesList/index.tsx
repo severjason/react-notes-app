@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AppActions, AppNote } from '../../interfaces';
+import { AppActions, AppCategories, AppNote } from '../../interfaces';
 import { Note, EmptyPage } from '../../components';
 import './index.css';
 import { ReactNode } from 'react';
@@ -7,11 +7,16 @@ import { ReactNode } from 'react';
 interface AppNoteListProps {
     notes: AppNote[];
     actions: AppActions;
+    categories: AppCategories;
 }
 
 const NotesList: React.StatelessComponent<AppNoteListProps> = (props: AppNoteListProps) => {
 
-    const notes: ReactNode[] = props.notes.map((note: AppNote, index: number) => {
+    const filteredNotes: AppNote[] = (props.categories.activated === 'all')
+        ? props.notes
+        : props.notes.filter(note => note.categories.includes(props.categories.activated));
+
+    const notes: ReactNode[] = filteredNotes.map((note: AppNote, index: number) => {
         return (
             <Note
                 key={index}
@@ -23,7 +28,7 @@ const NotesList: React.StatelessComponent<AppNoteListProps> = (props: AppNoteLis
 
     return (notes.length > 0)
         ? (<div className="app-notes-container">{notes}</div>)
-        : (<EmptyPage/>);
+        : (<EmptyPage category={props.categories.activated}/>);
 };
 
 export default NotesList;
