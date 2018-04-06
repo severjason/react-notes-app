@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Accordion, Icon, Divider } from 'semantic-ui-react';
+import { Icon, Menu } from 'semantic-ui-react';
 import { AppActions, AppCategories } from '../../interfaces';
 import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
@@ -11,40 +11,57 @@ interface AppCategoriesDispatch {
 
 class CategoriesList extends React.Component<AppCategories & AppCategoriesDispatch, {}> {
 
-    public state = {
-    };
+    public state = {};
 
     render() {
         const categories: ReactNode = this.props.categoriesList.map((category: string, index: number) => {
             return (
-                <Link
+                <Menu.Item
                     key={index}
-                    to={`/notes/${category}`}
-                    className={`${(this.props.activated === category) ? 'app-activated-category' : ''}`}
-                    onClick={() => this.props.actions.activateCategory(category)}
+                    className={`app-categories-menu-item ${(this.props.expanded ? 'expanded' : '')}`}
+                    active={(this.props.activated === category)}
                 >
-                    {category}<br/>
-                </Link>
+                    <Link
+                        to={`/notes/${category}`}
+                        className={`${(category === 'all')
+                            ? 'app-categories-menu-link app-all'
+                            : 'app-categories-menu-link'}`}
+                        onClick={() => this.props.actions.activateCategory(category)}
+                    >
+                        {category}
+                    </Link>
+                    <Icon
+                        name="delete"
+                        className={`app-category-delete-icon
+                        ${(this.props.activated === category || category === 'all') ? 'hidden' : ''}`}
+                        onClick={() => this.props.actions.deleteCategory(category)}
+                    />
+                </Menu.Item>
             );
         });
 
         return (
-            <div>
-                <Accordion fluid={true} styled={false}>
-                    <Accordion.Title
-                        active={this.props.expanded}
+                <Menu
+                    stackable={true}
+                    className="app-categories-menu"
+                >
+                    <Menu.Item
+                        className="app-categories-menu-logo"
                         onClick={this.props.actions.toggleCategories}
                     >
-                        <Icon name="dropdown"/>
-                        Notes categories
-                    </Accordion.Title>
-                    <Accordion.Content active={this.props.expanded}>
-                        <Divider/>
-                        {categories}
-                    </Accordion.Content>
-                </Accordion>
-                <Divider/>
-            </div>
+                        <Icon
+                            name={this.props.expanded ? 'minus' : 'plus'}
+                        />
+                    </Menu.Item>
+                    {categories}
+                    <Menu.Item
+                        className="app-categories-menu-logo"
+                    >
+                        <Icon
+                            name="plus"
+                        />
+                    </Menu.Item>
+                </Menu>
         );
     }
 }
