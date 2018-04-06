@@ -41,6 +41,8 @@ export interface AppActions {
     toggleCategories(): AppAction;
 
     activateCategory(category: string): AppActionCategory;
+
+    deleteCategory(category: string): AppActionCategory;
 }
 
 export interface AppNote {
