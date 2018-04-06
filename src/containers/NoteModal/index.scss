@@ -73,8 +73,9 @@
     }
   }
 
-  .app-modal-category-title {
+  .ui.label.app-modal-category-title {
     @extend %app-modal-item;
+    margin-top: .5rem;
 
     &:hover {
       cursor: pointer;
@@ -92,12 +93,20 @@
   %app-modal-item {
     height: 2.5rem;
     line-height: 2.5rem;
-    margin: .5rem;
+    margin: .5rem .5rem .5rem 0;
     padding: 0 .5rem;
   }
 
   .app-modal-label {
     @extend %app-modal-item;
+
+    &.required {
+      &::after {
+        color: $app-red-color;
+        content: '*';
+        margin: -.2em 0 0 .2em;
+      }
+    }
 
     &.app-categories {
       margin-right: 1rem;
@@ -114,8 +123,22 @@
     @extend %app-modal-item;
   }
 
-  .ui.form.fields {
+  .fields {
+    flex-wrap: wrap;
     margin: 0;
+  }
+
+  .app-required-text {
+    color: $app-grey-color;
+    font-size: .8rem;
+    font-style: italic;
+    padding-left: .5rem;
+
+    &::before {
+      color: $app-red-color;
+      content: '*';
+      margin: -.2em 0 0 .2em;
+    }
   }
 
 }
