@@ -7,6 +7,12 @@ $app-green-color: #21ba45;
 $app-blue-color: #2185d0;
 $app-black-color: #1b1c1d;
 $app-grey-color: #767676;
+$app-orange-color: #f2711c;
+$app-teal-color: #009c95;
+$app-purple-color: #a333c8;
+$app-brown-color: #a5673f;
+$app-violet-color: #6435c9;
+$app-pink-color: #e03997;
 
 // base
 $basic-margin-padding: 1rem;
@@ -19,3 +25,7 @@ $app-note-add-icon-width: 3.5rem;
 $app-note-add-icon-font-size: 1.5rem;
 $app-note-add-icon-border: 1px solid $app-note-add-icon-border-color;
 $app-note-add-icon-box-shadow: 0 1px 2px 0 $app-note-add-icon-border-color;
+
+// note-modal
+$app-note-modal-color-checkbox-width: 1.5rem;
+$app-note-modal-container-width: 50rem;
