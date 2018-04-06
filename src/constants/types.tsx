@@ -14,6 +14,7 @@ export const types = {
     categories: {
         TOGGLE_CATEGORIES: 'TOGGLE_CATEGORIES',
         ACTIVATE_CATEGORY: 'ACTIVATE_CATEGORY',
+        DELETE_CATEGORY: 'DELETE_CATEGORY',
     },
     tags: {
         ADD_CUSTOM_TAG: 'ADD_CUSTOM_TAG',
