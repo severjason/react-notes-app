@@ -57,3 +57,8 @@ export const deleteCustomTag = (tag: string): AppActionTags => ({
     type: types.tags.DELETE_CUSTOM_TAG,
     tag: tag,
 });
+
+export const deleteCategory = (category: string): AppActionCategory => ({
+    type: types.categories.DELETE_CATEGORY,
+    category: category,
+});
