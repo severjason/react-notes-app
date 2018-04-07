@@ -24,7 +24,6 @@
     width: $app-title-height;
     z-index: 100;
 
-
     &:hover {
       cursor: pointer;
       opacity: 1;
@@ -62,26 +61,107 @@
     }
   }
 
-}
+  .app-note-title-container {
+    padding: 1rem;
 
-.app-note-title-container {
-  padding: 1rem;
+    &:hover {
+      background-color: $app-note-title-hover-color;
+      cursor: pointer;
+    }
 
-  &:hover {
-    background-color: $app-note-title-hover-color;
-    cursor: pointer;
+    .app-note-title-text {
+      @extend %app-note-title-element;
+      word-wrap: break-word;
+    }
   }
 
-  .app-note-title-text {
-    @extend %app-note-title-element;
-    word-wrap: break-word;
+  .app-note-info {
+    display: none;
+
+    .app-note-text {
+      //
+    }
+
+    .app-note-tags {
+      .label {
+        font-size: .7rem;
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    &.expanded {
+      display: block;
+    }
   }
+
+  &.full {
+    margin: 0 auto;
+    max-width: $app-note-container-full-width;
+    width: 100%;
+
+    .app-note-title-container {
+      border-radius: $app-border-radius;
+
+      &:hover {
+        background-color: unset;
+        cursor: auto;
+      }
+    }
+
+    .app-note-edit-icon {
+      margin-left: 85%;
+    }
+
+    .app-note-trash-icon {
+      margin-left: 90%;
+    }
+
+    .app-note-close-icon {
+      @extend %app-note-icon;
+      margin-left: 95%;
+
+      &:hover {
+        color: $app-black-color;
+      }
+    }
+
+    .app-note-tags {
+      .label {
+        font-size: .85rem;
+      }
+    }
+
+  }
+
 }
 
-.app-note-info {
-  display: none;
+@media all and (max-width: 500px) {
+  .ui.app-note-container {
 
-  &.expanded {
-    display: block;
+    &.full {
+
+      .app-note-edit-icon {
+        margin-left: 78%;
+      }
+
+      .app-note-trash-icon {
+        margin-left: 85%;
+      }
+
+      .app-note-close-icon {
+        margin-left: 92%;
+      }
+
+      .app-note-tags {
+        .label {
+          font-size: .7rem;
+        }
+      }
+
+    }
+
   }
 }
