@@ -28,71 +28,75 @@
 .ui.app-border-pink {
   border: 1px solid #e03997; }
 
-.ui.modal.app-note-modal-container {
-  left: 50%;
-  margin: 0 0 0 -25rem;
-  position: fixed;
-  top: 50%;
-  width: 50rem;
-  z-index: 1001; }
-  .ui.modal.app-note-modal-container textarea {
-    margin-top: 1rem; }
-  .ui.modal.app-note-modal-container .ui.label.app-checkbox-label {
-    border-radius: 0.75rem;
-    height: 1.5rem;
-    margin: .2rem;
-    padding: 0;
-    width: 1.5rem; }
-    .ui.modal.app-note-modal-container .ui.label.app-checkbox-label:hover {
-      cursor: pointer; }
-    .ui.modal.app-note-modal-container .ui.label.app-checkbox-label label::before, .ui.modal.app-note-modal-container .ui.label.app-checkbox-label label::after {
-      display: none; }
-  .ui.modal.app-note-modal-container .ui.label.app-modal-category-title {
-    margin-top: .5rem; }
-    .ui.modal.app-note-modal-container .ui.label.app-modal-category-title:hover {
-      cursor: pointer; }
-    .ui.modal.app-note-modal-container .ui.label.app-modal-category-title::first-letter {
-      text-transform: capitalize; }
-    .ui.modal.app-note-modal-container .ui.label.app-modal-category-title .ui.checkbox {
-      display: none; }
-  .ui.modal.app-note-modal-container .ui.label.app-modal-category-title, .ui.modal.app-note-modal-container .app-modal-label, .ui.modal.app-note-modal-container .app-modal-input, .ui.modal.app-note-modal-container .app-modal-button {
-    height: 2.5rem;
-    line-height: 2.5rem;
-    margin: .5rem .5rem .5rem 0;
-    padding: 0 .5rem; }
-  .ui.modal.app-note-modal-container .app-modal-label.app-tags-category {
-    margin-right: 1rem; }
-  .ui.modal.app-note-modal-container .app-modal-label.required::after {
+.ui.modal.app-note-modal-container textarea {
+  margin-top: 1rem; }
+
+.ui.modal.app-note-modal-container .ui.label.app-checkbox-label {
+  border-radius: 0.75rem;
+  height: 1.5rem;
+  margin: .2rem;
+  padding: 0;
+  width: 1.5rem; }
+  .ui.modal.app-note-modal-container .ui.label.app-checkbox-label:hover {
+    cursor: pointer; }
+  .ui.modal.app-note-modal-container .ui.label.app-checkbox-label label::before, .ui.modal.app-note-modal-container .ui.label.app-checkbox-label label::after {
+    display: none; }
+
+.ui.modal.app-note-modal-container .ui.label.app-modal-category-title {
+  margin-top: .5rem; }
+  .ui.modal.app-note-modal-container .ui.label.app-modal-category-title:hover {
+    cursor: pointer; }
+  .ui.modal.app-note-modal-container .ui.label.app-modal-category-title::first-letter {
+    text-transform: capitalize; }
+  .ui.modal.app-note-modal-container .ui.label.app-modal-category-title .ui.checkbox {
+    display: none; }
+
+.ui.modal.app-note-modal-container .ui.label.app-modal-category-title, .ui.modal.app-note-modal-container .app-modal-label, .ui.modal.app-note-modal-container .app-modal-input, .ui.modal.app-note-modal-container .app-modal-button {
+  height: 2.5rem;
+  line-height: 2.5rem;
+  margin: .5rem .5rem .5rem 0;
+  padding: 0 .5rem; }
+
+.ui.modal.app-note-modal-container .app-modal-label.app-tags-category {
+  margin-right: 1rem; }
+
+.ui.modal.app-note-modal-container .app-modal-label.required::after {
+  color: #db2828;
+  content: '*';
+  margin: -.2em 0 0 .2em; }
+
+.ui.modal.app-note-modal-container .app-modal-label.app-categories {
+  margin-right: 1rem; }
+
+.ui.modal.app-note-modal-container .app-modal-input {
+  margin-right: 0;
+  padding: 0 .5rem 0 0; }
+  .ui.modal.app-note-modal-container .app-modal-input.app-tag-input {
+    padding-right: 0; }
+  .ui.modal.app-note-modal-container .app-modal-input.app-tag-input > input {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0; }
+
+.ui.modal.app-note-modal-container .app-modal-button {
+  padding: 0 1.5rem; }
+
+.ui.modal.app-note-modal-container .fields {
+  flex-wrap: wrap;
+  margin: 0; }
+
+.ui.modal.app-note-modal-container .limited-height {
+  max-height: 7rem;
+  overflow: auto; }
+
+.ui.modal.app-note-modal-container .app-required-text {
+  color: #767676;
+  font-size: .8rem;
+  font-style: italic;
+  padding-left: .5rem; }
+  .ui.modal.app-note-modal-container .app-required-text::before {
     color: #db2828;
     content: '*';
     margin: -.2em 0 0 .2em; }
-  .ui.modal.app-note-modal-container .app-modal-label.app-categories {
-    margin-right: 1rem; }
-  .ui.modal.app-note-modal-container .app-modal-input {
-    margin-right: 0;
-    padding: 0 .5rem 0 0; }
-    .ui.modal.app-note-modal-container .app-modal-input.app-tag-input {
-      padding-right: 0; }
-    .ui.modal.app-note-modal-container .app-modal-input.app-tag-input > input {
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0; }
-  .ui.modal.app-note-modal-container .app-modal-button {
-    padding: 0 1.5rem; }
-  .ui.modal.app-note-modal-container .fields {
-    flex-wrap: wrap;
-    margin: 0; }
-  .ui.modal.app-note-modal-container .limited-height {
-    max-height: 7rem;
-    overflow: auto; }
-  .ui.modal.app-note-modal-container .app-required-text {
-    color: #767676;
-    font-size: .8rem;
-    font-style: italic;
-    padding-left: .5rem; }
-    .ui.modal.app-note-modal-container .app-required-text::before {
-      color: #db2828;
-      content: '*';
-      margin: -.2em 0 0 .2em; }
 
 @media all and (max-width: 767px) {
   .ui.modal.app-note-modal-container {

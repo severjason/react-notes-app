@@ -185,7 +185,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
         return (
             <div>
                 <Modal
-                    className={`app-note-modal-container app-border-${this.state.color}`}
+                    className={`app-note-modal-container scrolling app-border-${this.state.color}`}
                     size="small"
                     open={this.props.modal.opened}
                     onClose={() => {

@@ -3,12 +3,12 @@
 @import '../../scss/classes';
 
 .ui.modal.app-note-modal-container {
-  left: 50%;
-  margin: 0 0 0 (-$app-note-modal-container-width / 2);
-  position: fixed;
-  top: 50%;
-  width: $app-note-modal-container-width;
-  z-index: 1001;
+  // left: 50%;
+  // margin: 0 0 0 (-$app-note-modal-container-width / 2);
+  // position: fixed;
+  // top: 50%;
+  // width: $app-note-modal-container-width;
+  // z-index: 1001;
 
   textarea {
     margin-top: 1rem;
