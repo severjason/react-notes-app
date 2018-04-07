@@ -2,6 +2,7 @@
 $app-note-title-hover-color: #f3f4f5;
 $app-note-add-icon-border-color: rgba(34, 36, 38, .15);
 $app-note-form-info-color: rgba(0, 0, 0, .3);
+$app-menu-hover-color: rgba(0, 0, 0, .03);
 $app-red-color: #db2828;
 $app-green-color: #21ba45;
 $app-blue-color: #2185d0;
@@ -16,10 +17,12 @@ $app-pink-color: #e03997;
 
 // base
 $basic-margin-padding: 1rem;
+$app-border-radius: 5px;
 
 // note
 $app-note-margin: .5rem;
 $app-note-container-width: 18.9rem;
+$app-note-container-full-width: 54.7rem;
 $app-title-height: 2rem;
 $app-note-add-icon-width: 3.5rem;
 $app-note-add-icon-font-size: 1.5rem;
@@ -29,7 +32,10 @@ $app-note-add-icon-box-shadow: 0 1px 2px 0 $app-note-add-icon-border-color;
 // note-modal
 $app-note-modal-color-checkbox-width: 1.5rem;
 $app-note-modal-container-width: 50rem;
+$app-note-modal-limited-height: 7rem;
 
 // categories-menu
 $app-categories-menu-height: 3.5rem;
 $app-categories-menu-delete-icon-width: 2rem;
+$app-categories-menu-border: .5px solid $app-note-add-icon-border-color;
+$app-categories-menu-box-shadow: 0 0 1px 0 $app-note-add-icon-border-color;
