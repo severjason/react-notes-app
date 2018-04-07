@@ -41,7 +41,7 @@
     }
   }
 
-  .app-categories-menu-logo {
+  %app-categories-menu {
     // color: $app-black-color;
     font-size: 1.5rem;
     height: $app-categories-menu-height;
@@ -52,12 +52,44 @@
       margin: 0 auto;
     }
 
+    &.hidden {
+      display: none;
+    }
+
     &:hover {
       cursor: pointer;
     }
   }
 
-  .icon.app-category-delete-icon {
+  .app-categories-menu-logo {
+    @extend %app-categories-menu;
+  }
+
+  .app-add-category-menu {
+    @extend %app-categories-menu;
+    display: none;
+
+    &.expanded {
+      display: flex;
+
+      &.hidden {
+        display: none;
+      }
+    }
+  }
+
+  .app-category-input-container {
+    &.hidden {
+      display: none;
+    }
+
+    input,
+    button {
+      border-radius: 0;
+    }
+  }
+
+  %app-delete-icon {
     height: $app-categories-menu-delete-icon-width;
     line-height: $app-categories-menu-delete-icon-width;
     opacity: .2;
@@ -74,5 +106,20 @@
       cursor: pointer;
       opacity: .8;
     }
+  }
+
+  .icon.app-category-delete-icon {
+    @extend %app-delete-icon;
+  }
+
+  .icon.app-hide-input-icon {
+    @extend %app-delete-icon;
+    height: $app-categories-menu-height;
+    line-height: $app-categories-menu-height;
+    padding: 0;
+  }
+
+  .app-add-category-button {
+    padding-right: 2.5rem;
   }
 }

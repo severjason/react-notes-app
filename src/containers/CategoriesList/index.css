@@ -22,16 +22,29 @@
       text-transform: capitalize; }
     .ui.stackable.menu.app-categories-menu .app-categories-menu-link:hover {
       color: #1b1c1d; }
-  .ui.stackable.menu.app-categories-menu .app-categories-menu-logo {
+  .ui.stackable.menu.app-categories-menu .app-categories-menu-logo, .ui.stackable.menu.app-categories-menu .app-add-category-menu {
     font-size: 1.5rem;
     height: 3.5rem;
     padding: 0;
     width: 3.5rem; }
-    .ui.stackable.menu.app-categories-menu .app-categories-menu-logo .icon {
+    .ui.stackable.menu.app-categories-menu .app-categories-menu-logo .icon, .ui.stackable.menu.app-categories-menu .app-add-category-menu .icon {
       margin: 0 auto; }
-    .ui.stackable.menu.app-categories-menu .app-categories-menu-logo:hover {
+    .ui.stackable.menu.app-categories-menu .hidden.app-categories-menu-logo, .ui.stackable.menu.app-categories-menu .hidden.app-add-category-menu {
+      display: none; }
+    .ui.stackable.menu.app-categories-menu .app-categories-menu-logo:hover, .ui.stackable.menu.app-categories-menu .app-add-category-menu:hover {
       cursor: pointer; }
-  .ui.stackable.menu.app-categories-menu .icon.app-category-delete-icon {
+  .ui.stackable.menu.app-categories-menu .app-add-category-menu {
+    display: none; }
+    .ui.stackable.menu.app-categories-menu .app-add-category-menu.expanded {
+      display: flex; }
+      .ui.stackable.menu.app-categories-menu .app-add-category-menu.expanded.hidden {
+        display: none; }
+  .ui.stackable.menu.app-categories-menu .app-category-input-container.hidden {
+    display: none; }
+  .ui.stackable.menu.app-categories-menu .app-category-input-container input,
+  .ui.stackable.menu.app-categories-menu .app-category-input-container button {
+    border-radius: 0; }
+  .ui.stackable.menu.app-categories-menu .icon.app-category-delete-icon, .ui.stackable.menu.app-categories-menu .icon.app-hide-input-icon {
     height: 2rem;
     line-height: 2rem;
     opacity: .2;
@@ -39,8 +52,14 @@
     right: 0;
     width: 2rem;
     z-index: 1001; }
-    .ui.stackable.menu.app-categories-menu .icon.app-category-delete-icon.hidden {
+    .ui.stackable.menu.app-categories-menu .hidden.icon.app-category-delete-icon, .ui.stackable.menu.app-categories-menu .hidden.icon.app-hide-input-icon {
       display: none; }
-    .ui.stackable.menu.app-categories-menu .icon.app-category-delete-icon:hover {
+    .ui.stackable.menu.app-categories-menu .icon.app-category-delete-icon:hover, .ui.stackable.menu.app-categories-menu .icon.app-hide-input-icon:hover {
       cursor: pointer;
       opacity: .8; }
+  .ui.stackable.menu.app-categories-menu .icon.app-hide-input-icon {
+    height: 3.5rem;
+    line-height: 3.5rem;
+    padding: 0; }
+  .ui.stackable.menu.app-categories-menu .app-add-category-button {
+    padding-right: 2.5rem; }
