@@ -150,6 +150,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
             );
         });
 
+        // generate tags and add delete icons only to custom tags
         const getTags = (tagsList: string[], deleteIcon: boolean): ReactNode => {
             const getIcon = (tag: string): ReactNode => (
                 <Icon
@@ -163,6 +164,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                     <Label
                         as="a"
                         key={index}
+                        tag={true}
                         className={`${this.state.tags.includes(tag) ? 'active' : ''}`}
                         onClick={() => this.handleTagClick(tag)}
                     >
@@ -231,27 +233,30 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                             </Form.Group>
                             <Divider hidden={true}/>
                             <Form.Group>
-                                <Label className={`right pointing basic grey app-modal-label`}>Tags:</Label>
-                                <Label.Group tag={true}>
+                                <Label.Group>
+                                    <Label
+                                        className={`right pointing basic grey app-modal-label app-tags-category`}
+                                    >
+                                        Tags:
+                                    </Label>
                                     {basicTags}
                                     {customTags}
                                 </Label.Group>
                             </Form.Group>
                             <Divider hidden={true}/>
                             <Form.Group>
-                                <Label className={`right pointing basic grey middle aligned app-modal-label`}>
-                                    Custom tag:
-                                </Label>
                                 <Input
+                                    icon="tags"
+                                    iconPosition="left"
                                     placeholder="Add your tag here..."
                                     value={this.state.newTag}
                                     maxLength={this.maxNewTagLength}
-                                    className="app-modal-input"
+                                    className="app-modal-input app-tag-input"
                                     onChange={this.handleNewTagChange}
                                 />
                                 <Button
-                                    className="app-modal-button basic"
-                                    disabled={this.addTagIsDisabled(allTags)}
+                                    className="app-modal-button ui label tag "
+                                    disabled={this.addTagIsDisabled(allTags) || !this.state.newTag}
                                     onClick={() => {
                                         this.props.actions.addCustomTag(this.state.newTag);
                                         this.setState({tags: this.state.tags.concat(this.state.newTag)});
