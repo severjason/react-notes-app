@@ -1,5 +1,6 @@
 import { AppAction, AppActionCategory, AppCategories } from '../interfaces';
 import { types } from '../constants/types';
+import * as helpers from '../helpers';
 
 const INITIAL_STATE: AppCategories = {
     activated: 'all',
@@ -28,6 +29,15 @@ export default function categoriesReducer(
             return {
                 ...state,
                 categoriesList: state.categoriesList.filter((c: string) => c !== action.category),
+            };
+        }
+        case types.categories.ADD_CATEGORY: {
+            const newCategories = (!state.categoriesList.includes(action.category))
+                ? helpers.concatArrayUnique(state.categoriesList, [action.category])
+                : state.categoriesList;
+            return {
+                ...state,
+                categoriesList: newCategories,
             };
         }
         default: {

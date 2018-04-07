@@ -43,6 +43,8 @@ export interface AppActions {
     activateCategory(category: string): AppActionCategory;
 
     deleteCategory(category: string): AppActionCategory;
+
+    addCategory(category: string): AppActionCategory;
 }
 
 export interface AppNote {
