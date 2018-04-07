@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import * as actions from '../../actions';
 import { AppAction, AppActions, AppNote, AppState } from '../../interfaces';
-import { NotesList, FullNote } from '../../components';
+import { NotesList, Note } from '../../components';
 import './index.css';
 import { NoteModal, CategoriesList } from '../../containers';
 
@@ -46,7 +46,17 @@ class Home extends React.Component<AppState & AppRoute & AppHomeDispatch, {}> {
                                     (route: any) => {
                                         const category = route.match.params.category;
                                         return (this.props.categories.categoriesList.includes(category))
-                                            ? (<NotesList {...{...this.props, routeCategory: category}}/>)
+                                            ? (
+                                                <div>
+                                                    <Helmet>
+                                                        <title>
+                                                            {category[0].toUpperCase() + category.substring(1)}
+                                                        </title>
+                                                    </Helmet>
+                                                    <NotesList {...{...this.props, routeCategory: category}}/>
+                                                </div>
+
+                                            )
                                             : (<Redirect to="/notes/all"/>);
                                     }}
                             />
@@ -54,13 +64,26 @@ class Home extends React.Component<AppState & AppRoute & AppHomeDispatch, {}> {
                                 path="/note/:noteId"
                                 render={
                                     (route: any) => {
-                                        const idMatches = (noteId: string): boolean => {
+                                        const noteIndex = (): number => {
                                             return this.props.notes.findIndex((note: AppNote) => {
-                                                return noteId === note.id;
-                                            }) !== -1;
+                                                return route.match.params.noteId === note.id;
+                                            });
                                         };
-                                        return (idMatches(route.match.params.noteId))
-                                            ? (<FullNote {...this.props}/>)
+                                        const requestedNote = this.props.notes[noteIndex()];
+                                        return (noteIndex() !== -1)
+                                            ? (
+                                                <div>
+                                                    <Helmet>
+                                                        <title>View full note - {requestedNote.title}</title>
+                                                    </Helmet>
+                                                    <Note
+                                                        note={requestedNote}
+                                                        actions={this.props.actions}
+                                                        fullView={true}
+                                                    />
+                                                </div>
+
+                                            )
                                             : (<Redirect to="/notes/all"/>);
                                     }}
                             />
