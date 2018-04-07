@@ -5,8 +5,8 @@ import { Container, Grid, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import * as actions from '../../actions';
-import { AppAction, AppActions, AppState } from '../../interfaces';
-import { NotesList } from '../../components';
+import { AppAction, AppActions, AppNote, AppState } from '../../interfaces';
+import { NotesList, FullNote } from '../../components';
 import './index.css';
 import { NoteModal, CategoriesList } from '../../containers';
 
@@ -14,7 +14,11 @@ interface AppHomeDispatch {
     actions: AppActions;
 }
 
-class Home extends React.Component<AppState & AppHomeDispatch, {}> {
+interface AppRoute {
+    match: any;
+}
+
+class Home extends React.Component<AppState & AppRoute & AppHomeDispatch, {}> {
 
     render() {
         return (
@@ -36,8 +40,33 @@ class Home extends React.Component<AppState & AppHomeDispatch, {}> {
                     </Grid>
                     <Grid.Column width={16}>
                         <Switch>
-                            <Route path="/notes/:category" render={() => <NotesList {...this.props}/>}/>
+                            <Route
+                                path="/notes/:category"
+                                render={
+                                    (route: any) => {
+                                        const category = route.match.params.category;
+                                        return (this.props.categories.categoriesList.includes(category))
+                                            ? (<NotesList {...{...this.props, routeCategory: category}}/>)
+                                            : (<Redirect to="/notes/all"/>);
+                                    }}
+                            />
+                            <Route
+                                path="/note/:noteId"
+                                render={
+                                    (route: any) => {
+                                        const idMatches = (noteId: string): boolean => {
+                                            return this.props.notes.findIndex((note: AppNote) => {
+                                                return noteId === note.id;
+                                            }) !== -1;
+                                        };
+                                        return (idMatches(route.match.params.noteId))
+                                            ? (<FullNote {...this.props}/>)
+                                            : (<Redirect to="/notes/all"/>);
+                                    }}
+                            />
+                            <Route exact={true} path="/note" render={() => <Redirect to="/notes/all"/>}/>
                             <Route exact={true} path="/notes" render={() => <Redirect to="/notes/all"/>}/>
+                            <Route path="*" render={() => <Redirect to="/notes/all"/>}/>
                         </Switch>
                     </Grid.Column>
                 </Grid>
