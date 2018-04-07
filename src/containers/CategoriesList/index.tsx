@@ -61,17 +61,18 @@ class CategoriesList extends React.Component<AppCategories & AppCategoriesDispat
         });
 
         return (
-            <div>
+            <div className="sixteen wide column">
                 <Menu
                     stackable={true}
                     className="app-categories-menu"
                 >
                     <Menu.Item
-                        className="app-categories-menu-logo"
+                        className={`app-categories-menu-logo ${(this.props.expanded ? 'expanded' : '')}`}
                         onClick={this.props.actions.toggleCategories}
                     >
                         <Icon
-                            name={this.props.expanded ? 'minus' : 'plus'}
+                            title={this.props.expanded ? 'hide categories' : 'show categories'}
+                            name={this.props.expanded ? 'toggle on' : 'toggle off'}
                         />
                     </Menu.Item>
                     {categories}
@@ -81,9 +82,9 @@ class CategoriesList extends React.Component<AppCategories & AppCategoriesDispat
                         ${(this.props.expanded ? 'expanded' : '')}`}
                         onClick={this.handleShowInputClick}
                     >
-                        <Icon
-                            name="plus"
-                        />
+                        <strong>
+                            Add category
+                        </strong>
                     </Menu.Item>
                     <div
                         className={`ui action input app-category-input-container app-categories-menu-item
