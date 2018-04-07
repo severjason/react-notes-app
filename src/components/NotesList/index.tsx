@@ -8,9 +8,14 @@ interface AppNoteListProps {
     notes: AppNote[];
     actions: AppActions;
     categories: AppCategories;
+    routeCategory: string;
 }
 
 const NotesList: React.StatelessComponent<AppNoteListProps> = (props: AppNoteListProps) => {
+
+    if (props.categories.activated !== props.routeCategory) {
+        props.actions.activateCategory(props.routeCategory);
+    }
 
     const filteredNotes: AppNote[] = (props.categories.activated === 'all')
         ? props.notes
