@@ -14,7 +14,7 @@ interface AppNoteProps {
 
 const Note: React.StatelessComponent<AppNoteProps> = (props: AppNoteProps) => {
     const note: AppNote = props.note;
-    const noteExpandedClass: string = (note.expanded) ? 'expanded' : '';
+    const noteExpandedClass: string = (note.expanded || props.fullView) ? 'expanded' : '';
     const addDots: string = (note.text.length > 300 ? '...' : '');
     const noteTags: ReactNode = note.tags.map((tag: string, index: number) => {
         return (
