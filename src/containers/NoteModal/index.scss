@@ -1,5 +1,6 @@
 // sass-lint:disable force-element-nesting
 @import '../../scss/variables';
+@import '../../scss/classes';
 
 .ui.modal.app-note-modal-container {
   left: 50%;
@@ -8,46 +9,6 @@
   top: 50%;
   width: $app-note-modal-container-width;
   z-index: 1001;
-
-  &.red {
-    border: 1px solid $app-red-color;
-  }
-
-  &.black {
-    border: 1px solid $app-black-color;
-  }
-
-  &.green {
-    border: 1px solid $app-green-color;
-  }
-
-  &.blue {
-    border: 1px solid $app-blue-color;
-  }
-
-  &.violet {
-    border: 1px solid $app-violet-color;
-  }
-
-  &.teal {
-    border: 1px solid $app-teal-color;
-  }
-
-  &.purple {
-    border: 1px solid $app-purple-color;
-  }
-
-  &.brown {
-    border: 1px solid $app-brown-color;
-  }
-
-  &.orange {
-    border: 1px solid $app-orange-color;
-  }
-
-  &.pink {
-    border: 1px solid $app-pink-color;
-  }
 
   textarea {
     margin-top: 1rem;
@@ -142,6 +103,11 @@
     margin: 0;
   }
 
+  .limited-height {
+    max-height: $app-note-modal-limited-height;
+    overflow: auto;
+  }
+
   .app-required-text {
     color: $app-grey-color;
     font-size: .8rem;
@@ -157,7 +123,7 @@
 
 }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 767px) {
   .ui.modal.app-note-modal-container {
     margin: 0 0 0 -45.5%;
     width: 91%;

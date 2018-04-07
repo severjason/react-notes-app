@@ -1,3 +1,33 @@
+.ui.app-border-red {
+  border: 1px solid #db2828; }
+
+.ui.app-border-black {
+  border: 1px solid #1b1c1d; }
+
+.ui.app-border-green {
+  border: 1px solid #21ba45; }
+
+.ui.app-border-blue {
+  border: 1px solid #2185d0; }
+
+.ui.app-border-violet {
+  border: 1px solid #6435c9; }
+
+.ui.app-border-teal {
+  border: 1px solid #009c95; }
+
+.ui.app-border-purple {
+  border: 1px solid #a333c8; }
+
+.ui.app-border-brown {
+  border: 1px solid #a5673f; }
+
+.ui.app-border-orange {
+  border: 1px solid #f2711c; }
+
+.ui.app-border-pink {
+  border: 1px solid #e03997; }
+
 .ui.modal.app-note-modal-container {
   left: 50%;
   margin: 0 0 0 -25rem;
@@ -5,26 +35,6 @@
   top: 50%;
   width: 50rem;
   z-index: 1001; }
-  .ui.modal.app-note-modal-container.red {
-    border: 1px solid #db2828; }
-  .ui.modal.app-note-modal-container.black {
-    border: 1px solid #1b1c1d; }
-  .ui.modal.app-note-modal-container.green {
-    border: 1px solid #21ba45; }
-  .ui.modal.app-note-modal-container.blue {
-    border: 1px solid #2185d0; }
-  .ui.modal.app-note-modal-container.violet {
-    border: 1px solid #6435c9; }
-  .ui.modal.app-note-modal-container.teal {
-    border: 1px solid #009c95; }
-  .ui.modal.app-note-modal-container.purple {
-    border: 1px solid #a333c8; }
-  .ui.modal.app-note-modal-container.brown {
-    border: 1px solid #a5673f; }
-  .ui.modal.app-note-modal-container.orange {
-    border: 1px solid #f2711c; }
-  .ui.modal.app-note-modal-container.pink {
-    border: 1px solid #e03997; }
   .ui.modal.app-note-modal-container textarea {
     margin-top: 1rem; }
   .ui.modal.app-note-modal-container .ui.label.app-checkbox-label {
@@ -71,6 +81,9 @@
   .ui.modal.app-note-modal-container .fields {
     flex-wrap: wrap;
     margin: 0; }
+  .ui.modal.app-note-modal-container .limited-height {
+    max-height: 7rem;
+    overflow: auto; }
   .ui.modal.app-note-modal-container .app-required-text {
     color: #767676;
     font-size: .8rem;
@@ -81,7 +94,7 @@
       content: '*';
       margin: -.2em 0 0 .2em; }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 767px) {
   .ui.modal.app-note-modal-container {
     margin: 0 0 0 -45.5%;
     width: 91%; } }
