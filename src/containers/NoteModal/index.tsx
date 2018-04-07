@@ -42,7 +42,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
 
     private maxNewTagLength: number = 15;
 
-    private maxTextAreaLength: number = 400;
+    private maxTextAreaLength: number = 2000;
 
     componentDidUpdate() {
         if (this.props.modal.openedForUpdate && this.props.modal.modalProps.id !== this.state.id) {
@@ -162,6 +162,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
             return tagsList.map((tag: string, index: number) => {
                 return (
                     <Label
+                        title={tag}
                         as="a"
                         key={index}
                         tag={true}
@@ -184,7 +185,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
         return (
             <div>
                 <Modal
-                    className={`app-note-modal-container ${this.state.color}`}
+                    className={`app-note-modal-container app-border-${this.state.color}`}
                     size="small"
                     open={this.props.modal.opened}
                     onClose={() => {
@@ -223,7 +224,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                                 {colorCheckboxes}
                             </Form.Group>
                             <Divider hidden={true}/>
-                            <Form.Group inline={true}>
+                            <Form.Group inline={true} className="limited-height">
                                 <Label
                                     className={`right pointing basic grey app-modal-label app-categories`}
                                 >
@@ -232,8 +233,8 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                                 {categoriesCheckboxes}
                             </Form.Group>
                             <Divider hidden={true}/>
-                            <Form.Group>
-                                <Label.Group>
+                            <Form.Group >
+                                <Label.Group className="limited-height">
                                     <Label
                                         className={`right pointing basic grey app-modal-label app-tags-category`}
                                     >
