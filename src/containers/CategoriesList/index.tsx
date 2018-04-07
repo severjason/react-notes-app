@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Icon, Menu } from 'semantic-ui-react';
+import { Icon, Menu, Button, Input, InputProps } from 'semantic-ui-react';
 import { AppActions, AppCategories } from '../../interfaces';
-import { ReactNode } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import './index.css';
 
@@ -11,7 +11,27 @@ interface AppCategoriesDispatch {
 
 class CategoriesList extends React.Component<AppCategories & AppCategoriesDispatch, {}> {
 
-    public state = {};
+    public state = {
+        showInput: false,
+        inputValue: '',
+    };
+
+    private handleShowInputClick = (): void => this.setState({showInput: true});
+
+    private handleHideInputClick = (): void => this.setState({showInput: false, inputValue: ''});
+
+    private handleInputChange = (e: ChangeEvent<HTMLInputElement>, {value}: InputProps): void => {
+        this.setState({inputValue: value});
+    }
+
+    private handleAddCategoryClick = (category: string): void => {
+        this.props.actions.addCategory(category);
+        this.setState({showInput: false, inputValue: ''});
+    }
+
+    private isInputDisabled = (): boolean => {
+        return !this.state.inputValue || this.props.categoriesList.includes(this.state.inputValue.toLowerCase());
+    }
 
     render() {
         const categories: ReactNode = this.props.categoriesList.map((category: string, index: number) => {
@@ -41,6 +61,7 @@ class CategoriesList extends React.Component<AppCategories & AppCategoriesDispat
         });
 
         return (
+            <div>
                 <Menu
                     stackable={true}
                     className="app-categories-menu"
@@ -55,13 +76,42 @@ class CategoriesList extends React.Component<AppCategories & AppCategoriesDispat
                     </Menu.Item>
                     {categories}
                     <Menu.Item
-                        className="app-categories-menu-logo"
+                        className={`app-add-category-menu
+                        ${this.state.showInput ? 'hidden' : ''}
+                        ${(this.props.expanded ? 'expanded' : '')}`}
+                        onClick={this.handleShowInputClick}
                     >
                         <Icon
                             name="plus"
                         />
                     </Menu.Item>
+                    <div
+                        className={`ui action input app-category-input-container app-categories-menu-item
+                        ${this.state.showInput ? '' : 'hidden'}
+                        ${(this.props.expanded ? 'expanded' : '')}`}
+                    >
+                        <Input
+                            value={this.state.inputValue}
+                            type="text"
+                            placeholder="New category.."
+                            onChange={this.handleInputChange}
+                        />
+                        <Button
+                            onClick={() => this.handleAddCategoryClick(this.state.inputValue)}
+                            disabled={this.isInputDisabled()}
+                            className="app-add-category-button"
+                        >
+                            Add
+                        </Button>
+                        <Icon
+                            name="delete"
+                            className={`app-hide-input-icon`}
+                            onClick={this.handleHideInputClick}
+                        />
+                    </div>
                 </Menu>
+            </div>
+
         );
     }
 }
