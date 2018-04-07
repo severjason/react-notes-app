@@ -4,8 +4,7 @@ import * as helpers from '../helpers';
 
 const INITIAL_STATE: AppCategories = {
     activated: 'all',
-    categoriesList: ['all', 'work', 'private', 'health', 'work1', 'private1',
-        'health1'],
+    categoriesList: ['all', 'work', 'private', 'health'],
     expanded: true,
 };
 
