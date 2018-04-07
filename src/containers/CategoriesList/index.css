@@ -2,15 +2,21 @@
   color: #1b1c1d; }
 
 .ui.stackable.menu.app-categories-menu {
+  border: 0;
+  box-shadow: none;
   flex-wrap: wrap;
-  margin: 1rem 0;
+  margin: 1rem .5rem;
   padding: 0; }
   .ui.stackable.menu.app-categories-menu .app-categories-menu-item {
+    border: 0.5px solid rgba(34, 36, 38, 0.15);
+    box-shadow: 0 0 1px 0 rgba(34, 36, 38, 0.15);
     display: none;
     height: 3.5rem;
     padding: 0; }
     .ui.stackable.menu.app-categories-menu .app-categories-menu-item.expanded {
       display: flex; }
+    .ui.stackable.menu.app-categories-menu .app-categories-menu-item:hover {
+      background: rgba(0, 0, 0, 0.03); }
   .ui.stackable.menu.app-categories-menu .app-categories-menu-link {
     color: #1b1c1d;
     height: 3.5rem;
@@ -33,17 +39,38 @@
       display: none; }
     .ui.stackable.menu.app-categories-menu .app-categories-menu-logo:hover, .ui.stackable.menu.app-categories-menu .app-add-category-menu:hover {
       cursor: pointer; }
+  .ui.stackable.menu.app-categories-menu .app-categories-menu-logo {
+    border: 0.5px solid rgba(34, 36, 38, 0.15);
+    border-radius: 5px;
+    box-shadow: none; }
+    .ui.stackable.menu.app-categories-menu .app-categories-menu-logo.expanded {
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0; }
+    .ui.stackable.menu.app-categories-menu .app-categories-menu-logo::before {
+      width: 0; }
   .ui.stackable.menu.app-categories-menu .app-add-category-menu {
-    display: none; }
+    border: 0.5px solid rgba(34, 36, 38, 0.15);
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow: 0 0 1px 0 rgba(34, 36, 38, 0.15);
+    display: none;
+    font-size: 1rem;
+    padding: 0 1rem;
+    width: auto; }
     .ui.stackable.menu.app-categories-menu .app-add-category-menu.expanded {
       display: flex; }
       .ui.stackable.menu.app-categories-menu .app-add-category-menu.expanded.hidden {
         display: none; }
-  .ui.stackable.menu.app-categories-menu .app-category-input-container.hidden {
-    display: none; }
-  .ui.stackable.menu.app-categories-menu .app-category-input-container input,
-  .ui.stackable.menu.app-categories-menu .app-category-input-container button {
-    border-radius: 0; }
+  .ui.stackable.menu.app-categories-menu .app-category-input-container {
+    border: 0;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px; }
+    .ui.stackable.menu.app-categories-menu .app-category-input-container.hidden {
+      display: none; }
+    .ui.stackable.menu.app-categories-menu .app-category-input-container input,
+    .ui.stackable.menu.app-categories-menu .app-category-input-container button {
+      border: 0.5px solid rgba(34, 36, 38, 0.15);
+      border-radius: 0; }
   .ui.stackable.menu.app-categories-menu .icon.app-category-delete-icon, .ui.stackable.menu.app-categories-menu .icon.app-hide-input-icon {
     height: 2rem;
     line-height: 2rem;
@@ -61,5 +88,34 @@
     height: 3.5rem;
     line-height: 3.5rem;
     padding: 0; }
-  .ui.stackable.menu.app-categories-menu .app-add-category-button {
+  .ui.stackable.menu.app-categories-menu .ui.button.app-add-category-button {
+    border: 0.5px solid rgba(34, 36, 38, 0.15);
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
     padding-right: 2.5rem; }
+
+@media all and (max-width: 767px) {
+  .ui.app-categories-container {
+    margin-left: 0;
+    width: 100%; }
+  .ui.stackable.menu.app-categories-menu {
+    margin: 0 auto;
+    max-width: 400px; }
+    .ui.stackable.menu.app-categories-menu .ui.app-category-input-container {
+      border-bottom-left-radius: 5px;
+      border-top-right-radius: 0;
+      width: 100%; }
+      .ui.stackable.menu.app-categories-menu .ui.app-category-input-container .ui.button.app-add-category-button {
+        border-top-right-radius: 0; }
+      .ui.stackable.menu.app-categories-menu .ui.app-category-input-container .input {
+        width: 100%; }
+      .ui.stackable.menu.app-categories-menu .ui.app-category-input-container input {
+        border-bottom-left-radius: 5px; }
+    .ui.stackable.menu.app-categories-menu .app-add-category-menu {
+      border-bottom-left-radius: 5px;
+      border-top-right-radius: 0; }
+    .ui.stackable.menu.app-categories-menu .app-categories-menu-logo.expanded {
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 5px; }
+    .ui.stackable.menu.app-categories-menu .app-categories-menu-link {
+      width: 100%; } }
