@@ -123,8 +123,8 @@
   }
 
   %app-delete-icon {
-    height: $app-categories-menu-delete-icon-width;
-    line-height: $app-categories-menu-delete-icon-width;
+    height: $app-categories-menu-height;
+    line-height: $app-categories-menu-height;
     margin: 0;
     opacity: .2;
     position: absolute;
@@ -144,12 +144,11 @@
 
   .icon.app-category-delete-icon {
     @extend %app-delete-icon;
+    top: 0;
   }
 
   .icon.app-hide-input-icon {
     @extend %app-delete-icon;
-    height: $app-categories-menu-height;
-    line-height: $app-categories-menu-height;
     padding: 0;
   }
 
