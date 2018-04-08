@@ -40,9 +40,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
 
     private maxTitleLength: number = 20;
 
-    private maxNewTagLength: number = 15;
-
-    private maxTextAreaLength: number = 2000;
+    private maxNewTagLength: number = 20;
 
     componentDidUpdate() {
         if (this.props.modal.openedForUpdate && this.props.modal.modalProps.id !== this.state.id) {
@@ -224,7 +222,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                                 {colorCheckboxes}
                             </Form.Group>
                             <Divider hidden={true}/>
-                            <Form.Group inline={true} className="limited-height">
+                            <Form.Group inline={true} >
                                 <Label
                                     className={`right pointing basic grey app-modal-label app-categories`}
                                 >
@@ -234,7 +232,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                             </Form.Group>
                             <Divider hidden={true}/>
                             <Form.Group >
-                                <Label.Group className="limited-height">
+                                <Label.Group >
                                     <Label
                                         className={`right pointing basic grey app-modal-label app-tags-category`}
                                     >
@@ -274,7 +272,6 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                                     value={this.state.text}
                                     placeholder="Add some interesting text..."
                                     onChange={this.handleTextChange}
-                                    maxLength={this.maxTextAreaLength}
                                 />
                             </Form.Field>
                         </Form>
