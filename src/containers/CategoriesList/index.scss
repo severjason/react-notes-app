@@ -1,4 +1,6 @@
 // sass-lint:disable force-element-nesting
+// sass-lint:disable no-important
+
 @import '../../scss/variables';
 
 .app-activated-category {
@@ -72,6 +74,7 @@
     border: $app-categories-menu-border;
     border-radius: $app-border-radius;
     box-shadow: none;
+    color: $app-main-color;
 
     &.expanded {
       border-bottom-right-radius: 0;
@@ -190,7 +193,10 @@
       border-top-right-radius: 0;
     }
 
-    .app-categories-menu-logo {
+    .item.app-categories-menu-logo {
+
+      width: $app-categories-menu-height !important;
+
       &.expanded {
         border-bottom-left-radius: 0;
         border-top-right-radius: $app-border-radius;
@@ -202,5 +208,4 @@
     }
 
   }
-
 }

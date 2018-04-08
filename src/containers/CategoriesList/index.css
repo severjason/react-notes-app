@@ -42,7 +42,8 @@
   .ui.stackable.menu.app-categories-menu .app-categories-menu-logo {
     border: 0.5px solid rgba(34, 36, 38, 0.15);
     border-radius: 5px;
-    box-shadow: none; }
+    box-shadow: none;
+    color: #334e61; }
     .ui.stackable.menu.app-categories-menu .app-categories-menu-logo.expanded {
       border-bottom-right-radius: 0;
       border-top-right-radius: 0; }
@@ -114,8 +115,10 @@
     .ui.stackable.menu.app-categories-menu .app-add-category-menu {
       border-bottom-left-radius: 5px;
       border-top-right-radius: 0; }
-    .ui.stackable.menu.app-categories-menu .app-categories-menu-logo.expanded {
-      border-bottom-left-radius: 0;
-      border-top-right-radius: 5px; }
+    .ui.stackable.menu.app-categories-menu .item.app-categories-menu-logo {
+      width: 3.5rem !important; }
+      .ui.stackable.menu.app-categories-menu .item.app-categories-menu-logo.expanded {
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 5px; }
     .ui.stackable.menu.app-categories-menu .app-categories-menu-link {
       width: 100%; } }

@@ -40,7 +40,9 @@
   .ui.app-note-container .app-note-info {
     display: none; }
     .ui.app-note-container .app-note-info .app-note-tags .label {
-      font-size: .7rem; }
+      font-size: .7rem;
+      margin-right: .5rem;
+      margin-top: .2rem; }
     .ui.app-note-container .app-note-info .hidden {
       display: none; }
     .ui.app-note-container .app-note-info.expanded {
