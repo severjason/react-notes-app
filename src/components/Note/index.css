@@ -76,3 +76,8 @@
     margin-left: 92%; }
   .ui.app-note-container.full .app-note-tags .label {
     font-size: .7rem; } }
+
+@media all and (max-width: 767px) {
+  .ui.app-note-container {
+    max-width: 20.79rem;
+    width: 100%; } }

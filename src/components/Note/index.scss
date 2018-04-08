@@ -167,3 +167,10 @@
 
   }
 }
+
+@media all and (max-width: 767px) {
+  .ui.app-note-container {
+    max-width: $app-note-container-width * 1.1;
+    width: 100%;
+  }
+}
