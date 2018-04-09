@@ -9,7 +9,7 @@ interface AppNoteProps {
     note: AppNote;
     actions: AppActions;
     fullView?: boolean;
-    location?: any;
+    activeCategory?: string;
 }
 
 const Note: React.StatelessComponent<AppNoteProps> = (props: AppNoteProps) => {
@@ -54,7 +54,7 @@ const Note: React.StatelessComponent<AppNoteProps> = (props: AppNoteProps) => {
                 </Link>
             )
             : (
-                <Link to={`/notes/all`}>
+                <Link to={`/notes/${props.activeCategory}`}>
                     <div
                         className="app-note-close-icon"
                         title="Close note"

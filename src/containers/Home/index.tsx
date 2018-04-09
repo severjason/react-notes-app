@@ -16,6 +16,7 @@ interface AppHomeDispatch {
 
 interface AppRoute {
     match: any;
+    activeCategory: string;
 }
 
 class Home extends React.Component<AppState & AppRoute & AppHomeDispatch, {}> {
@@ -80,6 +81,7 @@ class Home extends React.Component<AppState & AppRoute & AppHomeDispatch, {}> {
                                                         note={requestedNote}
                                                         actions={this.props.actions}
                                                         fullView={true}
+                                                        activeCategory={this.props.categories.activated}
                                                     />
                                                 </div>
 
