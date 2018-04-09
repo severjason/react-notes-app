@@ -178,6 +178,12 @@
     margin: 0 auto;
     max-width: 400px;
 
+    .app-categories-menu-item {
+      &:nth-child(2) {
+        border-top-right-radius: $app-border-radius;
+      }
+    }
+
     .ui.app-category-input-container {
       border-bottom-left-radius: $app-border-radius;
       border-top-right-radius: 0;

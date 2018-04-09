@@ -108,6 +108,8 @@
   .ui.stackable.menu.app-categories-menu {
     margin: 0 auto;
     max-width: 400px; }
+    .ui.stackable.menu.app-categories-menu .app-categories-menu-item:nth-child(2) {
+      border-top-right-radius: 5px; }
     .ui.stackable.menu.app-categories-menu .ui.app-category-input-container {
       border-bottom-left-radius: 5px;
       border-top-right-radius: 0;
