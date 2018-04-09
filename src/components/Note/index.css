@@ -65,6 +65,7 @@
       .ui.app-note-container.full .app-note-close-icon:hover {
         color: #1b1c1d; }
     .ui.app-note-container.full .app-note-tags .label {
+      cursor: default;
       font-size: .85rem; }
 
 @media all and (max-width: 500px) {
