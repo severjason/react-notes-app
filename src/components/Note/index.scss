@@ -17,12 +17,19 @@
 
   %app-note-icon {
     @extend %app-note-title-element;
+    height: $app-title-height * 2;
     margin-left: 90%;
-    margin-top: $app-title-height / 2;
+    margin-top: 0;
     opacity: .5;
     position: absolute;
     width: $app-title-height;
     z-index: 100;
+
+    .icon {
+      display: block;
+      margin: 1.1rem auto 0;
+      width: 1rem;
+    }
 
     &:hover {
       cursor: pointer;
