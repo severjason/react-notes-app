@@ -57,7 +57,7 @@
     box-shadow: 0 0 1px 0 rgba(34, 36, 38, 0.15);
     display: none;
     font-size: 1rem;
-    padding: 0 1rem;
+    padding: 0 2rem;
     width: auto; }
     .ui.stackable.menu.app-categories-menu .app-add-category-menu.expanded {
       display: flex; }
