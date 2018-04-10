@@ -12,17 +12,6 @@ import './index.css';
 
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
-            <App/>
-        </BrowserRouter>
-    </Provider>,
-    document.getElementById('root') as HTMLElement
-);
-
-registerServiceWorker();
-
-ReactDOM.render(
-    <Provider store={store}>
         <PersistGate persistor={persistor}>
             <BrowserRouter>
                 <App/>
@@ -31,3 +20,5 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root') as HTMLElement
 );
+
+registerServiceWorker();
