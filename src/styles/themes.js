@@ -1,6 +1,7 @@
 export const mainTheme = {
   colors: {
     mainColor: '#334e61',
+    blackColor: '#1b1c1d',
     noteTitleHoverColor: '#f3f4f5',
     noteAddIconBorderColor: 'rgba(34, 36, 38, .15)',
     noteFormInfoColor: 'rgba(0, 0, 0, .3)',
@@ -18,8 +19,8 @@ export const mainTheme = {
     titleHeightRem: 2, //rem
     addIconWidthRem: 3.5, //rem
     addIconFontSizeRem: 1.5, //rem
-    addIconBorder: () => `1px solid ${this.colors.noteAddIconBorderColor}`,
-    addIconBoxShadow: () => `0 1px 2px 0 ${this.colors.noteAddIconBorderColor}`,
+    addIconBorder: () => `1px solid ${mainTheme.colors.noteAddIconBorderColor}`,
+    addIconBoxShadow: () => `0 1px 2px 0 ${mainTheme.colors.noteAddIconBorderColor}`,
   },
   modal: {
     checkboxWidthRem: 1.5, //rem
@@ -29,7 +30,7 @@ export const mainTheme = {
   categories: {
     menuHeightRem: 3.5, //rem
     menuDeleteIconWidthRem: 2, //rem
-    menuBorder: () => `.5px solid ${this.colors.noteAddIconBorderColor}`,
-    menuBoxShadow: () => `0 0 1px 0 ${this.colors.noteAddIconBorderColor}`
+    menuBorder: () => `.5px solid ${mainTheme.colors.noteAddIconBorderColor}`,
+    menuBoxShadow: () => `0 0 1px 0 ${mainTheme.colors.noteAddIconBorderColor}`
   }
 };

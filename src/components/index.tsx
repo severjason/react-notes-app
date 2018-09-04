@@ -1,10 +1,10 @@
-import Header from './Header';
-import NotesList from './NotesList';
-import Note from './Note';
-import EmptyPage from './EmptyPage';
-import App from './App';
-import CategoriesList from './CategoriesList';
-import NoteModal from './NoteModal';
+import Header     from './Header';
+import NotesList  from './NotesList';
+import Note       from './Note';
+import EmptyPage  from './EmptyPage';
+import App        from './App';
+import Categories from './Categories';
+import NoteModal  from './NoteModal';
 
 export {
     Header,
@@ -13,5 +13,5 @@ export {
     Note,
     EmptyPage,
     NoteModal,
-    CategoriesList,
+    Categories,
 };

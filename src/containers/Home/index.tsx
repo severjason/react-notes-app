@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
-import { Container, Grid, Icon } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
-import * as actions from '../../actions';
+import * as React                                   from 'react';
+import { Route, Switch, Redirect }                  from 'react-router-dom';
+import { Helmet }                                   from 'react-helmet';
+import { Container, Grid, Icon }                    from 'semantic-ui-react';
+import { connect }                                  from 'react-redux';
+import { bindActionCreators, Dispatch }             from 'redux';
+import * as actions                                 from '../../actions';
 import { AppAction, AppActions, AppNote, AppState } from '../../interfaces';
-import { NotesList, Note, CategoriesList, NoteModal } from '../../components';
+import { NotesList, Note, Categories, NoteModal }   from '../../components';
 import './index.css';
 
 interface AppHomeDispatch {
@@ -36,7 +36,7 @@ class Home extends React.Component<AppState & AppRoute & AppHomeDispatch, {} > {
                         />
                     </Grid.Column>
                     <Grid className="app-categories-container">
-                        <CategoriesList {...this.props.categories} actions={this.props.actions}/>
+                        <Categories {...this.props.categories} actions={this.props.actions}/>
                     </Grid>
                     <Grid.Column width={16}>
                         <Switch>
