@@ -71,7 +71,7 @@ const Note: React.StatelessComponent<AppNoteProps> = (props: AppNoteProps) => {
                 className="app-note-trash-icon"
                 title="Delete note"
             >
-                <Icon name="trash outline" className="alternate"/>
+                <Icon name="trash alternate outline" className="alternate"/>
             </div>
             <div
                 className="app-note-edit-icon"

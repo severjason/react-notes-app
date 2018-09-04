@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import 'semantic-ui-css/semantic.min.css';
-import { App } from './containers';
+import { App } from './components';
 import { persistor, store } from './store';
 
 import registerServiceWorker from './registerServiceWorker';
