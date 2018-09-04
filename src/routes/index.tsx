@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import { Home } from '../../containers';
+import { Home } from '../containers';
 
 const Routes: React.StatelessComponent<{}> = () => {
     return (

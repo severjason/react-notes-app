@@ -44,6 +44,7 @@
     "@types/react-router-dom": "^4.2.6",
     "@types/redux-logger": "^3.0.5",
     "@types/uuid": "^3.4.3",
+    "redux-devtools-extension": "^2.13.5",
     "redux-logger": "^3.0.6",
     "typescript": "^3.0.3"
   }

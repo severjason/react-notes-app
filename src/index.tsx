@@ -1,22 +1,23 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import * as React        from 'react';
+import * as ReactDOM     from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
+import { Provider }      from 'react-redux';
+import { ThemeProvider } from 'styled-components';
 import 'semantic-ui-css/semantic.min.css';
-import { App } from './components';
-import { persistor, store } from './store';
+import { App }           from './components';
+import { store }         from './store';
+import { mainTheme }     from './styles/themes';
 
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 ReactDOM.render(
     <Provider store={store}>
-        <PersistGate persistor={persistor}>
+        <ThemeProvider theme={mainTheme}>
             <BrowserRouter>
                 <App/>
             </BrowserRouter>
-        </PersistGate>
+        </ThemeProvider>
     </Provider>,
     document.getElementById('root') as HTMLElement
 );

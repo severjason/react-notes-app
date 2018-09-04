@@ -6,9 +6,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import * as actions from '../../actions';
 import { AppAction, AppActions, AppNote, AppState } from '../../interfaces';
-import { NotesList, Note } from '../../components';
+import { NotesList, Note, CategoriesList, NoteModal } from '../../components';
 import './index.css';
-import { NoteModal, CategoriesList } from '../../containers';
 
 interface AppHomeDispatch {
     actions: AppActions;
@@ -19,7 +18,7 @@ interface AppRoute {
     activeCategory: string;
 }
 
-class Home extends React.Component<AppState & AppRoute & AppHomeDispatch, {}> {
+class Home extends React.Component<AppState & AppRoute & AppHomeDispatch, {} > {
 
     render() {
         return (
