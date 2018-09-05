@@ -39,7 +39,7 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
         return !inputValue || this.props.categoriesList.includes(inputValue.toLowerCase());
     }
 
-    getCategories(): ReactNode {
+    private getCategories(): ReactNode {
         const {actions, categoriesList, expanded, activated} = this.props;
         return categoriesList.map((category: string) => (
             <CategoryItem
