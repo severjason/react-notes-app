@@ -1,13 +1,10 @@
-.ui.app-note-container .app-note-trash-icon, .ui.app-note-container .app-note-edit-icon, .ui.app-note-container .app-note-expand-icon, .ui.app-note-container.full .app-note-close-icon, .ui.app-note-container .app-note-title-container .app-note-title-text {
-  height: 2rem;
-  line-height: 2rem; }
-
 .ui.app-note-container {
   margin: 0.5rem;
   width: 18.9rem; }
   .ui.app-note-container:first-child, .ui.app-note-container:last-child {
     margin: 0.5rem; }
-  .ui.app-note-container .app-note-trash-icon, .ui.app-note-container .app-note-edit-icon, .ui.app-note-container .app-note-expand-icon, .ui.app-note-container.full .app-note-close-icon {
+  .ui.app-note-container .app-note-icon {
+    line-height: 2rem;
     height: 4rem;
     margin-left: 90%;
     margin-top: 0;
@@ -15,15 +12,15 @@
     position: absolute;
     width: 2rem;
     z-index: 100; }
-    .ui.app-note-container .app-note-trash-icon .icon, .ui.app-note-container .app-note-edit-icon .icon, .ui.app-note-container .app-note-expand-icon .icon, .ui.app-note-container.full .app-note-close-icon .icon {
+    .ui.app-note-container .app-note-icon .icon {
       display: block;
       margin: 1.1rem auto 0;
       width: 1rem; }
-    .ui.app-note-container .app-note-trash-icon:hover, .ui.app-note-container .app-note-edit-icon:hover, .ui.app-note-container .app-note-expand-icon:hover, .ui.app-note-container.full .app-note-close-icon:hover {
+    .ui.app-note-container .app-note-icon:hover {
       cursor: pointer;
       opacity: 1;
       transform: scale(1.1); }
-    .ui.app-note-container .app-note-trash-icon:active, .ui.app-note-container .app-note-edit-icon:active, .ui.app-note-container .app-note-expand-icon:active, .ui.app-note-container.full .app-note-close-icon:active {
+    .ui.app-note-container .app-note-icon:active {
       transform: scale(1); }
   .ui.app-note-container .app-note-trash-icon:hover {
     color: #db2828; }
@@ -41,6 +38,8 @@
       background-color: #f3f4f5;
       cursor: pointer; }
     .ui.app-note-container .app-note-title-container .app-note-title-text {
+      height: 2rem;
+      line-height: 2rem;
       word-wrap: break-word; }
   .ui.app-note-container .app-note-info {
     display: none; }

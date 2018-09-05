@@ -1,9 +1,14 @@
-import * as React from 'react';
+import * as React              from 'react';
 import './index.css';
 import { AppActions, AppNote } from '../../interfaces';
-import { SegmentGroup, Segment, Icon, Label, Divider } from 'semantic-ui-react/';
-import { Link } from 'react-router-dom';
-import { ReactNode } from 'react';
+import {
+    SegmentGroup,
+    Segment,
+    Label,
+    Divider
+}                              from 'semantic-ui-react/';
+import { ReactNode }           from 'react';
+import NoteButtons             from './NoteButtons';
 
 interface AppNoteProps {
     note: AppNote;
@@ -12,104 +17,67 @@ interface AppNoteProps {
     activeCategory?: string;
 }
 
-const Note: React.StatelessComponent<AppNoteProps> = (props: AppNoteProps) => {
-    const note: AppNote = props.note;
-    const noteExpandedClass: string = (note.expanded || props.fullView) ? 'expanded' : '';
-    const addDots: string = (note.text.length > 300 ? '...' : '');
-    const noteTags: ReactNode = note.tags.map((tag: string, index: number) => {
+class Note extends React.Component<AppNoteProps, {}> {
+
+    private getNoteExpandedClass(): string {
+        const {note, fullView} = this.props;
+        return (note.expanded || fullView) ? 'expanded' : '';
+    }
+
+    private addDots(): string {
+        const {note} = this.props;
+        return (note.text.length > 300 ? '...' : '');
+    }
+
+    private getTags(): ReactNode[] {
+        const {note} = this.props;
+        return note.tags.map((tag: string, index: number) => {
+            return <Label title={tag} as="a" key={index} tag={true}>{tag}</Label>;
+        });
+    }
+
+    private getCategories(): ReactNode[] {
+        const {note} = this.props;
+        return note.categories.map((category: string, index: number) => {
+            return <Label title={category} as="a" key={index} basic={true} className={note.color}>{category}</Label>;
+        });
+    }
+
+    render() {
+        const {fullView, note, actions, activeCategory} = this.props;
         return (
-            <Label
-                title={tag}
-                as="a"
-                key={index}
-                tag={true}
-            >
-                {tag}
-            </Label>
-        );
-    });
-    const noteCategories: ReactNode = note.categories.map((category: string, index: number) => {
-        return (
-            <Label
-                title={category}
-                as="a"
-                key={index}
-                basic={true}
-                className={note.color}
-            >
-                {category}
-            </Label>
-        );
-    });
-    const editOrCloseIcon = (): ReactNode => {
-        return (!props.fullView)
-            ? (
-                <Link to={`/note/${note.id}`}>
-                    <div
-                        className="app-note-expand-icon"
-                        title="Expand note"
-                    >
-                        <Icon name="expand" className="arrows alternate"/>
+            <SegmentGroup className={`app-note-container ${(fullView ? 'full app-border-' + note.color : '')}`}>
+                <NoteButtons
+                    actions={actions}
+                    note={note}
+                    fullView={fullView}
+                    activeCategory={activeCategory}
+                />
+                <Segment
+                    onClick={() => fullView ? null : actions.toggleNote(note.id)}
+                    className={`${fullView ? '' : note.color} app-note-title-container`}
+                >
+                    <div className="app-note-title-text">
+                        <strong>{note.title}</strong>
                     </div>
-                </Link>
-            )
-            : (
-                <Link to={`/notes/${props.activeCategory}`}>
-                    <div
-                        className="app-note-close-icon"
-                        title="Close note"
-                    >
-                        <Icon name="close"/>
+                </Segment>
+                <Segment className={`app-note-info ${this.getNoteExpandedClass()}`}>
+                    <div className={`${note.tags.length > 0 ? '' : 'hidden'} app-note-tags`}>
+                        {fullView ? `Tags: ` : ''}
+                        {this.getTags()}
+                        <Divider/>
                     </div>
-                </Link>
-            );
-    };
-    return (
-        <SegmentGroup className={`app-note-container ${(props.fullView ? 'full app-border-' + props.note.color : '')}`}>
-            <div
-                onClick={() => props.actions.deleteNote(note.id)}
-                className="app-note-trash-icon"
-                title="Delete note"
-            >
-                <Icon name="trash alternate outline" className="alternate"/>
-            </div>
-            <div
-                className="app-note-edit-icon"
-                title="Edit note"
-                onClick={() => props.actions.openModalForUpdate(note)}
-            >
-                <Icon name="edit" className="outline"/>
-            </div>
-            {editOrCloseIcon()}
-            <Segment
-                onClick={() => props.fullView ? null : props.actions.toggleNote(note.id)}
-                className={`${props.fullView ? '' : note.color} app-note-title-container`}
-            >
-                <div className="app-note-title-text">
-                    <strong>{note.title}</strong>
-                </div>
-            </Segment>
-            <Segment className={`app-note-info ${noteExpandedClass}`}>
-                <div className={`${note.tags.length > 0 ? '' : 'hidden'} app-note-tags`}>
-                    {props.fullView ? 'Tags: ' : ''}
-                    {noteTags}
-                    <Divider/>
-                </div>
-                <div className={`${note.categories.length > 0 && props.fullView ? '' : 'hidden'} app-note-tags`}>
-                    Categories: {noteCategories}
-                    <Divider/>
-                </div>
-
-                <div className={`app-note-text `}>
-                    <p>
-                        {(props.fullView) ? note.text : note.text.slice(0, 300) + addDots}
-                    </p>
-                </div>
-
-            </Segment>
-
-        </SegmentGroup>
-    );
-};
+                    <div className={`${note.categories.length > 0 && fullView ? '' : 'hidden'} app-note-tags`}>
+                        Categories: {this.getCategories()}
+                        <Divider/>
+                    </div>
+                    <div className={`app-note-text `}>
+                        <p>{(fullView) ? note.text : note.text.slice(0, 300) + this.addDots()}</p>
+                    </div>
+                </Segment>
+            </SegmentGroup>
+        );
+    }
+}
 
 export default Note;
