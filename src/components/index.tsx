@@ -5,6 +5,7 @@ import EmptyPage  from './EmptyPage';
 import App        from './App';
 import Categories from './Categories';
 import NoteModal  from './NoteModal';
+import Home       from './Home';
 
 export {
     Header,
@@ -14,4 +15,5 @@ export {
     EmptyPage,
     NoteModal,
     Categories,
+    Home,
 };
