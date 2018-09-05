@@ -70,20 +70,16 @@ export default function notesReducer(state: AppNote[] = INITIAL_STATE,
             ];
         }
         case types.tags.DELETE_CUSTOM_TAG: {
-            return state.map((note: AppNote) => {
-                return {
-                    ...note,
-                    tags: note.tags.filter((tag: string) => tag !== action.tag),
-                };
-            });
+            return state.map((note: AppNote) => ({
+                ...note,
+                tags: note.tags.filter((tag: string) => tag !== action.tag),
+            }));
         }
         case types.categories.DELETE_CATEGORY: {
-            return state.map((note: AppNote) => {
-                return {
-                    ...note,
-                    categories: note.categories.filter((c: string) => c !== action.category),
-                };
-            });
+            return state.map((note: AppNote) => ({
+                ...note,
+                categories: note.categories.filter((c: string) => c !== action.category),
+            }));
         }
         default: {
             return state;

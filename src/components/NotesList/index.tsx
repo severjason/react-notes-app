@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React                             from 'react';
 import { AppActions, AppCategories, AppNote } from '../../interfaces';
-import { Note, EmptyPage } from '../../components';
-import './index.css';
-import { ReactNode } from 'react';
+import { Note, EmptyPage }                    from '../../components';
+import { ReactNode }                          from 'react';
+import NotesListStyles                        from './styles';
 
 interface AppNoteListProps {
     notes: AppNote[];
@@ -11,29 +11,35 @@ interface AppNoteListProps {
     routeCategory: string;
 }
 
-const NotesList: React.StatelessComponent<AppNoteListProps> = (props: AppNoteListProps) => {
+class NotesList extends React.Component<AppNoteListProps, {}> {
 
-    if (props.categories.activated !== props.routeCategory) {
-        props.actions.activateCategory(props.routeCategory);
+    componentDidMount() {
+        const {categories, routeCategory, actions} = this.props;
+        if (categories.activated !== routeCategory) {
+            actions.activateCategory(routeCategory);
+        }
     }
 
-    const filteredNotes: AppNote[] = (props.categories.activated === 'all')
-        ? props.notes
-        : props.notes.filter(note => note.categories.includes(props.categories.activated));
+    private filterNotes(notes: AppNote[], categories: AppCategories): AppNote[] {
+        return (categories.activated === 'all')
+            ? notes
+            : notes.filter((note: AppNote) => note.categories.includes(categories.activated));
+    }
 
-    const notes: ReactNode[] = filteredNotes.map((note: AppNote, index: number) => {
-        return (
-            <Note
-                key={index}
-                note={note}
-                actions={props.actions}
-            />
-        );
-    });
+    private renderFilterNotes = (): ReactNode[] => {
+        const {notes, categories, actions} = this.props;
+        return this.filterNotes(notes, categories).map((note: AppNote, index: number) => (
+            <Note key={index} note={note} actions={actions}/>
+        ));
+    }
 
-    return (notes.length > 0)
-        ? (<div className="app-notes-container">{notes}</div>)
-        : (<EmptyPage category={props.categories.activated}/>);
-};
+    render() {
+        const notes: ReactNode[] = this.renderFilterNotes();
+        const {categories} = this.props;
+        return (notes.length > 0)
+            ? <NotesListStyles>{notes}</NotesListStyles>
+            : <EmptyPage category={categories.activated}/>;
+    }
+}
 
 export default NotesList;

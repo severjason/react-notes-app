@@ -1,11 +1,6 @@
 // sass-lint:disable force-element-nesting
 @import '../../scss/variables';
 
-%app-note-title-element {
-  height: $app-title-height;
-  line-height: $app-title-height;
-}
-
 .ui.app-note-container {
   margin: $app-note-margin;
   width: $app-note-container-width;
@@ -15,8 +10,9 @@
     margin: $app-note-margin;
   }
 
-  %app-note-icon {
-    @extend %app-note-title-element;
+  .app-note-icon {
+    // height: $app-title-height;
+    line-height: $app-title-height;
     height: $app-title-height * 2;
     margin-left: 90%;
     margin-top: 0;
@@ -43,7 +39,6 @@
   }
 
   .app-note-trash-icon {
-    @extend %app-note-icon;
 
     &:hover {
       color: $app-red-color;
@@ -51,7 +46,6 @@
   }
 
   .app-note-edit-icon {
-    @extend %app-note-icon;
     margin-left: 80%;
 
     &:hover {
@@ -60,7 +54,6 @@
   }
 
   .app-note-expand-icon {
-    @extend %app-note-icon;
     margin-left: 70%;
 
     &:hover {
@@ -77,17 +70,14 @@
     }
 
     .app-note-title-text {
-      @extend %app-note-title-element;
+      height: $app-title-height;
+      line-height: $app-title-height;
       word-wrap: break-word;
     }
   }
 
   .app-note-info {
     display: none;
-
-    .app-note-text {
-      //
-    }
 
     .app-note-tags {
       .label {
@@ -129,7 +119,6 @@
     }
 
     .app-note-close-icon {
-      @extend %app-note-icon;
       margin-left: 95%;
 
       &:hover {

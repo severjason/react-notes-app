@@ -1,9 +1,0 @@
-.app-notes-container {
-  align-items: flex-start;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start; }
-
-@media all and (max-width: 767px) {
-  .app-notes-container {
-    justify-content: center; } }
