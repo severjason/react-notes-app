@@ -23,7 +23,7 @@ class NotesList extends React.Component<AppNoteListProps, {}> {
     private filterNotes(notes: AppNote[], categories: AppCategories): AppNote[] {
         return (categories.activated === 'all')
             ? notes
-            : notes.filter(note => note.categories.includes(categories.activated));
+            : notes.filter((note: AppNote) => note.categories.includes(categories.activated));
     }
 
     private renderFilterNotes = (): ReactNode[] => {
@@ -34,7 +34,7 @@ class NotesList extends React.Component<AppNoteListProps, {}> {
     }
 
     render() {
-        const notes = this.renderFilterNotes();
+        const notes: ReactNode[] = this.renderFilterNotes();
         const {categories} = this.props;
         return (notes.length > 0)
             ? <NotesListStyles>{notes}</NotesListStyles>
