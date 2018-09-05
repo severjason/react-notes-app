@@ -1,4 +1,4 @@
-Notes app for Front-End developer position (created with react-create-app).
+Notes app React+Typescript.
 
 Install dependencies - yarn install
 
