@@ -2,11 +2,11 @@ import * as React                          from 'react';
 import { connect }                         from 'react-redux';
 import { bindActionCreators, Dispatch }    from 'redux';
 import * as actions                        from '../actions';
-import { AppAction, AppActions, AppState } from '../interfaces/index';
+import { AppAction, AppAllActions, AppState } from '../interfaces/';
 import { Home }                            from '../components';
 
 interface AppHomeDispatch {
-    actions: AppActions;
+    actions: AppAllActions;
 }
 
 interface AppRoute {

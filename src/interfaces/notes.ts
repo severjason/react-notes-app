@@ -1,4 +1,4 @@
-import { AppAction } from "./index";
+import { AppAction } from './index';
 
 export interface AppActionNote extends AppAction {
     note: AppNote;

@@ -1,4 +1,4 @@
-import { AppAction } from "./index";
+import { AppAction } from './index';
 
 export interface AppActionTags extends AppAction {
     tag: string;

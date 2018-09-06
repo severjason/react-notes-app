@@ -1,12 +1,12 @@
 import * as React                                from 'react';
 import { Icon, Menu, Button, Input, InputProps } from 'semantic-ui-react';
-import { AppActions, AppCategories }             from '../../interfaces/index';
+import { AppCategories, AppCategoriesActions }   from '../../interfaces/categories';
 import { ChangeEvent, ReactNode }                from 'react';
 import CategoryItem                              from './CategoryItem';
 import CategoriesStyles                          from './styles';
 
 interface AppCategoriesDispatch {
-    actions: AppActions;
+    actions: AppCategoriesActions;
 }
 
 interface CategoriesListState {

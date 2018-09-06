@@ -1,23 +1,25 @@
-import * as React                                                               from 'react';
-import { ChangeEvent}                                               from 'react';
+import * as React from 'react';
+import { ChangeEvent } from 'react';
 import { Modal, Button, CheckboxProps, InputProps, TextAreaProps, Label } from 'semantic-ui-react';
 import { Form, Input, TextArea, Checkbox, Divider } from 'semantic-ui-react';
 import './index.css';
-import * as uuid                                    from 'uuid';
-import * as helpers                                 from '../../helpers';
-import NoteModalStyles                              from './styles';
-import Tags                                         from './Tags';
-import { AppTagsActions }                           from "../../interfaces/tags";
-import { AppModalActions }                          from "../../interfaces/modal";
+import * as uuid from 'uuid';
+import * as helpers from '../../helpers';
+import NoteModalStyles from './styles';
+import Tags from './Tags';
+import { AppTagsActions } from '../../interfaces/tags';
+import { AppModalActions } from '../../interfaces/modal';
+import { AppNoteActions } from '../../interfaces/notes';
+import { AppModal, AppCategories, AppTags, AppNote } from '../../interfaces';
 
 interface AppNoteModalProps {
-    modal: AppNoteModal;
+    modal: AppModal;
     categories: AppCategories;
     tags: AppTags;
 }
 
 interface AppNoteModalDispatch {
-    actions: AppTagsActions & AppModalActions;
+    actions: AppTagsActions & AppModalActions & AppNoteActions;
 }
 
 interface AppNoteModalState {
@@ -49,7 +51,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     private maxNewTagLength: number = 20;
 
     componentDidUpdate() {
-        const { modal } = this.props;
+        const {modal} = this.props;
         if (modal.openedForUpdate && modal.modalProps.id !== this.state.note.id) {
             this.setState({note: modal.modalProps});
         }
@@ -100,7 +102,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
 
     public render() {
 
-        const { openedForUpdate } = this.props.modal;
+        const {openedForUpdate} = this.props.modal;
 
         const colorCheckboxes = this.colors.map((color: string, index: number) => {
             return (
@@ -185,7 +187,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                                 {colorCheckboxes}
                             </Form.Group>
                             <Divider hidden={true}/>
-                            <Form.Group inline={true} >
+                            <Form.Group inline={true}>
                                 <Label
                                     className={`right pointing basic grey app-modal-label app-categories`}
                                 >
@@ -194,8 +196,8 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                                 {categoriesCheckboxes}
                             </Form.Group>
                             <Divider hidden={true}/>
-                            <Form.Group >
-                                <Label.Group >
+                            <Form.Group>
+                                <Label.Group>
                                     <Label
                                         className={`right pointing basic grey app-modal-label app-tags-category`}
                                     >

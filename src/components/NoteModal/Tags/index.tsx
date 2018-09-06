@@ -1,8 +1,7 @@
 import * as React        from 'react';
-import { ReactNode }     from "react";
-import { Icon, Label }   from "semantic-ui-react";
-import { AppActionTags } from "../../../interfaces/tags";
-import { AppNote }       from "../../../interfaces/notes";
+import { ReactNode }     from 'react';
+import { Icon, Label }   from 'semantic-ui-react';
+import { AppActionTags, AppNote } from '../../../interfaces/';
 
 interface NoteTags {
     tagsList: string[];
@@ -22,8 +21,8 @@ class Tags extends React.Component<NoteTags, {}> {
                 className="app-tag-delete-icon"
                 onClick={() => deleteIcon ? deleteTag(tag) : false}
             />
-        )
-    };
+        );
+    }
 
     render() {
         const {tagsList, note, deleteIcon, handleTagClick} = this.props;

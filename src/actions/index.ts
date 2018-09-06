@@ -1,5 +1,5 @@
 import { types }                                                               from '../constants/types';
-import { AppAction, AppActionCategory, AppActionTags, AppActionNote, AppNote } from '../interfaces/index';
+import { AppAction, AppActionCategory, AppActionTags, AppActionNote, AppNote } from '../interfaces';
 // import { Dispatch } from 'redux';
 
 export const getNotes = (): AppAction => ({

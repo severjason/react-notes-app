@@ -1,12 +1,12 @@
 import * as React                             from 'react';
-import { AppActions, AppCategories, AppNote } from '../../interfaces/index';
+import { AppAllActions, AppCategories, AppNote } from '../../interfaces';
 import { Note, EmptyPage }                    from '../../components';
 import { ReactNode }                          from 'react';
 import NotesListStyles                        from './styles';
 
 interface AppNoteListProps {
     notes: AppNote[];
-    actions: AppActions;
+    actions: AppAllActions;
     categories: AppCategories;
     routeCategory: string;
 }

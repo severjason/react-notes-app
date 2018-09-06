@@ -1,4 +1,4 @@
-import { AppAction } from "./index";
+import { AppAction } from './index';
 
 export interface AppActionCategory extends AppAction {
     category: string;
@@ -16,4 +16,3 @@ export interface AppCategories {
     categoriesList: string[];
     expanded: boolean;
 }
-

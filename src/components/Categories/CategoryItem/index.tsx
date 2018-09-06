@@ -2,13 +2,13 @@ import * as React     from 'react';
 import { Menu }       from 'semantic-ui-react';
 import { Link }       from 'react-router-dom';
 import { Icon }       from 'semantic-ui-react';
-import { AppActions } from '../../../interfaces/index';
+import { AppCategoriesActions } from '../../../interfaces/categories';
 
 interface CategoryItemProps {
     category: string;
     expanded: boolean;
     activated: string;
-    actions: AppActions;
+    actions: AppCategoriesActions;
 }
 
 const CategoryItem: React.StatelessComponent<CategoryItemProps> = ({category, activated, expanded, actions}) => {

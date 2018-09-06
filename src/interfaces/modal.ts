@@ -1,5 +1,5 @@
-import { AppNote }   from "./notes";
-import { AppAction } from "./index";
+import { AppNote }   from './notes';
+import { AppAction } from './index';
 
 export interface AppModalActions {
     openModal(): AppAction;

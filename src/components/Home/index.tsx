@@ -1,13 +1,13 @@
 import * as React                from 'react';
 import { Helmet }                from 'react-helmet';
 import { Container, Grid, Icon } from 'semantic-ui-react';
-import { AppActions, AppState }  from '../../interfaces/index';
+import { AppAllActions, AppState }  from '../../interfaces/index';
 import { Categories, NoteModal } from '../../components';
 import { HomeRoutes }            from '../../routes';
 import HomeStyles                from './styles';
 
 interface AppHomeDispatch {
-    actions: AppActions;
+    actions: AppAllActions;
 }
 
 interface AppRoute {

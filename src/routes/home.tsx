@@ -2,12 +2,12 @@ import * as React                                       from 'react';
 import { Route, Redirect, Switch, RouteComponentProps } from 'react-router-dom';
 import { Helmet }                                       from 'react-helmet';
 import { NotesList, Note }                              from '../components/';
-import { AppActions, AppCategories, AppNote }           from '../interfaces/index';
+import { AppAllActions, AppCategories, AppNote }           from '../interfaces/';
 
 interface HomeRoutesProps {
     categories: AppCategories;
     notes: AppNote[];
-    actions: AppActions;
+    actions: AppAllActions;
 }
 
 interface RouteParams {

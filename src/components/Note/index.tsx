@@ -1,5 +1,6 @@
 import * as React              from 'react';
-import { AppActions, AppNote } from '../../interfaces/index';
+import { AppNoteActions, AppNote } from '../../interfaces/notes';
+import { AppModalActions } from '../../interfaces/modal';
 import {
     SegmentGroup,
     Segment,
@@ -12,7 +13,7 @@ import NoteStyles              from './styles';
 
 interface AppNoteProps {
     note: AppNote;
-    actions: AppActions;
+    actions: AppNoteActions & AppModalActions;
     fullView?: boolean;
     activeCategory?: string;
 }
