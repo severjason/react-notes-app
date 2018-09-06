@@ -1,5 +1,5 @@
 import * as React                             from 'react';
-import { AppActions, AppCategories, AppNote } from '../../interfaces';
+import { AppActions, AppCategories, AppNote } from '../../interfaces/index';
 import { Note, EmptyPage }                    from '../../components';
 import { ReactNode }                          from 'react';
 import NotesListStyles                        from './styles';

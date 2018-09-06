@@ -1,24 +1,24 @@
-// sass-lint:disable force-element-nesting
-@import '../../scss/variables';
+import styled from 'styled-components';
 
+const NoteStyles = styled.div`
 .ui.app-note-container {
-  margin: $app-note-margin;
-  width: $app-note-container-width;
+  margin: ${props => props.theme.note.marginRem}rem;
+  width: ${props => props.theme.note.containerWidthRem}rem;
 
   &:first-child,
   &:last-child {
-    margin: $app-note-margin;
+    margin: ${props => props.theme.note.marginRem}rem;
   }
 
   .app-note-icon {
     // height: $app-title-height;
-    line-height: $app-title-height;
-    height: $app-title-height * 2;
+    line-height: ${props => props.theme.note.titleHeightRem}rem;
+    height: ${props => props.theme.note.titleHeightRem * 2}rem;
     margin-left: 90%;
     margin-top: 0;
     opacity: .5;
     position: absolute;
-    width: $app-title-height;
+    width: ${props => props.theme.note.titleHeightRem}rem;
     z-index: 100;
 
     .icon {
@@ -41,7 +41,7 @@
   .app-note-trash-icon {
 
     &:hover {
-      color: $app-red-color;
+      color:${props => props.theme.colors.redColor};
     }
   }
 
@@ -49,7 +49,7 @@
     margin-left: 80%;
 
     &:hover {
-      color: $app-blue-color;
+      color: ${props => props.theme.colors.blueColor};
     }
   }
 
@@ -57,7 +57,7 @@
     margin-left: 70%;
 
     &:hover {
-      color: $app-black-color;
+      color: ${props => props.theme.colors.blackColor};
     }
   }
 
@@ -65,13 +65,13 @@
     padding: 1rem;
 
     &:hover {
-      background-color: $app-note-title-hover-color;
+      background-color: ${props => props.theme.colors.noteTitleHoverColor};
       cursor: pointer;
     }
 
     .app-note-title-text {
-      height: $app-title-height;
-      line-height: $app-title-height;
+      height: ${props => props.theme.note.titleHeightRem}rem;
+      line-height: ${props => props.theme.note.titleHeightRem}rem;
       word-wrap: break-word;
     }
   }
@@ -98,11 +98,11 @@
 
   &.full {
     margin: 0 auto;
-    max-width: $app-note-container-full-width;
+    max-width: ${props => props.theme.note.containerFullWidthRem}rem;
     width: 100%;
 
     .app-note-title-container {
-      border-radius: $app-border-radius;
+      border-radius: ${props => props.theme.note.borderRadiusPx}px;
 
       &:hover {
         background-color: unset;
@@ -122,7 +122,7 @@
       margin-left: 95%;
 
       &:hover {
-        color: $app-black-color;
+        color: ${props => props.theme.colors.blackColor};
       }
     }
 
@@ -139,35 +139,32 @@
 
 @media all and (max-width: 500px) {
   .ui.app-note-container {
-
     &.full {
-
       .app-note-edit-icon {
         margin-left: 78%;
       }
-
       .app-note-trash-icon {
         margin-left: 85%;
       }
-
       .app-note-close-icon {
         margin-left: 92%;
       }
-
       .app-note-tags {
         .label {
           font-size: .7rem;
         }
       }
-
     }
-
   }
 }
 
 @media all and (max-width: 767px) {
   .ui.app-note-container {
-    max-width: $app-note-container-width * 1.1;
+    max-width: ${props => props.theme.note.containerWidthRem * 1.1}rem;
     width: 100%;
   }
 }
+
+`;
+
+export default NoteStyles;

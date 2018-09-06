@@ -2,7 +2,7 @@ import * as React                                       from 'react';
 import { Route, Redirect, Switch, RouteComponentProps } from 'react-router-dom';
 import { Helmet }                                       from 'react-helmet';
 import { NotesList, Note }                              from '../components/';
-import { AppActions, AppCategories, AppNote }           from '../interfaces';
+import { AppActions, AppCategories, AppNote }           from '../interfaces/index';
 
 interface HomeRoutesProps {
     categories: AppCategories;
@@ -23,14 +23,10 @@ const HomeRoutes: React.StatelessComponent<HomeRoutesProps> = (props) => {
                 path="/notes/:category"
                 render={
                     (route: RouteComponentProps<RouteParams>) => {
-                        const category = route.match.params.category;
+                        const {category} = route.match.params;
                         return (categories.categoriesList.includes(category))
                             ? <React.Fragment>
-                                    <Helmet>
-                                        <title>
-                                            {category[0].toUpperCase() + category.substring(1)}
-                                        </title>
-                                    </Helmet>
+                                    <Helmet title={category[0].toUpperCase() + category.substring(1)} />
                                     <NotesList {...props} routeCategory={category}/>
                                 </React.Fragment>
                             : <Redirect to="/notes/all"/>;
@@ -48,9 +44,7 @@ const HomeRoutes: React.StatelessComponent<HomeRoutesProps> = (props) => {
                         const requestedNote = notes[noteIndex()];
                         return (noteIndex() !== -1)
                             ? <React.Fragment>
-                                    <Helmet>
-                                        <title>Full note - {requestedNote.title}</title>
-                                    </Helmet>
+                                    <Helmet title={`Full note - ${requestedNote.title}`}/>
                                     <Note
                                         note={requestedNote}
                                         actions={actions}

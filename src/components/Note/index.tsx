@@ -1,6 +1,5 @@
 import * as React              from 'react';
-import './index.css';
-import { AppActions, AppNote } from '../../interfaces';
+import { AppActions, AppNote } from '../../interfaces/index';
 import {
     SegmentGroup,
     Segment,
@@ -9,6 +8,7 @@ import {
 }                              from 'semantic-ui-react/';
 import { ReactNode }           from 'react';
 import NoteButtons             from './NoteButtons';
+import NoteStyles              from './styles';
 
 interface AppNoteProps {
     note: AppNote;
@@ -39,20 +39,16 @@ class Note extends React.Component<AppNoteProps, {}> {
     private getCategories(): ReactNode[] {
         const {note} = this.props;
         return note.categories.map((category: string, index: number) => {
-            return <Label title={category} as="a" key={index} basic={true} className={note.color}>{category}</Label>;
+            return <Label title={category} as="div" key={index} basic={true}>{category}</Label>;
         });
     }
 
     render() {
         const {fullView, note, actions, activeCategory} = this.props;
         return (
+          <NoteStyles>
             <SegmentGroup className={`app-note-container ${(fullView ? 'full app-border-' + note.color : '')}`}>
-                <NoteButtons
-                    actions={actions}
-                    note={note}
-                    fullView={fullView}
-                    activeCategory={activeCategory}
-                />
+                <NoteButtons actions={actions} note={note} fullView={fullView} activeCategory={activeCategory}/>
                 <Segment
                     onClick={() => fullView ? null : actions.toggleNote(note.id)}
                     className={`${fullView ? '' : note.color} app-note-title-container`}
@@ -76,6 +72,7 @@ class Note extends React.Component<AppNoteProps, {}> {
                     </div>
                 </Segment>
             </SegmentGroup>
+          </NoteStyles>
         );
     }
 }

@@ -1,6 +1,6 @@
 import * as React                                from 'react';
 import { Icon, Menu, Button, Input, InputProps } from 'semantic-ui-react';
-import { AppActions, AppCategories }             from '../../interfaces';
+import { AppActions, AppCategories }             from '../../interfaces/index';
 import { ChangeEvent, ReactNode }                from 'react';
 import CategoryItem                              from './CategoryItem';
 import CategoriesStyles                          from './styles';

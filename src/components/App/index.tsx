@@ -4,10 +4,10 @@ import { Header } from '../../components';
 
 const App: React.StatelessComponent<{}> = () => {
     return (
-        <div>
+        <React.Fragment>
             <Header/>
             <MainRoutes/>
-        </div>
+        </React.Fragment>
     );
 };
 

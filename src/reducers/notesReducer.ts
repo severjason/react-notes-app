@@ -1,5 +1,5 @@
-import { types } from '../constants/types';
-import { AppAction, AppActionCategory, AppActionNote, AppActionTags, AppNote } from '../interfaces';
+import { types }                                                               from '../constants/types';
+import { AppAction, AppActionCategory, AppActionNote, AppActionTags, AppNote } from '../interfaces/index';
 
 const INITIAL_STATE: AppNote[] = [
     {

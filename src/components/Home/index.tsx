@@ -1,7 +1,7 @@
 import * as React                from 'react';
 import { Helmet }                from 'react-helmet';
 import { Container, Grid, Icon } from 'semantic-ui-react';
-import { AppActions, AppState }  from '../../interfaces';
+import { AppActions, AppState }  from '../../interfaces/index';
 import { Categories, NoteModal } from '../../components';
 import { HomeRoutes }            from '../../routes';
 import HomeStyles                from './styles';
@@ -19,9 +19,7 @@ const Home: React.StatelessComponent<AppState & AppRoute & AppHomeDispatch> = (p
     const {actions, categories, notes} = props;
     return (
         <Container>
-            <Helmet>
-                <title>Notes app</title>
-            </Helmet>
+            <Helmet title="Notes app"/>
             <HomeStyles>
                 <Grid>
                     <Grid.Column width={16}>

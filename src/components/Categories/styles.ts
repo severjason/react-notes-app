@@ -21,7 +21,6 @@ const CategoriesStyles = styled.div`
     border: ${props => props.theme.categories.menuBorder()};
     box-shadow: ${props => props.theme.categories.menuBoxShadow()};
     display: none;
-    height: ${props => props.theme.menuHeightRem}rem;
     padding: 0;
 
     &.expanded {

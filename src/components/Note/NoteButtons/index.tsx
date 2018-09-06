@@ -1,6 +1,6 @@
 import * as React              from 'react';
 import { Icon }                from 'semantic-ui-react';
-import { AppActions, AppNote } from '../../../interfaces';
+import { AppActions, AppNote } from '../../../interfaces/index';
 import { Link }                from 'react-router-dom';
 
 interface AppNoteButtonsProps {
@@ -11,6 +11,7 @@ interface AppNoteButtonsProps {
 }
 
 const NoteButtons: React.StatelessComponent<AppNoteButtonsProps> = ({actions, note, fullView, activeCategory}) => {
+
     return (
         <React.Fragment>
             <div

@@ -1,11 +1,14 @@
-import * as React from 'react';
-import { ChangeEvent, ReactNode } from 'react';
-import { Modal, Button, CheckboxProps, InputProps, TextAreaProps, Label, Icon } from 'semantic-ui-react';
-import { AppActions, AppCategories, AppNote, AppNoteModal, AppTags } from '../../interfaces';
+import * as React                                                               from 'react';
+import { ChangeEvent}                                               from 'react';
+import { Modal, Button, CheckboxProps, InputProps, TextAreaProps, Label } from 'semantic-ui-react';
 import { Form, Input, TextArea, Checkbox, Divider } from 'semantic-ui-react';
 import './index.css';
-import * as uuid from 'uuid';
-import * as helpers from '../../helpers';
+import * as uuid                                    from 'uuid';
+import * as helpers                                 from '../../helpers';
+import NoteModalStyles                              from './styles';
+import Tags                                         from './Tags';
+import { AppTagsActions }                           from "../../interfaces/tags";
+import { AppModalActions }                          from "../../interfaces/modal";
 
 interface AppNoteModalProps {
     modal: AppNoteModal;
@@ -14,27 +17,30 @@ interface AppNoteModalProps {
 }
 
 interface AppNoteModalDispatch {
-    actions: AppActions;
+    actions: AppTagsActions & AppModalActions;
 }
 
-interface AppNoteModalState extends AppNote {
+interface AppNoteModalState {
+    note: AppNote;
     newTag: string;
 }
 
 export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalDispatch, {}> {
 
     private INITIAL_STATE: AppNoteModalState = {
-        id: '',
-        title: '',
-        color: 'black',
-        text: '',
-        categories: [],
-        tags: [],
-        expanded: false,
+        note: {
+            id: '',
+            title: '',
+            color: 'black',
+            text: '',
+            categories: [],
+            tags: [],
+            expanded: false,
+        },
         newTag: ''
     };
 
-    public state: AppNoteModalState = Object.assign({}, this.INITIAL_STATE);
+    public state: AppNoteModalState = this.INITIAL_STATE;
 
     private colors: string[] = ['black', 'red', 'green', 'orange', 'blue', 'purple', 'brown', 'violet', 'teal', 'pink'];
 
@@ -43,8 +49,9 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     private maxNewTagLength: number = 20;
 
     componentDidUpdate() {
-        if (this.props.modal.openedForUpdate && this.props.modal.modalProps.id !== this.state.id) {
-            this.setState(this.props.modal.modalProps);
+        const { modal } = this.props;
+        if (modal.openedForUpdate && modal.modalProps.id !== this.state.note.id) {
+            this.setState({note: modal.modalProps});
         }
     }
 
@@ -61,66 +68,52 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     }
 
     private handleCategoryChange = (e: ChangeEvent<HTMLInputElement>, {value}: any): void => {
-        this.setState({categories: helpers.toggleStringInArray(this.state.categories, value)});
+        this.setState({categories: helpers.toggleStringInArray(this.state.note.categories, value)});
     }
 
     private handleTagClick = (clickedTag: string): void => {
-        this.setState({tags: helpers.toggleStringInArray(this.state.tags, clickedTag)});
+        this.setState({tags: helpers.toggleStringInArray(this.state.note.tags, clickedTag)});
     }
 
     private handleNewTagChange = (e: ChangeEvent<HTMLInputElement>, {value}: InputProps): void => {
         this.setState({newTag: value});
     }
 
-    private handleDeleteTag = (tag: string): void => {
-        this.props.actions.deleteCustomTag(tag);
-    }
-
     private resetState = (): void => this.setState(this.INITIAL_STATE);
 
     private resetNewTag = (): void => this.setState({newTag: ''});
 
-    private addNoteIsDisabled = (): boolean => !(this.state.title);
+    private addNoteIsDisabled = (): boolean => !(this.state.note.title);
 
     private addTagIsDisabled = (tags: string[]): boolean => tags.includes(this.state.newTag.toLowerCase());
 
-    private removeNewTagFromState = (state: AppNoteModalState): AppNote => ({
-        id: state.id,
-        title: state.title,
-        color: state.color,
-        text: state.text,
-        categories: state.categories,
-        tags: state.tags,
-        expanded: state.expanded,
-    })
-
     private addNote = (): void => {
-        const state: AppNoteModalState = this.state;
-        this.props.actions.addNote(this.removeNewTagFromState({
-            ...state,
+        this.props.actions.addNote({
+            ...this.state.note,
             id: uuid.v4(),
-        }));
+        });
+    }
+
+    getCategoriesList() {
+        return this.props.categories.categoriesList.filter((category: string) => category !== 'all');
     }
 
     public render() {
 
-        const categoriesList: string[] = this.props.categories.categoriesList
-            .filter((category: string) => category !== 'all');
-
-        const noteForUpdate: boolean = this.props.modal.openedForUpdate;
+        const { openedForUpdate } = this.props.modal;
 
         const colorCheckboxes = this.colors.map((color: string, index: number) => {
             return (
                 <Form.Field key={index}>
                     <label
                         className={`ui ${color}
-                        ${(this.state.color === color) ? '' : 'basic'} label app-checkbox-label`}
+                        ${(this.state.note.color === color) ? '' : 'basic'} label app-checkbox-label`}
                     >
                         <Checkbox
                             radio={true}
                             name="colorCheckbox"
                             value={color}
-                            checked={this.state.color === color}
+                            checked={this.state.note.color === color}
                             onChange={this.handleColorChange}
                         />
                     </label>
@@ -128,18 +121,19 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
             );
         });
 
-        const categoriesCheckboxes = categoriesList.map((category: string, index: number) => {
+        const categoriesCheckboxes = this.getCategoriesList().map((category: string, index: number) => {
             return (
                 <Form.Field key={index}>
                     <label
-                        className={`ui basic label app-modal-category-title ${(this.state.categories.includes(category))
-                            ? this.state.color
+                        className={`ui basic label app-modal-category-title
+                        ${(this.state.note.categories.includes(category))
+                            ? this.state.note.color
                             : ''}`}
                     >
                         <Checkbox
                             name="categoryCheckbox"
                             value={category}
-                            checked={this.state.categories.includes(category)}
+                            checked={this.state.note.categories.includes(category)}
                             onChange={this.handleCategoryChange}
                         />
                         {category}
@@ -148,42 +142,12 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
             );
         });
 
-        // generate tags and add delete icons only to custom tags
-        const getTags = (tagsList: string[], deleteIcon: boolean): ReactNode => {
-            const getIcon = (tag: string): ReactNode => (
-                <Icon
-                    name="delete"
-                    className="app-tag-delete-icon"
-                    onClick={() => deleteIcon ? this.handleDeleteTag(tag) : false}
-                />
-            );
-            return tagsList.map((tag: string, index: number) => {
-                return (
-                    <Label
-                        title={tag}
-                        as="a"
-                        key={index}
-                        tag={true}
-                        className={`${this.state.tags.includes(tag) ? 'active' : ''}`}
-                        onClick={() => this.handleTagClick(tag)}
-                    >
-                        {tag}
-                        {(deleteIcon ? getIcon(tag) : '')}
-                    </Label>
-                );
-            });
-        };
-
-        const basicTags = getTags(this.props.tags.basicTags, false);
-
-        const customTags = getTags(this.props.tags.customTags, true);
-
         const allTags = this.props.tags.basicTags.concat(this.props.tags.customTags);
 
         return (
-            <div>
+            <NoteModalStyles>
                 <Modal
-                    className={`app-note-modal-container scrolling app-border-${this.state.color}`}
+                    className={`app-note-modal-container scrolling app-border-${this.state.note.color}`}
                     size="small"
                     open={this.props.modal.opened}
                     onClose={() => {
@@ -194,7 +158,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                     dimmer="blurring"
                 >
                     <Modal.Header className={`ui `}>
-                        {(noteForUpdate) ? 'Update note' : 'Create new note'}
+                        {(openedForUpdate) ? 'Update note' : 'Create new note'}
                     </Modal.Header>
                     <Modal.Content>
                         <Form>
@@ -205,12 +169,11 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                                         </span>
                                 </Label>
                                 <Input
-                                    value={this.state.title}
+                                    value={this.state.note.title}
                                     placeholder="Note title"
                                     maxLength={this.maxTitleLength}
                                     onChange={this.handleTitleChange}
                                     className="app-modal-input"
-
                                 />
                             </Form.Group>
                             <div className="app-required-text">
@@ -238,8 +201,20 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                                     >
                                         Tags:
                                     </Label>
-                                    {basicTags}
-                                    {customTags}
+                                    <Tags
+                                        tagsList={this.props.tags.basicTags}
+                                        deleteIcon={false}
+                                        note={this.state.note}
+                                        deleteTag={this.props.actions.deleteCustomTag}
+                                        handleTagClick={this.handleTagClick}
+                                    />
+                                    <Tags
+                                        tagsList={this.props.tags.customTags}
+                                        deleteIcon={true}
+                                        note={this.state.note}
+                                        deleteTag={this.props.actions.deleteCustomTag}
+                                        handleTagClick={this.handleTagClick}
+                                    />
                                 </Label.Group>
                             </Form.Group>
                             <Divider hidden={true}/>
@@ -258,7 +233,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                                     disabled={this.addTagIsDisabled(allTags) || !this.state.newTag}
                                     onClick={() => {
                                         this.props.actions.addCustomTag(this.state.newTag);
-                                        this.setState({tags: this.state.tags.concat(this.state.newTag)});
+                                        this.setState({tags: this.state.note.tags.concat(this.state.newTag)});
                                         this.resetNewTag();
                                     }}
                                 >
@@ -269,7 +244,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                             <Form.Field inline={true}>
                                 <Label className={`pointing below basic grey app-modal-label`}>Text:</Label>
                                 <TextArea
-                                    value={this.state.text}
+                                    value={this.state.note.text}
                                     placeholder="Add some interesting text..."
                                     onChange={this.handleTextChange}
                                 />
@@ -279,20 +254,20 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                     <Modal.Actions>
                         <Button
                             onClick={() => {
-                                (noteForUpdate)
-                                    ? this.props.actions.updateNote(this.removeNewTagFromState(this.state))
+                                (openedForUpdate)
+                                    ? this.props.actions.updateNote(this.state.note)
                                     : this.addNote();
                                 this.resetState();
                                 this.props.actions.closeModal();
                             }}
                             disabled={this.addNoteIsDisabled()}
-                            className={`ui ${this.state.color}`}
+                            className={`ui ${this.state.note.color}`}
                         >
-                            {(noteForUpdate) ? 'Update' : 'Add'}
+                            {(openedForUpdate) ? 'Update' : 'Add'}
                         </Button>
                     </Modal.Actions>
                 </Modal>
-            </div>
+            </NoteModalStyles>
         );
     }
 }

@@ -2,6 +2,9 @@ interface AppMainTheme {
     colors: {
         mainColor: string;
         blackColor: string;
+        redColor: string;
+        greenColor: string;
+        blueColor: string;
         noteTitleHoverColor: string;
         noteAddIconBorderColor: string;
         noteFormInfoColor: string;
@@ -39,6 +42,9 @@ export const mainTheme: AppMainTheme = {
     colors: {
         mainColor: '#334e61',
         blackColor: '#1b1c1d',
+        redColor: '#db2828',
+        blueColor: '#2185d0',
+        greenColor: '#21ba45',
         noteTitleHoverColor: '#f3f4f5',
         noteAddIconBorderColor: 'rgba(34, 36, 38, .15)',
         noteFormInfoColor: 'rgba(0, 0, 0, .3)',
@@ -47,7 +53,7 @@ export const mainTheme: AppMainTheme = {
     base: {
         marginRem: 1, // rem
         paddingRem: 1, // rem
-        borderRadiusPx: 5, // px
+        borderRadiusPx: 3, // px
     },
     note: {
         marginRem: .5, // rem

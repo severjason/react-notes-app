@@ -1,5 +1,5 @@
-import { types } from '../constants/types';
-import { AppAction, AppNoteModal } from '../interfaces';
+import { types }                   from '../constants/types';
+import { AppAction, AppNoteModal } from '../interfaces/index';
 
 const INITIAL_STATE: AppNoteModal = {
     opened: false,

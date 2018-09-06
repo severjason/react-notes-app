@@ -1,6 +1,6 @@
-import { AppActionTags, AppTags } from '../interfaces';
-import { types } from '../constants/types';
-import * as helpers from '../helpers';
+import { AppActionTags, AppTags } from '../interfaces/index';
+import { types }                  from '../constants/types';
+import * as helpers               from '../helpers';
 
 const INITIAL_STATE: AppTags = {
     basicTags: ['favourite', 'personal', 'interesting', 'later', 'important'],

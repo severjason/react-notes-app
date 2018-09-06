@@ -2,7 +2,7 @@ import * as React     from 'react';
 import { Menu }       from 'semantic-ui-react';
 import { Link }       from 'react-router-dom';
 import { Icon }       from 'semantic-ui-react';
-import { AppActions } from '../../../interfaces';
+import { AppActions } from '../../../interfaces/index';
 
 interface CategoryItemProps {
     category: string;
