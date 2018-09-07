@@ -2,7 +2,6 @@ import * as React from 'react';
 import { ChangeEvent } from 'react';
 import { Modal, Button, CheckboxProps, InputProps, TextAreaProps, Label } from 'semantic-ui-react';
 import { Form, Input, TextArea, Checkbox, Divider } from 'semantic-ui-react';
-import './index.css';
 import * as uuid from 'uuid';
 import * as helpers from '../../helpers';
 import NoteModalStyles from './styles';
@@ -62,11 +61,21 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     }
 
     private handleTitleChange = (e: ChangeEvent<HTMLInputElement>, {value}: InputProps): void => {
-        this.setState({title: value});
+        this.setState((state: AppNoteModalState) => ({
+            note: {
+                ...state.note,
+                title: value,
+            }
+        }));
     }
 
     private handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>, {value}: TextAreaProps): void => {
-        this.setState({text: value});
+        this.setState((state: AppNoteModalState) => ({
+            note: {
+                ...state.note,
+                text: value,
+            }
+        }));
     }
 
     private handleCategoryChange = (e: ChangeEvent<HTMLInputElement>, {value}: any): void => {

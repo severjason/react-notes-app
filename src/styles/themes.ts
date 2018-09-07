@@ -1,10 +1,17 @@
-interface AppMainTheme {
+/*interface AppMainTheme {
     colors: {
         mainColor: string;
         blackColor: string;
         redColor: string;
         greenColor: string;
         blueColor: string;
+        greyColor: string;
+        orangeColor: string;
+        tealColor: string;
+        purpleColor: string;
+        brownColor: string;
+        violetColor: string;
+        pinkColor: string;
         noteTitleHoverColor: string;
         noteAddIconBorderColor: string;
         noteFormInfoColor: string;
@@ -36,15 +43,22 @@ interface AppMainTheme {
         menuBorder: () => string;
         menuBoxShadow: () => string;
     };
-}
+}*/
 
-export const mainTheme: AppMainTheme = {
+export const mainTheme = {
     colors: {
         mainColor: '#334e61',
         blackColor: '#1b1c1d',
         redColor: '#db2828',
         blueColor: '#2185d0',
         greenColor: '#21ba45',
+        greyColor: '#767676',
+        orangeColor: '#f2711c',
+        tealColor: '#009c95',
+        purpleColor: '#a333c8',
+        brownColor: '#a5673f',
+        violetColor: '#6435c9',
+        pinkColor: '#e03997',
         noteTitleHoverColor: '#f3f4f5',
         noteAddIconBorderColor: 'rgba(34, 36, 38, .15)',
         noteFormInfoColor: 'rgba(0, 0, 0, .3)',

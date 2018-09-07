@@ -1,109 +1,92 @@
-import * as React                                from 'react';
-import { Icon, Menu, Button, Input, InputProps } from 'semantic-ui-react';
-import { AppCategories, AppCategoriesActions }   from '../../interfaces/categories';
-import { ChangeEvent, ReactNode }                from 'react';
-import CategoryItem                              from './CategoryItem';
-import CategoriesStyles                          from './styles';
+import * as React from 'react';
+import { AppCategories, AppCategoriesActions } from '../../interfaces/categories';
+import { ChangeEvent, ReactNode } from 'react';
+import CategoryItem from './CategoryItem';
+import AddCategory from './AddCategory';
+import CategoriesStyles from './styles';
+import { MenuList, Paper, Divider, Switch } from '@material-ui/core';
 
 interface AppCategoriesDispatch {
-    actions: AppCategoriesActions;
+  actions: AppCategoriesActions;
 }
 
 interface CategoriesListState {
-    showInput: boolean;
-    inputValue: string;
+  inputShowed: boolean;
+  inputValue: string;
 }
 
 class Categories extends React.Component<AppCategories & AppCategoriesDispatch, CategoriesListState> {
 
-    public state = {
-        showInput: false,
-        inputValue: '',
-    };
+  public state = {
+    inputShowed: false,
+    inputValue: '',
+  };
 
-    private handleShowInputClick = (): void => this.setState({showInput: true});
+  private handleShowInput = (): void => this.setState({inputShowed: true});
 
-    private handleHideInputClick = (): void => this.setState({showInput: false, inputValue: ''});
+  private handleHideInput = (): void => this.setState({inputShowed: false, inputValue: ''});
 
-    private handleInputChange = (e: ChangeEvent<HTMLInputElement>, {value}: InputProps): void => {
-        this.setState({inputValue: value});
+  private handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    this.setState({inputValue: e.target.value});
+  }
+
+  private handleAddCategory = (category: string): void => {
+    this.props.actions.addCategory(category);
+    this.setState({inputShowed: false, inputValue: ''});
+  }
+
+  private inputIsDisabled = (): boolean => {
+    const {inputValue} = this.state;
+    return !inputValue || this.props.categoriesList.includes(inputValue.toLowerCase());
+  }
+
+  private toggleCategories = (): void => {
+    const {actions, expanded} = this.props;
+    if (expanded) {
+      actions.toggleCategories();
+      this.handleHideInput();
+    } else {
+      actions.toggleCategories();
     }
+  }
 
-    private handleAddCategoryClick = (category: string): void => {
-        this.props.actions.addCategory(category);
-        this.setState({showInput: false, inputValue: ''});
-    }
+  private getCategories(): ReactNode {
+    const {actions, categoriesList, expanded, activated} = this.props;
+    return categoriesList.map((category: string) => (
+      <CategoryItem
+        key={category}
+        category={category}
+        activated={activated}
+        actions={actions}
+        expanded={expanded}
+      />)
+    );
+  }
 
-    private isInputDisabled = (): boolean => {
-        const {inputValue} = this.state;
-        return !inputValue || this.props.categoriesList.includes(inputValue.toLowerCase());
-    }
-
-    private getCategories(): ReactNode {
-        const {actions, categoriesList, expanded, activated} = this.props;
-        return categoriesList.map((category: string) => (
-            <CategoryItem
-                key={category}
-                category={category}
-                activated={activated}
-                actions={actions}
-                expanded={expanded}
-            />)
-        );
-    }
-
-    render() {
-        const {actions, expanded} = this.props;
-        const {inputValue, showInput} = this.state;
-        return (
-            <CategoriesStyles className="sixteen wide column">
-                <Menu stackable={true} className="app-categories-menu">
-                    <Menu.Item
-                        className={`app-categories-menu app-categories-menu-logo ${(expanded ? 'expanded' : '')}`}
-                        onClick={actions.toggleCategories}
-                    >
-                        <Icon
-                            title={expanded ? 'hide categories' : 'show categories'}
-                            name={expanded ? 'toggle on' : 'toggle off'}
-                        />
-                    </Menu.Item>
-                    {this.getCategories()}
-                    <Menu.Item
-                        className={` app-categories-menu app-add-category-menu
-                        ${showInput ? 'hidden' : ''}
-                        ${(expanded ? 'expanded' : '')}`}
-                        onClick={this.handleShowInputClick}
-                    >
-                        <strong>Add category</strong>
-                    </Menu.Item>
-                    <div
-                        className={`ui action input app-category-input-container app-categories-menu-item
-                        ${showInput ? '' : 'hidden'}
-                        ${(expanded ? 'expanded' : '')}`}
-                    >
-                        <Input
-                            value={inputValue}
-                            type="text"
-                            placeholder="New category.."
-                            onChange={this.handleInputChange}
-                        />
-                        <Button
-                            onClick={() => this.handleAddCategoryClick(inputValue)}
-                            disabled={this.isInputDisabled()}
-                            className="app-add-category-button"
-                        >
-                            Add
-                        </Button>
-                        <Icon
-                            name="delete"
-                            className={`app-delete-icon app-hide-input-icon`}
-                            onClick={this.handleHideInputClick}
-                        />
-                    </div>
-                </Menu>
-            </CategoriesStyles>
-        );
-    }
+  render() {
+    const {expanded} = this.props;
+    const {inputValue, inputShowed} = this.state;
+    return (
+      <CategoriesStyles>
+        <Switch defaultChecked={true} value="checkedF" color="default" onClick={this.toggleCategories}/>
+        <Paper className={`categories-menu ${(expanded ? 'expanded' : '')}`}>
+          <MenuList>
+            {this.getCategories()}
+            <Divider/>
+            <AddCategory
+              inputValue={inputValue}
+              inputShowed={inputShowed}
+              showInput={this.handleShowInput}
+              hideInput={this.handleHideInput}
+              onInputChange={this.handleInputChange}
+              inputIsDisabled={this.inputIsDisabled()}
+              addCategory={this.handleAddCategory}
+            />
+          </MenuList>
+        </Paper>
+      </CategoriesStyles>
+    );
+  }
 }
 
 export default Categories;
