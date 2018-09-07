@@ -39,7 +39,8 @@ const CategoryItemStyles = styled.div`
      text-transform: uppercase;
   }
   
-  @media all and (max-width: 768px) {
+  @media all and (max-width: ${props => props.theme.media.mobileMaxWidthPx}px) {
+    max-width: ${props => props.theme.media.mobileMaxWidthPx}px;
     .category-delete-icon {
       opacity: .2;
       margin-right: .25rem;

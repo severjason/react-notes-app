@@ -32,7 +32,7 @@ const CategoryItem: React.StatelessComponent<CategoryItemProps> = ({category, ac
   return (
     <CategoryItemStyles>
       <Link to={`/notes/${category}`} onClick={() => actions.activateCategory(category)}>
-        <MenuItem className="category-menu-item">
+        <MenuItem className={`category-menu-item ${category === activated ? 'active' : ''}`}>
           <ListItemIcon>
             {getIcon(category)}
           </ListItemIcon>

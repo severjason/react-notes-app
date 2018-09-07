@@ -8,6 +8,14 @@ const CategoriesStyles = styled.div`
       display: flex;
     }
   }
+  
+  @media all and (max-width: ${props => props.theme.media.mobileMaxWidthPx}px) {
+    .categories-menu {
+      ul {
+        width: 100%;
+      }
+    }
+  }
 `;
 
 export default CategoriesStyles;
