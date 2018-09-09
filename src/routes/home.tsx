@@ -26,7 +26,7 @@ const HomeRoutes: React.StatelessComponent<HomeRoutesProps> = (props) => {
                         const {category} = route.match.params;
                         return (categories.categoriesList.includes(category))
                             ? <React.Fragment>
-                                    <Helmet title={category[0].toUpperCase() + category.substring(1)} />
+                                    <Helmet title={`${category[0].toUpperCase() + category.substring(1)} | Notes`} />
                                     <NotesList {...props} routeCategory={category}/>
                                 </React.Fragment>
                             : <Redirect to="/notes/all"/>;

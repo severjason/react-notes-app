@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IconButton, Input, withStyles } from '@material-ui/core';
+import { IconButton, Input, withStyles, Tooltip } from '@material-ui/core';
 import { Add, Check, Close } from '@material-ui/icons';
 import AddCategoryStyles from './styles';
 import { ChangeEvent } from 'react';
@@ -36,9 +36,11 @@ const AddCategory: React.StatelessComponent<AddCategoryProps> = (
     classes
   }) => (
   <AddCategoryStyles>
-    <IconButton className={`category-add-button ${inputShowed ? 'hidden' : ''}`} onClick={showInput}>
-      <Add className="add-category-toggle-icon"/>
-    </IconButton>
+    <Tooltip title="Add new category">
+      <IconButton className={`category-add-button ${inputShowed ? 'hidden' : ''}`} onClick={showInput}>
+        <Add className="add-category-toggle-icon"/>
+      </IconButton>
+    </Tooltip>
     <div className={`add-category-input-container ${inputShowed ? '' : 'hidden'}`}>
       <Input
         value={inputValue}

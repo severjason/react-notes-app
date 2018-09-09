@@ -69,6 +69,9 @@ export const mainTheme = {
     paddingRem: 1, // rem
     borderRadiusPx: 3, // px
   },
+  drawer: {
+    widthRem: 22,
+  },
   note: {
     marginRem: .5, // rem
     containerWidthRem: 18.9, // rem

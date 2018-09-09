@@ -2,11 +2,14 @@ import styled from 'styled-components';
 
 const CategoryItemStyles = styled.div`
   position: relative;
-  min-width: 300px;
-  max-width: 320px;
+  width: ${props => props.theme.drawer.widthRem}rem;
  
   .category-menu-item {
     padding-right: 40px;
+    &.active span{
+      font-weight: 700;
+      color: ${props => props.theme.colors.mainColor};
+    }
   }
   
   &:hover {
@@ -16,7 +19,7 @@ const CategoryItemStyles = styled.div`
   }
   
   .category-icon {
-    color: ${props => props.theme.colors.mainColor}
+    color: ${props => props.theme.colors.mainColor};
   }
   
   .category-delete-icon {
@@ -40,7 +43,6 @@ const CategoryItemStyles = styled.div`
   }
   
   @media all and (max-width: ${props => props.theme.media.mobileMaxWidthPx}px) {
-    max-width: ${props => props.theme.media.mobileMaxWidthPx}px;
     .category-delete-icon {
       opacity: .2;
       margin-right: .25rem;

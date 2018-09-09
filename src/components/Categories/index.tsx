@@ -4,7 +4,7 @@ import { ChangeEvent, ReactNode } from 'react';
 import CategoryItem from './CategoryItem';
 import AddCategory from './AddCategory';
 import CategoriesStyles from './styles';
-import { MenuList, Paper, Divider, Switch } from '@material-ui/core';
+import { MenuList, Divider } from '@material-ui/core';
 
 interface AppCategoriesDispatch {
   actions: AppCategoriesActions;
@@ -40,7 +40,7 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
     return !inputValue || this.props.categoriesList.includes(inputValue.toLowerCase());
   }
 
-  private toggleCategories = (): void => {
+  /*private toggleCategories = (): void => {
     const {actions, expanded} = this.props;
     if (expanded) {
       actions.toggleCategories();
@@ -48,7 +48,7 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
     } else {
       actions.toggleCategories();
     }
-  }
+  }*/
 
   private getCategories(): ReactNode {
     const {actions, categoriesList, expanded, activated} = this.props;
@@ -64,13 +64,13 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
   }
 
   render() {
-    const {expanded} = this.props;
     const {inputValue, inputShowed} = this.state;
     return (
       <CategoriesStyles>
+{/*
         <Switch defaultChecked={true} value="checkedF" color="default" onClick={this.toggleCategories}/>
-        <Paper className={`categories-menu ${(expanded ? 'expanded' : '')}`}>
-          <MenuList>
+*/}
+          <MenuList className="menu-list">
             {this.getCategories()}
             <Divider/>
             <AddCategory
@@ -83,7 +83,6 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
               addCategory={this.handleAddCategory}
             />
           </MenuList>
-        </Paper>
       </CategoriesStyles>
     );
   }

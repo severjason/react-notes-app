@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
 const CategoriesStyles = styled.div`
+
+  .menu-list {
+    padding: 0;
+  }
   
   .categories-menu {
     display: none;
