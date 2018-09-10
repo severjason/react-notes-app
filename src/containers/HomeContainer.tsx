@@ -11,7 +11,6 @@ interface AppHomeDispatch {
 
 interface AppRoute {
     match: any;
-    activeCategory: string;
 }
 
 class HomeContainer extends React.Component<AppState & AppRoute & AppHomeDispatch, {}> {

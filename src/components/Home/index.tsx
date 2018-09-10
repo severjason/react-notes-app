@@ -14,7 +14,6 @@ interface AppHomeDispatch {
 
 interface AppRoute {
   match: any;
-  activeCategory: string;
 }
 
 interface HomeState {
