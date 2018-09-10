@@ -1,64 +1,61 @@
 import styled from 'styled-components';
 
 const NoteStyles = styled.div`
-.ui.app-note-container {
   margin: ${props => props.theme.note.marginRem}rem;
   width: ${props => props.theme.note.containerWidthRem}rem;
-
-  &:first-child,
-  &:last-child {
-    margin: ${props => props.theme.note.marginRem}rem;
-  }
-
   
-  .app-note-info {
-    display: none;
-
-    .app-note-tags {
-      .label {
-        font-size: .7rem;
-        margin-right: .5rem;
-        margin-top: .2rem;
+  &.full {
+    width: 100%;
+    max-width: 43rem;
+    margin: 0 auto;
+  
+    .card-action {
+      &:hover {
+        background-color: transparent;
+        cursor: unset;
       }
     }
-
-    .hidden {
-      display: none;
+  }
+  
+  .note-card {
+    position: relative;
+  }
+  .card-action {
+    width: 100%;
+  }
+  
+  .buttons-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: .7rem .5rem 0 0;
+  }
+  
+  .note-header {
+    padding-right: 8rem;
+    span {
+      font-size: 1.2rem;
     }
-
+  }
+  .note-content {
+    display: none;
+    padding-top: 1rem;
     &.expanded {
       display: block;
     }
   }
-
-}
-
-@media all and (max-width: 500px) {
-  .ui.app-note-container {
-    &.full {
-      .app-note-edit-icon {
-        margin-left: 78%;
-      }
-      .app-note-trash-icon {
-        margin-left: 85%;
-      }
-      .app-note-close-icon {
-        margin-left: 92%;
-      }
-      .app-note-tags {
-        .label {
-          font-size: .7rem;
-        }
-      }
-    }
+  .note-divider {
+    margin: 1rem 0;
   }
-}
+  
+  .note-tag {
+    height: 1.5rem;
+    margin: .1rem .1rem .1rem 0;
+  }
 
 @media all and (max-width: 767px) {
-  .ui.app-note-container {
     max-width: ${props => props.theme.note.containerWidthRem * 1.1}rem;
     width: 100%;
-  }
 }
 
 `;

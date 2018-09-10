@@ -3,7 +3,7 @@ import { AppNoteActions, AppNote } from '../../../interfaces/notes';
 import { AppModalActions } from '../../../interfaces/modal';
 import { Link } from 'react-router-dom';
 import { DeleteForeverOutlined, EditOutlined, ZoomOutMapOutlined, ClearOutlined } from '@material-ui/icons';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Tooltip } from '@material-ui/core';
 import NoteButtonStyles from './styles';
 import { AlertDialog } from '../../../components';
 
@@ -39,22 +39,30 @@ class NoteButtons extends React.Component<AppNoteButtonsProps, AppNoteButtonsSta
           onConfirm={() => actions.deleteNote(note.id)}
           opened={opened}
         />
-        <IconButton  onClick={() => actions.openModalForUpdate(note)} className="note-button">
-          <EditOutlined className="note-button app-note-edit-icon"/>
-        </IconButton>
-        <IconButton onClick={this.openDialog} className="note-button">
-          <DeleteForeverOutlined className="app-note-delete-icon"/>
-        </IconButton>
+        <Tooltip title={`Edit note`}>
+          <IconButton onClick={() => actions.openModalForUpdate(note)} className="note-button">
+            <EditOutlined className="note-icon app-note-edit-icon"/>
+          </IconButton>
+        </Tooltip>
+        <Tooltip title={`Delete note`}>
+          <IconButton onClick={this.openDialog} className="note-button">
+            <DeleteForeverOutlined className="note-icon app-note-delete-icon"/>
+          </IconButton>
+        </Tooltip>
         {(!fullView)
           ? <Link to={`/note/${note.id}`}>
-            <IconButton title="Expand note" className="note-button">
-              <ZoomOutMapOutlined className="app-note-expand-icon"/>
-            </IconButton>
+            <Tooltip title={`Show more`}>
+              <IconButton className="note-button">
+                <ZoomOutMapOutlined className="note-icon app-note-expand-icon"/>
+              </IconButton>
+            </Tooltip>
           </Link>
           : <Link to={`/notes/${activeCategory}`}>
-            <IconButton title="Close note" className="note-button">
-              <ClearOutlined className="app-note-close-icon"/>
-            </IconButton>
+            <Tooltip title={`Close note`}>
+              <IconButton className="note-button">
+                <ClearOutlined className="note-icon app-note-close-icon"/>
+              </IconButton>
+            </Tooltip>
           </Link>
         }
       </NoteButtonStyles>

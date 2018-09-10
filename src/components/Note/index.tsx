@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AppNoteActions, AppNote } from '../../interfaces/notes';
 import { AppModalActions } from '../../interfaces/modal';
-import { Card, CardHeader, CardContent, Typography, Divider, Chip } from '@material-ui/core';
+import { Card, CardHeader, CardContent, Typography, Divider, Chip, CardActionArea } from '@material-ui/core';
 import {
   Label,
 } from 'semantic-ui-react/';
@@ -18,10 +18,10 @@ interface AppNoteProps {
 
 class Note extends React.Component<AppNoteProps, {}> {
 
-/*  private getNoteExpandedClass(): string {
+  private getNoteExpandedClass(): string {
     const {note, fullView} = this.props;
     return (note.expanded || fullView) ? 'expanded' : '';
-  }*/
+  }
 
   private addDots(): string {
     const {note} = this.props;
@@ -30,7 +30,8 @@ class Note extends React.Component<AppNoteProps, {}> {
 
   private getTags(): ReactNode[] {
     const {note} = this.props;
-    return note.tags.map((tag: string, index: number) => <Chip label={tag} key={index}/>);
+    return note.tags.map((tag: string, index: number) =>
+      <Chip className={`note-tag`} label={tag} key={index}/>);
   }
 
   private getCategories(): ReactNode[] {
@@ -40,33 +41,46 @@ class Note extends React.Component<AppNoteProps, {}> {
     });
   }
 
+  private getNoteHeader(): ReactNode {
+    const {note, fullView, actions} = this.props;
+    return (
+      <CardHeader
+        onClick={() => fullView ? null : actions.toggleNote(note.id)}
+        className={`note-header`}
+        title={note.title}
+      />);
+  }
+
   render() {
     const {fullView, note, actions, activeCategory} = this.props;
     return (
-      <NoteStyles>
-        <Card className={`app-note-container ${(fullView ? 'full app-border-' + note.color : '')}`}>
-          <CardHeader
-            action={
-              <NoteButtons actions={actions} note={note} fullView={fullView} activeCategory={activeCategory}/>}
-            title={note.title}
-          />
+      <NoteStyles className={`${(fullView ? 'full' : '')}`}>
+        <Card className="note-card">
+          {fullView
+            ? this.getNoteHeader() :
+            <CardActionArea className={`card-action`}>
+              {this.getNoteHeader()}
+            </CardActionArea>}
+          <div className="buttons-container">
+            <NoteButtons actions={actions} note={note} fullView={fullView} activeCategory={activeCategory}/>
+          </div>
           <Divider/>
-          <CardContent>
+          <CardContent className={`note-content ${this.getNoteExpandedClass()}`}>
             <Typography component="div">
               <div className={`${note.tags.length > 0 ? '' : 'hidden'} app-note-tags`}>
                 {fullView ? `Tags: ` : ''}
                 {this.getTags()}
-                <Divider/>
+                <Divider className={`note-divider`}/>
                 <div className={`${note.categories.length > 0 && fullView ? '' : 'hidden'} app-note-tags`}>
                   Categories: {this.getCategories()}
+                  <Divider className={`note-divider`}/>
                 </div>
-                <Divider/>
                 <div>{(fullView) ? note.text : note.text.slice(0, 300) + this.addDots()}</div>
               </div>
             </Typography>
           </CardContent>
         </Card>
-       {/* <SegmentGroup className={`app-note-container ${(fullView ? 'full app-border-' + note.color : '')}`}>
+        {/* <SegmentGroup className={`app-note-container ${(fullView ? 'full app-border-' + note.color : '')}`}>
           <NoteButtons actions={actions} note={note} fullView={fullView} activeCategory={activeCategory}/>
           <Segment
             onClick={() => fullView ? null : actions.toggleNote(note.id)}

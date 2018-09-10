@@ -2,6 +2,13 @@ import styled from 'styled-components';
 
 const NoteButtonStyles = styled.div`
   .note-button {
+    width: 2.5rem;
+    height: 2.5rem;
+    
+    .note-icon {
+      font-size: 1.5rem;
+    }
+    
     &:hover {
       .app-note-edit-icon {
         color: ${props => props.theme.colors.blueColor};
