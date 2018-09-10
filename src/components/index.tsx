@@ -7,6 +7,7 @@ import Categories from './Categories';
 import NoteModal from './NoteModal';
 import Home from './Home';
 import AppDrawer from './Drawer';
+import AlertDialog from './Dialog';
 
 export {
   Header,
@@ -18,4 +19,5 @@ export {
   Categories,
   Home,
   AppDrawer,
+  AlertDialog,
 };
