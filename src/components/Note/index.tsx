@@ -2,9 +2,6 @@ import * as React from 'react';
 import { AppNoteActions, AppNote } from '../../interfaces/notes';
 import { AppModalActions } from '../../interfaces/modal';
 import { Card, CardHeader, CardContent, Typography, Divider, Chip, CardActionArea } from '@material-ui/core';
-import {
-  Label,
-} from 'semantic-ui-react/';
 import { ReactNode } from 'react';
 import NoteButtons from './NoteButtons';
 import NoteStyles from './styles';
@@ -37,7 +34,14 @@ class Note extends React.Component<AppNoteProps, {}> {
   private getCategories(): ReactNode[] {
     const {note} = this.props;
     return note.categories.map((category: string, index: number) => {
-      return <Label title={category} as="div" key={index} basic={true}>{category}</Label>;
+      return (
+        <Chip
+          style={{borderColor: note.color}}
+          className={`note-category`}
+          label={category.toUpperCase()}
+          key={index}
+          variant="outlined"
+        />);
     });
   }
 
@@ -64,7 +68,7 @@ class Note extends React.Component<AppNoteProps, {}> {
           <div className="buttons-container">
             <NoteButtons actions={actions} note={note} fullView={fullView} activeCategory={activeCategory}/>
           </div>
-          <Divider/>
+          <Divider style={{backgroundColor: note.color, height: 2}} />
           <CardContent className={`note-content ${this.getNoteExpandedClass()}`}>
             <Typography component="div">
               <div className={`${note.tags.length > 0 ? '' : 'hidden'} app-note-tags`}>
@@ -80,31 +84,6 @@ class Note extends React.Component<AppNoteProps, {}> {
             </Typography>
           </CardContent>
         </Card>
-        {/* <SegmentGroup className={`app-note-container ${(fullView ? 'full app-border-' + note.color : '')}`}>
-          <NoteButtons actions={actions} note={note} fullView={fullView} activeCategory={activeCategory}/>
-          <Segment
-            onClick={() => fullView ? null : actions.toggleNote(note.id)}
-            className={`${fullView ? '' : note.color} app-note-title-container`}
-          >
-            <div className="app-note-title-text">
-              <strong>{note.title}</strong>
-            </div>
-          </Segment>
-          <Segment className={`app-note-info ${this.getNoteExpandedClass()}`}>
-            <div className={`${note.tags.length > 0 ? '' : 'hidden'} app-note-tags`}>
-              {fullView ? `Tags: ` : ''}
-              {this.getTags()}
-              <Divider/>
-            </div>
-            <div className={`${note.categories.length > 0 && fullView ? '' : 'hidden'} app-note-tags`}>
-              Categories: {this.getCategories()}
-              <Divider/>
-            </div>
-            <div className={`app-note-text `}>
-              <p>{(fullView) ? note.text : note.text.slice(0, 300) + this.addDots()}</p>
-            </div>
-          </Segment>
-        </SegmentGroup>*/}
       </NoteStyles>
     );
   }

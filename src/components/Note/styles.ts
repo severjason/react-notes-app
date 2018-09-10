@@ -17,6 +17,11 @@ const NoteStyles = styled.div`
     }
   }
   
+  .note-category {
+    height: 1.7rem;
+    margin: .2rem .2rem .2rem 0;
+  }
+  
   .note-card {
     position: relative;
   }
@@ -57,7 +62,6 @@ const NoteStyles = styled.div`
     max-width: ${props => props.theme.note.containerWidthRem * 1.1}rem;
     width: 100%;
 }
-
 `;
 
 export default NoteStyles;
