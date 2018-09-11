@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps, /*Redirect*/ } from 'react-router';
-import HomeContainer from '../containers/HomeContainer';
+import { HomeContainer } from '../containers';
 import { BaseLayout } from '../layouts';
 
 interface AppRoute {

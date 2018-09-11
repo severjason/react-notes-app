@@ -2,28 +2,32 @@ import * as React                          from 'react';
 import { connect }                         from 'react-redux';
 import { bindActionCreators, Dispatch }    from 'redux';
 import * as actions                        from '../actions';
-import { AppAction, AppAllActions, HomeProps, AppState, AppRoute } from '../interfaces/';
-import { Home }                            from '../components';
+import { AppAction, AppAllActions, AppState, NoteProps } from '../interfaces/';
+import { FullNote }                            from '../components';
 
 interface AppHomeDispatch {
     actions: AppAllActions;
 }
 
-class HomeContainer extends React.Component<HomeProps & AppRoute & AppHomeDispatch, {}> {
+interface AppRoute {
+    match: any;
+}
+
+class NoteContainer extends React.Component<NoteProps & AppRoute & AppHomeDispatch, {}> {
 
     render() {
         return (
-            <Home {...this.props}/>
+            <FullNote {...this.props}/>
         );
     }
 }
 
-export default connect<HomeProps, AppHomeDispatch>(
+export default connect<NoteProps, AppHomeDispatch>(
     (state: AppState) => ({
         notes: state.notes,
-        categories: state.categories,
+        activeCategory: state.categories.activated,
     }),
     (dispatch: Dispatch<AppAction>) => ({
         actions: bindActionCreators(actions, dispatch)
     })
-)(HomeContainer);
+)(NoteContainer);

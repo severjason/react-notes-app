@@ -20,7 +20,7 @@ const HomeStyles = styled.div`
     }
     display: flex;
     flex-direction: row;
-    padding: 7rem 1rem;
+    padding: 0 1rem;
     transition: margin-left ease-out 220ms;
   }
   

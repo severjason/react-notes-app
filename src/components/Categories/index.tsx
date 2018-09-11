@@ -40,16 +40,6 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
     return !inputValue || this.props.categoriesList.includes(inputValue.toLowerCase());
   }
 
-  /*private toggleCategories = (): void => {
-    const {actions, expanded} = this.props;
-    if (expanded) {
-      actions.toggleCategories();
-      this.handleHideInput();
-    } else {
-      actions.toggleCategories();
-    }
-  }*/
-
   private getCategories(): ReactNode {
     const {actions, categoriesList, expanded, activated} = this.props;
     return categoriesList.map((category: string) => (
@@ -67,9 +57,6 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
     const {inputValue, inputShowed} = this.state;
     return (
       <CategoriesStyles>
-{/*
-        <Switch defaultChecked={true} value="checkedF" color="default" onClick={this.toggleCategories}/>
-*/}
           <MenuList className="menu-list">
             {this.getCategories()}
             <Divider/>

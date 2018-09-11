@@ -54,8 +54,17 @@ const AddCategory: React.StatelessComponent<AddCategoryProps> = (
         classes={{
           underline: classes.cssUnderline,
         }}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter') {
+            addCategory(inputValue);
+          }
+        }}
       />
-      <IconButton onClick={() => addCategory(inputValue)} disabled={inputIsDisabled} className="add-category-button">
+      <IconButton
+        onClick={() => addCategory(inputValue)}
+        disabled={inputIsDisabled}
+        className="add-category-button"
+      >
         <Check className="add-category-icon"/>
       </IconButton>
       <IconButton onClick={hideInput}>

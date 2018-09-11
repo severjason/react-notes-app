@@ -19,7 +19,15 @@ export interface AppState {
 export interface HomeProps {
   notes: AppNote[];
   categories: AppCategories;
-  tags: AppTags;
+}
+
+export interface NoteProps {
+  notes: AppNote[];
+  activeCategory: string;
+}
+
+export interface AppRoute {
+  match: any;
 }
 
 export interface AppAllActions extends AppNoteActions, AppTagsActions, AppCategoriesActions, AppModalActions {

@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Header } from '../../components';
+import BaseLayoutStyles from './styles';
 
 const BaseLayout: React.StatelessComponent<{}> = ({children}) => (
-  <React.Fragment>
+  <BaseLayoutStyles>
     <Header/>
     {children}
-  </React.Fragment>
+  </BaseLayoutStyles>
 );
 
 export default BaseLayout;

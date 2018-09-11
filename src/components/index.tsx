@@ -9,6 +9,7 @@ import AppDrawer from './Drawer';
 import AlertDialog from './Dialog';
 import NotFound from './NotFound';
 import NavBar from './NavBar';
+import FullNote from './FullNote';
 
 export {
   Header,
@@ -22,4 +23,5 @@ export {
   AlertDialog,
   NotFound,
   NavBar,
+  FullNote,
 };
