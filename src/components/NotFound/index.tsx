@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { BaseLayout } from '../../layouts';
+import NotFoundStyles from './styles';
 
 const NotFound = () => (
   <BaseLayout>
-    <h2>
-      Page not found...
-    </h2>
+    <NotFoundStyles>
+      <h2>
+        Page not found...
+      </h2>
+    </NotFoundStyles>
   </BaseLayout>
 );
 
