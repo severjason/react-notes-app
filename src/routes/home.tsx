@@ -1,7 +1,7 @@
 import * as React                                       from 'react';
 import { Route, Redirect, Switch, RouteComponentProps } from 'react-router-dom';
 import { Helmet }                                       from 'react-helmet';
-import { NotesList, Note }                              from '../components/';
+import { Note }                              from '../components/';
 import { AppAllActions, AppCategories, AppNote }           from '../interfaces/';
 
 interface HomeRoutesProps {
@@ -19,19 +19,6 @@ const HomeRoutes: React.StatelessComponent<HomeRoutesProps> = (props) => {
     const {categories, notes, actions} = props;
     return (
         <Switch>
-            <Route
-                path="/notes/:category"
-                render={
-                    (route: RouteComponentProps<RouteParams>) => {
-                        const {category} = route.match.params;
-                        return (categories.categoriesList.includes(category))
-                            ? <React.Fragment>
-                                    <Helmet title={`${category[0].toUpperCase() + category.substring(1)} | Notes`} />
-                                    <NotesList {...props} routeCategory={category}/>
-                                </React.Fragment>
-                            : <Redirect to="/notes/all"/>;
-                    }}
-            />
             <Route
                 path="/note/:noteId"
                 render={

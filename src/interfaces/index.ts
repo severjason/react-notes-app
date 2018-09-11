@@ -4,26 +4,33 @@ import { AppCategories, AppCategoriesActions, AppActionCategory } from './catego
 import { AppModal, AppModalActions } from './modal';
 
 export interface AppAction {
-    type: string;
-    id?: string;
-    modalProps?: AppNote;
+  type: string;
+  id?: string;
+  modalProps?: AppNote;
 }
 
 export interface AppState {
-    notes: AppNote[];
-    modal: AppModal;
-    categories: AppCategories;
-    tags: AppTags;
+  notes: AppNote[];
+  modal: AppModal;
+  categories: AppCategories;
+  tags: AppTags;
 }
 
-export interface AppAllActions extends AppNoteActions, AppTagsActions, AppCategoriesActions, AppModalActions {}
+export interface HomeProps {
+  notes: AppNote[];
+  categories: AppCategories;
+  tags: AppTags;
+}
 
-export  {
-    AppNote,
-    AppTags,
-    AppCategories,
-    AppModal,
-    AppActionNote,
-    AppActionCategory,
-    AppActionTags,
+export interface AppAllActions extends AppNoteActions, AppTagsActions, AppCategoriesActions, AppModalActions {
+}
+
+export {
+  AppNote,
+  AppTags,
+  AppCategories,
+  AppModal,
+  AppActionNote,
+  AppActionCategory,
+  AppActionTags,
 };

@@ -1,11 +1,11 @@
-import { AppAction, AppActionCategory, AppCategories } from '../interfaces/index';
+import { AppAction, AppActionCategory, AppCategories } from '../interfaces/';
 import { types }                                       from '../constants/types';
 import * as helpers                                    from '../helpers';
 
 const INITIAL_STATE: AppCategories = {
     activated: 'all',
     categoriesList: ['all', 'work', 'private', 'health'],
-    expanded: true,
+    expanded: false,
 };
 
 export default function categoriesReducer(

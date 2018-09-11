@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider }      from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import 'semantic-ui-css/semantic.min.css';
-import { App }           from './components';
+import Routes            from './routes';
 import { store }         from './store';
 import { mainTheme }     from './styles/themes';
 import GlobalStyles      from './styles/global';
@@ -30,7 +30,7 @@ ReactDOM.render(
         <ThemeProvider theme={mainTheme}>
             <BrowserRouter>
                 <GlobalStyles>
-                    <App/>
+                    <Routes/>
                 </GlobalStyles>
             </BrowserRouter>
         </ThemeProvider>

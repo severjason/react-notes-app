@@ -2,7 +2,7 @@ import * as React                          from 'react';
 import { connect }                         from 'react-redux';
 import { bindActionCreators, Dispatch }    from 'redux';
 import * as actions                        from '../actions';
-import { AppAction, AppAllActions, AppState } from '../interfaces/';
+import { AppAction, AppAllActions, HomeProps, AppState } from '../interfaces/';
 import { Home }                            from '../components';
 
 interface AppHomeDispatch {
@@ -13,7 +13,7 @@ interface AppRoute {
     match: any;
 }
 
-class HomeContainer extends React.Component<AppState & AppRoute & AppHomeDispatch, {}> {
+class HomeContainer extends React.Component<HomeProps & AppRoute & AppHomeDispatch, {}> {
 
     render() {
         return (
@@ -22,10 +22,9 @@ class HomeContainer extends React.Component<AppState & AppRoute & AppHomeDispatc
     }
 }
 
-export default connect<AppState, AppHomeDispatch>(
+export default connect<HomeProps, AppHomeDispatch>(
     (state: AppState) => ({
         notes: state.notes,
-        modal: state.modal,
         categories: state.categories,
         tags: state.tags,
     }),
