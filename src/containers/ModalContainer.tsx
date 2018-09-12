@@ -2,28 +2,29 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import * as actions from '../actions';
-import { AppAction, AppAllActions, AppState, AppRoute, HomeProps } from '../interfaces/';
-import { Home } from '../components';
+import { AppAction, AppAllActions, AppState, AppModalProps } from '../interfaces/';
+import { NoteModal } from '../components';
 
 interface AppHomeDispatch {
   actions: AppAllActions;
 }
 
-class HomeContainer extends React.Component<HomeProps & AppRoute & AppHomeDispatch, {}> {
+class ModalContainer extends React.Component<AppModalProps & AppHomeDispatch, {}> {
 
   render() {
     return (
-      <Home {...this.props}/>
+      <NoteModal {...this.props}/>
     );
   }
 }
 
-export default connect<HomeProps, AppHomeDispatch>(
+export default connect<AppModalProps, AppHomeDispatch>(
   (state: AppState) => ({
-    notes: state.notes,
     categories: state.categories,
+    tags: state.tags,
+    modal: state.modal,
   }),
   (dispatch: Dispatch<AppAction>) => ({
     actions: bindActionCreators(actions, dispatch)
   })
-)(HomeContainer);
+)(ModalContainer);

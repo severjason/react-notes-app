@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { AppAllActions, HomeProps } from '../../interfaces';
-import {/*NoteModal*/ NotesList } from '../../components';
+import { /*NoteModal,*/ NotesList } from '../../components';
 import HomeStyles from './styles';
 import { Redirect } from 'react-router';
 
@@ -26,7 +26,7 @@ class Home extends React.Component<HomeProps & AppRoute & AppHomeDispatch, {}> {
             <div className={`home-container ${categories.expanded ? 'opened' : ''}`}>
               <NotesList categories={categories} notes={notes} actions={actions} routeCategory={category}/>
             </div>
-            {/*<NoteModal {...this.props}/>*/}
+           {/* <NoteModal {...this.props}/>*/}
           </HomeStyles>
         )
         : <Redirect to={'/notfound'}/>

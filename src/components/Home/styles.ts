@@ -37,7 +37,7 @@ const HomeStyles = styled.div`
   }
     .home-container {
       flex-direction: column;
-      padding: 5rem .5rem;
+      padding: .5rem;
       &.opened {
         margin-left: 0;
         width: 100%;

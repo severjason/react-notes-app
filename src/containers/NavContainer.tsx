@@ -2,11 +2,10 @@ import * as React                          from 'react';
 import { connect }                         from 'react-redux';
 import { bindActionCreators, Dispatch }    from 'redux';
 import * as actions                        from '../actions';
-import { AppAction, AppAllActions, AppCategories, AppModal } from '../interfaces/';
+import { AppAction, AppAllActions, AppCategories } from '../interfaces/';
 import { NavBar }                            from '../components';
 
 interface NavContainerProps {
-  modal: AppModal;
   categories: AppCategories;
 }
 
@@ -26,7 +25,6 @@ class NavContainer extends React.Component<NavContainerProps & NavContainerDispa
 
 export default connect<NavContainerProps, NavContainerDispatch>(
   (state: NavContainerProps) => ({
-    modal: state.modal,
     categories: state.categories,
   }),
   (dispatch: Dispatch<AppAction>) => ({

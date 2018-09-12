@@ -154,7 +154,6 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
         });
 
         const allTags = this.props.tags.basicTags.concat(this.props.tags.customTags);
-
         return (
             <NoteModalStyles>
                 <Modal

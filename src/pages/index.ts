@@ -1,7 +1,7 @@
 import NotesPage from './Notes';
-import FullNote from './FullNote';
+import FullNotesPage from './FullNote';
 
 export {
   NotesPage,
-  FullNote,
+  FullNotesPage,
 };

@@ -26,6 +26,12 @@ export interface NoteProps {
   activeCategory: string;
 }
 
+export interface AppModalProps {
+  modal: AppModal;
+  categories: AppCategories;
+  tags: AppTags;
+}
+
 export interface AppRoute {
   match: any;
 }
