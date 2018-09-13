@@ -14,6 +14,15 @@ export interface AppNote {
     expanded: boolean;
 }
 
+export interface AppNotesState {
+  byId: AppNotes;
+  allIds: string[];
+}
+
+export interface AppNotes {
+  [key: string]: AppNote;
+}
+
 export interface AppNoteActions {
 
     getNotes(): AppAction;

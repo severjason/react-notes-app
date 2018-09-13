@@ -24,7 +24,7 @@ class NoteContainer extends React.Component<NoteProps & AppRoute & AppHomeDispat
 
 export default connect<NoteProps, AppHomeDispatch>(
     (state: AppState) => ({
-        notes: state.notes,
+        notes: state.notes.byId,
         activeCategory: state.categories.activated,
     }),
     (dispatch: Dispatch<AppAction>) => ({
