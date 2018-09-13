@@ -1,4 +1,4 @@
-import { types }                   from '../constants/types';
+import { types }                   from '../actions/types';
 import { AppAction, AppModal } from '../interfaces';
 
 const INITIAL_STATE: AppModal = {

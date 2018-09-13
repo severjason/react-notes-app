@@ -1,5 +1,5 @@
 import { AppActionTags, AppTags } from '../interfaces/';
-import { types }                  from '../constants/types';
+import { types }                  from '../actions/types';
 import * as helpers               from '../helpers';
 
 const INITIAL_STATE: AppTags = {

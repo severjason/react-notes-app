@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Note } from '../../components';
-import { /*AppNote*/ NoteProps, AppRoute, AppAllActions } from '../../interfaces';
+import { NoteProps, AppRoute, AppAllActions } from '../../interfaces';
 import { Helmet } from 'react-helmet';
 import { Redirect } from 'react-router';
 
@@ -10,11 +10,8 @@ interface NoteActions {
 
 const FullNote: React.StatelessComponent<NoteProps & AppRoute & NoteActions> =
   ({notes, match, activeCategory, actions}) => {
-    const noteIndex = (): number => {
-      return -1/*notes.findIndex((note: AppNote) => match.params.noteId === note.id)*/;
-    };
-    const requestedNote = notes[noteIndex()];
-    return (noteIndex() !== -1) ? (
+    const requestedNote = notes[match.params.noteId];
+    return (requestedNote) ? (
         <React.Fragment>
           <Helmet title={`Full note - ${requestedNote.title}`}/>
           <Note note={requestedNote} actions={actions} fullView={true} activeCategory={activeCategory}/>

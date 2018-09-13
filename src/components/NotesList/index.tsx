@@ -7,7 +7,6 @@ import NotesListStyles from './styles';
 interface AppNoteListProps {
   notes: AppNote[];
   actions: AppAllActions;
-  notesIds: string[];
   categories: AppCategories;
   routeCategory: string;
 }
@@ -21,15 +20,9 @@ class NotesList extends React.Component<AppNoteListProps, {}> {
     }
   }
 
-  private filterNotes(notes: AppNote[], categories: AppCategories): AppNote[] {
-    return (categories.activated === 'all')
-      ? notes
-      : notes.filter((note: AppNote) => note.categories.includes(categories.activated));
-  }
-
   private renderFilterNotes = (): ReactNode[] => {
-    const {notes, categories, actions} = this.props;
-    return this.filterNotes(notes, categories).map((note: AppNote, index: number) => (
+    const {notes, actions} = this.props;
+    return notes.map((note: AppNote, index: number) => (
       <Note key={index} note={note} actions={actions}/>
     ));
   }

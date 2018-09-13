@@ -18,7 +18,6 @@ export interface AppState {
 
 export interface HomeProps {
   notes: AppNote[];
-  notesIds: string[];
   categories: AppCategories;
 }
 

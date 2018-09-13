@@ -4,7 +4,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import * as actions from '../actions';
 import { AppAction, AppAllActions, AppState, AppRoute, HomeProps } from '../interfaces/';
 import { Home } from '../components';
-import { getNotesArray } from '../selectors/notes';
+import { getActiveNotes } from '../selectors/notes';
 
 interface AppHomeDispatch {
   actions: AppAllActions;
@@ -21,8 +21,7 @@ class HomeContainer extends React.Component<HomeProps & AppRoute & AppHomeDispat
 
 export default connect<HomeProps, AppHomeDispatch>(
   (state: AppState) => ({
-    notes: getNotesArray(state),
-    notesIds: state.notes.allIds,
+    notes: getActiveNotes(state),
     categories: state.categories,
   }),
   (dispatch: Dispatch<AppAction>) => ({
