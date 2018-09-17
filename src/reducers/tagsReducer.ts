@@ -1,4 +1,4 @@
-import { AppActionTags, AppTags } from '../interfaces/';
+import { AppActionTags, AppTags } from '../app/interfaces';
 import { types }                  from '../actions/types';
 import * as helpers               from '../helpers';
 

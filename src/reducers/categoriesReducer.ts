@@ -1,4 +1,4 @@
-import { AppAction, AppActionCategory, AppCategories } from '../interfaces/';
+import { AppAction, AppActionCategory, AppCategories } from '../app/interfaces';
 import { types }                                       from '../actions/types';
 import * as helpers                                    from '../helpers';
 

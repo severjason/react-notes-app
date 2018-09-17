@@ -1,5 +1,5 @@
 import { types } from '../actions/types';
-import { AppAction, AppActionCategory, AppActionNote, AppActionTags, AppNote, AppNotesState } from '../interfaces';
+import { AppAction, AppActionCategory, AppActionNote, AppActionTags, AppNote, AppNotesState } from '../app/interfaces';
 
 const INITIAL_STATE: AppNotesState = {
   byId: {

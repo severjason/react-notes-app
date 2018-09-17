@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import { NotFound } from '../components';
+import { NotFound } from '../app/common';
 import { NotesPage, FullNotesPage } from '../pages';
 
 const Routes: React.StatelessComponent<{}> = () => {

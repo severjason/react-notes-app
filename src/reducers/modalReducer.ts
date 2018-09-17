@@ -1,5 +1,5 @@
 import { types }                   from '../actions/types';
-import { AppAction, AppModal } from '../interfaces';
+import { AppAction, AppModal } from '../app/interfaces';
 
 const INITIAL_STATE: AppModal = {
     opened: false,

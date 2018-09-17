@@ -1,5 +1,5 @@
 import { types }                                                               from './types';
-import { AppAction, AppActionCategory, AppActionTags, AppActionNote, AppNote } from '../interfaces';
+import { AppAction, AppActionCategory, AppActionTags, AppActionNote, AppNote } from '../app/interfaces';
 
 export const getNotes = (): AppAction => ({
     type: types.notes.GET_NOTES,

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
-import { NoteContainer } from '../containers';
-import { BaseLayout } from '../layouts';
-import { AppRoute } from '../interfaces';
+import NoteContainer from '../app/Note/containers/NoteContainer';
+import { BaseLayout } from '../app/layouts';
+import { AppRoute } from '../app/interfaces';
 
 const FullNotesPage: React.StatelessComponent<RouteComponentProps<AppRoute>> = (props) => (
   <BaseLayout>
