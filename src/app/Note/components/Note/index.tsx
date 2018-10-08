@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { AppNoteActions, AppNote } from '../../../interfaces/notes';
-import { AppModalActions } from '../../../interfaces/modal';
+import { AppModalActions } from '../../../interfaces';
 import { Card, CardHeader, CardContent, Typography, Divider, Chip, CardActionArea } from '@material-ui/core';
 import { ReactNode } from 'react';
 import NoteButtons from './NoteButtons';

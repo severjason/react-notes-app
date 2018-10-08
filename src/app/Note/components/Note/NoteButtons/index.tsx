@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { AppNoteActions } from '../../../../interfaces/notes';
-import { AppModalActions } from '../../../../interfaces/modal';
+import { AppModalActions } from '../../../../interfaces';
 import { Link } from 'react-router-dom';
 import { DeleteForeverOutlined, EditOutlined, ZoomOutMapOutlined, ClearOutlined } from '@material-ui/icons';
 import { IconButton, Tooltip } from '@material-ui/core';

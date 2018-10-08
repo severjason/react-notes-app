@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
+import * as modalActions from '../redux/actions';
 import * as actions from '../../../actions';
 import { AppAction, AppAllActions, AppState, AppModalProps } from '../../interfaces';
 import { NoteModal } from '../components';
@@ -26,11 +27,10 @@ class ModalContainer extends React.Component<AppModalProps & AppHomeDispatch, {}
 export default connect<AppModalProps, AppHomeDispatch>(
   (state: AppState) => ({
     categories: state.categories,
-    tags: state.tags,
     notes: state.notes.byId,
     modal: state.modal,
   }),
   (dispatch: Dispatch<AppAction>) => ({
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators({...actions, ...modalActions}, dispatch)
   })
 )(ModalContainer);

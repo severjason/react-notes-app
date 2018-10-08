@@ -6,16 +6,14 @@ import * as uuid from 'uuid';
 import * as helpers from '../../../../helpers';
 import NoteModalStyles from './styles';
 import Tags from './Tags';
-import { AppTagsActions } from '../../../interfaces/tags';
-import { AppModalActions } from '../../../interfaces/modal';
+import { AppTagsActions, AppModalActions } from '../../interfaces';
 import { AppNoteActions } from '../../../interfaces/notes';
 import { AppModal, AppCategories, AppTags, AppNote } from '../../../interfaces';
 
 interface AppNoteModalProps {
-  modal: AppModal;
+  modal: AppModal & AppTags;
   noteForUpdate: AppNote | null;
   categories: AppCategories;
-  tags: AppTags;
 }
 
 interface AppNoteModalDispatch {
@@ -154,7 +152,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
       );
     });
 
-    const allTags = this.props.tags.basicTags.concat(this.props.tags.customTags);
+    const allTags = this.props.modal.basicTags.concat(this.props.modal.customTags);
     return (
       <NoteModalStyles>
         <Modal
@@ -213,14 +211,14 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                     Tags:
                   </Label>
                   <Tags
-                    tagsList={this.props.tags.basicTags}
+                    tagsList={this.props.modal.basicTags}
                     deleteIcon={false}
                     note={this.state.note}
                     deleteTag={this.props.actions.deleteCustomTag}
                     handleTagClick={this.handleTagClick}
                   />
                   <Tags
-                    tagsList={this.props.tags.customTags}
+                    tagsList={this.props.modal.customTags}
                     deleteIcon={true}
                     note={this.state.note}
                     deleteTag={this.props.actions.deleteCustomTag}

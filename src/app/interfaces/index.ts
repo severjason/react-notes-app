@@ -1,7 +1,6 @@
 import { AppNote, AppNoteActions, AppActionNote, AppNotes, AppNotesState } from './notes';
-import { AppTags, AppTagsActions, AppActionTags } from './tags';
+import { AppTags, AppTagsActions, AppActionTags, AppModal, AppModalActions } from '../Modal/interfaces';
 import { AppCategories, AppCategoriesActions, AppActionCategory } from './categories';
-import { AppModal, AppModalActions } from './modal';
 
 export interface AppAction {
   type: string;
@@ -11,9 +10,8 @@ export interface AppAction {
 
 export interface AppState {
   notes: AppNotesState;
-  modal: AppModal;
+  modal: AppModal & AppTags;
   categories: AppCategories;
-  tags: AppTags;
 }
 
 export interface HomeProps {
@@ -27,10 +25,9 @@ export interface NoteProps {
 }
 
 export interface AppModalProps {
-  modal: AppModal;
+  modal: AppModal & AppTags;
   notes: AppNotes;
   categories: AppCategories;
-  tags: AppTags;
 }
 
 export interface AppRoute {
@@ -45,8 +42,10 @@ export {
   AppNotes,
   AppNotesState,
   AppTags,
+  AppTagsActions,
   AppCategories,
   AppModal,
+  AppModalActions,
   AppActionNote,
   AppActionCategory,
   AppActionTags,
