@@ -28,6 +28,7 @@ export interface NoteProps {
 
 export interface AppModalProps {
   modal: AppModal;
+  notes: AppNotes;
   categories: AppCategories;
   tags: AppTags;
 }

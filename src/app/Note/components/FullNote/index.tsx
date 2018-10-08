@@ -14,7 +14,7 @@ const FullNote: React.StatelessComponent<NoteProps & AppRoute & NoteActions> =
     return (requestedNote) ? (
         <React.Fragment>
           <Helmet title={`Full note - ${requestedNote.title}`}/>
-          <Note note={requestedNote} actions={actions} fullView={true} activeCategory={activeCategory}/>
+          <Note {...requestedNote} actions={actions} fullView={true} activeCategory={activeCategory}/>
         </React.Fragment>
       )
       : <Redirect to={`/notes/${activeCategory}`}/>;

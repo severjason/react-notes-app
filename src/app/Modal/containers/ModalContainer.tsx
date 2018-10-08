@@ -11,9 +11,14 @@ interface AppHomeDispatch {
 
 class ModalContainer extends React.Component<AppModalProps & AppHomeDispatch, {}> {
 
+  getNoteForUpdate = () => {
+    const {notes, modal} = this.props;
+    return modal.noteId !== null ? notes[modal.noteId] : null;
+  }
+
   render() {
     return (
-      <NoteModal {...this.props}/>
+      <NoteModal {...this.props} noteForUpdate={this.getNoteForUpdate()}/>
     );
   }
 }
@@ -22,6 +27,7 @@ export default connect<AppModalProps, AppHomeDispatch>(
   (state: AppState) => ({
     categories: state.categories,
     tags: state.tags,
+    notes: state.notes.byId,
     modal: state.modal,
   }),
   (dispatch: Dispatch<AppAction>) => ({

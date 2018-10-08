@@ -33,9 +33,9 @@ export const updateNote = (note: AppNote): AppActionNote => ({
     note: note,
 });
 
-export const openModalForUpdate = (modalProps: AppNote): AppAction => ({
+export const openModalForUpdate = (noteId: string): AppAction => ({
     type: types.modal.OPEN_MODAL_FOR_UPDATE,
-    modalProps: modalProps,
+    id: noteId,
 });
 
 export const toggleCategories = (): AppAction => ({

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AppNoteActions, AppNote } from '../../../../interfaces/notes';
+import { AppNoteActions } from '../../../../interfaces/notes';
 import { AppModalActions } from '../../../../interfaces/modal';
 import { Link } from 'react-router-dom';
 import { DeleteForeverOutlined, EditOutlined, ZoomOutMapOutlined, ClearOutlined } from '@material-ui/icons';
@@ -8,7 +8,7 @@ import NoteButtonStyles from './styles';
 import { AlertDialog } from '../../../../common';
 
 interface AppNoteButtonsProps {
-  note: AppNote;
+  noteId: string;
   actions: AppNoteActions & AppModalActions;
   fullView?: boolean;
   activeCategory?: string;
@@ -18,7 +18,7 @@ interface AppNoteButtonsState {
   opened: boolean;
 }
 
-class NoteButtons extends React.Component<AppNoteButtonsProps, AppNoteButtonsState> {
+class NoteButtons extends React.PureComponent<AppNoteButtonsProps, AppNoteButtonsState> {
 
   state = {
     opened: false,
@@ -29,18 +29,18 @@ class NoteButtons extends React.Component<AppNoteButtonsProps, AppNoteButtonsSta
   closeDialog = () => this.setState(() => ({opened: false}));
 
   render() {
-    const {actions, note, fullView, activeCategory} = this.props;
+    const {actions, noteId, fullView, activeCategory} = this.props;
     const {opened} = this.state;
     return (
       <NoteButtonStyles>
         <AlertDialog
           title={`Are you sure? `}
           onClose={this.closeDialog}
-          onConfirm={() => actions.deleteNote(note.id)}
+          onConfirm={() => actions.deleteNote(noteId)}
           opened={opened}
         />
         <Tooltip title={`Edit note`}>
-          <IconButton onClick={() => actions.openModalForUpdate(note)} className="note-button">
+          <IconButton onClick={() => actions.openModalForUpdate(noteId)} className="note-button">
             <EditOutlined className="note-icon app-note-edit-icon"/>
           </IconButton>
         </Tooltip>
@@ -50,7 +50,7 @@ class NoteButtons extends React.Component<AppNoteButtonsProps, AppNoteButtonsSta
           </IconButton>
         </Tooltip>
         {(!fullView)
-          ? <Link to={`/note/${note.id}`}>
+          ? <Link to={`/note/${noteId}`}>
             <Tooltip title={`Show more`}>
               <IconButton className="note-button">
                 <ZoomOutMapOutlined className="note-icon app-note-expand-icon"/>
