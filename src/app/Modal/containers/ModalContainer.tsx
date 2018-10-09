@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import * as modalActions from '../redux/actions';
 import * as notesActions from '../../Note/redux/actions';
-import { AppAction, AppAllActions, AppState, AppModalProps } from '../../interfaces';
+import { AppAction, AppState } from '../../interfaces';
 import { NoteModal } from '../components';
+import { AppModalProps, AppModalActions, AppTagsActions } from '../interfaces';
+import { AppNoteActions } from '../../Note/interfaces';
 
 interface AppHomeDispatch {
-  actions: AppAllActions;
+  actions: AppTagsActions & AppModalActions & AppNoteActions;
 }
 
 class ModalContainer extends React.Component<AppModalProps & AppHomeDispatch, {}> {

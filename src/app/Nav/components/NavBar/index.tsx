@@ -1,7 +1,7 @@
 import * as React from 'react';
 import NavBarStyles from './styles';
 import { AppModalActions, AppCategories } from '../../../interfaces';
-import { AppCategoriesActions } from '../../../interfaces/categories';
+import { AppCategoriesActions } from '../../interfaces';
 import { AppBar, IconButton, Toolbar, Tooltip, Typography } from '@material-ui/core';
 import { mainTheme } from '../../../../styles/themes';
 import { Add, Menu } from '@material-ui/icons';

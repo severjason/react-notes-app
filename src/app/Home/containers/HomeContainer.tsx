@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import * as actions from '../../../actions';
+import * as navActions from '../../Nav/redux/actions';
 import * as notesActions from '../../Note/redux/actions';
 import * as modalActions from '../../Modal/redux/actions';
 import { AppAction, AppAllActions, AppState, AppRoute, HomeProps } from '../../interfaces';
@@ -27,6 +27,6 @@ export default connect<HomeProps, AppHomeDispatch>(
     categories: state.categories,
   }),
   (dispatch: Dispatch<AppAction>) => ({
-    actions: bindActionCreators({...actions, ...modalActions, ...notesActions}, dispatch)
+    actions: bindActionCreators({...navActions, ...modalActions, ...notesActions}, dispatch)
   })
 )(HomeContainer);

@@ -1,6 +1,6 @@
 import * as noteTypes from './types';
 import * as modalTypes from '../../Modal/redux/types';
-import { types } from '../../../actions/types';
+import * as navTypes from '../../Nav/redux/types';
 import { AppActionNote, AppNote, AppNotesState } from '../interfaces';
 import { AppAction, AppActionCategory, AppActionTags } from '../../interfaces';
 
@@ -105,7 +105,7 @@ export default function notesReducer(state: AppNotesState = INITIAL_STATE,
         byId: filtered,
       };
     }
-    case types.categories.DELETE_CATEGORY: {
+    case navTypes.DELETE_CATEGORY: {
       const filtered = {};
       Object.values(state.byId).map((note: AppNote) => {
         filtered[note.id] = {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AppCategories, AppCategoriesActions } from '../../../interfaces/categories';
+import { AppCategories, AppCategoriesActions } from '../../interfaces';
 import { ChangeEvent, ReactNode } from 'react';
 import { CategoryItem, AddCategory } from '../../components';
 import CategoriesStyles from './styles';

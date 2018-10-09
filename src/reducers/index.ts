@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import notesReducer        from '../app/Note/redux/reducer';
 import modalReducer        from '../app/Modal/redux/reducer';
-import categoriesReducer   from './categoriesReducer';
+import categoriesReducer   from '../app/Nav/redux/reducer';
 // import { AppState }        from '../interfaces';
 
 const rootReducer = combineReducers<any>({

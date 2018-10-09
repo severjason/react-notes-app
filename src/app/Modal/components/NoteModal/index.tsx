@@ -7,7 +7,7 @@ import * as helpers from '../../../../helpers';
 import NoteModalStyles from './styles';
 import Tags from './Tags';
 import { AppTagsActions, AppModalActions } from '../../interfaces';
-import { AppNoteActions } from '../../../interfaces/notes';
+import { AppNoteActions } from '../../../Note/interfaces';
 import { AppModal, AppCategories, AppTags, AppNote } from '../../../interfaces';
 
 interface AppNoteModalProps {

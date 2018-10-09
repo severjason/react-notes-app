@@ -1,5 +1,5 @@
 import * as noteTypes from './types';
-import { types } from '../../../actions/types';
+import * as navTypes from '../../Nav/redux/types';
 import { AppActionNote, AppNote } from '../interfaces';
 import { AppAction, AppActionCategory } from '../../interfaces';
 
@@ -28,20 +28,20 @@ export const updateNote = (note: AppNote): AppActionNote => ({
 });
 
 export const toggleCategories = (): AppAction => ({
-  type: types.categories.TOGGLE_CATEGORIES,
+  type: navTypes.TOGGLE_CATEGORIES,
 });
 
 export const activateCategory = (category: string): AppActionCategory => ({
-  type: types.categories.ACTIVATE_CATEGORY,
+  type: navTypes.ACTIVATE_CATEGORY,
   category: category,
 });
 
 export const deleteCategory = (category: string): AppActionCategory => ({
-  type: types.categories.DELETE_CATEGORY,
+  type: navTypes.DELETE_CATEGORY,
   category: category,
 });
 
 export const addCategory = (category: string): AppActionCategory => ({
-  type: types.categories.ADD_CATEGORY,
+  type: navTypes.ADD_CATEGORY,
   category: category,
 });

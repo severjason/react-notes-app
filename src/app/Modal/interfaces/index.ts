@@ -1,7 +1,13 @@
-import { AppAction } from '../../interfaces';
+import { AppAction, AppCategories, AppNotes } from '../../interfaces';
 
 export interface AppActionTags extends AppAction {
     tag: string;
+}
+
+export interface AppModalProps {
+  modal: AppModal & AppTags;
+  notes: AppNotes;
+  categories: AppCategories;
 }
 
 export interface AppModalActions {
