@@ -19,11 +19,6 @@ export interface HomeProps {
   categories: AppCategories;
 }
 
-export interface NoteProps {
-  notes: AppNotes;
-  activeCategory: string;
-}
-
 export interface AppModalProps {
   modal: AppModal & AppTags;
   notes: AppNotes;

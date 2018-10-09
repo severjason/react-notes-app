@@ -1,5 +1,8 @@
-import { types } from '../actions/types';
-import { AppAction, AppActionCategory, AppActionNote, AppActionTags, AppNote, AppNotesState } from '../app/interfaces';
+import * as noteTypes from './types';
+import * as modalTypes from '../../Modal/redux/types';
+import { types } from '../../../actions/types';
+import { AppActionNote, AppNote, AppNotesState } from '../interfaces';
+import { AppAction, AppActionCategory, AppActionTags } from '../../interfaces';
 
 const INITIAL_STATE: AppNotesState = {
   byId: {
@@ -49,10 +52,10 @@ const INITIAL_STATE: AppNotesState = {
 export default function notesReducer(state: AppNotesState = INITIAL_STATE,
                                      action: AppAction & AppActionNote & AppActionTags & AppActionCategory) {
   switch (action.type) {
-    case types.notes.GET_NOTES: {
+    case noteTypes.GET_NOTES: {
       return state;
     }
-    case types.notes.TOGGLE_NOTE: {
+    case noteTypes.TOGGLE_NOTE: {
       // @ts-ignore
       const toggledNote: AppNote = state.byId[action.id];
       toggledNote.expanded = !toggledNote.expanded;
@@ -65,7 +68,7 @@ export default function notesReducer(state: AppNotesState = INITIAL_STATE,
       };
 
     }
-    case types.notes.DELETE_NOTE: {
+    case noteTypes.DELETE_NOTE: {
       const newObj = {};
       Object.values(state.byId).map((note: AppNote) => {
         if (note.id !== action.id) {
@@ -78,8 +81,8 @@ export default function notesReducer(state: AppNotesState = INITIAL_STATE,
         allIds: state.allIds.filter((id: string) => id !== action.id),
       };
     }
-    case types.notes.ADD_NOTE:
-    case types.notes.UPDATE_NOTE: {
+    case noteTypes.ADD_NOTE:
+    case noteTypes.UPDATE_NOTE: {
       return {
         ...state,
         byId: {
@@ -89,7 +92,7 @@ export default function notesReducer(state: AppNotesState = INITIAL_STATE,
         allIds: [...state.allIds, action.note.id]
       };
     }
-    case types.tags.DELETE_CUSTOM_TAG: {
+    case modalTypes.DELETE_CUSTOM_TAG: {
       const filtered = {};
       Object.values(state.byId).map((note: AppNote) => {
         filtered[note.id] = {

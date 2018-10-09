@@ -1,6 +1,7 @@
 import * as React from 'react';
 import NavBarStyles from './styles';
-import { AppAllActions, AppCategories } from '../../../interfaces';
+import { AppModalActions, AppCategories } from '../../../interfaces';
+import { AppCategoriesActions } from '../../../interfaces/categories';
 import { AppBar, IconButton, Toolbar, Tooltip, Typography } from '@material-ui/core';
 import { mainTheme } from '../../../../styles/themes';
 import { Add, Menu } from '@material-ui/icons';
@@ -8,7 +9,7 @@ import { AppDrawer } from '../../components';
 
 interface NavBarProps {
   opened: boolean;
-  actions: AppAllActions;
+  actions: AppCategoriesActions & AppModalActions;
   categories: AppCategories;
 }
 

@@ -3,7 +3,8 @@ import { connect }                         from 'react-redux';
 import { bindActionCreators, Dispatch }    from 'redux';
 import * as actions                        from '../../../actions';
 import * as modalActions from '../../Modal/redux/actions';
-import { AppAction, AppAllActions, AppCategories } from '../../interfaces';
+import { AppCategoriesActions } from '../../interfaces/categories';
+import { AppAction, AppCategories, AppModalActions } from '../../interfaces';
 import { NavBar }                            from '../components';
 
 interface NavContainerProps {
@@ -11,7 +12,7 @@ interface NavContainerProps {
 }
 
 interface NavContainerDispatch {
-  actions: AppAllActions;
+  actions: AppCategoriesActions & AppModalActions;
 }
 
 class NavContainer extends React.Component<NavContainerProps & NavContainerDispatch, {}> {

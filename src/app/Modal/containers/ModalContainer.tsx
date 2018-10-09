@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import * as modalActions from '../redux/actions';
-import * as actions from '../../../actions';
+import * as notesActions from '../../Note/redux/actions';
 import { AppAction, AppAllActions, AppState, AppModalProps } from '../../interfaces';
 import { NoteModal } from '../components';
 
@@ -31,6 +31,6 @@ export default connect<AppModalProps, AppHomeDispatch>(
     modal: state.modal,
   }),
   (dispatch: Dispatch<AppAction>) => ({
-    actions: bindActionCreators({...actions, ...modalActions}, dispatch)
+    actions: bindActionCreators({...notesActions, ...modalActions}, dispatch)
   })
 )(ModalContainer);

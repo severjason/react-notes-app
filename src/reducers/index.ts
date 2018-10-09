@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import notesReducer        from './notesReducer';
+import notesReducer        from '../app/Note/redux/reducer';
 import modalReducer        from '../app/Modal/redux/reducer';
 import categoriesReducer   from './categoriesReducer';
 // import { AppState }        from '../interfaces';

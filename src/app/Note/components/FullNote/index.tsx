@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Note } from '../../components';
-import { NoteProps, AppRoute, AppAllActions } from '../../../interfaces';
+import { AppRoute, AppModalActions } from '../../../interfaces';
 import { Helmet } from 'react-helmet';
 import { Redirect } from 'react-router';
+import { AppNoteActions, NoteProps } from '../../interfaces';
 
 interface NoteActions {
-  actions: AppAllActions;
+  actions: AppNoteActions & AppModalActions;
 }
 
 const FullNote: React.StatelessComponent<NoteProps & AppRoute & NoteActions> =
