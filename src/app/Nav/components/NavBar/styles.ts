@@ -2,6 +2,13 @@ import styled from 'styled-components';
 
 const NavBarStyles = styled.div`
 .app-bar {
+
+  & > div {
+    padding: 0 .5rem;
+  }
+  .header-title {
+    padding: .5rem;
+  }
     &.opened {
       margin-left: ${props => props.theme.drawer.widthRem}rem;
       width: calc(100% - ${props => props.theme.drawer.widthRem}rem);

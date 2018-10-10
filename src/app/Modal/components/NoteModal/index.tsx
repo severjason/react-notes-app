@@ -1,14 +1,18 @@
 import * as React from 'react';
 import { ChangeEvent } from 'react';
-import { Modal, Button, CheckboxProps, InputProps, TextAreaProps, Label } from 'semantic-ui-react';
-import { Form, Input, TextArea, Checkbox, Divider } from 'semantic-ui-react';
+import { TextAreaProps } from 'semantic-ui-react';
+import { TextArea } from 'semantic-ui-react';
 import * as uuid from 'uuid';
 import * as helpers from '../../../../helpers';
 import NoteModalStyles from './styles';
 import Tags from './Tags';
-import { AppTagsActions, AppModalActions } from '../../interfaces';
-import { AppNoteActions } from '../../../Note/interfaces';
-import { AppModal, AppCategories, AppTags, AppNote } from '../../../interfaces';
+import { AppTagsActions, AppModalActions, AppTags, AppModal } from '../../interfaces';
+import { AppNoteActions, AppNote } from '../../../Note/interfaces';
+import { AppCategories } from '../../../interfaces';
+import { Dialog, Grid, TextField, Radio, FormGroup,
+  FormLabel, FormControl, Chip, Button } from '@material-ui/core';
+import { TitleOutlined, Label } from '@material-ui/icons';
+import { notesColors } from '../../../../constants';
 
 interface AppNoteModalProps {
   modal: AppModal & AppTags;
@@ -31,7 +35,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     note: {
       id: '',
       title: '',
-      color: 'black',
+      color: '#000',
       text: '',
       categories: [],
       tags: [],
@@ -42,24 +46,31 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
 
   public state: AppNoteModalState = this.INITIAL_STATE;
 
-  private colors: string[] = ['black', 'red', 'green', 'orange', 'blue', 'purple', 'brown', 'violet', 'teal', 'pink'];
-
   private maxTitleLength: number = 20;
 
   private maxNewTagLength: number = 20;
 
   componentDidUpdate() {
     const {noteForUpdate} = this.props;
-    if (noteForUpdate && noteForUpdate.id !== this.state.note.id) {
+    const {note} = this.state;
+    if (noteForUpdate && noteForUpdate.id !== note.id) {
       this.setState({note: noteForUpdate});
     }
   }
 
-  private handleColorChange = (e: ChangeEvent<HTMLInputElement>, {value}: CheckboxProps): void => {
-    this.setState({color: value});
+  private handleColorChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const value = e.target.value;
+    const {note} = this.state;
+    this.setState({
+      note: {
+        ...note,
+        color: value,
+      },
+    });
   }
 
-  private handleTitleChange = (e: ChangeEvent<HTMLInputElement>, {value}: InputProps): void => {
+  private handleTitleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const value = e.target.value;
     this.setState((state: AppNoteModalState) => ({
       note: {
         ...state.note,
@@ -77,15 +88,28 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     }));
   }
 
-  private handleCategoryChange = (e: ChangeEvent<HTMLInputElement>, {value}: any): void => {
-    this.setState({categories: helpers.toggleStringInArray(this.state.note.categories, value)});
+  private handleCategoryChange = (category: string): void => {
+    const {note} = this.state;
+    this.setState({
+      note: {
+        ...note,
+        categories: helpers.toggleStringInArray(note.categories, category),
+      }
+    });
   }
 
   private handleTagClick = (clickedTag: string): void => {
-    this.setState({tags: helpers.toggleStringInArray(this.state.note.tags, clickedTag)});
+    const {note} = this.state;
+    this.setState({
+      note: {
+        ...note,
+        tags: helpers.toggleStringInArray(note.tags, clickedTag),
+      }
+    });
   }
 
-  private handleNewTagChange = (e: ChangeEvent<HTMLInputElement>, {value}: InputProps): void => {
+  private handleNewTagChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const value = e.target.value;
     this.setState({newTag: value});
   }
 
@@ -105,178 +129,167 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
   }
 
   getCategoriesList() {
-    return this.props.categories.categoriesList.filter((category: string) => category !== 'all');
+    const {categories} = this.props;
+    return categories.categoriesList.filter((category: string) => category !== 'all');
   }
 
-  public render() {
-
-    const {openedForUpdate} = this.props.modal;
-
-    const colorCheckboxes = this.colors.map((color: string, index: number) => {
-      return (
-        <Form.Field key={index}>
-          <label
-            className={`ui ${color}
-                        ${(this.state.note.color === color) ? '' : 'basic'} label app-checkbox-label`}
-          >
-            <Checkbox
-              radio={true}
-              name="colorCheckbox"
-              value={color}
-              checked={this.state.note.color === color}
-              onChange={this.handleColorChange}
-            />
-          </label>
-        </Form.Field>
-      );
-    });
-
-    const categoriesCheckboxes = this.getCategoriesList().map((category: string, index: number) => {
-      return (
-        <Form.Field key={index}>
-          <label
-            className={`ui basic label app-modal-category-title
-                        ${(this.state.note.categories.includes(category))
-              ? this.state.note.color
-              : ''}`}
-          >
-            <Checkbox
-              name="categoryCheckbox"
-              value={category}
-              checked={this.state.note.categories.includes(category)}
-              onChange={this.handleCategoryChange}
-            />
-            {category}
-          </label>
-        </Form.Field>
-      );
-    });
-
-    const allTags = this.props.modal.basicTags.concat(this.props.modal.customTags);
+  private colorCheckboxes = () => notesColors.map((color: string, index: number) => {
+    const {note} = this.state;
     return (
-      <NoteModalStyles>
-        <Modal
-          className={`app-note-modal-container scrolling app-border-${this.state.note.color}`}
-          size="small"
-          open={this.props.modal.opened}
-          onClose={() => {
-            this.props.actions.closeModal();
-            this.resetState();
-          }}
-          closeIcon={true}
-          dimmer="blurring"
-        >
-          <Modal.Header className={`ui `}>
+      <Radio
+        key={index}
+        name="color-checkbox"
+        value={color}
+        style={{color: color}}
+        checked={note.color === color}
+        onChange={this.handleColorChange}
+      />
+    );
+  })
+
+  private categoriesCheckboxes = (color: string) =>
+    this.getCategoriesList().map((category: string, index: number) => {
+      const {note} = this.state;
+      return (
+        <Chip
+          style={{borderColor: color}}
+          label={category.toUpperCase()}
+          className={`category-chip ${note.categories.includes(category) ? 'active' : ''}`}
+          key={index}
+          variant="outlined"
+          clickable={true}
+          onClick={() => this.handleCategoryChange(category)}
+        />
+
+      );
+    })
+
+  public render() {
+    const {openedForUpdate, basicTags, customTags} = this.props.modal;
+    const allTags = basicTags.concat(customTags);
+    const {actions, modal} = this.props;
+    const {note, newTag} = this.state;
+    return (
+      <Dialog
+        className={`app-note-modal-container scrolling app-border-${note.color}`}
+        open={modal.opened}
+        onClose={() => {
+          actions.closeModal();
+          this.resetState();
+        }}
+      >
+        <NoteModalStyles>
+          <p className="modal-header">
             {(openedForUpdate) ? 'Update note' : 'Create new note'}
-          </Modal.Header>
-          <Modal.Content>
-            <Form>
-              <Form.Group>
-                <Label className={`right pointing basic grey app-modal-label required`}>Title:
-                  <span className="app-note-form--info">
-                                            (max length - {this.maxTitleLength})
-                                        </span>
-                </Label>
-                <Input
-                  value={this.state.note.title}
-                  placeholder="Note title"
-                  maxLength={this.maxTitleLength}
+          </p>
+          <FormControl className="form-padding">
+            <Grid container={true} spacing={8} alignItems="flex-end">
+              <Grid item={true}>
+                <TitleOutlined/>
+              </Grid>
+              <Grid item={true}>
+                <TextField
+                  id="input-title"
+                  label="Note title"
+                  value={note.title}
+                  required={true}
                   onChange={this.handleTitleChange}
-                  className="app-modal-input"
+                  inputProps={{
+                    maxLength: this.maxTitleLength,
+                  }}
                 />
-              </Form.Group>
-              <div className="app-required-text">
-                <strong>Title</strong> is required
-              </div>
-              <Divider hidden={true}/>
-              <Form.Group inline={true}>
-                <Label className={`right pointing basic grey app-modal-label`}>Color:</Label>
-                {colorCheckboxes}
-              </Form.Group>
-              <Divider hidden={true}/>
-              <Form.Group inline={true}>
-                <Label
-                  className={`right pointing basic grey app-modal-label app-categories`}
-                >
-                  Category:
-                </Label>
-                {categoriesCheckboxes}
-              </Form.Group>
-              <Divider hidden={true}/>
-              <Form.Group>
-                <Label.Group>
-                  <Label
-                    className={`right pointing basic grey app-modal-label app-tags-category`}
-                  >
-                    Tags:
-                  </Label>
-                  <Tags
-                    tagsList={this.props.modal.basicTags}
-                    deleteIcon={false}
-                    note={this.state.note}
-                    deleteTag={this.props.actions.deleteCustomTag}
-                    handleTagClick={this.handleTagClick}
-                  />
-                  <Tags
-                    tagsList={this.props.modal.customTags}
-                    deleteIcon={true}
-                    note={this.state.note}
-                    deleteTag={this.props.actions.deleteCustomTag}
-                    handleTagClick={this.handleTagClick}
-                  />
-                </Label.Group>
-              </Form.Group>
-              <Divider hidden={true}/>
-              <Form.Group>
-                <Input
-                  icon="tags"
-                  iconPosition="left"
-                  placeholder="Add your tag here..."
-                  value={this.state.newTag}
-                  maxLength={this.maxNewTagLength}
-                  className="app-modal-input app-tag-input"
+              </Grid>
+            </Grid>
+          </FormControl>
+          <FormControl className="form-padding">
+            <FormLabel className="form-label" component="legend">Color:</FormLabel>
+            <FormGroup row={true}>
+              {this.colorCheckboxes()}
+            </FormGroup>
+          </FormControl>
+          <FormControl className="form-padding">
+            <FormLabel className="form-label" component="legend">Categories:</FormLabel>
+            <FormGroup row={true}>
+              {this.categoriesCheckboxes(note.color)}
+            </FormGroup>
+          </FormControl>
+          <FormControl className="form-padding">
+            <FormLabel className="form-label" component="legend">Tags:</FormLabel>
+            <FormGroup row={true}>
+              <Tags
+                tagsList={basicTags}
+                deleteIcon={false}
+                note={note}
+                deleteTag={actions.deleteCustomTag}
+                handleTagClick={this.handleTagClick}
+              />
+              <Tags
+                tagsList={customTags}
+                deleteIcon={true}
+                note={note}
+                deleteTag={actions.deleteCustomTag}
+                handleTagClick={this.handleTagClick}
+              />
+            </FormGroup>
+          </FormControl>
+          <FormControl>
+            <Grid container={true} spacing={8} alignItems="flex-end">
+              <Grid item={true}>
+                <Label/>
+              </Grid>
+              <Grid item={true}>
+                <TextField
+                  id="input-tag"
+                  label="Add your tag here..."
+                  value={newTag}
                   onChange={this.handleNewTagChange}
+                  inputProps={{
+                    maxLength: this.maxNewTagLength,
+                  }}
                 />
                 <Button
-                  className="app-modal-button ui label tag "
-                  disabled={this.addTagIsDisabled(allTags) || !this.state.newTag}
+                  disabled={this.addTagIsDisabled(allTags) || !newTag}
                   onClick={() => {
-                    this.props.actions.addCustomTag(this.state.newTag);
-                    this.setState({tags: this.state.note.tags.concat(this.state.newTag)});
+                    actions.addCustomTag(newTag);
+                    this.setState({tags: note.tags.concat(newTag)});
                     this.resetNewTag();
                   }}
                 >
                   Add tag
                 </Button>
-              </Form.Group>
-              <Divider hidden={true}/>
-              <Form.Field inline={true}>
-                <Label className={`pointing below basic grey app-modal-label`}>Text:</Label>
-                <TextArea
-                  value={this.state.note.text}
-                  placeholder="Add some interesting text..."
-                  onChange={this.handleTextChange}
-                />
-              </Form.Field>
-            </Form>
-          </Modal.Content>
-          <Modal.Actions>
+              </Grid>
+            </Grid>
+          </FormControl>
+          <FormControl >
+            <FormLabel className="form-label">Text:</FormLabel>
+            <TextArea
+              value={note.text}
+              placeholder="Add some interesting text..."
+              onChange={this.handleTextChange}
+            />
+          </FormControl>
+          <FormControl >
+
             <Button
-              onClick={() => {
-                (openedForUpdate)
-                  ? this.props.actions.updateNote(this.state.note)
-                  : this.addNote();
-                this.resetState();
-                this.props.actions.closeModal();
-              }}
-              disabled={this.addNoteIsDisabled()}
-              className={`ui ${this.state.note.color}`}
+              onClick={actions.closeModal}
             >
               {(openedForUpdate) ? 'Update' : 'Add'}
             </Button>
-          </Modal.Actions>
-        </Modal>
-      </NoteModalStyles>
+            <Button
+              onClick={() => {
+                (openedForUpdate)
+                  ? actions.updateNote(note)
+                  : this.addNote();
+                this.resetState();
+                actions.closeModal();
+              }}
+              disabled={this.addNoteIsDisabled()}
+            >
+              {(openedForUpdate) ? 'Update' : 'Add'}
+            </Button>
+          </FormControl>
+        </NoteModalStyles>
+      </Dialog>
     );
   }
 }
