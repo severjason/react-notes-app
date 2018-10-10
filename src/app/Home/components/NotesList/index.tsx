@@ -24,7 +24,7 @@ class NotesList extends React.Component<AppNoteListProps, {}> {
   private renderFilterNotes = (): ReactNode[] => {
     const {notes, actions} = this.props;
     return notes.map((note: AppNote, index: number) => (
-      <Note key={index} note={note} actions={actions}/>
+      <Note key={index} {...note} actions={actions}/>
     ));
   }
 

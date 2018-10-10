@@ -1,6 +1,7 @@
-import { AppAction, AppActionCategory, AppCategories } from '../app/interfaces';
-import { types }                                       from '../actions/types';
-import * as helpers                                    from '../helpers';
+import { AppAction } from '../../interfaces';
+import { AppActionCategory, AppCategories } from '../interfaces';
+import * as types from './types';
+import * as helpers from '../../../helpers';
 
 const INITIAL_STATE: AppCategories = {
   activated: 'all',
@@ -12,25 +13,25 @@ export default function categoriesReducer(
   state: AppCategories = INITIAL_STATE,
   action: AppAction & AppActionCategory) {
   switch (action.type) {
-    case types.categories.TOGGLE_CATEGORIES: {
+    case types.TOGGLE_CATEGORIES: {
       return {
         ...state,
         expanded: !state.expanded,
       };
     }
-    case types.categories.ACTIVATE_CATEGORY: {
+    case types.ACTIVATE_CATEGORY: {
       return {
         ...state,
         activated: (state.categoriesList.includes(action.category) ? action.category : state.activated),
       };
     }
-    case types.categories.DELETE_CATEGORY: {
+    case types.DELETE_CATEGORY: {
       return {
         ...state,
         categoriesList: state.categoriesList.filter((c: string) => c !== action.category),
       };
     }
-    case types.categories.ADD_CATEGORY: {
+    case types.ADD_CATEGORY: {
       const newCategories = (!state.categoriesList.includes(action.category))
         ? helpers.concatArrayUnique(state.categoriesList, [action.category])
         : state.categoriesList;

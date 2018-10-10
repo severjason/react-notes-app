@@ -1,15 +1,13 @@
 import { combineReducers } from 'redux';
-import notesReducer        from './notesReducer';
-import modalReducer        from './modalReducer';
-import categoriesReducer   from './categoriesReducer';
-import tagsReducer         from './tagsReducer';
+import notesReducer        from '../app/Note/redux/reducer';
+import modalReducer        from '../app/Modal/redux/reducer';
+import categoriesReducer   from '../app/Nav/redux/reducer';
 // import { AppState }        from '../interfaces';
 
 const rootReducer = combineReducers<any>({
     notes: notesReducer,
     modal: modalReducer,
     categories: categoriesReducer,
-    tags: tagsReducer,
 });
 
 export default rootReducer;

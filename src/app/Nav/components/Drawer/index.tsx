@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Divider, Drawer, IconButton, List } from '@material-ui/core';
 import { ChevronLeft } from '@material-ui/icons';
 import Categories from '../Categories';
-import { AppCategories, AppCategoriesActions } from '../../../interfaces/categories';
+import { AppCategories, AppCategoriesActions } from '../../interfaces';
 import DrawerStyles from './styles';
 
 interface CategoriesDrawerProps {

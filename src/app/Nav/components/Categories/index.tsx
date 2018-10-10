@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AppCategories, AppCategoriesActions } from '../../../interfaces/categories';
+import { AppCategories, AppCategoriesActions } from '../../interfaces';
 import { ChangeEvent, ReactNode } from 'react';
 import { CategoryItem, AddCategory } from '../../components';
 import CategoriesStyles from './styles';
@@ -30,13 +30,15 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
   }
 
   private handleAddCategory = (category: string): void => {
-    this.props.actions.addCategory(category);
+    const { addCategory } = this.props.actions;
+    addCategory(category);
     this.setState({inputShowed: false, inputValue: ''});
   }
 
   private inputIsDisabled = (): boolean => {
     const {inputValue} = this.state;
-    return !inputValue || this.props.categoriesList.includes(inputValue.toLowerCase());
+    const {categoriesList} = this.props;
+    return !inputValue || categoriesList.includes(inputValue.toLowerCase());
   }
 
   private getCategories(): ReactNode {

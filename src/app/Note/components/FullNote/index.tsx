@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Note } from '../../components';
-import { NoteProps, AppRoute, AppAllActions } from '../../../interfaces';
+import { AppRoute, AppModalActions } from '../../../interfaces';
 import { Helmet } from 'react-helmet';
 import { Redirect } from 'react-router';
+import { AppNoteActions, NoteProps } from '../../interfaces';
 
 interface NoteActions {
-  actions: AppAllActions;
+  actions: AppNoteActions & AppModalActions;
 }
 
 const FullNote: React.StatelessComponent<NoteProps & AppRoute & NoteActions> =
@@ -14,7 +15,7 @@ const FullNote: React.StatelessComponent<NoteProps & AppRoute & NoteActions> =
     return (requestedNote) ? (
         <React.Fragment>
           <Helmet title={`Full note - ${requestedNote.title}`}/>
-          <Note note={requestedNote} actions={actions} fullView={true} activeCategory={activeCategory}/>
+          <Note {...requestedNote} actions={actions} fullView={true} activeCategory={activeCategory}/>
         </React.Fragment>
       )
       : <Redirect to={`/notes/${activeCategory}`}/>;

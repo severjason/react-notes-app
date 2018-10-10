@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { AppCategoriesActions } from '../../../interfaces/categories';
+import { AppCategoriesActions } from '../../interfaces';
 import { MenuItem, ListItemIcon, ListItemText, Tooltip, IconButton } from '@material-ui/core';
 import { Close, Inbox, ShortText, WorkOutline, LocalHospitalOutlined, LockOutlined } from '@material-ui/icons';
 import CategoryItemStyles from './styles';

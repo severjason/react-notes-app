@@ -1,16 +1,18 @@
-import * as React                          from 'react';
-import { connect }                         from 'react-redux';
-import { bindActionCreators, Dispatch }    from 'redux';
-import * as actions                        from '../../../actions';
-import { AppAction, AppAllActions, AppCategories } from '../../interfaces';
-import { NavBar }                            from '../components';
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
+import * as navActions from '../../Nav/redux/actions';
+import * as modalActions from '../../Modal/redux/actions';
+import { AppCategoriesActions } from '../interfaces';
+import { AppAction, AppCategories, AppModalActions } from '../../interfaces';
+import { NavBar } from '../components';
 
 interface NavContainerProps {
   categories: AppCategories;
 }
 
 interface NavContainerDispatch {
-  actions: AppAllActions;
+  actions: AppCategoriesActions & AppModalActions;
 }
 
 class NavContainer extends React.Component<NavContainerProps & NavContainerDispatch, {}> {
@@ -28,6 +30,6 @@ export default connect<NavContainerProps, NavContainerDispatch>(
     categories: state.categories,
   }),
   (dispatch: Dispatch<AppAction>) => ({
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators({...navActions, ...modalActions}, dispatch)
   })
 )(NavContainer);
