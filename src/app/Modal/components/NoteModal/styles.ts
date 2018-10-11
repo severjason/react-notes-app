@@ -2,7 +2,14 @@ import styled from 'styled-components';
 
 const NoteModalStyles = styled.div`
   padding: 1rem;
-  .form-padding {
+  .form-control {
+    display: flex;
+    padding: .5rem;
+  }
+  .form-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     padding: .5rem;
   }
   .modal-header {

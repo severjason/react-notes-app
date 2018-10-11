@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { ChangeEvent } from 'react';
-import { TextAreaProps } from 'semantic-ui-react';
-import { TextArea } from 'semantic-ui-react';
 import * as uuid from 'uuid';
 import * as helpers from '../../../../helpers';
 import NoteModalStyles from './styles';
@@ -79,7 +77,8 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     }));
   }
 
-  private handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>, {value}: TextAreaProps): void => {
+  private handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
+    const value = e.target.value;
     this.setState((state: AppNoteModalState) => ({
       note: {
         ...state.note,
@@ -201,19 +200,19 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
               </Grid>
             </Grid>
           </FormControl>
-          <FormControl className="form-padding">
+          <FormControl className="form-control">
             <FormLabel className="form-label" component="legend">Color:</FormLabel>
             <FormGroup row={true}>
               {this.colorCheckboxes()}
             </FormGroup>
           </FormControl>
-          <FormControl className="form-padding">
+          <FormControl className="form-control">
             <FormLabel className="form-label" component="legend">Categories:</FormLabel>
             <FormGroup row={true}>
               {this.categoriesCheckboxes(note.color)}
             </FormGroup>
           </FormControl>
-          <FormControl className="form-padding">
+          <FormControl className="form-control">
             <FormLabel className="form-label" component="legend">Tags:</FormLabel>
             <FormGroup row={true}>
               <Tags
@@ -232,7 +231,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
               />
             </FormGroup>
           </FormControl>
-          <FormControl>
+          <FormControl className="form-control">
             <Grid container={true} spacing={8} alignItems="flex-end">
               <Grid item={true}>
                 <Label/>
@@ -260,22 +259,21 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
               </Grid>
             </Grid>
           </FormControl>
-          <FormControl >
+          <FormControl className="form-control">
             <FormLabel className="form-label">Text:</FormLabel>
-            <TextArea
+            <TextField
               value={note.text}
+              multiline={true}
               placeholder="Add some interesting text..."
               onChange={this.handleTextChange}
             />
           </FormControl>
-          <FormControl >
-
-            <Button
-              onClick={actions.closeModal}
-            >
-              {(openedForUpdate) ? 'Update' : 'Add'}
+          <FormControl className="form-buttons">
+            <Button onClick={actions.closeModal}>
+             Close
             </Button>
             <Button
+              style={{color: note.color}}
               onClick={() => {
                 (openedForUpdate)
                   ? actions.updateNote(note)
