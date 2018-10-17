@@ -3,11 +3,11 @@ import { ChangeEvent } from 'react';
 import * as uuid from 'uuid';
 import * as helpers from '../../../../helpers';
 import NoteModalStyles from './styles';
-import Tags from './Tags';
+import { Tags, ModalButtons, Checkboxes } from '../../components';
 import { AppTagsActions, AppModalActions, AppTags, AppModal } from '../../interfaces';
 import { AppNoteActions, AppNote } from '../../../Note/interfaces';
 import { AppCategories } from '../../../interfaces';
-import { Dialog, Grid, TextField, Radio, FormGroup,
+import { Dialog, Grid, TextField, FormGroup,
   FormLabel, FormControl, Chip, Button } from '@material-ui/core';
 import { TitleOutlined, Label } from '@material-ui/icons';
 import { notesColors } from '../../../../constants';
@@ -132,20 +132,6 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     return categories.categoriesList.filter((category: string) => category !== 'all');
   }
 
-  private colorCheckboxes = () => notesColors.map((color: string, index: number) => {
-    const {note} = this.state;
-    return (
-      <Radio
-        key={index}
-        name="color-checkbox"
-        value={color}
-        style={{color: color}}
-        checked={note.color === color}
-        onChange={this.handleColorChange}
-      />
-    );
-  })
-
   private categoriesCheckboxes = (color: string) =>
     this.getCategoriesList().map((category: string, index: number) => {
       const {note} = this.state;
@@ -203,7 +189,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
           <FormControl className="form-control">
             <FormLabel className="form-label" component="legend">Color:</FormLabel>
             <FormGroup row={true}>
-              {this.colorCheckboxes()}
+              <Checkboxes note={note} colors={notesColors} onColorChange={this.handleColorChange}/>
             </FormGroup>
           </FormControl>
           <FormControl className="form-control">
@@ -269,22 +255,15 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
             />
           </FormControl>
           <FormControl className="form-buttons">
-            <Button onClick={actions.closeModal}>
-             Close
-            </Button>
-            <Button
-              style={{color: note.color}}
-              onClick={() => {
-                (openedForUpdate)
-                  ? actions.updateNote(note)
-                  : this.addNote();
-                this.resetState();
-                actions.closeModal();
-              }}
-              disabled={this.addNoteIsDisabled()}
-            >
-              {(openedForUpdate) ? 'Update' : 'Add'}
-            </Button>
+            <ModalButtons
+              onClose={actions.closeModal}
+              addNote={this.addNote}
+              updateNote={actions.updateNote}
+              resetForm={this.resetState}
+              isDisabled={this.addNoteIsDisabled()}
+              openedForUpdate={openedForUpdate}
+              note={note}
+            />
           </FormControl>
         </NoteModalStyles>
       </Dialog>
