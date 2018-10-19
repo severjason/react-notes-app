@@ -78,8 +78,8 @@ class Note extends React.PureComponent<AppNoteProps & AppNote, {}> {
                   Categories: {this.getCategories()}
                   <Divider className={`note-divider`}/>
                 </div>
-                <div>{(fullView) ? text : text.slice(0, 300) + this.addDots()}</div>
               </div>
+              <div>{(fullView) ? text : text.slice(0, 300) + this.addDots()}</div>
             </Typography>
           </CardContent>
         </Card>

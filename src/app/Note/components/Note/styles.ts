@@ -42,9 +42,10 @@ const NoteStyles = styled.div`
       font-size: 1.2rem;
     }
   }
-  .note-content {
+  div.note-content {
     display: none;
     padding-top: 1rem;
+    padding-bottom: 1rem;
     &.expanded {
       display: block;
     }
