@@ -9,7 +9,7 @@ interface AppCheckboxes {
   onColorChange (e: ChangeEvent<HTMLInputElement>): void;
 }
 
-const Checkboxes: React.StatelessComponent<AppCheckboxes> = ({colors, note, onColorChange}): any =>
+const ColorCheckboxes: React.StatelessComponent<AppCheckboxes> = ({colors, note, onColorChange}): any =>
   colors.map((color: string, index: number) => {
     return (
       <Radio
@@ -23,4 +23,4 @@ const Checkboxes: React.StatelessComponent<AppCheckboxes> = ({colors, note, onCo
     );
   });
 
-export default Checkboxes;
+export default ColorCheckboxes;

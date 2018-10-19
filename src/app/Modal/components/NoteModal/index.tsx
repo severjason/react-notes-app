@@ -3,13 +3,11 @@ import { ChangeEvent } from 'react';
 import * as uuid from 'uuid';
 import * as helpers from '../../../../helpers';
 import NoteModalStyles from './styles';
-import { Tags, ModalButtons, Checkboxes } from '../../components';
+import { Tags, ModalButtons, ColorCheckboxes, CategoriesCheckboxes, AddTag, ModalTitle } from '../../components';
 import { AppTagsActions, AppModalActions, AppTags, AppModal } from '../../interfaces';
 import { AppNoteActions, AppNote } from '../../../Note/interfaces';
 import { AppCategories } from '../../../interfaces';
-import { Dialog, Grid, TextField, FormGroup,
-  FormLabel, FormControl, Chip, Button } from '@material-ui/core';
-import { TitleOutlined, Label } from '@material-ui/icons';
+import { Dialog, TextField, FormGroup, FormLabel, FormControl } from '@material-ui/core';
 import { notesColors } from '../../../../constants';
 
 interface AppNoteModalProps {
@@ -116,38 +114,24 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
 
   private resetNewTag = (): void => this.setState({newTag: ''});
 
+  private addNewTag = (): void => {
+    const {note, newTag} = this.state;
+    this.setState({tags: note.tags.concat(newTag)});
+  }
+
   private addNoteIsDisabled = (): boolean => !(this.state.note.title);
 
   private addTagIsDisabled = (tags: string[]): boolean => tags.includes(this.state.newTag.toLowerCase());
 
   private addNote = (): void => {
-    this.props.actions.addNote({
-      ...this.state.note,
-      id: uuid.v4(),
-    });
+    const { addNote } = this.props.actions;
+    addNote({...this.state.note, id: uuid.v4()});
   }
 
   getCategoriesList() {
     const {categories} = this.props;
     return categories.categoriesList.filter((category: string) => category !== 'all');
   }
-
-  private categoriesCheckboxes = (color: string) =>
-    this.getCategoriesList().map((category: string, index: number) => {
-      const {note} = this.state;
-      return (
-        <Chip
-          style={{borderColor: color}}
-          label={category.toUpperCase()}
-          className={`category-chip ${note.categories.includes(category) ? 'active' : ''}`}
-          key={index}
-          variant="outlined"
-          clickable={true}
-          onClick={() => this.handleCategoryChange(category)}
-        />
-
-      );
-    })
 
   public render() {
     const {openedForUpdate, basicTags, customTags} = this.props.modal;
@@ -156,7 +140,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     const {note, newTag} = this.state;
     return (
       <Dialog
-        className={`app-note-modal-container scrolling app-border-${note.color}`}
+        className={`${note.color}`}
         open={modal.opened}
         onClose={() => {
           actions.closeModal();
@@ -168,34 +152,22 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
             {(openedForUpdate) ? 'Update note' : 'Create new note'}
           </p>
           <FormControl className="form-padding">
-            <Grid container={true} spacing={8} alignItems="flex-end">
-              <Grid item={true}>
-                <TitleOutlined/>
-              </Grid>
-              <Grid item={true}>
-                <TextField
-                  id="input-title"
-                  label="Note title"
-                  value={note.title}
-                  required={true}
-                  onChange={this.handleTitleChange}
-                  inputProps={{
-                    maxLength: this.maxTitleLength,
-                  }}
-                />
-              </Grid>
-            </Grid>
+            <ModalTitle title={note.title} maxLength={this.maxTitleLength} onTitleChange={this.handleTitleChange}/>
           </FormControl>
           <FormControl className="form-control">
             <FormLabel className="form-label" component="legend">Color:</FormLabel>
             <FormGroup row={true}>
-              <Checkboxes note={note} colors={notesColors} onColorChange={this.handleColorChange}/>
+              <ColorCheckboxes note={note} colors={notesColors} onColorChange={this.handleColorChange}/>
             </FormGroup>
           </FormControl>
           <FormControl className="form-control">
             <FormLabel className="form-label" component="legend">Categories:</FormLabel>
             <FormGroup row={true}>
-              {this.categoriesCheckboxes(note.color)}
+              <CategoriesCheckboxes
+                note={note}
+                categories={this.getCategoriesList()}
+                onCategoryChange={this.handleCategoryChange}
+              />
             </FormGroup>
           </FormControl>
           <FormControl className="form-control">
@@ -218,32 +190,15 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
             </FormGroup>
           </FormControl>
           <FormControl className="form-control">
-            <Grid container={true} spacing={8} alignItems="flex-end">
-              <Grid item={true}>
-                <Label/>
-              </Grid>
-              <Grid item={true}>
-                <TextField
-                  id="input-tag"
-                  label="Add your tag here..."
-                  value={newTag}
-                  onChange={this.handleNewTagChange}
-                  inputProps={{
-                    maxLength: this.maxNewTagLength,
-                  }}
-                />
-                <Button
-                  disabled={this.addTagIsDisabled(allTags) || !newTag}
-                  onClick={() => {
-                    actions.addCustomTag(newTag);
-                    this.setState({tags: note.tags.concat(newTag)});
-                    this.resetNewTag();
-                  }}
-                >
-                  Add tag
-                </Button>
-              </Grid>
-            </Grid>
+            <AddTag
+              newTag={newTag}
+              maxLength={this.maxNewTagLength}
+              tagButtonDisabled={this.addTagIsDisabled(allTags) || !newTag}
+              onTagChange={this.handleNewTagChange}
+              addCustomTag={actions.addCustomTag}
+              addNewTag={this.addNewTag}
+              resetNewTag={this.resetNewTag}
+            />
           </FormControl>
           <FormControl className="form-control">
             <FormLabel className="form-label">Text:</FormLabel>
