@@ -3,7 +3,7 @@ import * as  types from '../redux/types';
 import * as helpers from '../../../helpers';
 
 const INITIAL_STATE: AppTags & AppModal = {
-  opened: false,
+  opened: true,
   openedForUpdate: false,
   noteId: null,
   basicTags: ['favourite', 'personal', 'interesting', 'later', 'important'],

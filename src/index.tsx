@@ -3,7 +3,6 @@ import * as ReactDOM     from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider }      from 'react-redux';
 import { ThemeProvider } from 'styled-components';
-import 'semantic-ui-css/semantic.min.css';
 import Routes            from './routes';
 import { store }         from './store';
 import { mainTheme }     from './styles/themes';
