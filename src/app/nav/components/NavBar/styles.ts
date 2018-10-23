@@ -20,13 +20,30 @@ const NavBarStyles = styled.div`
     display: none;
   }
   
-  @media all and (max-width: ${props => props.theme.media.mobileMaxWidthPx}px) {
-  .app-bar {
-    &.opened {
-      margin-left: 0;
-      width: 100%;
+  .toolbar {
+    justify-content: space-between;
+  }
+  
+  .notes-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .auth-container {
+    a {
+      color: ${props => props.theme.colors.secondaryTextColor};
     }
   }
+  
+  @media all and (max-width: ${props => props.theme.media.mobileMaxWidthPx}px) {
+    .app-bar {
+      &.opened {
+        margin-left: 0;
+        width: 100%;
+      }
+    }
   }
 `;
 

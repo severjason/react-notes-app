@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Chip } from '@material-ui/core';
-import { AppNote } from '../../../../Note/interfaces';
+import { AppNote } from '../../../../note/interfaces';
 
 interface AppCheckboxes {
   note: AppNote;

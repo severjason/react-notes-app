@@ -1,5 +1,5 @@
 import * as noteTypes from './types';
-import * as navTypes from '../../Nav/redux/types';
+import * as navTypes from '../../nav/redux/types';
 import { AppActionNote, AppNote } from '../interfaces';
 import { AppAction, AppActionCategory } from '../../interfaces';
 

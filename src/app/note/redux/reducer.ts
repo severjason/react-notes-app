@@ -1,6 +1,6 @@
 import * as noteTypes from './types';
-import * as modalTypes from '../../Modal/redux/types';
-import * as navTypes from '../../Nav/redux/types';
+import * as modalTypes from '../../modal/redux/types';
+import * as navTypes from '../../nav/redux/types';
 import { AppActionNote, AppNote, AppNotesState } from '../interfaces';
 import { AppAction, AppActionCategory, AppActionTags } from '../../interfaces';
 

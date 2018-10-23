@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import * as navActions from '../../Nav/redux/actions';
-import * as notesActions from '../../Note/redux/actions';
-import * as modalActions from '../../Modal/redux/actions';
+import * as navActions from '../../nav/redux/actions';
+import * as notesActions from '../../note/redux/actions';
+import * as modalActions from '../../modal/redux/actions';
 import { AppAction, AppAllActions, AppState, AppRoute, HomeProps } from '../../interfaces';
 import { Home } from '../components';
 import { getActiveNotes } from '../selectors/notes';

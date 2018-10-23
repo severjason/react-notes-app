@@ -1,5 +1,5 @@
 import * as  React from 'react';
-import { AppNote } from '../../../../Note/interfaces';
+import { AppNote } from '../../../../note/interfaces';
 import { Radio } from '@material-ui/core';
 import { ChangeEvent } from 'react';
 

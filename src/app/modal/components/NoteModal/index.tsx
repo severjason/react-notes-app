@@ -5,7 +5,7 @@ import * as helpers from '../../../../helpers';
 import NoteModalStyles from './styles';
 import { Tags, ModalButtons, ColorCheckboxes, CategoriesCheckboxes, AddTag, ModalTitle } from '../../components';
 import { AppTagsActions, AppModalActions, AppTags, AppModal } from '../../interfaces';
-import { AppNoteActions, AppNote } from '../../../Note/interfaces';
+import { AppNoteActions, AppNote } from '../../../note/interfaces';
 import { AppCategories } from '../../../interfaces';
 import { Dialog, TextField, FormGroup, FormLabel, FormControl } from '@material-ui/core';
 import { notesColors } from '../../../../constants';

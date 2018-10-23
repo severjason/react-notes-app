@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import * as navActions from '../../Nav/redux/actions';
-import * as modalActions from '../../Modal/redux/actions';
+import * as navActions from '../redux/actions';
+import * as modalActions from '../../modal/redux/actions';
 import { AppCategoriesActions } from '../interfaces';
 import { AppAction, AppCategories, AppModalActions } from '../../interfaces';
 import { NavBar } from '../components';

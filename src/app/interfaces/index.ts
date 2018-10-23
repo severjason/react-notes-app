@@ -1,6 +1,6 @@
-import { AppNote, AppNoteActions, AppActionNote, AppNotes, AppNotesState } from '../Note/interfaces';
-import { AppTags, AppTagsActions, AppActionTags, AppModal, AppModalActions } from '../Modal/interfaces';
-import { AppCategories, AppCategoriesActions, AppActionCategory } from '../Nav/interfaces';
+import { AppNote, AppNoteActions, AppActionNote, AppNotes, AppNotesState } from '../note/interfaces';
+import { AppTags, AppTagsActions, AppActionTags, AppModal, AppModalActions } from '../modal/interfaces';
+import { AppCategories, AppCategoriesActions, AppActionCategory } from '../nav/interfaces';
 
 export interface AppAction {
   type: string;

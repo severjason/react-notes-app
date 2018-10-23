@@ -2,11 +2,11 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import * as modalActions from '../redux/actions';
-import * as notesActions from '../../Note/redux/actions';
+import * as notesActions from '../../note/redux/actions';
 import { AppAction, AppState } from '../../interfaces';
 import { NoteModal } from '../components';
 import { AppModalProps, AppModalActions, AppTagsActions } from '../interfaces';
-import { AppNoteActions } from '../../Note/interfaces';
+import { AppNoteActions } from '../../note/interfaces';
 
 interface AppHomeDispatch {
   actions: AppTagsActions & AppModalActions & AppNoteActions;

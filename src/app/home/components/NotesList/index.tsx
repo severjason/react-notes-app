@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AppAllActions, AppCategories, AppNote } from '../../../interfaces';
 import { EmptyPage } from '../../../common';
-import { Note } from '../../../Note/components';
+import { Note } from '../../../note/components';
 import { ReactNode } from 'react';
 import NotesListStyles from './styles';
 

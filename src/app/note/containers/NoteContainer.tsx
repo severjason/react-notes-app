@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import * as notesActions from '../redux/actions';
-import * as modalActions from '../../Modal/redux/actions';
+import * as modalActions from '../../modal/redux/actions';
 import { NoteProps, AppNoteActions } from '../interfaces';
 import { AppAction, AppModalActions, AppState } from '../../interfaces';
 import { FullNote } from '../components';
