@@ -1,13 +1,14 @@
 import { combineReducers } from 'redux';
-import notesReducer        from '../app/Note/redux/reducer';
-import modalReducer        from '../app/Modal/redux/reducer';
-import categoriesReducer   from '../app/Nav/redux/reducer';
-// import { AppState }        from '../interfaces';
+import notesReducer from '../app/note/redux/reducer';
+import modalReducer from '../app/modal/redux/reducer';
+import categoriesReducer from '../app/nav/redux/reducer';
+import { firebaseReducer } from 'react-redux-firebase';
 
 const rootReducer = combineReducers<any>({
-    notes: notesReducer,
-    modal: modalReducer,
-    categories: categoriesReducer,
+  notes: notesReducer,
+  modal: modalReducer,
+  categories: categoriesReducer,
+  firebase: firebaseReducer,
 });
 
 export default rootReducer;
