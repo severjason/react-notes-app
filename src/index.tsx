@@ -8,6 +8,7 @@ import { store }         from './store';
 import { mainTheme }     from './styles/themes';
 import GlobalStyles      from './styles/global';
 import { injectGlobal }  from 'styled-components';
+import 'normalize.css';
 
 injectGlobal`
 html {
@@ -19,6 +20,10 @@ body {
   margin: 0;
   padding: 0;
   min-width: 300px;
+}
+
+* {
+  box-sizing: border-box;
 }
 `;
 
