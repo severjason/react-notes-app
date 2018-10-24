@@ -4,6 +4,7 @@ import thunkMiddleware                         from 'redux-thunk';
 import { AppState }                            from '../app/interfaces';
 import { composeWithDevTools }                 from 'redux-devtools-extension';
 import * as firebase from 'firebase/app';
+import 'firebase/auth';
 import { reactReduxFirebase } from 'react-redux-firebase';
 
 import { FirebaseConfig } from '../config/keys';

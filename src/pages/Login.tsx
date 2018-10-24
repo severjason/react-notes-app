@@ -6,6 +6,7 @@ import LoginContainer from '../app/auth/containers/LoginContainer';
 
 const FullNotesPage: React.StatelessComponent<RouteComponentProps<AppRoute>> = () => (
   <BaseLayout>
+    // @ts-ignore
     <LoginContainer/>
   </BaseLayout>
 );
