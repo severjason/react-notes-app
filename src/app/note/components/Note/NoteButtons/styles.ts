@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 
 const NoteButtonStyles = styled.div`
+  display: flex;
+  flex-direction: row;
   .note-button {
+    flex-direction: column;
     width: 2.5rem;
     height: 2.5rem;
     
