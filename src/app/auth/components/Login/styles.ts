@@ -8,6 +8,10 @@ const LoginStyles = styled.div`
     width: 100%;
     max-width: 300px;
   }
+  .api-error {
+    color: ${props => props.theme.colors.errorColor};
+    font-size: .75rem;
+  }
 `;
 
 export default LoginStyles;

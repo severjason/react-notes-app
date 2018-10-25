@@ -1,34 +1,26 @@
 import * as React from 'react';
 import { Login } from '../components';
-import { firebaseConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { loginRequest } from '../redux/actions';
 
 interface AppLoginContainerProps {
   firebase?: any;
   authError?: null | object;
+  loginRequest: ({email, password}: {email: string, password: string}) => void;
 }
 
 class LoginContainer extends React.Component<AppLoginContainerProps> {
 
-  private firebaseLogin = (values: any): void => {
-    const { firebase } = this.props;
-    const {email, password} = values;
-    firebase.login({email, password})
-      .catch((err: any) => console.log(2, err));
-  }
-
   render() {
-    const { authError } = this.props;
+    const { authError, loginRequest } = this.props;
     return (
-      <Login onSubmit={this.firebaseLogin} firebaseError={authError}/>
+      <Login onSubmit={loginRequest} firebaseError={authError}/>
     );
   }
 }
 
-export default compose(
-  firebaseConnect(),
-  connect((state: any) => ({
-    authError: state.firebase.authError
-  }))
-)(LoginContainer);
+const mapStateToProps = (state: any) => ({
+  authError: state.firebase.authError,
+});
+
+export default connect(mapStateToProps, {loginRequest})(LoginContainer);

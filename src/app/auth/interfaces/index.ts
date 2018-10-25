@@ -1,3 +1,5 @@
+import { AppAction } from '../../interfaces';
+
 export interface AppValidationProps {
   email?: string;
   password?: string;
@@ -6,4 +8,11 @@ export interface AppValidationProps {
 
 export interface AppLoginProps {
   firebaseError: null | object;
+}
+
+export interface AppLoginAction extends AppAction {
+  payload: {
+    email: string;
+    password: string;
+  };
 }

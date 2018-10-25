@@ -3,11 +3,11 @@ import * as ReactDOM     from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider }      from 'react-redux';
 import { ThemeProvider } from 'styled-components';
-import Routes            from './routes';
-import { store }         from './store';
-import { mainTheme }     from './styles/themes';
-import GlobalStyles      from './styles/global';
-import { injectGlobal }  from 'styled-components';
+import Routes from './routes';
+import store from './store';
+import { mainTheme } from './styles/themes';
+import GlobalStyles from './styles/global';
+import { injectGlobal } from 'styled-components';
 import 'normalize.css';
 
 injectGlobal`

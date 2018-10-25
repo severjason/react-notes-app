@@ -1,11 +1,15 @@
 import { applyMiddleware, createStore, Store, compose } from 'redux';
-import rootReducer                             from '../reducers';
-import thunkMiddleware                         from 'redux-thunk';
-import { AppState }                            from '../app/interfaces';
-import { composeWithDevTools }                 from 'redux-devtools-extension';
+import rootReducer from '../reducers';
+import thunkMiddleware from 'redux-thunk';
+import { AppState } from '../app/interfaces';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { reactReduxFirebase } from 'react-redux-firebase';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from '../sagas';
+
+const sagaMiddleware = createSagaMiddleware();
 
 import { FirebaseConfig } from '../config/keys';
 
@@ -21,8 +25,13 @@ const createStoreWithFirebase = compose(
   // reduxFirestore(firebase) // <- needed if using firestore
 )(createStore);
 
-export const store: Store<AppState> = createStoreWithFirebase(
+const store: Store<AppState> = createStoreWithFirebase(
   rootReducer,
   composeWithDevTools(applyMiddleware(
     thunkMiddleware,
+    sagaMiddleware,
   )));
+
+sagaMiddleware.run(rootSaga);
+
+export default store;

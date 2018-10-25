@@ -1,29 +1,15 @@
 import * as React from 'react';
-import { Grid, FormGroup, TextField, Typography, IconButton } from '@material-ui/core';
+import { Grid, FormGroup, Typography, IconButton } from '@material-ui/core';
 import { Clear, Done } from '@material-ui/icons';
 import LoginStyles from './styles';
-import { reduxForm, InjectedFormProps, WrappedFieldProps, Field, ConfigProps } from 'redux-form';
+import { reduxForm, InjectedFormProps, Field, ConfigProps } from 'redux-form';
 import validate from './validation';
 import { AppValidationProps, AppLoginProps } from '../../interfaces';
+import { loginForm } from '../../../../constants';
+import { RenderTextField } from '../../../common/forms';
 
-interface TextInputProps {
-  label: string;
-  className?: string;
-}
-
-const renderTextField: React.StatelessComponent<WrappedFieldProps & TextInputProps> =
-  ({input, label, meta: {touched, error}, ...custom}: any) => (
-      <TextField
-        hinttext={label}
-        label={label}
-        helperText={(!!error && touched) && error}
-        error={touched && !!error}
-        {...input}
-        {...custom}
-      />
-  );
 const Login: React.StatelessComponent<InjectedFormProps & AppLoginProps> =
-  ({ handleSubmit, pristine, reset, submitting}) => {
+  ({ handleSubmit, pristine, reset, submitting, invalid, error}) => {
   return (
     <LoginStyles>
       <form onSubmit={handleSubmit}>
@@ -32,20 +18,14 @@ const Login: React.StatelessComponent<InjectedFormProps & AppLoginProps> =
             Login form
           </Typography>
           <FormGroup className="form-group" >
-            <Field type="email" name="email" component={renderTextField} label="Email" required={true}/>
-            <Field type="password" name="password" component={renderTextField} label="Password" required={true}/>
-            <Field
-              type="password"
-              name="passwordConfirmation"
-              component={renderTextField}
-              label="Confirm password"
-              required={true}
-            />
-            <Grid container={true} alignItems="center" justify="center" className="grid-container">
+            <Field type="email" name="email" component={RenderTextField} label="Email" required={true}/>
+            <Field type="password" name="password" component={RenderTextField} label="Password" required={true}/>
+            {error && <p className="api-error">{error}</p>}
+            <Grid container={true} alignItems="center" justify="space-evenly" className="grid-container">
               <IconButton type="button" disabled={pristine || submitting} onClick={reset}>
                 <Clear/>
               </IconButton>
-              <IconButton type="submit" disabled={pristine || submitting}>
+              <IconButton type="submit" disabled={pristine || submitting || invalid}>
                 <Done/>
               </IconButton>
             </Grid>
@@ -57,7 +37,7 @@ const Login: React.StatelessComponent<InjectedFormProps & AppLoginProps> =
 };
 
 export default reduxForm<ConfigProps<FormData> & AppValidationProps & AppLoginProps>({
-  form: 'login',
+  form: loginForm,
   validate,
   // @ts-ignore
 })(Login);
