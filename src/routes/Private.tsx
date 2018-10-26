@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { RouteProps, RouteComponentProps } from 'react-router';
-// import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { firebaseConnect, isEmpty, isLoaded } from 'react-redux-firebase';
+import { isEmpty, isLoaded } from 'react-redux-firebase';
 import FullScreenLoading from '../app/common/loading/FullScreen';
+import { withFirebaseAuth } from '../app/hocs';
 
 interface PrivateRouteProps extends RouteProps {
   component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
@@ -28,6 +27,4 @@ class PrivateRoute extends Route<PrivateRouteProps> {
     );
   }
 }
-export default firebaseConnect()(
-  connect(({ firebase: { auth } }: {firebase: any}) => ({ auth })
-  )(PrivateRoute));
+export default withFirebaseAuth(PrivateRoute);
