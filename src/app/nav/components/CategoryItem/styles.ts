@@ -26,7 +26,7 @@ const CategoryItemStyles = styled.div`
     position: absolute;
     top: 50%;
     right: 0;
-    margin-top: -24px;
+    margin-top: -32px;
     opacity: 0;
     
     &:hover {

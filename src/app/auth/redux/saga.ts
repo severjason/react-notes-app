@@ -33,9 +33,25 @@ export function* firebaseLogin(action: any) {
   }
 }
 
+export function* firebaseLogout() {
+  try {
+    const response = yield call(getFirebase().logout);
+    yield put({
+      type: types.USER_LOGOUT_SUCCESS,
+      payload: response,
+    });
+  } catch (error) {
+    yield put({
+      type: types.USER_LOGOUT_FAILED,
+      payload: error,
+    });
+  }
+}
+
 function* authSaga() {
   yield all([
     yield takeLatest(types.USER_LOGIN_REQUEST, firebaseLogin),
+    yield takeLatest(types.USER_LOGOUT_REQUEST, firebaseLogout),
   ]);
 }
 

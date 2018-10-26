@@ -11,8 +11,12 @@ export interface AppLoginProps {
 }
 
 export interface AppLoginAction extends AppAction {
-  payload: {
+  payload?: {
     email: string;
     password: string;
   };
+}
+export interface AppLoginActions {
+  logoutRequest?: () =>  AppLoginAction;
+  loginRequest?: ({email, password}: {email: string, password: string}) =>  AppLoginAction;
 }

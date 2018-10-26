@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import * as navActions from '../redux/actions';
 import * as modalActions from '../../modal/redux/actions';
+import { logoutRequest } from '../../auth/redux/actions';
 import { AppCategoriesActions } from '../interfaces';
+import { AppLoginActions } from '../../auth/interfaces';
 import { AppAction, AppCategories, AppModalActions } from '../../interfaces';
 import { NavBar } from '../components';
 
@@ -12,7 +14,7 @@ interface NavContainerProps {
 }
 
 interface NavContainerDispatch {
-  actions: AppCategoriesActions & AppModalActions;
+  actions: AppCategoriesActions & AppModalActions & AppLoginActions;
 }
 
 class NavContainer extends React.Component<NavContainerProps & NavContainerDispatch, {}> {
@@ -30,6 +32,6 @@ export default connect<NavContainerProps, NavContainerDispatch>(
     categories: state.categories,
   }),
   (dispatch: Dispatch<AppAction>) => ({
-    actions: bindActionCreators({...navActions, ...modalActions}, dispatch)
+    actions: bindActionCreators({...navActions, ...modalActions, logoutRequest}, dispatch)
   })
 )(NavContainer);

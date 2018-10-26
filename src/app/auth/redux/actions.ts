@@ -8,3 +8,7 @@ export const loginRequest = ({email, password}: {email: string, password: string
     password,
   }
 });
+
+export const logoutRequest = (): AppLoginAction => ({
+  type: types.USER_LOGOUT_REQUEST,
+});

@@ -4,13 +4,14 @@ import { AppModalActions, AppCategories } from '../../../interfaces';
 import { AppCategoriesActions } from '../../interfaces';
 import { AppBar, IconButton, Toolbar, Tooltip, Typography } from '@material-ui/core';
 import { mainTheme } from '../../../../styles/themes';
-import { Add, Menu, AccountCircleOutlined } from '@material-ui/icons';
+import { Add, Menu, AccountCircleOutlined, Forward } from '@material-ui/icons';
 import { AppDrawer } from '../../components';
 import { Link } from 'react-router-dom';
+import { AppLoginActions } from '../../../auth/interfaces';
 
 interface NavBarProps {
   opened: boolean;
-  actions: AppCategoriesActions & AppModalActions;
+  actions: AppCategoriesActions & AppModalActions & AppLoginActions;
   categories: AppCategories;
 }
 
@@ -41,6 +42,9 @@ const NavBar: React.StatelessComponent<NavBarProps> = ({opened, categories, acti
               <AccountCircleOutlined/>
             </IconButton>
           </Link>
+          <IconButton color="inherit" aria-label="Menu" onClick={actions.logoutRequest}>
+            <Forward/>
+          </IconButton>
         </div>
       </Toolbar>
     </AppBar>

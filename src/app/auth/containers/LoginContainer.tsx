@@ -5,22 +5,17 @@ import { loginRequest } from '../redux/actions';
 
 interface AppLoginContainerProps {
   firebase?: any;
-  authError?: null | object;
   loginRequest: ({email, password}: {email: string, password: string}) => void;
 }
 
 class LoginContainer extends React.Component<AppLoginContainerProps> {
 
   render() {
-    const { authError, loginRequest } = this.props;
+    const { loginRequest } = this.props;
     return (
-      <Login onSubmit={loginRequest} firebaseError={authError}/>
+      <Login onSubmit={loginRequest}/>
     );
   }
 }
 
-const mapStateToProps = (state: any) => ({
-  authError: state.firebase.authError,
-});
-
-export default connect(mapStateToProps, {loginRequest})(LoginContainer);
+export default connect(null, {loginRequest})(LoginContainer);
