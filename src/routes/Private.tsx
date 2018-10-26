@@ -1,23 +1,19 @@
 import * as React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { RouteProps, RouteComponentProps } from 'react-router';
-import { isEmpty, isLoaded } from 'react-redux-firebase';
+import { RouteComponentProps } from 'react-router';
 import FullScreenLoading from '../app/common/loading/FullScreen';
 import { withFirebaseAuth } from '../app/hocs';
+import { AppWithFirebaseAuthProps } from '../app/interfaces';
 
-interface PrivateRouteProps extends RouteProps {
-  component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
-  auth?: any;
-}
 type RenderComponent = (props: RouteComponentProps<any>) => React.ReactNode;
 
-class PrivateRoute extends Route<PrivateRouteProps> {
+class PrivateRoute extends Route<AppWithFirebaseAuthProps> {
   render () {
-    const {component: Component, auth, ...rest}: PrivateRouteProps = this.props;
+    const {component: Component, isEmpty, isLoaded, ...rest}: AppWithFirebaseAuthProps = this.props;
     const renderComponent: RenderComponent = (props) => (
-      !isLoaded(auth)
+      !isLoaded
         ? <FullScreenLoading />
-        : isEmpty(auth)
+        : isEmpty
         ? <Redirect to="/login" />
         : <Component {...props} />
     );
