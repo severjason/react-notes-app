@@ -4,6 +4,7 @@ import { AppAllActions, HomeProps } from '../../../interfaces';
 import NotesList from '../../components/NotesList';
 import HomeStyles from './styles';
 import { Redirect } from 'react-router';
+import { helmetTitle } from '../../../../constants';
 
 interface AppHomeDispatch {
   actions: AppAllActions;
@@ -22,7 +23,7 @@ class Home extends React.Component<HomeProps & AppRoute & AppHomeDispatch, {}> {
       (categories.categoriesList.includes(category))
         ? (
           <HomeStyles>
-            <Helmet title={`${category[0].toUpperCase() + category.substring(1)} | Notes`} />
+            <Helmet title={`${category[0].toUpperCase() + category.substring(1)} | ${helmetTitle}`} />
             <div className={`home-container ${categories.expanded ? 'opened' : ''}`}>
               <NotesList categories={categories} notes={notes} actions={actions} routeCategory={category}/>
             </div>
