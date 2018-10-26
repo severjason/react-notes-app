@@ -27,9 +27,12 @@ export interface AppRoute {
 
 export interface AppWithFirebaseAuthProps extends RouteProps {
   component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
-  auth: any;
-  isLoaded: boolean;
-  isEmpty: boolean;
+  firebaseUser: {
+    auth: any;
+    profile: any;
+    isAuthReady: boolean;
+    isAuthEmpty: boolean;
+  };
 }
 
 export interface AppAllActions extends AppNoteActions, AppTagsActions, AppCategoriesActions, AppModalActions {

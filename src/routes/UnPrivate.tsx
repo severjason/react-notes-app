@@ -9,11 +9,12 @@ type RenderComponent = (props: RouteComponentProps<any>) => React.ReactNode;
 
 class UnPrivateRoute extends Route<AppWithFirebaseAuthProps> {
   render () {
-    const {component: Component, isLoaded, isEmpty, ...rest}: AppWithFirebaseAuthProps = this.props;
+    const {component: Component, firebaseUser: {isAuthEmpty, isAuthReady}, ...rest}: AppWithFirebaseAuthProps =
+      this.props;
     const renderComponent: RenderComponent = (props) => (
-      !isLoaded
+      !isAuthReady
         ? <FullScreenLoading />
-        : !isEmpty
+        : !isAuthEmpty
           ? <Redirect to="/" />
           : <Component {...props} />
     );

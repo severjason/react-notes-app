@@ -17,7 +17,7 @@ interface NavBarProps {
 }
 
 const NavBar: React.StatelessComponent<NavBarProps & AppWithFirebaseAuthProps> =
-  ({opened, categories, actions, isEmpty}) => (
+  ({opened, categories, actions, firebaseUser: {isAuthEmpty}}) => (
     <NavBarStyles>
       <AppBar className={`app-bar ${opened ? 'opened' : ''}`} style={{backgroundColor: mainTheme.colors.mainColor}}>
         <Toolbar className="toolbar">
@@ -39,7 +39,7 @@ const NavBar: React.StatelessComponent<NavBarProps & AppWithFirebaseAuthProps> =
             </Tooltip>
           </div>
           <div className="auth-container">
-            {isEmpty
+            {isAuthEmpty
               ? <div>
                 <Link to={'/login'}>
                   <IconButton color="inherit" aria-label="Menu">

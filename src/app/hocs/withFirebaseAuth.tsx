@@ -1,25 +1,27 @@
 import * as React from 'react';
-import { firebaseConnect } from 'react-redux-firebase';
-import { connect } from 'react-redux';
-import { isLoaded, isEmpty } from 'react-redux-firebase';
+import { firebaseAuthContext as Context } from '../context';
 
 interface WrappedComponentProps {
-  auth: any;
-  isLoaded: boolean;
-  isEmpty: boolean;
+  firebaseUser: {
+    auth: any;
+    profile: any;
+    isAuthReady: boolean;
+    isAuthEmpty: boolean;
+  };
 }
 
 function withFirebaseAuth<P extends object>(WrappedComponent: React.ComponentType<P & WrappedComponentProps> ) {
-  class Wrapper extends React.Component<WrappedComponentProps> {
+  return class Wrapper extends React.Component<any> {
     public render() {
-      const { auth } = this.props;
-      return <WrappedComponent isLoaded={isLoaded(auth)} isEmpty={isEmpty(auth)} {...this.props}/>;
+      return (
+        <Context.Consumer>
+          {({auth, isAuthReady, isAuthEmpty, profile}: any) => (
+            <WrappedComponent firebaseUser={{auth, profile, isAuthEmpty, isAuthReady}} {...this.props}/>
+          )}
+        </Context.Consumer>
+      );
     }
-  }
-
-  return firebaseConnect()(
-    connect(({ firebase: { auth } }: {firebase: any}) => ({ auth })
-    )(Wrapper));
+  };
 }
 
 export default withFirebaseAuth;

@@ -9,12 +9,13 @@ type RenderComponent = (props: RouteComponentProps<any>) => React.ReactNode;
 
 class PrivateRoute extends Route<AppWithFirebaseAuthProps> {
   render () {
-    const {component: Component, isEmpty, isLoaded, ...rest}: AppWithFirebaseAuthProps = this.props;
+    const {component: Component, firebaseUser: {isAuthEmpty, isAuthReady}, ...rest}: AppWithFirebaseAuthProps =
+      this.props;
     const renderComponent: RenderComponent = (props) => (
-      !isLoaded
-        ? <FullScreenLoading/>
-        : isEmpty
-          ? <Redirect to="/login"/>
+      !isAuthReady
+        ? <FullScreenLoading />
+        : isAuthEmpty
+          ? <Redirect to="/login" />
           : <Component {...props} />
     );
 
