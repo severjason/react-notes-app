@@ -1,6 +1,8 @@
 export const mainTheme = {
   colors: {
     mainColor: '#334e61',
+    secondaryTextColor: '#f3f4f5',
+    errorColor: '#f44336',
     blackColor: '#1b1c1d',
     redColor: '#db2828',
     blueColor: '#2185d0',

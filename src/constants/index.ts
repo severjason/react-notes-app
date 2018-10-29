@@ -1,5 +1,9 @@
-import { notesColors } from './colors';
+import { NOTES_COLORS } from './colors';
+import { LOGIN_FORM_NAME } from './auth';
+import { HELMET_TITLE } from './base';
 
 export {
-  notesColors,
+  NOTES_COLORS,
+  LOGIN_FORM_NAME,
+  HELMET_TITLE,
 };

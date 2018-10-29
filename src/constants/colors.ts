@@ -1,4 +1,4 @@
-export const notesColors: string[] = [
+export const NOTES_COLORS: string[] = [
   '#000',
   '#EA2027',
   '#009432',
