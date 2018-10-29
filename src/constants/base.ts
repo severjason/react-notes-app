@@ -1,1 +1,1 @@
-export const helmetTitle: string = 'Notes';
+export const HELMET_TITLE: string = 'Notes';

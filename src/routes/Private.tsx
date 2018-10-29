@@ -12,10 +12,10 @@ class PrivateRoute extends Route<AppWithFirebaseAuthProps> {
     const {component: Component, isEmpty, isLoaded, ...rest}: AppWithFirebaseAuthProps = this.props;
     const renderComponent: RenderComponent = (props) => (
       !isLoaded
-        ? <FullScreenLoading />
+        ? <FullScreenLoading/>
         : isEmpty
-        ? <Redirect to="/login" />
-        : <Component {...props} />
+          ? <Redirect to="/login"/>
+          : <Component {...props} />
     );
 
     return (

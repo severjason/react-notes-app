@@ -8,12 +8,13 @@ interface TextInputProps {
 }
 
 const RenderTextField: React.StatelessComponent<WrappedFieldProps & TextInputProps> =
-  ({input, label, meta: {touched, error}, ...custom}: any) => (
+  ({input, label, validator, meta: {touched, error}, ...custom}: any) => (
     <TextField
       hinttext={label}
       label={label}
       helperText={(!!error && touched) && error}
       error={touched && !!error}
+      validate={validator && validator}
       {...input}
       {...custom}
     />

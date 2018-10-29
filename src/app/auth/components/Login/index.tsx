@@ -3,10 +3,10 @@ import { Grid, FormGroup, Typography, IconButton } from '@material-ui/core';
 import { Clear, Done } from '@material-ui/icons';
 import LoginStyles from './styles';
 import { reduxForm, InjectedFormProps, Field, ConfigProps } from 'redux-form';
-import validate from './validation';
 import { AppValidationProps, AppLoginProps } from '../../interfaces';
-import { loginForm } from '../../../../constants';
+import { LOGIN_FORM_NAME } from '../../../../constants';
 import { RenderTextField } from '../../../common/forms';
+import { email, required } from '../../../common/forms/validators';
 
 const Login: React.StatelessComponent<InjectedFormProps & AppLoginProps> =
   ({ handleSubmit, pristine, reset, submitting, invalid, error}) => {
@@ -18,8 +18,22 @@ const Login: React.StatelessComponent<InjectedFormProps & AppLoginProps> =
             Login form
           </Typography>
           <FormGroup className="form-group" >
-            <Field type="email" name="email" component={RenderTextField} label="Email" required={true}/>
-            <Field type="password" name="password" component={RenderTextField} label="Password" required={true}/>
+            <Field
+              type="email"
+              name="email"
+              component={RenderTextField}
+              label="Email"
+              required={true}
+              validate={[required, email]}
+            />
+            <Field
+              type="password"
+              name="password"
+              component={RenderTextField}
+              label="Password"
+              required={true}
+              validate={[required]}
+            />
             {error && <p className="api-error">{error}</p>}
             <Grid container={true} alignItems="center" justify="space-evenly" className="grid-container">
               <IconButton type="button" disabled={pristine || submitting} onClick={reset}>
@@ -37,7 +51,6 @@ const Login: React.StatelessComponent<InjectedFormProps & AppLoginProps> =
 };
 
 export default reduxForm<ConfigProps<FormData> & AppValidationProps & AppLoginProps>({
-  form: loginForm,
-  validate,
+  form: LOGIN_FORM_NAME,
   // @ts-ignore
 })(Login);

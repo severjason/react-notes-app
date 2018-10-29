@@ -8,7 +8,7 @@ import { AppTagsActions, AppModalActions, AppTags, AppModal } from '../../interf
 import { AppNoteActions, AppNote } from '../../../note/interfaces';
 import { AppCategories } from '../../../interfaces';
 import { Dialog, TextField, FormGroup, FormLabel, FormControl } from '@material-ui/core';
-import { notesColors } from '../../../../constants';
+import { NOTES_COLORS } from '../../../../constants';
 
 interface AppNoteModalProps {
   modal: AppModal & AppTags;
@@ -157,7 +157,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
           <FormControl className="form-control">
             <FormLabel className="form-label" component="legend">Color:</FormLabel>
             <FormGroup row={true}>
-              <ColorCheckboxes note={note} colors={notesColors} onColorChange={this.handleColorChange}/>
+              <ColorCheckboxes note={note} colors={NOTES_COLORS} onColorChange={this.handleColorChange}/>
             </FormGroup>
           </FormControl>
           <FormControl className="form-control">

@@ -1,1 +1,1 @@
-export const loginForm: string = 'loginForm';
+export const LOGIN_FORM_NAME: string = 'loginForm';
