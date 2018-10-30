@@ -4,7 +4,6 @@ import { AppValidationProps } from '../../interfaces';
 import { LOGIN_FORM_NAME } from '../../../../constants';
 import { AuthForm } from '../../../common/forms';
 import { RenderTextField } from '../../../common/forms';
-import { required, email, minLength } from '../../../common/forms/validators';
 
 const Login: React.StatelessComponent<InjectedFormProps> = (props) => {
   return (
@@ -16,7 +15,6 @@ const Login: React.StatelessComponent<InjectedFormProps> = (props) => {
           name: 'email',
           component: RenderTextField,
           label: 'Email',
-          validate: [required, email],
           required: true,
         },
         {
@@ -24,7 +22,6 @@ const Login: React.StatelessComponent<InjectedFormProps> = (props) => {
           name: 'password',
           component: RenderTextField,
           label: 'Password',
-          validate: [required, minLength(6)],
           required: true,
         }
       ]}
