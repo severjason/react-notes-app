@@ -4,6 +4,7 @@ import { AppValidationProps } from '../../interfaces';
 import { SIGNUP_FORM_NAME } from '../../../../constants';
 import { AuthForm } from '../../../common/forms';
 import RenderTextField from '../../../common/forms/RenderTextField';
+import { required, email, isEqual, minLength, password } from '../../../common/forms/validators';
 
 const SignUp: React.StatelessComponent<InjectedFormProps> = (props) => {
   return (
@@ -16,6 +17,7 @@ const SignUp: React.StatelessComponent<InjectedFormProps> = (props) => {
           component: RenderTextField,
           label: 'Username',
           required: true,
+          validate: [required],
           inputProps: {
             maxLength: 30,
           }
@@ -26,6 +28,7 @@ const SignUp: React.StatelessComponent<InjectedFormProps> = (props) => {
           component: RenderTextField,
           label: 'Email',
           required: true,
+          validate: [required, email],
           inputProps: {
             maxLength: 30
           }
@@ -36,6 +39,7 @@ const SignUp: React.StatelessComponent<InjectedFormProps> = (props) => {
           component: RenderTextField,
           label: 'Password',
           required: true,
+          validate: [required, minLength(6), password],
           inputProps: {
             maxLength: 30,
           }
@@ -46,6 +50,7 @@ const SignUp: React.StatelessComponent<InjectedFormProps> = (props) => {
           component: RenderTextField,
           label: 'Confirm password',
           required: true,
+          validate: [required, isEqual('password', 'Passwords are not equal')],
           inputProps: {
             maxLength: 30,
           }
