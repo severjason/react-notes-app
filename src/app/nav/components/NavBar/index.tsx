@@ -4,7 +4,7 @@ import { AppModalActions, AppCategories, AppWithFirebaseAuthProps } from '../../
 import { AppCategoriesActions } from '../../interfaces';
 import { AppBar, IconButton, Toolbar, Tooltip, Typography } from '@material-ui/core';
 import { mainTheme } from '../../../../styles/themes';
-import { Add, Menu, AccountCircleOutlined, Forward } from '@material-ui/icons';
+import { Add, Menu, AccountCircleOutlined, Forward, LockOpenOutlined } from '@material-ui/icons';
 import { AppDrawer } from '../../components';
 import { Link } from 'react-router-dom';
 import { AppLoginActions } from '../../../auth/interfaces';
@@ -17,7 +17,7 @@ interface NavBarProps {
 }
 
 const NavBar: React.StatelessComponent<NavBarProps & AppWithFirebaseAuthProps> =
-  ({opened, categories, actions, isEmpty}) => (
+  ({opened, categories, actions, firebaseUser: {isAuthEmpty}}) => (
     <NavBarStyles>
       <AppBar className={`app-bar ${opened ? 'opened' : ''}`} style={{backgroundColor: mainTheme.colors.mainColor}}>
         <Toolbar className="toolbar">
@@ -39,12 +39,21 @@ const NavBar: React.StatelessComponent<NavBarProps & AppWithFirebaseAuthProps> =
             </Tooltip>
           </div>
           <div className="auth-container">
-            {isEmpty
+            {isAuthEmpty
               ? <div>
                 <Link to={'/login'}>
-                  <IconButton color="inherit" aria-label="Menu">
-                    <AccountCircleOutlined/>
-                  </IconButton>
+                  <Tooltip title="Login">
+                    <IconButton color="inherit" aria-label="Menu">
+                      <LockOpenOutlined/>
+                    </IconButton>
+                  </Tooltip>
+                </Link>
+                <Link to={'/signup'}>
+                  <Tooltip title="Sign Up">
+                    <IconButton color="inherit" aria-label="Menu">
+                      <AccountCircleOutlined/>
+                    </IconButton>
+                  </Tooltip>
                 </Link>
               </div>
               : <Tooltip title="Logout">

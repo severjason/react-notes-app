@@ -1,7 +1,7 @@
 import * as types from './types';
-import { AppLoginAction } from '../interfaces';
+import { AppAuthAction } from '../interfaces';
 
-export const loginRequest = ({email, password}: {email: string, password: string}): AppLoginAction => ({
+export const loginRequest = ({email, password}: {email: string, password: string}): AppAuthAction => ({
   type: types.USER_LOGIN_REQUEST,
   payload: {
     email,
@@ -9,6 +9,16 @@ export const loginRequest = ({email, password}: {email: string, password: string
   }
 });
 
-export const logoutRequest = (): AppLoginAction => ({
+export const signupRequest =
+  ({username, email, password}: {username: string, email: string, password: string}): AppAuthAction => ({
+  type: types.USER_SIGNUP_REQUEST,
+  payload: {
+    username,
+    email,
+    password,
+  }
+});
+
+export const logoutRequest = (): AppAuthAction => ({
   type: types.USER_LOGOUT_REQUEST,
 });

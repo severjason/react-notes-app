@@ -2,7 +2,7 @@ import * as types from '../redux/types';
 import { call, put, all, takeLatest } from 'redux-saga/effects';
 import { getFirebase } from 'react-redux-firebase';
 import { startSubmit, stopSubmit, reset } from 'redux-form';
-import { LOGIN_FORM_NAME } from '../../../constants';
+import { LOGIN_FORM_NAME, SIGNUP_FORM_NAME } from '../../../constants';
 
 export function* firebaseLogin(action: any) {
   try {
@@ -33,6 +33,36 @@ export function* firebaseLogin(action: any) {
   }
 }
 
+export function* firebaseSignup(action: any) {
+  try {
+    yield put(startSubmit(SIGNUP_FORM_NAME));
+    const {email, username, password} = action.payload;
+    const response = yield call(getFirebase().createUser, { email, password },  { username, email });
+    yield put({
+      type: types.USER_SIGNUP_SUCCESS,
+      payload: response,
+    });
+    yield put(stopSubmit(SIGNUP_FORM_NAME));
+    yield put(reset(SIGNUP_FORM_NAME));
+  } catch (error) {
+    yield put({
+      type: types.USER_SIGNUP_FAILED,
+      payload: error,
+    });
+    if (error.code.includes('email')) {
+      // @ts-ignore
+      yield put(stopSubmit(SIGNUP_FORM_NAME, {email: error.message}));
+    } else if (error.code.includes('password')) {
+      // @ts-ignore
+      yield put(stopSubmit(SIGNUP_FORM_NAME, {password: error.message}));
+    } else {
+      // @ts-ignore
+      yield put(stopSubmit(SIGNUP_FORM_NAME, {_error: error.message}));
+    }
+
+  }
+}
+
 export function* firebaseLogout() {
   try {
     const response = yield call(getFirebase().logout);
@@ -51,6 +81,7 @@ export function* firebaseLogout() {
 function* authSaga() {
   yield all([
     yield takeLatest(types.USER_LOGIN_REQUEST, firebaseLogin),
+    yield takeLatest(types.USER_SIGNUP_REQUEST, firebaseSignup),
     yield takeLatest(types.USER_LOGOUT_REQUEST, firebaseLogout),
   ]);
 }

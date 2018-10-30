@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
+import { FirebaseAuthProvider } from './app/hocs';
 import Routes from './routes';
 import store from './store';
 import { mainTheme } from './styles/themes';
@@ -32,11 +33,13 @@ import registerServiceWorker from './registerServiceWorker';
 ReactDOM.render(
     <Provider store={store}>
         <ThemeProvider theme={mainTheme}>
+          <FirebaseAuthProvider>
             <BrowserRouter>
                 <GlobalStyles>
                     <Routes/>
                 </GlobalStyles>
             </BrowserRouter>
+          </FirebaseAuthProvider>
         </ThemeProvider>
     </Provider>,
     document.getElementById('root') as HTMLElement
