@@ -1,7 +1,7 @@
 import withFirebaseAuth from './withFirebaseAuth';
-import fireBaseAuthProvider from './firebaseAuthProvider';
+import FirebaseAuthProvider from './firebaseAuthProvider';
 
 export {
   withFirebaseAuth,
-  fireBaseAuthProvider as FirebaseAuthProvider ,
+  FirebaseAuthProvider,
 };
