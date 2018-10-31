@@ -1,20 +1,22 @@
 import * as React from 'react';
 import { AppAuthProps } from '../../interfaces';
-import { Button, Typography, Divider } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
+import SocialLoginStyles from './styles';
 
 const SocialLogin: React.StatelessComponent<AppAuthProps> = ({googleAuthRequest, githubAuthRequest}) => (
-  <React.Fragment>
-    <Typography variant="subtitle1">
+  <SocialLoginStyles>
+    <Typography variant="subtitle1" className="title">
       Login with social services
     </Typography>
-    <Button onClick={googleAuthRequest} variant="contained" color="secondary">
-      Login with Google
-    </Button>
-    <Divider inset={true}/>
-    <Button onClick={githubAuthRequest} variant="contained">
-      Login with Github
-    </Button>
-  </React.Fragment>
+    <div className="buttons-container">
+      <Button onClick={googleAuthRequest} variant="contained">
+        Login with Google
+      </Button>
+      <Button onClick={githubAuthRequest} variant="contained">
+        Login with Github
+      </Button>
+    </div>
+  </SocialLoginStyles>
 );
 
 export default SocialLogin;
