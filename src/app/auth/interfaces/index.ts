@@ -7,16 +7,23 @@ export interface AppValidationProps {
 }
 
 export interface AppAuthAction extends AppAction {
-  payload?: {
+  payload: {
     username?: string;
-    email: string;
-    password: string;
+    email?: string;
+    password?: string;
+  };
+}
+
+export interface AppSocialAuthAction extends AppAction {
+  payload?: {
+    provider: string;
+    type?: string;
   };
 }
 
 export interface AppAuthProps {
-  googleAuthRequest: () => AppAuthAction;
-  githubAuthRequest: () => AppAuthAction;
+  googleAuthRequest: () => AppSocialAuthAction;
+  githubAuthRequest: () => AppSocialAuthAction;
 }
 
 export interface AppLoginActions {
