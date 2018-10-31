@@ -9,6 +9,14 @@ export const loginRequest = ({email, password}: {email: string, password: string
   }
 });
 
+export const googleAuthRequest = (): AppAuthAction => ({
+  type: types.GOOGLE_LOGIN_REQUEST,
+});
+
+export const githubAuthRequest = (): AppAuthAction => ({
+  type: types.GITHUB_LOGIN_REQUEST,
+});
+
 export const signupRequest =
   ({username, email, password}: {username: string, email: string, password: string}): AppAuthAction => ({
   type: types.USER_SIGNUP_REQUEST,

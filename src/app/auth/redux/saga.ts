@@ -63,6 +63,60 @@ export function* firebaseSignup(action: any) {
   }
 }
 
+export function* firebaseGoogleAuth() {
+  try {
+    yield put(startSubmit(LOGIN_FORM_NAME));
+    yield call(getFirebase().login, { provider: 'google', type: 'popup'});
+    yield put({
+      type: types.GOOGLE_LOGIN_SUCCESS,
+    });
+    yield put(stopSubmit(LOGIN_FORM_NAME));
+  } catch (error) {
+    yield put({
+      type: types.GOOGLE_LOGIN_FAILED,
+      payload: error,
+    });
+    if (error.code.includes('email')) {
+      // @ts-ignore
+      yield put(stopSubmit(LOGIN_FORM_NAME, {email: error.message}));
+    } else if (error.code.includes('password')) {
+      // @ts-ignore
+      yield put(stopSubmit(LOGIN_FORM_NAME, {password: error.message}));
+    } else {
+      // @ts-ignore
+      yield put(stopSubmit(LOGIN_FORM_NAME, {_error: error.message}));
+    }
+
+  }
+}
+
+export function* firebaseGithubAuth() {
+  try {
+    yield put(startSubmit(LOGIN_FORM_NAME));
+    yield call(getFirebase().login, { provider: 'github', type: 'popup'});
+    yield put({
+      type: types.GITHUB_LOGIN_SUCCESS,
+    });
+    yield put(stopSubmit(LOGIN_FORM_NAME));
+  } catch (error) {
+    yield put({
+      type: types.GITHUB_LOGIN_FAILED,
+      payload: error,
+    });
+    if (error.code.includes('email')) {
+      // @ts-ignore
+      yield put(stopSubmit(LOGIN_FORM_NAME, {email: error.message}));
+    } else if (error.code.includes('password')) {
+      // @ts-ignore
+      yield put(stopSubmit(LOGIN_FORM_NAME, {password: error.message}));
+    } else {
+      // @ts-ignore
+      yield put(stopSubmit(LOGIN_FORM_NAME, {_error: error.message}));
+    }
+
+  }
+}
+
 export function* firebaseLogout() {
   try {
     const response = yield call(getFirebase().logout);
@@ -82,6 +136,8 @@ function* authSaga() {
   yield all([
     yield takeLatest(types.USER_LOGIN_REQUEST, firebaseLogin),
     yield takeLatest(types.USER_SIGNUP_REQUEST, firebaseSignup),
+    yield takeLatest(types.GOOGLE_LOGIN_REQUEST, firebaseGoogleAuth),
+    yield takeLatest(types.GITHUB_LOGIN_REQUEST, firebaseGithubAuth),
     yield takeLatest(types.USER_LOGOUT_REQUEST, firebaseLogout),
   ]);
 }

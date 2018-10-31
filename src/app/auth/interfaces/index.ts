@@ -13,6 +13,12 @@ export interface AppAuthAction extends AppAction {
     password: string;
   };
 }
+
+export interface AppAuthProps {
+  googleAuthRequest: () => AppAuthAction;
+  githubAuthRequest: () => AppAuthAction;
+}
+
 export interface AppLoginActions {
   logoutRequest?: () =>  AppAuthAction;
   loginRequest?: ({email, password}: {email: string, password: string}) =>  AppAuthAction;
