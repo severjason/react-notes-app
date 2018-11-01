@@ -1,53 +1,8 @@
-/*interface AppMainTheme {
-    colors: {
-        mainColor: string;
-        blackColor: string;
-        redColor: string;
-        greenColor: string;
-        blueColor: string;
-        greyColor: string;
-        orangeColor: string;
-        tealColor: string;
-        purpleColor: string;
-        brownColor: string;
-        violetColor: string;
-        pinkColor: string;
-        noteTitleHoverColor: string;
-        noteAddIconBorderColor: string;
-        noteFormInfoColor: string;
-        menuHoverColor: string;
-    };
-    base: {
-        marginRem: number;
-        paddingRem: number;
-        borderRadiusPx: number;
-    };
-    note: {
-        marginRem: number;
-        containerWidthRem: number;
-        containerFullWidthRem: number;
-        titleHeightRem: number;
-        addIconWidthRem: number;
-        addIconFontSizeRem: number;
-        addIconBorder: () => string;
-        addIconBoxShadow: () => string;
-    };
-    modal: {
-        checkboxWidthRem: number;
-        containerWidthRem: number;
-        limitedHeightRem: number;
-    };
-    categories: {
-        menuHeightRem: number;
-        menuDeleteIconWidthRem: number;
-        menuBorder: () => string;
-        menuBoxShadow: () => string;
-    };
-}*/
-
 export const mainTheme = {
   colors: {
     mainColor: '#334e61',
+    secondaryTextColor: '#f3f4f5',
+    errorColor: '#f44336',
     blackColor: '#1b1c1d',
     redColor: '#db2828',
     blueColor: '#2185d0',

@@ -1,7 +1,7 @@
-Notes app for Front-End developer position (created with react-create-app).
+React-notes app with Firebase.
 
-Install dependencies - npm install
+Install dependencies - npm install;
 
-Start project - npm start
+Start project - npm start;
 
-Build project - npm build
+Build project - npm build;
