@@ -21,6 +21,7 @@ const FormStyles = styled.div`
 interface AuthFormProps {
   formTitle: string;
   fields: any[];
+  social?: any;
 }
 
 interface AuthFormField {
@@ -37,6 +38,7 @@ class AuthForm extends React.Component<InjectedFormProps & AuthFormProps> {
     const {
       formTitle,
       fields,
+      social,
       handleSubmit,
       pristine,
       reset,
@@ -55,6 +57,7 @@ class AuthForm extends React.Component<InjectedFormProps & AuthFormProps> {
               {fields && fields.map((field: AuthFormField, index: number) => (
                 <Field name={field.name} {...field} key={`${index}${field.name}`}/>
               ))}
+
               {error && <p className="api-error">{error}</p>}
               <Grid container={true} alignItems="center" justify="space-evenly" className="grid-container">
                 <IconButton type="button" disabled={pristine || submitting} onClick={reset}>
@@ -65,6 +68,7 @@ class AuthForm extends React.Component<InjectedFormProps & AuthFormProps> {
                 </IconButton>
               </Grid>
             </FormGroup>
+            {social}
           </Grid>
         </form>
       </FormStyles>

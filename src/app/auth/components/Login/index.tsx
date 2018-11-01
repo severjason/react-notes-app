@@ -5,6 +5,7 @@ import { LOGIN_FORM_NAME } from '../../../../constants';
 import { AuthForm } from '../../../common/forms';
 import { RenderTextField } from '../../../common/forms';
 import { required, email, minLength6 } from '../../../common/forms/validators';
+import SocialContainer from '../../containers/SocialContainer';
 
 const Login: React.StatelessComponent<InjectedFormProps> = (props) => {
   return (
@@ -28,6 +29,7 @@ const Login: React.StatelessComponent<InjectedFormProps> = (props) => {
           required: true,
         }
       ]}
+      social={<SocialContainer />}
       {...props}
     />
   );
