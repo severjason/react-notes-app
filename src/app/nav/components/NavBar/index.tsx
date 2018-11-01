@@ -22,21 +22,23 @@ const NavBar: React.StatelessComponent<NavBarProps & AppWithFirebaseAuthProps> =
       <AppBar className={`app-bar ${opened ? 'opened' : ''}`} style={{backgroundColor: mainTheme.colors.mainColor}}>
         <Toolbar className="toolbar">
           <div className="notes-actions">
+            {!isAuthEmpty &&
             <IconButton
               className={`menu-button ${opened ? 'hidden' : ''}`}
               color="inherit"
               onClick={actions.toggleCategories}
             >
               <Menu/>
-            </IconButton>
+            </IconButton>}
             <Typography variant="h6" color="inherit" className="header-title">
               Notes app
             </Typography>
+            {!isAuthEmpty &&
             <Tooltip title="Create note">
               <IconButton color="inherit" aria-label="Menu" onClick={actions.openModal}>
                 <Add/>
               </IconButton>
-            </Tooltip>
+            </Tooltip>}
           </div>
           <div className="auth-container">
             {isAuthEmpty
