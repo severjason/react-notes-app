@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
-import HomeContainer from '../app/home/containers/HomeContainer';
+// @ts-ignore
+import { lazy } from 'react';
+
+const HomeContainer = lazy(() => import('../app/home/containers/HomeContainer'));
 
 interface AppRoute {
   match: any;

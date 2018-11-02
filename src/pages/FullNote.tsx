@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
-import NoteContainer from '../app/note/containers/NoteContainer';
 import { AppRoute } from '../app/interfaces';
+// @ts-ignore
+import { lazy } from 'react';
+
+const NoteContainer = lazy(() => import('../app/note/containers/NoteContainer'));
 
 const FullNotesPage: React.StatelessComponent<RouteComponentProps<AppRoute>> = (props) => <NoteContainer {...props}/>;
 
