@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
 // @ts-ignore
-import { lazy, Suspense } from 'react';
+import { lazy } from 'react';
 
 const HomeContainer = lazy(() => import('../app/home/containers/HomeContainer'));
 
