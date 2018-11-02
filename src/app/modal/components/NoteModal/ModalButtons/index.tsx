@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { AppAction, AppActionNote, AppNote } from '../../../../interfaces';
-import { Button } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 
 interface AppModalButtons {
   openedForUpdate: boolean;

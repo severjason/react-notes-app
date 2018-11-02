@@ -1,7 +1,13 @@
 import * as React from 'react';
 import { AppNoteActions, AppNote } from '../../interfaces';
 import { AppModalActions } from '../../../interfaces';
-import { Card, CardHeader, CardContent, Typography, Divider, Chip, CardActionArea } from '@material-ui/core';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import Chip from '@material-ui/core/Chip';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import Card from '@material-ui/core/Card';
 import { ReactNode } from 'react';
 import NoteButtons from './NoteButtons';
 import NoteStyles from './styles';

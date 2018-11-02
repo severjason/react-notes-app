@@ -2,8 +2,12 @@ import * as React from 'react';
 import { AppNoteActions } from '../../../interfaces';
 import { AppModalActions } from '../../../../interfaces';
 import { Link } from 'react-router-dom';
-import { DeleteForeverOutlined, EditOutlined, ZoomOutMapOutlined, ClearOutlined } from '@material-ui/icons';
-import { IconButton, Tooltip } from '@material-ui/core';
+import DeleteForeverOutlined from '@material-ui/icons/DeleteForeverOutlined';
+import EditOutlined from '@material-ui/icons/EditOutlined';
+import ZoomOutMapOutlined from '@material-ui/icons/ZoomOutMapOutlined';
+import ClearOutlined from '@material-ui/icons/ClearOutlined';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import NoteButtonStyles from './styles';
 import { AlertDialog } from '../../../../common';
 

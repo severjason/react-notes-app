@@ -1,6 +1,6 @@
 import * as React      from 'react';
 import EmptyPageStyles from './styles';
-import { Paper } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
 
 interface AppEmptyPage {
     category?: string;
