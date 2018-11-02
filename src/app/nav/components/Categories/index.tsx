@@ -3,7 +3,8 @@ import { AppCategories, AppCategoriesActions } from '../../interfaces';
 import { ChangeEvent, ReactNode } from 'react';
 import { CategoryItem, AddCategory } from '../../components';
 import CategoriesStyles from './styles';
-import { MenuList, Divider } from '@material-ui/core';
+import MenuList from '@material-ui/core/MenuList';
+import Divider from '@material-ui/core/Divider';
 
 interface AppCategoriesDispatch {
   actions: AppCategoriesActions;

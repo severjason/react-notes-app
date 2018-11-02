@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { AppCategoriesActions } from '../../interfaces';
-import { MenuItem, ListItemIcon, ListItemText, Tooltip, IconButton } from '@material-ui/core';
+import MenuItem from '@material-ui/core/MenuItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
 import LockOutlined from '@material-ui/icons/LockOutlined';
 import Inbox from '@material-ui/icons/Inbox';
 import ShortText from '@material-ui/icons/ShortText';

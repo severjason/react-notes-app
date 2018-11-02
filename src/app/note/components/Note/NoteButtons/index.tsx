@@ -6,7 +6,8 @@ import DeleteForeverOutlined from '@material-ui/icons/DeleteForeverOutlined';
 import EditOutlined from '@material-ui/icons/EditOutlined';
 import ZoomOutMapOutlined from '@material-ui/icons/ZoomOutMapOutlined';
 import ClearOutlined from '@material-ui/icons/ClearOutlined';
-import { IconButton, Tooltip } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import NoteButtonStyles from './styles';
 import { AlertDialog } from '../../../../common';
 

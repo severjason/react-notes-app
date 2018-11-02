@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Chip } from '@material-ui/core';
+import Chip from '@material-ui/core/Chip';
 import Clear from '@material-ui/icons/Clear';
 import { AppActionTags, AppNote } from '../../../../interfaces';
 

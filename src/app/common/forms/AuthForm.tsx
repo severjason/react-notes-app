@@ -1,7 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Field, InjectedFormProps } from 'redux-form';
-import { FormGroup, Grid, IconButton, Typography } from '@material-ui/core';
+import FormGroup from '@material-ui/core/FormGroup';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
 import Clear from '@material-ui/icons/Clear';
 import Done from '@material-ui/icons/Done';
 

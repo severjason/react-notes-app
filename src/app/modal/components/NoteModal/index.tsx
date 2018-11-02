@@ -7,7 +7,11 @@ import { Tags, ModalButtons, ColorCheckboxes, CategoriesCheckboxes, AddTag, Moda
 import { AppTagsActions, AppModalActions, AppTags, AppModal } from '../../interfaces';
 import { AppNoteActions, AppNote } from '../../../note/interfaces';
 import { AppCategories } from '../../../interfaces';
-import { Dialog, TextField, FormGroup, FormLabel, FormControl } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import TextField from '@material-ui/core/TextField';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
 import { NOTES_COLORS } from '../../../../constants';
 
 interface AppNoteModalProps {
