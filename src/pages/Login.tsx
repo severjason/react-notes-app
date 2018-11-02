@@ -2,8 +2,11 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { withRouter, RouteComponentProps } from 'react-router';
 import { AppRoute } from '../app/interfaces';
-import LoginContainer from '../app/auth/containers/LoginContainer';
 import { HELMET_TITLE } from '../constants';
+// @ts-ignore
+import { lazy } from 'react';
+
+const LoginContainer = lazy(() => import('../app/auth/containers/LoginContainer'));
 
 const FullNotesPage: React.StatelessComponent<RouteComponentProps<AppRoute>> = () => (
   <React.Fragment>
