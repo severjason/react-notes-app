@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Divider, Drawer, IconButton, List } from '@material-ui/core';
-import { ChevronLeft } from '@material-ui/icons';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Categories from '../Categories';
 import { AppCategories, AppCategoriesActions } from '../../interfaces';
 import DrawerStyles from './styles';

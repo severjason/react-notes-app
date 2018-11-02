@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ChangeEvent } from 'react';
 import { Grid, TextField } from '@material-ui/core';
-import { TitleOutlined } from '@material-ui/icons';
+import TitleOutlined from '@material-ui/icons/TitleOutlined';
 
 interface AppModalTitle {
   title: string;

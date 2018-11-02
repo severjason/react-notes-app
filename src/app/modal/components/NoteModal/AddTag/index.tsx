@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button, Grid, TextField } from '@material-ui/core';
-import { Label } from '@material-ui/icons';
+import Label from '@material-ui/icons/Label';
 import { ChangeEvent } from 'react';
 import { AppActionTags } from '../../../interfaces';
 

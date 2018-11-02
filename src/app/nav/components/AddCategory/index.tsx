@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { IconButton, Input, withStyles, Tooltip } from '@material-ui/core';
-import { Add, Check, Close } from '@material-ui/icons';
+import Add from '@material-ui/icons/Add';
+import Check from '@material-ui/icons/Check';
+import Close from '@material-ui/icons/Close';
 import AddCategoryStyles from './styles';
 import { ChangeEvent } from 'react';
 import { mainTheme } from '../../../../styles/themes';

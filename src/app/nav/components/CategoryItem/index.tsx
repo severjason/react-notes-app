@@ -2,7 +2,12 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { AppCategoriesActions } from '../../interfaces';
 import { MenuItem, ListItemIcon, ListItemText, Tooltip, IconButton } from '@material-ui/core';
-import { Close, Inbox, ShortText, WorkOutline, LocalHospitalOutlined, LockOutlined } from '@material-ui/icons';
+import LockOutlined from '@material-ui/icons/LockOutlined';
+import Inbox from '@material-ui/icons/Inbox';
+import ShortText from '@material-ui/icons/ShortText';
+import WorkOutline from '@material-ui/icons/WorkOutline';
+import LocalHospitalOutlined from '@material-ui/icons/LockOutlined';
+import Close from '@material-ui/icons/Close';
 import CategoryItemStyles from './styles';
 import { ReactElement } from 'react';
 

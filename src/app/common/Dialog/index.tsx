@@ -7,7 +7,8 @@ import {
   DialogActions,
   IconButton
 } from '@material-ui/core';
-import { Check, Close } from '@material-ui/icons';
+import Check from '@material-ui/icons/Check';
+import Close from '@material-ui/icons/Close';
 import AlertDialogStyles from './styles';
 
 interface AlertDialogProps {

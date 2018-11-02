@@ -22,7 +22,7 @@
     "react-redux-firebase": "^2.1.9",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts-ts": "2.17.0",
+    "react-scripts-ts": "^3.1.0",
     "redux": "^4.0.1",
     "redux-firestore": "^0.5.8",
     "redux-form": "^7.4.2",
@@ -30,7 +30,8 @@
     "redux-saga": "^0.16.2",
     "reselect": "^3.0.1",
     "styled-components": "^3.4.10",
-    "uuid": "^3.2.1"
+    "uuid": "^3.2.1",
+    "webpack-bundle-analyzer": "^3.0.3"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
@@ -56,6 +57,7 @@
     "@types/redux-logger": "^3.0.5",
     "@types/styled-components": "^3.0.2",
     "@types/uuid": "^3.4.3",
+    "babel-plugin-import": "^1.11.0",
     "redux-devtools-extension": "^2.13.5",
     "redux-logger": "^3.0.6",
     "typescript": "^3.1.5"

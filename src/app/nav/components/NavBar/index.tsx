@@ -4,7 +4,11 @@ import { AppModalActions, AppCategories, AppWithFirebaseAuthProps } from '../../
 import { AppCategoriesActions } from '../../interfaces';
 import { AppBar, IconButton, Toolbar, Tooltip, Typography } from '@material-ui/core';
 import { mainTheme } from '../../../../styles/themes';
-import { Add, Menu, AccountCircleOutlined, Forward, LockOpenOutlined } from '@material-ui/icons';
+import Add from '@material-ui/icons/Add';
+import Menu from '@material-ui/icons/Menu';
+import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined';
+import Forward from '@material-ui/icons/Forward';
+import LockOpenOutlined from '@material-ui/icons/LockOpenOutlined';
 import { AppDrawer } from '../../components';
 import { Link } from 'react-router-dom';
 import { AppLoginActions } from '../../../auth/interfaces';

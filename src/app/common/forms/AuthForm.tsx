@@ -2,7 +2,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Field, InjectedFormProps } from 'redux-form';
 import { FormGroup, Grid, IconButton, Typography } from '@material-ui/core';
-import { Clear, Done } from '@material-ui/icons';
+import Clear from '@material-ui/icons/Clear';
+import Done from '@material-ui/icons/Done';
 
 const FormStyles = styled.div`
   .grid-container {
