@@ -75,7 +75,9 @@ const NavBar: React.StatelessComponent<NavBarProps & AppWithFirebaseAuthProps> =
           </div>
         </Toolbar>
       </AppBar>
-      <AppDrawer opened={opened} actions={actions} categories={categories} toggleDrawer={actions.toggleCategories}/>
+      {!!categories.categoriesList.length &&
+      <AppDrawer opened={opened} actions={actions} categories={categories} toggleDrawer={actions.toggleCategories}/>}
+
     </NavBarStyles>
   );
 

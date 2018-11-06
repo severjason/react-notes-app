@@ -20,3 +20,7 @@ export const addCategory = (category: string): AppActionCategory => ({
   type: types.ADD_CATEGORY,
   category: category,
 });
+
+export const fetchCategoriesRequest = (): AppAction => ({
+  type: types.FETCH_CATEGORIES_REQUEST,
+});

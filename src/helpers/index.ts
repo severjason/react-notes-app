@@ -8,3 +8,14 @@ export function toggleStringInArray(array: string[], value: string): string[] {
 export function concatArrayUnique(array1: string[], array2: string[]): string[] {
     return array1.concat(array2.filter((s: string) => !array1.includes(s)));
 }
+
+export function filterCategories (categories: any): string[] {
+    if (!Array.isArray(categories)) {
+        return [];
+    }
+    const result: string[] = [];
+    for (let i = 0, length = categories.length; i < length; i++) {
+        result.push(categories[i].name);
+    }
+    return ['all'].concat(result.sort());
+}

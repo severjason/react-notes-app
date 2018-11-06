@@ -19,22 +19,22 @@ const AppDrawer: React.StatelessComponent<CategoriesDrawerProps> = (props) => {
   const {opened, categories, actions, toggleDrawer} = props;
   return (
     <DrawerStyles>
-    <Drawer
-      variant="persistent"
-      open={opened}
-      className="app-drawer"
-    >
-      <div className="button-container">
-        <IconButton onClick={toggleDrawer}>
-          <ChevronLeft/>
-        </IconButton>
-      </div>
-      <Divider/>
-      <List>
-        <Categories {...categories} actions={actions}/>
-      </List>
-      <Divider/>
-    </Drawer>
+      <Drawer
+        variant="persistent"
+        open={opened}
+        className="app-drawer"
+      >
+        <div className="button-container">
+          <IconButton onClick={toggleDrawer}>
+            <ChevronLeft/>
+          </IconButton>
+        </div>
+        <Divider/>
+        <List>
+          <Categories {...categories} actions={actions}/>
+        </List>
+        <Divider/>
+      </Drawer>
     </DrawerStyles>
   );
 };

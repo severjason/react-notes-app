@@ -3,7 +3,7 @@ import authSaga from '../app/auth/redux/saga';
 
 function* rootSaga() {
   yield all([
-    spawn(authSaga)
+    spawn(authSaga),
   ]);
 }
 
