@@ -55,6 +55,15 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
     );
   }
 
+  private handleKeyPress = (e: any) => {
+    const {actions} = this.props;
+    const {inputValue} = this.state;
+    if (e.key === 'Enter') {
+      actions.addCategory(inputValue);
+      this.setState({inputValue: ''});
+    }
+  }
+
   render() {
     const {inputValue, inputShowed} = this.state;
     return (
@@ -71,6 +80,7 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
               onInputChange={this.handleInputChange}
               inputIsDisabled={this.inputIsDisabled()}
               addCategory={this.handleAddCategory}
+              onKeyPress={this.handleKeyPress}
             />
           </MenuList>
       </CategoriesStyles>

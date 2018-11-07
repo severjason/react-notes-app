@@ -15,6 +15,7 @@ interface AddCategoryProps {
   inputValue: string;
   showInput: () => void;
   hideInput: () => void;
+  onKeyPress: () => void;
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   addCategory: (category: string) => void;
   inputIsDisabled: boolean;
@@ -38,7 +39,8 @@ const AddCategory: React.StatelessComponent<AddCategoryProps> = (
     onInputChange,
     inputIsDisabled,
     addCategory,
-    classes
+    classes,
+    onKeyPress,
   }) => (
   <AddCategoryStyles>
     <Tooltip title="Add new category">
@@ -59,11 +61,7 @@ const AddCategory: React.StatelessComponent<AddCategoryProps> = (
         classes={{
           underline: classes.cssUnderline,
         }}
-        onKeyPress={(e) => {
-          if (e.key === 'Enter') {
-            addCategory(inputValue);
-          }
-        }}
+        onKeyPress={onKeyPress}
       />
       <IconButton
         onClick={() => addCategory(inputValue)}
