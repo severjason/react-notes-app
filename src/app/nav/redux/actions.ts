@@ -8,19 +8,22 @@ export const toggleCategories = (): AppAction => ({
 
 export const activateCategory = (category: string): AppActionCategory => ({
   type: types.ACTIVATE_CATEGORY,
-  category: category,
+  payload: {
+    category
+  },
 });
 
 export const deleteCategory = (category: string): AppActionCategory => ({
   type: types.DELETE_CATEGORY,
-  category: category,
+  payload: {
+    category
+  },
 });
 
-export const addCategory = (category: string): AppActionCategory => ({
-  type: types.ADD_CATEGORY,
-  category: category,
-});
-
-export const fetchCategoriesRequest = (): AppAction => ({
-  type: types.FETCH_CATEGORIES_REQUEST,
+export const addCategory = (category: string, uuid: string): AppActionCategory => ({
+  type: types.ADD_CATEGORY_REQUEST,
+  payload: {
+    uuid,
+    category,
+  }
 });

@@ -5,6 +5,8 @@ import { CategoryItem, AddCategory } from '../../components';
 import CategoriesStyles from './styles';
 import MenuList from '@material-ui/core/MenuList';
 import Divider from '@material-ui/core/Divider';
+import { withFirebaseAuth } from '../../../hocs';
+import { AppWithFirebaseAuthProps } from '../../../interfaces';
 
 interface AppCategoriesDispatch {
   actions: AppCategoriesActions;
@@ -15,7 +17,8 @@ interface CategoriesListState {
   inputValue: string;
 }
 
-class Categories extends React.Component<AppCategories & AppCategoriesDispatch, CategoriesListState> {
+class Categories extends React.Component<AppCategories & AppCategoriesDispatch & AppWithFirebaseAuthProps,
+  CategoriesListState> {
 
   public state = {
     inputShowed: false,
@@ -31,8 +34,8 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
   }
 
   private handleAddCategory = (category: string): void => {
-    const { addCategory } = this.props.actions;
-    addCategory(category);
+    const {actions, firebaseUser: {auth}} = this.props;
+    actions.addCategory(category, auth.uid);
     this.setState({inputShowed: false, inputValue: ''});
   }
 
@@ -44,9 +47,9 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
 
   private getCategories(): ReactNode {
     const {actions, categoriesList, activated} = this.props;
-    return categoriesList.map((category: string) => (
+    return categoriesList.map((category: string, index: number) => (
       <CategoryItem
-        key={category}
+        key={index}
         category={category}
         isActivated={activated === category}
         activateCategory={actions.activateCategory}
@@ -56,11 +59,9 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
   }
 
   private handleKeyPress = (e: any) => {
-    const {actions} = this.props;
     const {inputValue} = this.state;
     if (e.key === 'Enter') {
-      actions.addCategory(inputValue);
-      this.setState({inputValue: ''});
+      this.handleAddCategory(inputValue);
     }
   }
 
@@ -88,4 +89,4 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
   }
 }
 
-export default Categories;
+export default withFirebaseAuth(Categories);

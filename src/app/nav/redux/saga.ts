@@ -2,28 +2,40 @@ import * as types from '../redux/types';
 import { call, put, all, takeLatest } from 'redux-saga/effects';
 import { getFirebase } from 'react-redux-firebase';
 import { CATEGORIES_COLLECTION } from '../../../constants';
+import { AppActionCategory } from '../interfaces';
 
-function* fetchCategories() {
+function* addCategory(action: AppActionCategory) {
   try {
-    const response: any = yield call([getFirebase().firestore().collection(CATEGORIES_COLLECTION), 'get']);
-    response.forEach((doc: any) => {
-      console.log(`${doc.id} => ${doc.data().name}`);
-    });
+    const { uuid, category } = action.payload;
+    yield call([getFirebase().firestore().collection(CATEGORIES_COLLECTION), 'add'], {name: category, uuid});
     yield put({
-      type: types.FETCH_CATEGORIES_SUCCESS,
-      payload: response,
+      type: types.ADD_CATEGORY_SUCCESS,
     });
   } catch (error) {
-    console.log(error);
     yield put({
-      type: types.FETCH_CATEGORIES_FAILED,
+      type: types.ADD_CATEGORY_FAILED,
     });
   }
 }
 
+/*function* deleteCategory(action: AppActionCategory) {
+  try {
+    const { uuid, category } = action.payload;
+    yield call([getFirebase().firestore().collection(CATEGORIES_COLLECTION), 'add'], {name: category, uuid});
+    yield put({
+      type: types.DELETE_CATEGORY_SUCCESS,
+    });
+  } catch (error) {
+    yield put({
+      type: types.DELETE_CATEGORY_FAILED,
+    });
+  }
+}*/
+
 function* categoriesSaga() {
   yield all([
-    yield takeLatest(types.FETCH_CATEGORIES_REQUEST, fetchCategories),
+    yield takeLatest(types.ADD_CATEGORY_REQUEST, addCategory),
+    // yield takeLatest(types.DELETE_CATEGORY_REQUEST, deleteCategory),
   ]);
 }
 

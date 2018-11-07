@@ -22,7 +22,7 @@ export default function categoriesReducer(
     case types.ACTIVATE_CATEGORY: {
       return {
         ...state,
-        activated: (action.category) ? action.category : state.activated,
+        activated: (action.payload.category) ? action.payload.category : state.activated,
       };
     }
     /*case types.DELETE_CATEGORY: {

@@ -110,7 +110,7 @@ export default function notesReducer(state: AppNotesState = INITIAL_STATE,
       Object.values(state.byId).map((note: AppNote) => {
         filtered[note.id] = {
           ...note,
-          categories: note.categories.filter((c: string) => c !== action.category),
+          categories: note.categories.filter((c: string) => c !== action.payload.category),
         };
       });
       return {

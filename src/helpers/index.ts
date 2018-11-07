@@ -15,7 +15,9 @@ export function filterCategories (categories: any): string[] {
     }
     const result: string[] = [];
     for (let i = 0, length = categories.length; i < length; i++) {
-        result.push(categories[i].name);
+        if (categories[i].name !== undefined) {
+          result.push(categories[i].name);
+        }
     }
     return ['all', ...result.sort()];
 }

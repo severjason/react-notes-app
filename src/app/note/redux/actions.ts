@@ -33,15 +33,14 @@ export const toggleCategories = (): AppAction => ({
 
 export const activateCategory = (category: string): AppActionCategory => ({
   type: navTypes.ACTIVATE_CATEGORY,
-  category: category,
+  payload: {
+    category,
+  }
 });
 
 export const deleteCategory = (category: string): AppActionCategory => ({
   type: navTypes.DELETE_CATEGORY,
-  category: category,
-});
-
-export const addCategory = (category: string): AppActionCategory => ({
-  type: navTypes.ADD_CATEGORY,
-  category: category,
+  payload: {
+    category
+  },
 });

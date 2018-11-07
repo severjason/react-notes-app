@@ -6,11 +6,12 @@ import * as modalActions from '../../modal/redux/actions';
 import { logoutRequest } from '../../auth/redux/actions';
 import { AppCategoriesActions } from '../interfaces';
 import { AppLoginActions } from '../../auth/interfaces';
-import { AppAction, AppCategories, AppModalActions } from '../../interfaces';
+import { AppAction, AppCategories, AppModalActions, AppWithFirebaseAuthProps } from '../../interfaces';
 import { NavBar } from '../components';
 import { firestoreConnect } from 'react-redux-firebase';
 import { CATEGORIES_COLLECTION } from '../../../constants';
 import { filterCategories } from '../../../helpers';
+import withFirebaseAuth from '../../hocs/withFirebaseAuth';
 
 interface NavContainerProps {
   categories: AppCategories;
@@ -30,9 +31,18 @@ class NavContainer extends React.Component<NavContainerProps & NavContainerDispa
   }
 }
 export default compose(
-  firestoreConnect((props: any) => [
-    { collection: CATEGORIES_COLLECTION } // or `todos/${props.todoId}`
-  ]),
+  withFirebaseAuth,
+  firestoreConnect((props: AppWithFirebaseAuthProps) => {
+    const {auth: {uid}} = props.firebaseUser;
+    return !uid ? [] : [
+      {
+        collection: CATEGORIES_COLLECTION,
+        where: [
+          ['uuid', '==', uid]
+        ],
+      }
+    ];
+  }),
   connect<NavContainerProps, NavContainerDispatch>(
     ({ firestore: { ordered }, categories}: {firestore: any, categories: AppCategories}) => ({
       categories: {
