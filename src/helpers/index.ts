@@ -11,11 +11,11 @@ export function concatArrayUnique(array1: string[], array2: string[]): string[] 
 
 export function filterCategories (categories: any): string[] {
     if (!Array.isArray(categories)) {
-        return [];
+        return ['all'];
     }
     const result: string[] = [];
     for (let i = 0, length = categories.length; i < length; i++) {
         result.push(categories[i].name);
     }
-    return ['all'].concat(result.sort());
+    return ['all', ...result.sort()];
 }

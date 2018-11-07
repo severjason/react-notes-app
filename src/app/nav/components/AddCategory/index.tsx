@@ -78,5 +78,5 @@ const AddCategory: React.StatelessComponent<AddCategoryProps> = (
     </div>
   </AddCategoryStyles>
 );
-
-export default withStyles(inputStyles)(AddCategory);
+// @ts-ignore
+export default withStyles(inputStyles)(React.memo(AddCategory));

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { AppCategoriesActions } from '../../interfaces';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -10,16 +9,17 @@ import LockOutlined from '@material-ui/icons/LockOutlined';
 import Inbox from '@material-ui/icons/Inbox';
 import ShortText from '@material-ui/icons/ShortText';
 import WorkOutline from '@material-ui/icons/WorkOutline';
-import LocalHospitalOutlined from '@material-ui/icons/LockOutlined';
+import LocalHospitalOutlined from '@material-ui/icons/LocalHospitalOutlined';
 import Close from '@material-ui/icons/Close';
 import CategoryItemStyles from './styles';
 import { ReactElement } from 'react';
+import { AppActionCategory } from '../../interfaces';
 
 interface CategoryItemProps {
   category: string;
-  expanded: boolean;
-  activated: string;
-  actions: AppCategoriesActions;
+  isActivated: boolean;
+  activateCategory(category: string): AppActionCategory;
+  deleteCategory(category: string): AppActionCategory;
 }
 
 const getIcon = (category: string): ReactElement<any> => {
@@ -37,34 +37,43 @@ const getIcon = (category: string): ReactElement<any> => {
   }
 };
 
-const CategoryItem: React.StatelessComponent<CategoryItemProps> = ({category, activated, expanded, actions}) => {
-  return (
-    <CategoryItemStyles>
-      <Link to={`/notes/${category}`} onClick={() => actions.activateCategory(category)}>
-        <MenuItem className={`category-menu-item ${category === activated ? 'active' : ''}`}>
-          <ListItemIcon>
-            {getIcon(category)}
-          </ListItemIcon>
-          <ListItemText className="category-title">
-            {category}
-          </ListItemText>
-        </MenuItem>
-      </Link>
-      <ListItemIcon>
-        <React.Fragment>
-          <Tooltip title={`Delete ${category.toUpperCase()} category`}>
-            <IconButton
-              className={`category-delete-icon ${(activated === category || category === 'all') ? 'hidden' : ''}`}
-              onClick={() => actions.deleteCategory(category)}
-            >
-              <Close/>
-            </IconButton>
+class CategoryItem extends React.Component<CategoryItemProps> {
 
-          </Tooltip>
-        </React.Fragment>
-      </ListItemIcon>
-    </CategoryItemStyles>
-  );
-};
+  shouldComponentUpdate(nextProps: CategoryItemProps, nextState: any) {
+    const {isActivated, category} = this.props;
+    return isActivated !== nextProps.isActivated || category !== nextProps.category;
+  }
+
+  render() {
+    const {category, isActivated, activateCategory, deleteCategory} = this.props;
+    return (
+      <CategoryItemStyles>
+        <Link to={`/notes/${category}`} onClick={() => activateCategory(category)}>
+          <MenuItem className={`category-menu-item ${isActivated ? 'active' : ''}`}>
+            <ListItemIcon>
+              {getIcon(category)}
+            </ListItemIcon>
+            <ListItemText className="category-title">
+              {category}
+            </ListItemText>
+          </MenuItem>
+        </Link>
+        <ListItemIcon>
+          <React.Fragment>
+            <Tooltip title={`Delete ${category.toUpperCase()} category`}>
+              <IconButton
+                className={`category-delete-icon ${(isActivated || category === 'all') ? 'hidden' : ''}`}
+                onClick={() => deleteCategory(category)}
+              >
+                <Close/>
+              </IconButton>
+
+            </Tooltip>
+          </React.Fragment>
+        </ListItemIcon>
+      </CategoryItemStyles>
+    );
+  }
+}
 
 export default CategoryItem;

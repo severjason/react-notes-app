@@ -19,20 +19,22 @@ import { AppLoginActions } from '../../../auth/interfaces';
 import { withFirebaseAuth } from '../../../hocs';
 
 interface NavBarProps {
-  opened: boolean;
   actions: AppCategoriesActions & AppModalActions & AppLoginActions;
   categories: AppCategories;
 }
 
 const NavBar: React.StatelessComponent<NavBarProps & AppWithFirebaseAuthProps> =
-  ({opened, categories, actions, firebaseUser: {isAuthEmpty}}) => (
+  ({categories, actions, firebaseUser: {isAuthEmpty}}) => (
     <NavBarStyles>
-      <AppBar className={`app-bar ${opened ? 'opened' : ''}`} style={{backgroundColor: mainTheme.colors.mainColor}}>
+      <AppBar
+        className={`app-bar ${categories.expanded ? 'opened' : ''}`}
+        style={{backgroundColor: mainTheme.colors.mainColor}}
+      >
         <Toolbar className="toolbar">
           <div className="notes-actions">
             {!isAuthEmpty &&
             <IconButton
-              className={`menu-button ${opened ? 'hidden' : ''}`}
+              className={`menu-button ${categories.expanded ? 'hidden' : ''}`}
               color="inherit"
               onClick={actions.toggleCategories}
             >
@@ -76,7 +78,11 @@ const NavBar: React.StatelessComponent<NavBarProps & AppWithFirebaseAuthProps> =
         </Toolbar>
       </AppBar>
       {!!categories.categoriesList.length &&
-      <AppDrawer opened={opened} actions={actions} categories={categories} toggleDrawer={actions.toggleCategories}/>}
+      <AppDrawer
+        actions={actions}
+        categories={categories}
+        toggleDrawer={actions.toggleCategories}
+      />}
 
     </NavBarStyles>
   );

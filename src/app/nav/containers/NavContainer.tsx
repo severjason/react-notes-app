@@ -23,9 +23,9 @@ interface NavContainerDispatch {
 class NavContainer extends React.Component<NavContainerProps & NavContainerDispatch, {}> {
 
   render() {
-    const {categories} = this.props;
+    const {categories, actions} = this.props;
     return (
-      <NavBar opened={categories.expanded} {...this.props}/>
+      <NavBar categories={categories} actions={actions}/>
     );
   }
 }

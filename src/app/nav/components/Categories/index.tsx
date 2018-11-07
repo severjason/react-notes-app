@@ -43,9 +43,15 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
   }
 
   private getCategories(): ReactNode {
-    const {actions, categoriesList, expanded, activated} = this.props;
+    const {actions, categoriesList, activated} = this.props;
     return categoriesList.map((category: string) => (
-      <CategoryItem key={category} category={category} activated={activated} actions={actions} expanded={expanded}/>)
+      <CategoryItem
+        key={category}
+        category={category}
+        isActivated={activated === category}
+        activateCategory={actions.activateCategory}
+        deleteCategory={actions.deleteCategory}
+      />)
     );
   }
 
@@ -57,6 +63,7 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
             {this.getCategories()}
             <Divider/>
             <AddCategory
+              // @ts-ignore
               inputValue={inputValue}
               inputShowed={inputShowed}
               showInput={this.handleShowInput}
