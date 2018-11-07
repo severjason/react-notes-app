@@ -35,6 +35,10 @@ export interface AppWithFirebaseAuthProps extends RouteProps {
   };
 }
 
+interface AppFirestore {
+  firestore: any;
+}
+
 export interface AppAllActions extends AppNoteActions, AppTagsActions, AppCategoriesActions, AppModalActions {
 }
 
@@ -50,4 +54,5 @@ export {
   AppActionNote,
   AppActionCategory,
   AppActionTags,
+  AppFirestore,
 };

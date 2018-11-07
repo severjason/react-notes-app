@@ -1,11 +1,11 @@
 import { AppAction } from '../../interfaces';
 import { AppActionCategory, AppCategories } from '../interfaces';
 import * as types from './types';
-import * as helpers from '../../../helpers';
+// import * as helpers from '../../../helpers';
 
-const INITIAL_STATE: AppCategories = {
+const INITIAL_STATE: any = {
   activated: 'all',
-  categoriesList: ['all', 'work', 'private', 'health'],
+  // categoriesList: ['all'],
   expanded: false,
 };
 
@@ -22,10 +22,10 @@ export default function categoriesReducer(
     case types.ACTIVATE_CATEGORY: {
       return {
         ...state,
-        activated: (state.categoriesList.includes(action.category) ? action.category : state.activated),
+        activated: (action.category) ? action.category : state.activated,
       };
     }
-    case types.DELETE_CATEGORY: {
+    /*case types.DELETE_CATEGORY: {
       return {
         ...state,
         categoriesList: state.categoriesList.filter((c: string) => c !== action.category),
@@ -39,7 +39,7 @@ export default function categoriesReducer(
         ...state,
         categoriesList: newCategories,
       };
-    }
+    }*/
     default: {
       return state;
     }

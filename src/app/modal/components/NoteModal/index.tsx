@@ -132,6 +132,12 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     addNote({...this.state.note, id: uuid.v4()});
   }
 
+  private closeDialog = () => {
+    const {actions} = this.props;
+    actions.closeModal();
+    this.resetState();
+  }
+
   getCategoriesList() {
     const {categories} = this.props;
     return categories.categoriesList.filter((category: string) => category !== 'all');
@@ -146,10 +152,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
       <Dialog
         className={`${note.color}`}
         open={modal.opened}
-        onClose={() => {
-          actions.closeModal();
-          this.resetState();
-        }}
+        onClose={this.closeDialog}
       >
         <NoteModalStyles>
           <p className="modal-header">
