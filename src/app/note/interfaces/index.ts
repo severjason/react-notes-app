@@ -1,4 +1,4 @@
-import { AppAction } from '../../interfaces';
+import { AppAction, AppCategory } from '../../interfaces';
 
 export interface AppActionNote extends AppAction {
   note: AppNote;
@@ -7,7 +7,7 @@ export interface AppActionNote extends AppAction {
 export interface AppNote {
   id: string;
   title: string;
-  categories: string[];
+  category: AppCategory | null;
   color: string;
   tags: string[];
   text: string;

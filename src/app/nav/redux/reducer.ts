@@ -1,11 +1,9 @@
 import { AppAction } from '../../interfaces';
 import { AppActionCategory, AppCategories } from '../interfaces';
 import * as types from './types';
-// import * as helpers from '../../../helpers';
 
 const INITIAL_STATE: any = {
-  activated: 'all',
-  // categoriesList: ['all'],
+  activated: null,
   expanded: false,
 };
 
@@ -25,21 +23,6 @@ export default function categoriesReducer(
         activated: (action.payload.category) ? action.payload.category : state.activated,
       };
     }
-    /*case types.DELETE_CATEGORY: {
-      return {
-        ...state,
-        categoriesList: state.categoriesList.filter((c: string) => c !== action.category),
-      };
-    }
-    case types.ADD_CATEGORY: {
-      const newCategories = (!state.categoriesList.includes(action.category))
-        ? helpers.concatArrayUnique(state.categoriesList, [action.category])
-        : state.categoriesList;
-      return {
-        ...state,
-        categoriesList: newCategories,
-      };
-    }*/
     default: {
       return state;
     }

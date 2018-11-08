@@ -36,20 +36,6 @@ class Note extends React.PureComponent<AppNoteProps & AppNote, {}> {
       <Chip className={`note-tag`} label={tag} key={index}/>);
   }
 
-  private getCategories(): ReactNode[] {
-    const {categories, color} = this.props;
-    return categories.map((category: string, index: number) => {
-      return (
-        <Chip
-          style={{borderColor: color}}
-          className={`note-category`}
-          label={category.toUpperCase()}
-          key={index}
-          variant="outlined"
-        />);
-    });
-  }
-
   private getNoteHeader(): ReactNode {
     const {id, title, fullView, actions} = this.props;
     return (
@@ -61,7 +47,7 @@ class Note extends React.PureComponent<AppNoteProps & AppNote, {}> {
   }
 
   render() {
-    const {fullView, color, tags, text, id, categories, actions, activeCategory} = this.props;
+    const {fullView, color, tags, text, id, category, actions, activeCategory} = this.props;
     return (
       <NoteStyles className={`${(fullView ? 'full' : '')}`}>
         <Card className="note-card">
@@ -80,10 +66,17 @@ class Note extends React.PureComponent<AppNoteProps & AppNote, {}> {
                 {fullView ? `Tags: ` : ''}
                 {this.getTags()}
                 <Divider className={`note-divider`}/>
-                <div className={`${categories.length > 0 && fullView ? '' : 'hidden'} app-note-tags`}>
-                  Categories: {this.getCategories()}
+                {category &&
+                <div className={`${fullView ? '' : 'hidden'} app-note-tags`}>
+                  Category:
+                  <Chip
+                    style={{borderColor: color}}
+                    className={`note-category`}
+                    label={category.name.toUpperCase()}
+                    variant="outlined"
+                  />
                   <Divider className={`note-divider`}/>
-                </div>
+                </div>}
               </div>
               <div>{(fullView) ? text : text.slice(0, 300) + this.addDots()}</div>
             </Typography>

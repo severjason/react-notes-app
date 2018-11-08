@@ -24,6 +24,7 @@ function* deleteCategory(action: AppActionCategory) {
     yield call([getFirebase().firestore().collection(CATEGORIES_COLLECTION).doc(id), 'delete']);
     yield put({
       type: types.DELETE_CATEGORY_SUCCESS,
+      payload: id,
     });
   } catch (error) {
     yield put({

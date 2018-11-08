@@ -6,7 +6,7 @@ import { AppCategory } from '../../../../nav/interfaces';
 interface AppCheckboxes {
   note: AppNote;
   categories: AppCategory[];
-  onCategoryChange(category: string): void;
+  onCategoryChange(category: AppCategory): void;
 }
 
 const CategoriesCheckboxes: React.StatelessComponent<AppCheckboxes> = ({note, categories, onCategoryChange}): any =>
@@ -15,11 +15,11 @@ const CategoriesCheckboxes: React.StatelessComponent<AppCheckboxes> = ({note, ca
       <Chip
         style={{borderColor: note.color}}
         label={category.name.toUpperCase()}
-        className={`category-chip ${note.categories.includes(category.id) ? 'active' : ''}`}
+        className={`category-chip ${(note.category && (note.category.id === category.id)) ? 'active' : ''}`}
         key={index}
         variant="outlined"
         clickable={true}
-        onClick={() => onCategoryChange(category.id)}
+        onClick={() => onCategoryChange(category)}
       />
 
     );

@@ -38,7 +38,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
       title: '',
       color: '#000',
       text: '',
-      categories: [],
+      category: null,
       tags: [],
       expanded: false,
     },
@@ -90,12 +90,12 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     }));
   }
 
-  private handleCategoryChange = (categoryId: string): void => {
+  private handleCategoryChange = (category: AppCategory): void => {
     const {note} = this.state;
     this.setState({
       note: {
         ...note,
-        categories: helpers.toggleStringInArray(note.categories, categoryId),
+        category,
       }
     });
   }

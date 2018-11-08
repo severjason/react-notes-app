@@ -1,6 +1,6 @@
 import * as noteTypes from './types';
 import * as modalTypes from '../../modal/redux/types';
-// import * as navTypes from '../../nav/redux/types';
+import * as navTypes from '../../nav/redux/types';
 import { AppActionNote, AppNote, AppNotesState } from '../interfaces';
 import { AppAction, AppActionCategory, AppActionTags } from '../../interfaces';
 
@@ -9,7 +9,7 @@ const INITIAL_STATE: AppNotesState = {
     '1': {
       id: '1',
       title: 'First note',
-      categories: ['work', 'health'],
+      category: null,
       color: 'red',
       tags: ['important'],
       text: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of ' +
@@ -30,7 +30,7 @@ const INITIAL_STATE: AppNotesState = {
     '2': {
       id: '2',
       title: 'Second note',
-      categories: ['work', 'private'],
+      category: null,
       color: 'black',
       tags: ['personal', 'interesting'],
       text: 'First node text',
@@ -39,7 +39,7 @@ const INITIAL_STATE: AppNotesState = {
     '3': {
       id: '3',
       title: 'Third note',
-      categories: ['private', 'health'],
+      category: null,
       color: 'green',
       tags: ['favourite', 'later', 'important'],
       text: 'some text',
@@ -105,19 +105,20 @@ export default function notesReducer(state: AppNotesState = INITIAL_STATE,
         byId: filtered,
       };
     }
-    /*case navTypes.DELETE_CATEGORY_SUCCESS: {
+    case navTypes.DELETE_CATEGORY_SUCCESS: {
+      console.log(action);
       const filtered = {};
       Object.values(state.byId).map((note: AppNote) => {
         filtered[note.id] = {
           ...note,
-          categories: note.categories.filter((c: string) => c !== action.payload.category),
+          category: note.category === action.payload ? null : note.category,
         };
       });
       return {
         ...state,
         byId: filtered,
       };
-    }*/
+    }
     default: {
       return state;
     }

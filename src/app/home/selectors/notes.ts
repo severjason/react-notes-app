@@ -11,5 +11,5 @@ export const getActiveNotes = createSelector(
   [getNotesArray, getActiveCategory],
   (notes: AppNote[], activeCategory: string) => (activeCategory === 'all')
     ? notes
-    : notes.filter((note: AppNote) => note.categories.includes(activeCategory))
+    : notes.filter((note: AppNote) => note.category && note.category.id === activeCategory)
 );
