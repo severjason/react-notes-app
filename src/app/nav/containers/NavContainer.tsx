@@ -44,7 +44,7 @@ export default compose(
     ];
   }),
   connect<NavContainerProps, NavContainerDispatch>(
-    ({ firestore: { ordered }, categories}: {firestore: any, categories: AppCategories}) => ({
+    ({ firestore: { ordered }, categories}: {firestore: any, categories: any}) => ({
       categories: {
         categoriesList: filterCategories(ordered.categories),
         activated: categories.activated,

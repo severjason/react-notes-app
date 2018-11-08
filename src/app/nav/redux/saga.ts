@@ -18,10 +18,10 @@ function* addCategory(action: AppActionCategory) {
   }
 }
 
-/*function* deleteCategory(action: AppActionCategory) {
+function* deleteCategory(action: AppActionCategory) {
   try {
-    const { uuid, category } = action.payload;
-    yield call([getFirebase().firestore().collection(CATEGORIES_COLLECTION), 'add'], {name: category, uuid});
+    const { id } = action.payload;
+    yield call([getFirebase().firestore().collection(CATEGORIES_COLLECTION).doc(id), 'delete']);
     yield put({
       type: types.DELETE_CATEGORY_SUCCESS,
     });
@@ -30,12 +30,12 @@ function* addCategory(action: AppActionCategory) {
       type: types.DELETE_CATEGORY_FAILED,
     });
   }
-}*/
+}
 
 function* categoriesSaga() {
   yield all([
     yield takeLatest(types.ADD_CATEGORY_REQUEST, addCategory),
-    // yield takeLatest(types.DELETE_CATEGORY_REQUEST, deleteCategory),
+    yield takeLatest(types.DELETE_CATEGORY_REQUEST, deleteCategory),
   ]);
 }
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AppCategories, AppCategoriesActions } from '../../interfaces';
+import { AppCategories, AppCategoriesFirebase, AppCategoriesActions, AppCategory } from '../../interfaces';
 import { ChangeEvent, ReactNode } from 'react';
 import { CategoryItem, AddCategory } from '../../components';
 import CategoriesStyles from './styles';
@@ -17,8 +17,8 @@ interface CategoriesListState {
   inputValue: string;
 }
 
-class Categories extends React.Component<AppCategories & AppCategoriesDispatch & AppWithFirebaseAuthProps,
-  CategoriesListState> {
+class Categories extends React.Component<AppCategories
+  & AppCategoriesFirebase & AppCategoriesDispatch & AppWithFirebaseAuthProps, CategoriesListState> {
 
   public state = {
     inputShowed: false,
@@ -42,16 +42,18 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch &
   private inputIsDisabled = (): boolean => {
     const {inputValue} = this.state;
     const {categoriesList} = this.props;
-    return !inputValue || categoriesList.includes(inputValue.toLowerCase());
+    return !inputValue ||
+      !!categoriesList.filter(category => category.name === inputValue.toLowerCase()).length;
   }
 
   private getCategories(): ReactNode {
     const {actions, categoriesList, activated} = this.props;
-    return categoriesList.map((category: string, index: number) => (
+    return categoriesList.map((category: AppCategory, index: number) => (
       <CategoryItem
         key={index}
-        category={category}
-        isActivated={activated === category}
+        category={category.name}
+        categoryId={category.id}
+        isActivated={activated === category.id}
         activateCategory={actions.activateCategory}
         deleteCategory={actions.deleteCategory}
       />)

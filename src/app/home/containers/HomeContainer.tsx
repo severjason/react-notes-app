@@ -10,6 +10,7 @@ import {
   AppState,
   AppRoute,
   HomeProps,
+  HomePropsWithFirebase,
   AppFirestore,
   AppWithFirebaseAuthProps,
 } from '../../interfaces';
@@ -25,7 +26,8 @@ interface AppHomeDispatch {
   actions: AppAllActions;
 }
 
-class HomeContainer extends React.Component<HomeProps & AppRoute & AppHomeDispatch & AppWithFirebaseAuthProps, {}> {
+class HomeContainer extends React.Component<HomePropsWithFirebase
+  & AppRoute & AppHomeDispatch & AppWithFirebaseAuthProps, {}> {
 
   render() {
     const {actions, categories, notes, match} = this.props;
@@ -34,7 +36,6 @@ class HomeContainer extends React.Component<HomeProps & AppRoute & AppHomeDispat
       : <FullScreenLoading/>;
   }
 }
-
 export default compose(
   withFirebaseAuth,
   firestoreConnect((props: AppWithFirebaseAuthProps) => {

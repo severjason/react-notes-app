@@ -6,18 +6,19 @@ import NoteModalStyles from './styles';
 import { Tags, ModalButtons, ColorCheckboxes, CategoriesCheckboxes, AddTag, ModalTitle } from '../../components';
 import { AppTagsActions, AppModalActions, AppTags, AppModal } from '../../interfaces';
 import { AppNoteActions, AppNote } from '../../../note/interfaces';
-import { AppCategories } from '../../../interfaces';
+import { AppCategories, AppCategory } from '../../../interfaces';
 import Dialog from '@material-ui/core/Dialog';
 import TextField from '@material-ui/core/TextField';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { NOTES_COLORS } from '../../../../constants';
+import { AppCategoriesFirebase } from '../../../nav/interfaces';
 
 interface AppNoteModalProps {
   modal: AppModal & AppTags;
   noteForUpdate: AppNote | null;
-  categories: AppCategories;
+  categories: AppCategories & AppCategoriesFirebase;
 }
 
 interface AppNoteModalDispatch {
@@ -89,12 +90,12 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     }));
   }
 
-  private handleCategoryChange = (category: string): void => {
+  private handleCategoryChange = (categoryId: string): void => {
     const {note} = this.state;
     this.setState({
       note: {
         ...note,
-        categories: helpers.toggleStringInArray(note.categories, category),
+        categories: helpers.toggleStringInArray(note.categories, categoryId),
       }
     });
   }
@@ -140,7 +141,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
 
   getCategoriesList() {
     const {categories} = this.props;
-    return categories.categoriesList.filter((category: string) => category !== 'all');
+    return categories.categoriesList.filter((category: AppCategory) => category.name !== 'all');
   }
 
   public render() {

@@ -1,6 +1,12 @@
 import { AppNote, AppNoteActions, AppActionNote, AppNotes, AppNotesState } from '../note/interfaces';
 import { AppTags, AppTagsActions, AppActionTags, AppModal, AppModalActions } from '../modal/interfaces';
-import { AppCategories, AppCategoriesActions, AppActionCategory } from '../nav/interfaces';
+import {
+  AppCategories,
+  AppCategoriesActions,
+  AppActionCategory,
+  AppCategory,
+  AppCategoriesFirebase
+} from '../nav/interfaces';
 import { RouteComponentProps, RouteProps } from 'react-router';
 import * as React from 'react';
 
@@ -19,6 +25,10 @@ export interface AppState {
 export interface HomeProps {
   notes: AppNote[];
   categories: AppCategories;
+}
+
+export interface HomePropsWithFirebase extends HomeProps {
+  categories: AppCategories & AppCategoriesFirebase;
 }
 
 export interface AppRoute {
@@ -55,4 +65,5 @@ export {
   AppActionCategory,
   AppActionTags,
   AppFirestore,
+  AppCategory,
 };

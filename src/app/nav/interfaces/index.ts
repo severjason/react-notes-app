@@ -1,7 +1,11 @@
 import { AppAction } from '../../interfaces';
 
 export interface AppActionCategory extends AppAction {
-  payload: {category: string, uuid?: string};
+  payload: {
+    id?: string;
+    category?: string,
+    uuid?: string
+  };
 }
 
 export interface AppCategoriesActions {
@@ -11,9 +15,18 @@ export interface AppCategoriesActions {
   addCategory(category: string, uuid: string): AppActionCategory;
 }
 
+export interface AppCategory {
+  id: string;
+  name: string;
+  uuid?: string;
+}
+
+export interface AppCategoriesFirebase {
+  categoriesList: AppCategory[];
+}
+
 export interface AppCategories {
   activated: string;
-  categoriesList: string[];
   expanded: boolean;
   loaded?: boolean;
 }

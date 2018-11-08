@@ -1,7 +1,7 @@
 import * as React from 'react';
 import NavBarStyles from './styles';
 import { AppModalActions, AppCategories, AppWithFirebaseAuthProps } from '../../../interfaces';
-import { AppCategoriesActions } from '../../interfaces';
+import { AppCategoriesActions, AppCategoriesFirebase } from '../../interfaces';
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -20,7 +20,7 @@ import { withFirebaseAuth } from '../../../hocs';
 
 interface NavBarProps {
   actions: AppCategoriesActions & AppModalActions & AppLoginActions;
-  categories: AppCategories;
+  categories: AppCategories & AppCategoriesFirebase;
 }
 
 const NavBar: React.StatelessComponent<NavBarProps & AppWithFirebaseAuthProps> =

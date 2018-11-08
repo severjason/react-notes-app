@@ -18,12 +18,13 @@ import { AppActionCategory } from '../../interfaces';
 interface CategoryItemProps {
   category: string;
   isActivated: boolean;
+  categoryId: string;
   activateCategory(category: string): AppActionCategory;
   deleteCategory(category: string): AppActionCategory;
 }
 
 const getIcon = (category: string): ReactElement<any> => {
-  switch (category) {
+  switch (category.toLowerCase()) {
     case 'all':
       return <Inbox className="category-icon"/>;
     case 'work':
@@ -40,15 +41,25 @@ const getIcon = (category: string): ReactElement<any> => {
 class CategoryItem extends React.Component<CategoryItemProps> {
 
   shouldComponentUpdate(nextProps: CategoryItemProps, nextState: any) {
-    const {isActivated, category} = this.props;
-    return isActivated !== nextProps.isActivated || category !== nextProps.category;
+    const {isActivated, categoryId} = this.props;
+    return isActivated !== nextProps.isActivated || categoryId !== nextProps.categoryId;
+  }
+
+  deleteCategory = () => {
+    const {categoryId, deleteCategory} = this.props;
+    deleteCategory(categoryId);
+  }
+
+  activateCategory = () => {
+    const {categoryId, activateCategory} = this.props;
+    activateCategory(categoryId);
   }
 
   render() {
-    const {category, isActivated, activateCategory, deleteCategory} = this.props;
+    const {category, isActivated} = this.props;
     return (
       <CategoryItemStyles>
-        <Link to={`/notes/${category}`} onClick={() => activateCategory(category)}>
+        <Link to={`/notes/${category}`} onClick={this.activateCategory}>
           <MenuItem className={`category-menu-item ${isActivated ? 'active' : ''}`}>
             <ListItemIcon>
               {getIcon(category)}
@@ -63,7 +74,7 @@ class CategoryItem extends React.Component<CategoryItemProps> {
             <Tooltip title={`Delete ${category.toUpperCase()} category`}>
               <IconButton
                 className={`category-delete-icon ${(isActivated || category === 'all') ? 'hidden' : ''}`}
-                onClick={() => deleteCategory(category)}
+                onClick={this.deleteCategory}
               >
                 <Close/>
               </IconButton>

@@ -13,10 +13,10 @@ export const activateCategory = (category: string): AppActionCategory => ({
   },
 });
 
-export const deleteCategory = (category: string): AppActionCategory => ({
-  type: types.DELETE_CATEGORY,
+export const deleteCategory = (id: string): AppActionCategory => ({
+  type: types.DELETE_CATEGORY_REQUEST,
   payload: {
-    category
+    id
   },
 });
 
@@ -24,6 +24,6 @@ export const addCategory = (category: string, uuid: string): AppActionCategory =
   type: types.ADD_CATEGORY_REQUEST,
   payload: {
     uuid,
-    category,
+    category: category.toLowerCase(),
   }
 });

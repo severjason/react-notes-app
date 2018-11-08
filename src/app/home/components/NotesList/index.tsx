@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AppAllActions, AppCategories, AppNote } from '../../../interfaces';
+import { AppAllActions, AppNote } from '../../../interfaces';
 import { EmptyPage } from '../../../common';
 import { Note } from '../../../note/components';
 import { ReactNode } from 'react';
@@ -8,15 +8,15 @@ import NotesListStyles from './styles';
 interface AppNoteListProps {
   notes: AppNote[];
   actions: AppAllActions;
-  categories: AppCategories;
+  activatedCategory: string;
   routeCategory: string;
 }
 
 class NotesList extends React.Component<AppNoteListProps, {}> {
 
   componentDidMount() {
-    const {categories, routeCategory, actions} = this.props;
-    if (categories.activated !== routeCategory) {
+    const {activatedCategory, routeCategory, actions} = this.props;
+    if (activatedCategory !== routeCategory) {
       actions.activateCategory(routeCategory);
     }
   }
@@ -30,10 +30,10 @@ class NotesList extends React.Component<AppNoteListProps, {}> {
 
   render() {
     const notes: ReactNode[] = this.renderFilterNotes();
-    const {categories} = this.props;
+    const {activatedCategory} = this.props;
     return (notes.length > 0)
       ? <NotesListStyles>{notes}</NotesListStyles>
-      : <EmptyPage category={categories.activated}/>;
+      : <EmptyPage category={activatedCategory}/>;
   }
 }
 

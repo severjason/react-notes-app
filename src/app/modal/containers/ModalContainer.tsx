@@ -5,7 +5,7 @@ import * as modalActions from '../redux/actions';
 import * as notesActions from '../../note/redux/actions';
 import { AppAction, AppCategories, AppModal, AppTags, AppWithFirebaseAuthProps } from '../../interfaces';
 import { NoteModal } from '../components';
-import { AppModalProps, AppModalActions, AppTagsActions } from '../interfaces';
+import { AppModalProps, AppModalPropsWithFirebase, AppModalActions, AppTagsActions } from '../interfaces';
 import { AppNoteActions } from '../../note/interfaces';
 import { filterCategories } from '../../../helpers';
 import withFirebaseAuth from '../../hocs/withFirebaseAuth';
@@ -16,7 +16,7 @@ interface AppHomeDispatch {
   actions: AppTagsActions & AppModalActions & AppNoteActions;
 }
 
-class ModalContainer extends React.Component<AppModalProps & AppHomeDispatch, {}> {
+class ModalContainer extends React.Component<AppModalPropsWithFirebase & AppHomeDispatch, {}> {
 
   getNoteForUpdate = () => {
     const {notes, modal} = this.props;
