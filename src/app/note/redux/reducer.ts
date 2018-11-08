@@ -106,7 +106,6 @@ export default function notesReducer(state: AppNotesState = INITIAL_STATE,
       };
     }
     case navTypes.DELETE_CATEGORY_SUCCESS: {
-      console.log(action);
       const filtered = {};
       Object.values(state.byId).map((note: AppNote) => {
         filtered[note.id] = {

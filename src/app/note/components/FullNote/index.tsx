@@ -14,7 +14,7 @@ const FullNote: React.StatelessComponent<NoteProps & AppRoute & NoteActions> =
   ({notes, match, activeCategory, actions}) => {
     const requestedNote = notes[match.params.noteId];
     return (requestedNote) ? (
-        <div style={{paddingTop: '2rem'}}>
+        <div style={{paddingTop: '.5rem'}}>
           <Helmet title={`Full note - ${requestedNote.title} | ${HELMET_TITLE}`}/>
           <Note {...requestedNote} actions={actions} fullView={true} activeCategory={activeCategory}/>
         </div>

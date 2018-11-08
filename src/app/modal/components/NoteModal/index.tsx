@@ -149,6 +149,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     const allTags = basicTags.concat(customTags);
     const {actions, modal} = this.props;
     const {note, newTag} = this.state;
+
     return (
       <Dialog
         className={`${note.color}`}
@@ -162,12 +163,14 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
           <FormControl className="form-padding">
             <ModalTitle title={note.title} maxLength={this.maxTitleLength} onTitleChange={this.handleTitleChange}/>
           </FormControl>
+
           <FormControl className="form-control">
             <FormLabel className="form-label" component="legend">Color:</FormLabel>
             <FormGroup row={true}>
               <ColorCheckboxes note={note} colors={NOTES_COLORS} onColorChange={this.handleColorChange}/>
             </FormGroup>
           </FormControl>
+
           <FormControl className="form-control">
             <FormLabel className="form-label" component="legend">Categories:</FormLabel>
             <FormGroup row={true}>
@@ -178,6 +181,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
               />
             </FormGroup>
           </FormControl>
+
           <FormControl className="form-control">
             <FormLabel className="form-label" component="legend">Tags:</FormLabel>
             <FormGroup row={true}>
@@ -197,6 +201,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
               />
             </FormGroup>
           </FormControl>
+
           <FormControl className="form-control">
             <AddTag
               newTag={newTag}
@@ -208,6 +213,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
               resetNewTag={this.resetNewTag}
             />
           </FormControl>
+
           <FormControl className="form-control">
             <FormLabel className="form-label">Text:</FormLabel>
             <TextField
@@ -217,6 +223,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
               onChange={this.handleTextChange}
             />
           </FormControl>
+
           <FormControl className="form-buttons">
             <ModalButtons
               onClose={actions.closeModal}
