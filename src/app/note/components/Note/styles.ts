@@ -8,6 +8,7 @@ const NoteStyles = styled.div`
     width: 100%;
     max-width: 43rem;
     margin: 0 auto;
+    padding: .5rem;
   
     .card-action {
       &:hover {
