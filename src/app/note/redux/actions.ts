@@ -6,22 +6,25 @@ export const getNotes = (): AppAction => ({
   type: noteTypes.GET_NOTES,
 });
 
-export const toggleNote = (id: string): AppAction => ({
-  type: noteTypes.TOGGLE_NOTE,
-  id: id,
+export const toggleNote = (id: string, expanded: boolean): AppActionNote => ({
+  type: noteTypes.TOGGLE_NOTE_REQUEST,
+  payload: {
+    id,
+    expanded,
+  }
 });
 
-export const deleteNote = (id: string): AppAction => ({
-  type: noteTypes.DELETE_NOTE,
-  id: id,
+export const deleteNote = (id: string): AppActionNote => ({
+  type: noteTypes.DELETE_NOTE_REQUEST,
+  payload: id,
 });
 
 export const addNote = (note: AppNote): AppActionNote => ({
-  type: noteTypes.ADD_NOTE,
-  note: note,
+  type: noteTypes.ADD_NOTE_REQUEST,
+  payload: note,
 });
 
 export const updateNote = (note: AppNote): AppActionNote => ({
   type: noteTypes.UPDATE_NOTE,
-  note: note,
+  payload: note,
 });

@@ -43,6 +43,7 @@ export interface AppWithFirebaseAuthProps extends RouteProps {
     isAuthReady: boolean;
     isAuthEmpty: boolean;
   };
+  firestore?: any;
 }
 
 interface AppFirestore {

@@ -15,10 +15,9 @@ import {
   AppWithFirebaseAuthProps,
 } from '../../interfaces';
 import { Home } from '../components';
-import { getActiveNotes } from '../selectors/notes';
 import { filterCategories } from '../../../helpers';
 import { firestoreConnect, isLoaded } from 'react-redux-firebase';
-import { CATEGORIES_COLLECTION } from '../../../constants';
+import { CATEGORIES_COLLECTION, NOTES_COLLECTION } from '../../../constants';
 import FullScreenLoading from '../../common/loading/FullScreen';
 import { withFirebaseAuth } from '../../hocs';
 
@@ -29,9 +28,27 @@ interface AppHomeDispatch {
 class HomeContainer extends React.Component<HomePropsWithFirebase
   & AppRoute & AppHomeDispatch & AppWithFirebaseAuthProps, {}> {
 
+  createNotesQuery(uid: string) {
+    return !uid ? {} : {
+      collection: NOTES_COLLECTION,
+      where: [
+        ['uid', '==', uid],
+      ],
+    };
+  }
+
+  componentDidMount() {
+    const {firestore, firebaseUser} = this.props;
+    const {auth: {uid}} = firebaseUser;
+    const query = this.createNotesQuery(uid);
+    if (Object.keys(query).length) {
+      firestore.onSnapshot(query);
+    }
+  }
+
   render() {
     const {actions, categories, notes, match} = this.props;
-    return categories.loaded
+    return categories.loaded && isLoaded(notes)
       ? <Home actions={actions} categories={categories} notes={notes} match={match}/>
       : <FullScreenLoading/>;
   }
@@ -44,9 +61,9 @@ export default compose(
       {
         collection: CATEGORIES_COLLECTION,
         where: [
-          ['uuid', '==', uid]
+          ['uuid', '==', uid],
         ],
-      }
+      },
     ];
   }),
   connect<HomeProps, AppHomeDispatch>(
@@ -59,7 +76,7 @@ export default compose(
           expanded: categories.expanded,
           loaded: isLoaded(ordered.categories),
         },
-        notes: getActiveNotes(state),
+        notes: ordered.notes,
       };
     },
     (dispatch: Dispatch<AppAction>) => ({

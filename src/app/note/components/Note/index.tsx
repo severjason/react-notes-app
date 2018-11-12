@@ -37,10 +37,10 @@ class Note extends React.PureComponent<AppNoteProps & AppNote, {}> {
   }
 
   private getNoteHeader(): ReactNode {
-    const {id, title, fullView, actions} = this.props;
+    const {id, title, fullView, actions, expanded} = this.props;
     return (
       <CardHeader
-        onClick={() => fullView ? null : actions.toggleNote(id)}
+        onClick={() => fullView ? null : actions.toggleNote(id, !expanded)}
         className={`note-header`}
         title={title}
       />);

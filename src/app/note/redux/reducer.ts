@@ -1,13 +1,14 @@
 import * as noteTypes from './types';
-import * as modalTypes from '../../modal/redux/types';
-import * as navTypes from '../../nav/redux/types';
-import { AppActionNote, AppNote, AppNotesState } from '../interfaces';
+// import * as modalTypes from '../../modal/redux/types';
+// import * as navTypes from '../../nav/redux/types';
+import { AppActionNote, AppNotesState } from '../interfaces';
 import { AppAction, AppActionCategory, AppActionTags } from '../../interfaces';
 
 const INITIAL_STATE: AppNotesState = {
   byId: {
     '1': {
       id: '1',
+      uid: '1',
       title: 'First note',
       category: null,
       color: 'red',
@@ -29,6 +30,7 @@ const INITIAL_STATE: AppNotesState = {
     },
     '2': {
       id: '2',
+      uid: '2',
       title: 'Second note',
       category: null,
       color: 'black',
@@ -38,6 +40,7 @@ const INITIAL_STATE: AppNotesState = {
     },
     '3': {
       id: '3',
+      uid: '3',
       title: 'Third note',
       category: null,
       color: 'green',
@@ -55,7 +58,7 @@ export default function notesReducer(state: AppNotesState = INITIAL_STATE,
     case noteTypes.GET_NOTES: {
       return state;
     }
-    case noteTypes.TOGGLE_NOTE: {
+/*    case noteTypes.TOGGLE_NOTE: {
       // @ts-ignore
       const toggledNote: AppNote = state.byId[action.id];
       toggledNote.expanded = !toggledNote.expanded;
@@ -87,9 +90,9 @@ export default function notesReducer(state: AppNotesState = INITIAL_STATE,
         ...state,
         byId: {
           ...state.byId,
-          [action.note.id]: action.note,
+          [action.payload.id]: action.payload,
         },
-        allIds: [...state.allIds, action.note.id]
+        allIds: [...state.allIds, action.payload.id]
       };
     }
     case modalTypes.DELETE_CUSTOM_TAG: {
@@ -104,8 +107,8 @@ export default function notesReducer(state: AppNotesState = INITIAL_STATE,
         ...state,
         byId: filtered,
       };
-    }
-    case navTypes.DELETE_CATEGORY_SUCCESS: {
+    }*/
+    /*case navTypes.DELETE_CATEGORY_SUCCESS: {
       const filtered = {};
       Object.values(state.byId).map((note: AppNote) => {
         filtered[note.id] = {
@@ -117,7 +120,7 @@ export default function notesReducer(state: AppNotesState = INITIAL_STATE,
         ...state,
         byId: filtered,
       };
-    }
+    }*/
     default: {
       return state;
     }

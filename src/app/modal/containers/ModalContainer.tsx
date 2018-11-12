@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch, compose } from 'redux';
 import * as modalActions from '../redux/actions';
 import * as notesActions from '../../note/redux/actions';
-import { AppAction, AppCategories, AppModal, AppTags, AppWithFirebaseAuthProps } from '../../interfaces';
+import { AppAction, AppCategories, AppModal, AppNotes, AppTags, AppWithFirebaseAuthProps } from '../../interfaces';
 import { NoteModal } from '../components';
 import { AppModalProps, AppModalPropsWithFirebase, AppModalActions, AppTagsActions } from '../interfaces';
 import { AppNoteActions } from '../../note/interfaces';
@@ -16,7 +16,8 @@ interface AppHomeDispatch {
   actions: AppTagsActions & AppModalActions & AppNoteActions;
 }
 
-class ModalContainer extends React.Component<AppModalPropsWithFirebase & AppHomeDispatch, {}> {
+class ModalContainer extends
+  React.Component<AppModalPropsWithFirebase & AppWithFirebaseAuthProps & AppHomeDispatch, {}> {
 
   getNoteForUpdate = () => {
     const {notes, modal} = this.props;
@@ -24,9 +25,15 @@ class ModalContainer extends React.Component<AppModalPropsWithFirebase & AppHome
   }
 
   render() {
-    const {modal, categories, actions} = this.props;
+    const {modal, categories, actions, firebaseUser: {auth}} = this.props;
     return (
-      <NoteModal modal={modal} categories={categories} actions={actions} noteForUpdate={this.getNoteForUpdate()}/>
+      <NoteModal
+        userId={auth.uid}
+        modal={modal}
+        categories={categories}
+        actions={actions}
+        noteForUpdate={this.getNoteForUpdate()}
+      />
     );
   }
 }
@@ -39,20 +46,20 @@ export default compose(
       {
         collection: CATEGORIES_COLLECTION,
         where: [
-          ['uuid', '==', uid]
+          ['uuid', '==', uid],
         ],
-      }
+      },
     ];
   }),
   connect<AppModalProps, AppHomeDispatch>(
     ({firestore: {ordered}, categories, notes, modal}:
-       { firestore: any, categories: AppCategories, notes: any, modal: AppTags & AppModal }) => ({
+       { firestore: any, categories: AppCategories, notes: AppNotes, modal: AppTags & AppModal }) => ({
       categories: {
         categoriesList: filterCategories(ordered.categories),
         activated: categories.activated,
         expanded: categories.expanded,
       },
-      notes: notes.byId,
+      notes: ordered.notes,
       modal,
     }),
     (dispatch: Dispatch<AppAction>) => ({

@@ -15,7 +15,7 @@ interface AddCategoryProps {
   inputValue: string;
   showInput: () => void;
   hideInput: () => void;
-  onKeyPress: () => void;
+  onKeyPress: (e: any) => void;
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   addCategory: (category: string) => void;
   inputIsDisabled: boolean;

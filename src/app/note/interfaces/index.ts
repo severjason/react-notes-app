@@ -1,12 +1,15 @@
 import { AppAction, AppCategory } from '../../interfaces';
 
-export interface AppActionNote extends AppAction {
-  note: AppNote;
+export interface AppActionNote {
+  type: string;
+  note?: AppNote;
+  payload: any;
 }
 
 export interface AppNote {
-  id: string;
+  id?: string;
   title: string;
+  uid: string;
   category: AppCategory | null;
   color: string;
   tags: string[];
@@ -15,7 +18,7 @@ export interface AppNote {
 }
 
 export interface NoteProps {
-  notes: AppNotes;
+  note: AppNotes;
   activeCategory: string;
 }
 
@@ -32,7 +35,7 @@ export interface AppNoteActions {
 
   getNotes(): AppAction;
 
-  toggleNote(id: string): AppAction;
+  toggleNote(id: any, expanded: boolean): AppAction;
 
   addNote(note: AppNote): AppActionNote;
 

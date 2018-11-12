@@ -12,7 +12,7 @@ import NoteButtonStyles from './styles';
 import { AlertDialog } from '../../../../common';
 
 interface AppNoteButtonsProps {
-  noteId: string;
+  noteId: any;
   actions: AppNoteActions & AppModalActions;
   fullView?: boolean;
   activeCategory?: string;
@@ -33,7 +33,7 @@ class NoteButtons extends React.PureComponent<AppNoteButtonsProps, AppNoteButton
   closeDialog = () => this.setState(() => ({opened: false}));
 
   render() {
-    const {actions, noteId, fullView, activeCategory} = this.props;
+    const {actions, noteId, fullView} = this.props;
     const {opened} = this.state;
     return (
       <NoteButtonStyles>
@@ -61,7 +61,7 @@ class NoteButtons extends React.PureComponent<AppNoteButtonsProps, AppNoteButton
               </IconButton>
             </Tooltip>
           </Link>
-          : <Link to={`/notes/${activeCategory}`}>
+          : <Link to={`/notes/all`}>
             <Tooltip title={`Close note`}>
               <IconButton className="note-button">
                 <ClearOutlined className="note-icon app-note-close-icon"/>

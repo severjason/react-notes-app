@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { ChangeEvent } from 'react';
-import * as uuid from 'uuid';
 import * as helpers from '../../../../helpers';
 import NoteModalStyles from './styles';
 import { Tags, ModalButtons, ColorCheckboxes, CategoriesCheckboxes, AddTag, ModalTitle } from '../../components';
@@ -16,6 +15,7 @@ import { NOTES_COLORS } from '../../../../constants';
 import { AppCategoriesFirebase } from '../../../nav/interfaces';
 
 interface AppNoteModalProps {
+  userId: string;
   modal: AppModal & AppTags;
   noteForUpdate: AppNote | null;
   categories: AppCategories & AppCategoriesFirebase;
@@ -34,7 +34,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
 
   private INITIAL_STATE: AppNoteModalState = {
     note: {
-      id: '',
+      uid: '',
       title: '',
       color: '#000',
       text: '',
@@ -129,8 +129,8 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
   private addTagIsDisabled = (tags: string[]): boolean => tags.includes(this.state.newTag.toLowerCase());
 
   private addNote = (): void => {
-    const { addNote } = this.props.actions;
-    addNote({...this.state.note, id: uuid.v4()});
+    const { actions, userId } = this.props;
+    actions.addNote({...this.state.note, uid: userId});
   }
 
   private closeDialog = () => {
@@ -149,7 +149,6 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     const allTags = basicTags.concat(customTags);
     const {actions, modal} = this.props;
     const {note, newTag} = this.state;
-
     return (
       <Dialog
         className={`${note.color}`}
