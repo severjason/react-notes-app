@@ -10,7 +10,7 @@ export interface AppActionCategory extends AppAction {
 
 export interface AppCategoriesActions {
   toggleCategories(): AppAction;
-  activateCategory(category: string): AppActionCategory;
+  activateCategory(category: AppCategory): AppActionCategory;
   deleteCategory(category: string): AppActionCategory;
   addCategory(category: string, uuid: string): AppActionCategory;
 }
@@ -26,7 +26,7 @@ export interface AppCategoriesFirebase {
 }
 
 export interface AppCategories {
-  activated: string;
+  activated: AppCategory;
   expanded: boolean;
   loaded?: boolean;
 }

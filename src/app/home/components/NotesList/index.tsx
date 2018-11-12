@@ -10,14 +10,15 @@ interface AppNoteListProps {
   actions: AppAllActions;
   activatedCategory: string;
   routeCategory: string;
+  routeCategoryId: string;
 }
 
 class NotesList extends React.Component<AppNoteListProps, {}> {
 
   componentDidMount() {
-    const {activatedCategory, routeCategory, actions} = this.props;
+    const {activatedCategory, routeCategory, routeCategoryId, actions} = this.props;
     if (activatedCategory !== routeCategory) {
-      actions.activateCategory(routeCategory);
+      actions.activateCategory({id: routeCategoryId, name: routeCategory});
     }
   }
 
@@ -33,7 +34,6 @@ class NotesList extends React.Component<AppNoteListProps, {}> {
   render() {
     const notes: ReactNode[] = this.renderFilterNotes();
     const {activatedCategory} = this.props;
-    // console.log(notes);
     return (notes.length > 0)
       ? <NotesListStyles>{notes}</NotesListStyles>
       : <EmptyPage category={activatedCategory}/>;

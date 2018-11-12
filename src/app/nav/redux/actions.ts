@@ -1,16 +1,14 @@
 import * as types from './types';
 import { AppAction } from '../../interfaces';
-import { AppActionCategory } from '../interfaces';
+import { AppActionCategory, AppCategory } from '../interfaces';
 
 export const toggleCategories = (): AppAction => ({
   type: types.TOGGLE_CATEGORIES,
 });
 
-export const activateCategory = (category: string): AppActionCategory => ({
+export const activateCategory = (category: AppCategory): AppActionCategory => ({
   type: types.ACTIVATE_CATEGORY,
-  payload: {
-    category
-  },
+  payload: category,
 });
 
 export const deleteCategory = (id: string): AppActionCategory => ({

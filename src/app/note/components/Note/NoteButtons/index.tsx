@@ -33,7 +33,7 @@ class NoteButtons extends React.PureComponent<AppNoteButtonsProps, AppNoteButton
   closeDialog = () => this.setState(() => ({opened: false}));
 
   render() {
-    const {actions, noteId, fullView} = this.props;
+    const {actions, noteId, fullView, activeCategory} = this.props;
     const {opened} = this.state;
     return (
       <NoteButtonStyles>
@@ -61,7 +61,7 @@ class NoteButtons extends React.PureComponent<AppNoteButtonsProps, AppNoteButton
               </IconButton>
             </Tooltip>
           </Link>
-          : <Link to={`/notes/all`}>
+          : <Link to={`/notes/${activeCategory}`}>
             <Tooltip title={`Close note`}>
               <IconButton className="note-button">
                 <ClearOutlined className="note-icon app-note-close-icon"/>

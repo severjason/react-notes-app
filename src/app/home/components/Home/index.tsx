@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
-import { AppAllActions, HomePropsWithFirebase } from '../../../interfaces';
+import { AppAllActions, AppCategory, HomePropsWithFirebase } from '../../../interfaces';
 import NotesList from '../../components/NotesList';
 import HomeStyles from './styles';
 import { Redirect } from 'react-router';
@@ -19,18 +19,20 @@ class Home extends React.Component<HomePropsWithFirebase & AppRoute & AppHomeDis
   render() {
     const {actions, categories, notes, match} = this.props;
     const {category} = match.params;
-    const categoryAvailable: boolean = !!categories.categoriesList.filter(c => c.name === category).length;
+    const routeCategory: AppCategory | undefined =
+      categories.categoriesList.filter(c => c.name === category)[0];
     return (
-      (categoryAvailable || category === 'all')
+      (routeCategory)
         ? (
           <HomeStyles>
             <Helmet title={`${category[0].toUpperCase() + category.substring(1)} | ${HELMET_TITLE}`} />
             <div className={`home-container ${categories.expanded ? 'opened' : ''}`}>
               <NotesList
-                activatedCategory={categories.activated}
+                activatedCategory={categories.activated && categories.activated.name}
                 notes={notes}
                 actions={actions}
-                routeCategory={category}
+                routeCategory={routeCategory.name}
+                routeCategoryId={routeCategory.id}
               />
             </div>
           </HomeStyles>

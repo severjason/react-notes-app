@@ -53,7 +53,7 @@ class Categories extends React.Component<AppCategories
         key={index}
         category={category.name}
         categoryId={category.id}
-        isActivated={activated === category.id}
+        isActivated={activated && activated.id === category.id}
         activateCategory={actions.activateCategory}
         deleteCategory={actions.deleteCategory}
       />)
@@ -75,7 +75,6 @@ class Categories extends React.Component<AppCategories
             {this.getCategories()}
             <Divider/>
             <AddCategory
-              // @ts-ignore
               inputValue={inputValue}
               inputShowed={inputShowed}
               showInput={this.handleShowInput}

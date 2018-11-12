@@ -7,9 +7,7 @@ const INITIAL_STATE: any = {
   expanded: false,
 };
 
-export default function categoriesReducer(
-  state: AppCategories = INITIAL_STATE,
-  action: AppAction & AppActionCategory) {
+export default function categoriesReducer(state: AppCategories = INITIAL_STATE, action: AppAction & AppActionCategory) {
   switch (action.type) {
     case types.TOGGLE_CATEGORIES: {
       return {
@@ -20,7 +18,7 @@ export default function categoriesReducer(
     case types.ACTIVATE_CATEGORY: {
       return {
         ...state,
-        activated: (action.payload.category) ? action.payload.category : state.activated,
+        activated: (action.payload) ? action.payload : state.activated,
       };
     }
     default: {

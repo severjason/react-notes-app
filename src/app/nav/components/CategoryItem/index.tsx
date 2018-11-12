@@ -13,13 +13,13 @@ import LocalHospitalOutlined from '@material-ui/icons/LocalHospitalOutlined';
 import Close from '@material-ui/icons/Close';
 import CategoryItemStyles from './styles';
 import { ReactElement } from 'react';
-import { AppActionCategory } from '../../interfaces';
+import { AppActionCategory, AppCategory } from '../../interfaces';
 
 interface CategoryItemProps {
   category: string;
   isActivated: boolean;
   categoryId: string;
-  activateCategory(category: string): AppActionCategory;
+  activateCategory(category: AppCategory): AppActionCategory;
   deleteCategory(category: string): AppActionCategory;
 }
 
@@ -51,8 +51,8 @@ class CategoryItem extends React.Component<CategoryItemProps> {
   }
 
   activateCategory = () => {
-    const {categoryId, activateCategory} = this.props;
-    activateCategory(categoryId);
+    const {categoryId, category, activateCategory} = this.props;
+    activateCategory({id: categoryId, name: category});
   }
 
   render() {
