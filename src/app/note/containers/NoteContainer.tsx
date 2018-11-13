@@ -50,7 +50,7 @@ export default compose(
     ({firestore: {ordered}, categories}:
        { firestore: any, categories: AppCategories, note: AppNotes }) => {
       return {
-        activeCategory: categories.activated.name,
+        activeCategory: categories.activated && categories.activated.name,
         note: ordered.note && ordered.note,
       };
     },

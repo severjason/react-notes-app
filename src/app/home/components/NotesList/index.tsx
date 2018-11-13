@@ -24,11 +24,10 @@ class NotesList extends React.Component<AppNoteListProps, {}> {
 
   private renderFilterNotes = (): ReactNode[] => {
     const {notes, actions, activatedCategory} = this.props;
-    return notes.map((note: AppNote, index: number) => {
-      return (activatedCategory === 'all' || note.category && note.category.name === activatedCategory )
-        ? <Note key={index} {...note} actions={actions}/>
-        : null;
-    });
+    const filteredNotes = notes.filter(note =>
+      activatedCategory === 'all' || note.category && note.category.name === activatedCategory);
+    return filteredNotes.map((note: AppNote, index: number) =>
+      <Note key={index} {...note} actions={actions}/>);
   }
 
   render() {

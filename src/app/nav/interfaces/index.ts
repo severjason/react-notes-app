@@ -21,12 +21,12 @@ export interface AppCategory {
   uuid?: string;
 }
 
-export interface AppCategoriesFirebase {
-  categoriesList: AppCategory[];
-}
-
 export interface AppCategories {
   activated: AppCategory;
   expanded: boolean;
   loaded?: boolean;
+}
+
+export interface AppCategoriesFirebase extends AppCategories {
+  categoriesList: AppCategory[];
 }

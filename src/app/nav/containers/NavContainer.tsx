@@ -44,13 +44,15 @@ export default compose(
     ];
   }),
   connect<NavContainerProps, NavContainerDispatch>(
-    ({ firestore: { ordered }, categories}: {firestore: any, categories: any}) => ({
-      categories: {
-        categoriesList: filterCategories(ordered.categories),
-        activated: categories.activated,
-        expanded: categories.expanded,
-      }
-    }),
+    ({ firestore: { ordered }, categories}: {firestore: any, categories: any}) => {
+      return {
+        categories: {
+          categoriesList: filterCategories(ordered.categories),
+          activated: categories.activated,
+          expanded: categories.expanded,
+        }
+      };
+    },
     (dispatch: Dispatch<AppAction>) => ({
       actions: bindActionCreators({...navActions, ...modalActions, logoutRequest}, dispatch)
     })

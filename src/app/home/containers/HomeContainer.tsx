@@ -17,7 +17,7 @@ import {
 import { Home } from '../components';
 import { filterCategories } from '../../../helpers';
 import { firestoreConnect, isLoaded } from 'react-redux-firebase';
-import { CATEGORIES_COLLECTION, NOTES_COLLECTION } from '../../../constants';
+import { NOTES_COLLECTION } from '../../../constants';
 import FullScreenLoading from '../../common/loading/FullScreen';
 import { withFirebaseAuth } from '../../hocs';
 
@@ -55,20 +55,11 @@ class HomeContainer extends React.Component<HomePropsWithFirebase
 }
 export default compose(
   withFirebaseAuth,
-  firestoreConnect((props: AppWithFirebaseAuthProps) => {
-    const {auth: {uid}} = props.firebaseUser;
-    return !uid ? [] : [
-      {
-        collection: CATEGORIES_COLLECTION,
-        where: [
-          ['uuid', '==', uid],
-        ],
-      },
-    ];
-  }),
+  firestoreConnect(),
   connect<HomeProps, AppHomeDispatch>(
     (state: AppState & AppFirestore) => {
       const {firestore: {ordered}, categories} = state;
+      // console.log(ordered.notes);
       return {
         categories: {
           categoriesList: filterCategories(ordered.categories),
