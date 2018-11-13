@@ -3,17 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators, compose, Dispatch } from 'redux';
 import * as notesActions from '../redux/actions';
 import * as modalActions from '../../modal/redux/actions';
-import { NoteProps, AppNoteActions, AppNotes } from '../interfaces';
+import { NoteProps, AppNoteActions, AppNotesState } from '../interfaces';
 import {
   AppAction,
   AppCategories,
-  AppModalActions,
-  AppWithFirebaseAuthProps
+  AppModalActions, AppWithFirebaseAuthProps,
 } from '../../interfaces';
 import { FullNote } from '../components';
 import withFirebaseAuth from '../../hocs/withFirebaseAuth';
-import { firestoreConnect, isLoaded } from 'react-redux-firebase';
-import { NOTES_COLLECTION } from '../../../constants';
 import FullScreenLoading from '../../common/loading/FullScreen';
 
 interface AppHomeDispatch {
@@ -24,34 +21,32 @@ interface AppRoute {
   match: any;
 }
 
-class NoteContainer extends React.Component<NoteProps & AppRoute & AppHomeDispatch, {}> {
+class NoteContainer extends React.Component<NoteProps & AppWithFirebaseAuthProps & AppRoute & AppHomeDispatch, {}> {
+
+  componentDidMount(): void {
+    const {actions: {getNote}, match} = this.props;
+    const {params: {noteId}} = match;
+    getNote(noteId);
+  }
 
   render() {
-    const {note, actions, activeCategory} = this.props;
-    return isLoaded(note)
-      ? <FullNote note={note} actions={actions} activeCategory={activeCategory}/>
-      : <FullScreenLoading/>;
+    const {note, actions, activeCategory, noteIsLoading, firebaseUser} = this.props;
+    const {auth: {uid}} = firebaseUser;
+    return noteIsLoading || note === null
+      ? <FullScreenLoading/>
+      : <FullNote userId={uid} note={note} actions={actions} activeCategory={activeCategory}/>;
   }
 }
 
 export default compose(
   withFirebaseAuth,
-  firestoreConnect((props: AppWithFirebaseAuthProps & AppRoute) => {
-    const {params: {noteId}} = props.match;
-    return !noteId ? [] : [
-      {
-        collection: NOTES_COLLECTION,
-        doc: noteId,
-        storeAs: 'note',
-      }
-    ];
-  }),
   connect<NoteProps, AppHomeDispatch>(
-    ({firestore: {ordered}, categories}:
-       { firestore: any, categories: AppCategories, note: AppNotes }) => {
+    ({firestore: {ordered}, categories, notes: {viewedNote, viewedNoteLoading}}:
+       { firestore: any, categories: AppCategories, notes: AppNotesState }) => {
       return {
         activeCategory: categories.activated && categories.activated.name,
-        note: ordered.note && ordered.note,
+        note: viewedNote,
+        noteIsLoading: viewedNoteLoading,
       };
     },
     (dispatch: Dispatch<AppAction>) => ({

@@ -18,13 +18,17 @@ export interface AppNote {
 }
 
 export interface NoteProps {
-  note: AppNotes;
+  userId?: string;
+  note: AppNote | null;
+  noteIsLoading?: boolean;
   activeCategory: string;
 }
 
 export interface AppNotesState {
   byId: AppNotes;
   allIds: string[];
+  viewedNote: AppNote | null;
+  viewedNoteLoading: boolean;
 }
 
 export interface AppNotes {
@@ -34,6 +38,8 @@ export interface AppNotes {
 export interface AppNoteActions {
 
   getNotes(): AppAction;
+
+  getNote(id: string): AppActionNote;
 
   toggleNote(id: any, expanded: boolean): AppAction;
 

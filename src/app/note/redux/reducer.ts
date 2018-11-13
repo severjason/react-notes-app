@@ -6,50 +6,10 @@ import { AppAction, AppActionCategory, AppActionTags } from '../../interfaces';
 
 const INITIAL_STATE: AppNotesState = {
   byId: {
-    '1': {
-      id: '1',
-      uid: '1',
-      title: 'First note',
-      category: null,
-      color: 'red',
-      tags: ['important'],
-      text: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of ' +
-        'classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin ' +
-        'professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, ' +
-        'consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical ' +
-        'literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 ' +
-        'of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. ' +
-        'This book is a treatise on the theory of ethics, very popular during the Renaissance. The first ' +
-        'line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.\n' +
-        '\n' +
-        'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. ' +
-        'Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced ' +
-        'in their exact original form, accompanied by English versions from the 1914 translation by H. ' +
-        'Rackham.',
-      expanded: true,
-    },
-    '2': {
-      id: '2',
-      uid: '2',
-      title: 'Second note',
-      category: null,
-      color: 'black',
-      tags: ['personal', 'interesting'],
-      text: 'First node text',
-      expanded: true,
-    },
-    '3': {
-      id: '3',
-      uid: '3',
-      title: 'Third note',
-      category: null,
-      color: 'green',
-      tags: ['favourite', 'later', 'important'],
-      text: 'some text',
-      expanded: false,
-    },
   },
   allIds: ['1', '2', '3'],
+  viewedNote: null,
+  viewedNoteLoading: false,
 };
 
 export default function notesReducer(state: AppNotesState = INITIAL_STATE,
@@ -57,6 +17,27 @@ export default function notesReducer(state: AppNotesState = INITIAL_STATE,
   switch (action.type) {
     case noteTypes.GET_NOTES: {
       return state;
+    }
+    case noteTypes.GET_NOTE_REQUEST: {
+      return {
+        ...state,
+        viewedNoteLoading: true,
+        viewedNote: null,
+      };
+    }
+    case noteTypes.GET_NOTE_FAILED: {
+      return {
+        ...state,
+        viewedNoteLoading: false,
+        viewedNote: null,
+      };
+    }
+    case noteTypes.GET_NOTE_SUCCESS: {
+      return {
+        ...state,
+        viewedNoteLoading: false,
+        viewedNote: action.payload,
+      };
     }
 /*    case noteTypes.TOGGLE_NOTE: {
       // @ts-ignore

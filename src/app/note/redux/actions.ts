@@ -6,6 +6,11 @@ export const getNotes = (): AppAction => ({
   type: noteTypes.GET_NOTES,
 });
 
+export const getNote = (id: string): AppActionNote => ({
+  type: noteTypes.GET_NOTE_REQUEST,
+  payload: id,
+});
+
 export const toggleNote = (id: string, expanded: boolean): AppActionNote => ({
   type: noteTypes.TOGGLE_NOTE_REQUEST,
   payload: {

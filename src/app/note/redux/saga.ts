@@ -4,6 +4,27 @@ import { getFirebase } from 'react-redux-firebase';
 import { NOTES_COLLECTION } from '../../../constants';
 import { AppActionNote } from '../interfaces';
 
+function* getNote(action: AppActionNote) {
+  try {
+    const response = yield call([getFirebase().firestore().collection(NOTES_COLLECTION).doc(action.payload), 'get']);
+    if (response.exists) {
+      yield put({
+        type: types.GET_NOTE_SUCCESS,
+        payload: response.data(),
+      });
+    } else {
+      yield put({
+        type: types.GET_NOTE_FAILED,
+      });
+    }
+
+  } catch (error) {
+    yield put({
+      type: types.GET_NOTE_FAILED,
+    });
+  }
+}
+
 function* addNote(action: AppActionNote) {
   try {
     yield call([getFirebase().firestore().collection(NOTES_COLLECTION), 'add'], {...action.payload});
@@ -46,6 +67,7 @@ function* deleteNote(action: AppActionNote) {
 
 function* notesSaga() {
   yield all([
+    yield takeLatest(types.GET_NOTE_REQUEST, getNote),
     yield takeLatest(types.ADD_NOTE_REQUEST, addNote),
     yield takeLatest(types.TOGGLE_NOTE_REQUEST, toggleNote),
     yield takeLatest(types.DELETE_NOTE_REQUEST, deleteNote),

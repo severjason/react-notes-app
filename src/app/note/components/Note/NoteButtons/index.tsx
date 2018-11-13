@@ -61,7 +61,7 @@ class NoteButtons extends React.PureComponent<AppNoteButtonsProps, AppNoteButton
               </IconButton>
             </Tooltip>
           </Link>
-          : <Link to={`/notes/${activeCategory}`}>
+          : <Link to={`/notes/${activeCategory ? activeCategory : 'all'}`}>
             <Tooltip title={`Close note`}>
               <IconButton className="note-button">
                 <ClearOutlined className="note-icon app-note-close-icon"/>
