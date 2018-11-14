@@ -20,7 +20,7 @@ export interface AppNote {
 export interface NoteProps {
   userId?: string;
   note: AppNote | null;
-  noteIsLoading?: boolean;
+  noteIsLoaded?: boolean;
   activeCategory: string;
 }
 
@@ -28,7 +28,7 @@ export interface AppNotesState {
   byId: AppNotes;
   allIds: string[];
   viewedNote: AppNote | null;
-  viewedNoteLoading: boolean;
+  viewedNoteLoaded: boolean;
 }
 
 export interface AppNotes {

@@ -9,7 +9,7 @@ const INITIAL_STATE: AppNotesState = {
   },
   allIds: ['1', '2', '3'],
   viewedNote: null,
-  viewedNoteLoading: false,
+  viewedNoteLoaded: false,
 };
 
 export default function notesReducer(state: AppNotesState = INITIAL_STATE,
@@ -21,22 +21,28 @@ export default function notesReducer(state: AppNotesState = INITIAL_STATE,
     case noteTypes.GET_NOTE_REQUEST: {
       return {
         ...state,
-        viewedNoteLoading: true,
+        viewedNoteLoaded: false,
         viewedNote: null,
       };
     }
     case noteTypes.GET_NOTE_FAILED: {
       return {
         ...state,
-        viewedNoteLoading: false,
+        viewedNoteLoaded: false,
         viewedNote: null,
       };
     }
     case noteTypes.GET_NOTE_SUCCESS: {
       return {
         ...state,
-        viewedNoteLoading: false,
+        viewedNoteLoaded: true,
         viewedNote: action.payload,
+      };
+    }
+    case noteTypes.DELETE_NOTE_SUCCESS: {
+      return {
+        ...state,
+        viewedNoteLoaded: false,
       };
     }
 /*    case noteTypes.TOGGLE_NOTE: {

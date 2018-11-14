@@ -30,23 +30,23 @@ class NoteContainer extends React.Component<NoteProps & AppWithFirebaseAuthProps
   }
 
   render() {
-    const {note, actions, activeCategory, noteIsLoading, firebaseUser} = this.props;
+    const {note, actions, activeCategory, noteIsLoaded, firebaseUser} = this.props;
     const {auth: {uid}} = firebaseUser;
-    return noteIsLoading || note === null
-      ? <FullScreenLoading/>
-      : <FullNote userId={uid} note={note} actions={actions} activeCategory={activeCategory}/>;
+    return noteIsLoaded
+      ? <FullNote userId={uid} note={note} actions={actions} activeCategory={activeCategory}/>
+      : <FullScreenLoading/>;
   }
 }
 
 export default compose(
   withFirebaseAuth,
   connect<NoteProps, AppHomeDispatch>(
-    ({firestore: {ordered}, categories, notes: {viewedNote, viewedNoteLoading}}:
+    ({firestore: {ordered}, categories, notes: {viewedNote, viewedNoteLoaded}}:
        { firestore: any, categories: AppCategories, notes: AppNotesState }) => {
       return {
         activeCategory: categories.activated && categories.activated.name,
         note: viewedNote,
-        noteIsLoading: viewedNoteLoading,
+        noteIsLoaded: viewedNoteLoaded,
       };
     },
     (dispatch: Dispatch<AppAction>) => ({
