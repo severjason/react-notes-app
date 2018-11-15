@@ -33,7 +33,7 @@ export default function notesReducer(state: AppNotesState = INITIAL_STATE,
     case noteTypes.GET_ALL_NOTES_FAILED: {
       return {
         ...state,
-        notesAreLoaded: true,
+        notesAreLoaded: false,
         error: action.payload,
       };
     }
@@ -47,6 +47,7 @@ export default function notesReducer(state: AppNotesState = INITIAL_STATE,
     case noteTypes.GET_NOTE_FAILED: {
       return {
         ...state,
+        error: action.payload,
         viewedNoteLoaded: false,
         viewedNote: null,
       };

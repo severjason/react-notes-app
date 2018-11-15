@@ -3,6 +3,7 @@ import EmptyPage from './EmptyPage';
 import Header from './Header';
 import NotFound from './NotFound';
 import ErrorBoundary from './ErrorBoundary';
+import ErrorPage from './ErrorPage';
 
 export {
   AlertDialog,
@@ -10,4 +11,5 @@ export {
   Header,
   NotFound,
   ErrorBoundary,
+  ErrorPage,
 };

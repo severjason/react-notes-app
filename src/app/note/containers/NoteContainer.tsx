@@ -12,6 +12,7 @@ import {
 import { FullNote } from '../components';
 import withFirebaseAuth from '../../hocs/withFirebaseAuth';
 import FullScreenLoading from '../../common/loading/FullScreen';
+import { ErrorPage } from '../../common';
 
 interface AppHomeDispatch {
   actions: AppNoteActions & AppModalActions;
@@ -30,23 +31,26 @@ class NoteContainer extends React.Component<NoteProps & AppWithFirebaseAuthProps
   }
 
   render() {
-    const {note, actions, activeCategory, noteIsLoaded, firebaseUser} = this.props;
+    const {note, actions, activeCategory, noteIsLoaded, firebaseUser, error} = this.props;
     const {auth: {uid}} = firebaseUser;
-    return noteIsLoaded
-      ? <FullNote userId={uid} note={note} actions={actions} activeCategory={activeCategory}/>
-      : <FullScreenLoading/>;
+    return error
+      ? <ErrorPage error={error}/>
+      : noteIsLoaded
+        ? <FullNote userId={uid} note={note} actions={actions} activeCategory={activeCategory}/>
+        : <FullScreenLoading/>;
   }
 }
 
 export default compose(
   withFirebaseAuth,
   connect<NoteProps, AppHomeDispatch>(
-    ({categories, notes: {viewedNote, viewedNoteLoaded}}:
+    ({categories, notes: {viewedNote, viewedNoteLoaded, error}}:
        { categories: AppCategories, notes: AppNotesState }) => {
       return {
         activeCategory: categories.activated && categories.activated.name,
         note: viewedNote,
         noteIsLoaded: viewedNoteLoaded,
+        error,
       };
     },
     (dispatch: Dispatch<AppAction>) => ({

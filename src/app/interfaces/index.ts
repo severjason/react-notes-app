@@ -26,6 +26,7 @@ export interface HomeProps {
   notes: AppNote[];
   notesAreLoaded?: boolean;
   categories: AppCategories;
+  error?: any;
 }
 
 export interface HomePropsWithFirebase extends HomeProps {

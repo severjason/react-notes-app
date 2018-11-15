@@ -19,6 +19,7 @@ import { filterCategories } from '../../../helpers';
 import { firestoreConnect, isLoaded } from 'react-redux-firebase';
 import FullScreenLoading from '../../common/loading/FullScreen';
 import { withFirebaseAuth } from '../../hocs';
+import { ErrorPage } from '../../common';
 
 interface AppHomeDispatch {
   actions: AppAllActions;
@@ -36,10 +37,12 @@ class HomeContainer extends React.Component<HomePropsWithFirebase
   }
 
   render() {
-    const {actions, categories, notes, match, notesAreLoaded} = this.props;
-    return categories.loaded && notesAreLoaded
-      ? <Home actions={actions} categories={categories} notes={notes} match={match}/>
-      : <FullScreenLoading/>;
+    const {actions, categories, notes, match, notesAreLoaded, error} = this.props;
+    return error
+      ? <ErrorPage error={error}/>
+      : categories.loaded && notesAreLoaded
+        ? <Home actions={actions} categories={categories} notes={notes} match={match}/>
+        : <FullScreenLoading/>;
   }
 }
 export default compose(
@@ -58,6 +61,7 @@ export default compose(
         },
         notes: notes.allNotes,
         notesAreLoaded: notes.notesAreLoaded,
+        error: notes.error,
       };
     },
     (dispatch: Dispatch<AppAction>) => ({

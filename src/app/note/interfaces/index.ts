@@ -20,6 +20,7 @@ export interface AppNote {
 export interface NoteProps {
   userId?: string;
   note: AppNote | null;
+  error?: any;
   noteIsLoaded?: boolean;
   activeCategory: string;
 }
