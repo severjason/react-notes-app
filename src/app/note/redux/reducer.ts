@@ -5,18 +5,37 @@ import { AppActionNote, AppNotesState } from '../interfaces';
 import { AppAction, AppActionCategory, AppActionTags } from '../../interfaces';
 
 const INITIAL_STATE: AppNotesState = {
-  byId: {
-  },
-  allIds: ['1', '2', '3'],
+  allNotes: [],
+  notesAreLoaded: false,
   viewedNote: null,
   viewedNoteLoaded: false,
+  error: null,
 };
 
 export default function notesReducer(state: AppNotesState = INITIAL_STATE,
                                      action: AppAction & AppActionNote & AppActionTags & AppActionCategory) {
   switch (action.type) {
-    case noteTypes.GET_NOTES: {
-      return state;
+    case noteTypes.GET_ALL_NOTES_REQUEST: {
+      return {
+        ...state,
+        notesAreLoaded: false,
+        viewedNoteLoaded: false,
+      };
+    }
+    case noteTypes.GET_ALL_NOTES_SUCCESS: {
+      return {
+        ...state,
+        notesAreLoaded: true,
+        viewedNoteLoaded: false,
+        allNotes: action.payload,
+      };
+    }
+    case noteTypes.GET_ALL_NOTES_FAILED: {
+      return {
+        ...state,
+        notesAreLoaded: true,
+        error: action.payload,
+      };
     }
     case noteTypes.GET_NOTE_REQUEST: {
       return {

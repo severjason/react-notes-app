@@ -1,9 +1,9 @@
 import * as noteTypes from './types';
 import { AppActionNote, AppNote } from '../interfaces';
-import { AppAction } from '../../interfaces';
 
-export const getNotes = (): AppAction => ({
-  type: noteTypes.GET_NOTES,
+export const getNotes = (uid: string): AppActionNote => ({
+  type: noteTypes.GET_ALL_NOTES_REQUEST,
+  payload: uid,
 });
 
 export const getNote = (id: string): AppActionNote => ({

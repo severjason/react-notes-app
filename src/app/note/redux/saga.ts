@@ -1,6 +1,5 @@
 import * as types from '../redux/types';
 import { call, put, all, takeLatest, take } from 'redux-saga/effects';
-// import { eventChannel } from 'redux-saga';
 import { getFirebase } from 'react-redux-firebase';
 import { NOTES_COLLECTION } from '../../../constants';
 import { AppActionNote } from '../interfaces';
@@ -14,8 +13,27 @@ function fetchCollection(collection: string) {
   return getFirestore().collection(collection);
 }
 
-function createEventChannel(noteId: string) {
-  return eventChannel((emit: any) => {
+function createAllNotesChannel(uid: string) {
+  return uid && eventChannel((emit: any) => {
+    fetchCollection(NOTES_COLLECTION).where('uid', '==', uid).onSnapshot(
+      (querySnapshot: any) => {
+        const notes: any = [];
+        querySnapshot.forEach((doc: any) => {
+          notes.push({
+            ...doc.data(),
+            id: doc.id,
+          });
+        });
+        emit(notes);
+      },
+      (error: any) => emit(false, error));
+    return () => {
+    };
+  });
+}
+
+function createNoteChannel(noteId: string) {
+  return noteId && eventChannel((emit: any) => {
     fetchCollection(NOTES_COLLECTION).doc(noteId).onSnapshot(
       (doc: any) => {
         if (doc.data()) {
@@ -24,29 +42,52 @@ function createEventChannel(noteId: string) {
           emit(false);
         }
       },
-      (error: any) => emit(null, error));
-    return () => {};
+      (error: any) => emit(false, error));
+    return () => {
+    };
   });
+}
+
+function* getAllNotes(action: AppActionNote) {
+  try {
+    const channel = yield call(createAllNotesChannel, action.payload);
+    while (true) {
+      const data = yield take(channel);
+      yield put({
+        type: types.GET_ALL_NOTES_SUCCESS,
+        payload: data ? data : [],
+      });
+    }
+
+  } catch (error) {
+    console.log(error);
+    yield put({
+      type: types.GET_ALL_NOTES_FAILED,
+      payload: error,
+    });
+  }
 }
 
 function* getNote(action: AppActionNote) {
   try {
-    const channel = yield call(createEventChannel, action.payload);
+
+    const channel = yield call(createNoteChannel, action.payload);
     while (true) {
-        const data = yield take(channel);
-        yield put({
-          type: types.GET_NOTE_SUCCESS,
-          payload: data ? {
-            ...data,
-            id: action.payload,
-          } : null,
-        });
+      const data = yield take(channel);
+      yield put({
+        type: types.GET_NOTE_SUCCESS,
+        payload: data ? {
+          ...data,
+          id: action.payload,
+        } : null,
+      });
     }
 
   } catch (error) {
     console.log(error);
     yield put({
       type: types.GET_NOTE_FAILED,
+      payload: error,
     });
   }
 }
@@ -80,7 +121,7 @@ function* toggleNote(action: AppActionNote) {
 
 function* deleteNote(action: AppActionNote) {
   try {
-    yield createEventChannel(action.payload).close();
+    // yield createNoteChannel(action.payload).close();
     yield call([fetchCollection(NOTES_COLLECTION).doc(action.payload), 'delete']);
     yield put({
       type: types.DELETE_NOTE_SUCCESS,
@@ -95,6 +136,7 @@ function* deleteNote(action: AppActionNote) {
 
 function* notesSaga() {
   yield all([
+    yield takeLatest(types.GET_ALL_NOTES_REQUEST, getAllNotes),
     yield takeLatest(types.GET_NOTE_REQUEST, getNote),
     yield takeLatest(types.ADD_NOTE_REQUEST, addNote),
     yield takeLatest(types.TOGGLE_NOTE_REQUEST, toggleNote),

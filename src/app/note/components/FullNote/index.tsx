@@ -12,12 +12,12 @@ interface NoteActions {
 
 const FullNote: React.StatelessComponent<NoteProps & NoteActions> =
   ({note, activeCategory, actions, userId}) => {
-    return (note && userId === note.uid)
+   return (note && userId === note.uid)
       ? (
-      <div style={{paddingTop: '.5rem'}}>
-        <Helmet title={`Full note - ${note.title} | ${HELMET_TITLE}`}/>
-        <Note {...note} actions={actions} fullView={true} activeCategory={activeCategory}/>
-      </div>
+        <div style={{paddingTop: '.5rem'}}>
+          <Helmet title={`Full note - ${note.title} | ${HELMET_TITLE}`}/>
+          <Note {...note} actions={actions} fullView={true} activeCategory={activeCategory}/>
+        </div>
       )
       : <Redirect to={`/notes/${activeCategory ? activeCategory : 'all'}`}/>;
   };

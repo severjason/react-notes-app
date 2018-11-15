@@ -24,6 +24,7 @@ export interface AppState {
 
 export interface HomeProps {
   notes: AppNote[];
+  notesAreLoaded?: boolean;
   categories: AppCategories;
 }
 

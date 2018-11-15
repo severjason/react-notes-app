@@ -3,7 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch, compose } from 'redux';
 import * as modalActions from '../redux/actions';
 import * as notesActions from '../../note/redux/actions';
-import { AppAction, AppCategories, AppModal, AppNotes, AppTags, AppWithFirebaseAuthProps } from '../../interfaces';
+import {
+  AppAction,
+  AppCategories,
+  AppModal,
+  AppNotesState,
+  AppTags,
+  AppWithFirebaseAuthProps
+} from '../../interfaces';
 import { NoteModal } from '../components';
 import { AppModalProps, AppModalPropsWithFirebase, AppModalActions, AppTagsActions } from '../interfaces';
 import { AppNoteActions } from '../../note/interfaces';
@@ -53,13 +60,13 @@ export default compose(
   }),
   connect<AppModalProps, AppHomeDispatch>(
     ({firestore: {ordered}, categories, notes, modal}:
-       { firestore: any, categories: AppCategories, notes: AppNotes, modal: AppTags & AppModal }) => ({
+       { firestore: any, categories: AppCategories, notes: AppNotesState, modal: AppTags & AppModal }) => ({
       categories: {
         categoriesList: filterCategories(ordered.categories),
         activated: categories.activated,
         expanded: categories.expanded,
       },
-      notes: ordered.notes,
+      notes: notes.allNotes,
       modal,
     }),
     (dispatch: Dispatch<AppAction>) => ({

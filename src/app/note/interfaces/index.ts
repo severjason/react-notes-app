@@ -25,10 +25,11 @@ export interface NoteProps {
 }
 
 export interface AppNotesState {
-  byId: AppNotes;
-  allIds: string[];
+  allNotes: AppNote[];
+  notesAreLoaded: boolean;
   viewedNote: AppNote | null;
   viewedNoteLoaded: boolean;
+  error: any;
 }
 
 export interface AppNotes {
@@ -37,7 +38,7 @@ export interface AppNotes {
 
 export interface AppNoteActions {
 
-  getNotes(): AppAction;
+  getNotes(uid: string): AppAction;
 
   getNote(id: string): AppActionNote;
 

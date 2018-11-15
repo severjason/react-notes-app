@@ -1,4 +1,4 @@
-import { AppAction, AppCategories, AppNotes } from '../../interfaces';
+import { AppAction, AppCategories, AppNote } from '../../interfaces';
 import { AppCategoriesFirebase } from '../../nav/interfaces';
 
 export interface AppActionTags extends AppAction {
@@ -7,7 +7,7 @@ export interface AppActionTags extends AppAction {
 
 export interface AppModalProps {
   modal: AppModal & AppTags;
-  notes: AppNotes;
+  notes: AppNote[];
   categories: AppCategories;
 }
 

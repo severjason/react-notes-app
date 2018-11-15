@@ -41,8 +41,8 @@ class NoteContainer extends React.Component<NoteProps & AppWithFirebaseAuthProps
 export default compose(
   withFirebaseAuth,
   connect<NoteProps, AppHomeDispatch>(
-    ({firestore: {ordered}, categories, notes: {viewedNote, viewedNoteLoaded}}:
-       { firestore: any, categories: AppCategories, notes: AppNotesState }) => {
+    ({categories, notes: {viewedNote, viewedNoteLoaded}}:
+       { categories: AppCategories, notes: AppNotesState }) => {
       return {
         activeCategory: categories.activated && categories.activated.name,
         note: viewedNote,
