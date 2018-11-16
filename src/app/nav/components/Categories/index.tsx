@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AppCategories, AppCategoriesFirebase, AppCategoriesActions, AppCategory } from '../../interfaces';
+import { AppCategoriesActions, AppCategory } from '../../interfaces';
 import { ChangeEvent, ReactNode } from 'react';
 import { CategoryItem, AddCategory } from '../../components';
 import CategoriesStyles from './styles';
@@ -12,13 +12,18 @@ interface AppCategoriesDispatch {
   actions: AppCategoriesActions;
 }
 
+interface CategoriesProps {
+  categories: AppCategory[];
+  activated: AppCategory;
+}
+
 interface CategoriesListState {
   inputShowed: boolean;
   inputValue: string;
 }
 
-class Categories extends React.Component<AppCategories
-  & AppCategoriesFirebase & AppCategoriesDispatch & AppWithFirebaseAuthProps, CategoriesListState> {
+class Categories extends React.Component<CategoriesProps
+  & AppCategoriesDispatch & AppWithFirebaseAuthProps, CategoriesListState> {
 
   public state = {
     inputShowed: false,
@@ -41,19 +46,19 @@ class Categories extends React.Component<AppCategories
 
   private inputIsDisabled = (): boolean => {
     const {inputValue} = this.state;
-    const {categoriesList} = this.props;
+    const {categories} = this.props;
     return !inputValue ||
-      !!categoriesList.filter(category => category.name === inputValue.toLowerCase()).length;
+      !!categories.filter(category => category.name === inputValue.toLowerCase()).length;
   }
 
   private getCategories(): ReactNode {
-    const {actions, categoriesList, activated} = this.props;
-    return categoriesList.map((category: AppCategory, index: number) => (
+    const {actions, categories, activated} = this.props;
+    return categories.map((category: AppCategory, index: number) => (
       <CategoryItem
         key={index}
         category={category.name}
         categoryId={category.id}
-        isActivated={activated && activated.id === category.id}
+        isActivated={!!activated && activated.id === category.id}
         activateCategory={actions.activateCategory}
         deleteCategory={actions.deleteCategory}
       />)

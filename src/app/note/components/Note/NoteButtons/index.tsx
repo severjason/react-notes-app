@@ -15,7 +15,7 @@ interface AppNoteButtonsProps {
   noteId: any;
   actions: AppNoteActions & AppModalActions;
   fullView?: boolean;
-  activeCategory?: string;
+  activeCategory?: string | null;
 }
 
 interface AppNoteButtonsState {

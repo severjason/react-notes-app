@@ -5,7 +5,6 @@ import {
   AppCategoriesActions,
   AppActionCategory,
   AppCategory,
-  AppCategoriesFirebase
 } from '../nav/interfaces';
 import { RouteComponentProps, RouteProps } from 'react-router';
 import * as React from 'react';
@@ -30,7 +29,7 @@ export interface HomeProps {
 }
 
 export interface HomePropsWithFirebase extends HomeProps {
-  categories: AppCategories & AppCategoriesFirebase;
+  categories: AppCategories;
 }
 
 export interface AppRoute {

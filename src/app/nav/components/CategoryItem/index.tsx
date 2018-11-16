@@ -40,10 +40,10 @@ const getIcon = (category: string): ReactElement<any> => {
 
 class CategoryItem extends React.Component<CategoryItemProps> {
 
-  shouldComponentUpdate(nextProps: CategoryItemProps, nextState: any) {
+  /*shouldComponentUpdate(nextProps: CategoryItemProps, nextState: any) {
     const {isActivated, categoryId} = this.props;
     return isActivated !== nextProps.isActivated || categoryId !== nextProps.categoryId;
-  }
+  }*/
 
   deleteCategory = () => {
     const {categoryId, deleteCategory} = this.props;
@@ -56,10 +56,10 @@ class CategoryItem extends React.Component<CategoryItemProps> {
   }
 
   render() {
-    const {category, isActivated} = this.props;
+    const {categoryId, category, isActivated} = this.props;
     return (
       <CategoryItemStyles>
-        <Link to={`/notes/${category}`} onClick={this.activateCategory}>
+        <Link to={`/notes/${categoryId}`} onClick={this.activateCategory}>
           <MenuItem className={`category-menu-item ${isActivated ? 'active' : ''}`}>
             <ListItemIcon>
               {getIcon(category)}

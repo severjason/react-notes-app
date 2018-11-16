@@ -1,17 +1,9 @@
 import * as types from '../redux/types';
 import { call, put, all, takeLatest, take } from 'redux-saga/effects';
-import { getFirebase } from 'react-redux-firebase';
 import { NOTES_COLLECTION } from '../../../constants';
 import { AppActionNote } from '../interfaces';
 import { eventChannel } from 'redux-saga';
-
-function getFirestore() {
-  return getFirebase().firestore();
-}
-
-function fetchCollection(collection: string) {
-  return getFirestore().collection(collection);
-}
+import { fetchCollection } from '../../../helpers/firebase';
 
 function createAllNotesChannel(uid: string) {
   return uid && eventChannel((emit: any) => {
@@ -53,10 +45,12 @@ function* getAllNotes(action: AppActionNote) {
     const channel = yield call(createAllNotesChannel, action.payload);
     while (true) {
       const data = yield take(channel);
-      yield put({
-        type: types.GET_ALL_NOTES_SUCCESS,
-        payload: data ? data : [],
-      });
+      if (data) {
+        yield put({
+          type: types.GET_ALL_NOTES_SUCCESS,
+          payload: data,
+        });
+      }
     }
 
   } catch (error) {

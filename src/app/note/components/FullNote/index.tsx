@@ -10,7 +10,7 @@ interface NoteActions {
   actions: AppNoteActions & AppModalActions;
 }
 
-const FullNote: React.StatelessComponent<NoteProps & NoteActions> =
+const FullNote: React.FunctionComponent<NoteProps & NoteActions> =
   ({note, activeCategory, actions, userId}) => {
    return (note && userId === note.uid)
       ? (

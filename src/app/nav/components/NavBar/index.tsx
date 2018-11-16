@@ -1,7 +1,7 @@
 import * as React from 'react';
 import NavBarStyles from './styles';
-import { AppModalActions, AppCategories, AppWithFirebaseAuthProps } from '../../../interfaces';
-import { AppCategoriesActions, AppCategoriesFirebase } from '../../interfaces';
+import { AppModalActions, AppWithFirebaseAuthProps, AppCategory } from '../../../interfaces';
+import { AppCategoriesActions } from '../../interfaces';
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -20,21 +20,23 @@ import { withFirebaseAuth } from '../../../hocs';
 
 interface NavBarProps {
   actions: AppCategoriesActions & AppModalActions & AppLoginActions;
-  categories: AppCategories & AppCategoriesFirebase;
+  categories: AppCategory[];
+  expanded: boolean;
+  activated: AppCategory | null;
 }
 
-const NavBar: React.StatelessComponent<NavBarProps & AppWithFirebaseAuthProps> =
-  ({categories, actions, firebaseUser: {isAuthEmpty}}) => (
+const NavBar: React.FunctionComponent<NavBarProps & AppWithFirebaseAuthProps> =
+  ({categories, expanded, activated, actions, firebaseUser: {isAuthEmpty}}) => (
     <NavBarStyles>
       <AppBar
-        className={`app-bar ${categories.expanded ? 'opened' : ''}`}
+        className={`app-bar ${expanded ? 'opened' : ''}`}
         style={{backgroundColor: mainTheme.colors.mainColor}}
       >
         <Toolbar className="toolbar">
           <div className="notes-actions">
             {!isAuthEmpty &&
             <IconButton
-              className={`menu-button ${categories.expanded ? 'hidden' : ''}`}
+              className={`menu-button ${expanded ? 'hidden' : ''}`}
               color="inherit"
               onClick={actions.toggleCategories}
             >
@@ -77,10 +79,12 @@ const NavBar: React.StatelessComponent<NavBarProps & AppWithFirebaseAuthProps> =
           </div>
         </Toolbar>
       </AppBar>
-      {!!categories.categoriesList.length &&
+      {!!categories.length &&
       <AppDrawer
         actions={actions}
         categories={categories}
+        expanded={expanded}
+        activated={activated}
         toggleDrawer={actions.toggleCategories}
       />}
 

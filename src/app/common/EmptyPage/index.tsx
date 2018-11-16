@@ -3,7 +3,7 @@ import EmptyPageStyles from './styles';
 import Paper from '@material-ui/core/Paper';
 
 interface AppEmptyPage {
-  category?: string;
+  category?: string | null;
 }
 
 const EmptyPage: React.StatelessComponent<AppEmptyPage> = (props: AppEmptyPage) => {

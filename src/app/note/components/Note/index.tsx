@@ -15,7 +15,7 @@ import NoteStyles from './styles';
 interface AppNoteProps {
   actions: AppNoteActions & AppModalActions;
   fullView?: boolean;
-  activeCategory?: string;
+  activeCategory?: string | null;
 }
 
 class Note extends React.PureComponent<AppNoteProps & AppNote, {}> {

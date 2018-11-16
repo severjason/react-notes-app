@@ -5,22 +5,24 @@ import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Categories from '../Categories';
-import { AppCategories, AppCategoriesActions } from '../../interfaces';
+import { AppCategoriesActions, AppCategory } from '../../interfaces';
 import DrawerStyles from './styles';
 
 interface CategoriesDrawerProps {
   actions: AppCategoriesActions;
-  categories: AppCategories;
+  categories: AppCategory[];
+  expanded: boolean;
+  activated: AppCategory | null;
   toggleDrawer: () => void;
 }
 
-const AppDrawer: React.StatelessComponent<CategoriesDrawerProps> = (props) => {
-  const {categories, actions, toggleDrawer} = props;
+const AppDrawer: React.FunctionComponent<CategoriesDrawerProps> = (props) => {
+  const {categories, expanded, activated, actions, toggleDrawer} = props;
   return (
     <DrawerStyles>
       <Drawer
         variant="persistent"
-        open={categories.expanded}
+        open={expanded}
         className="app-drawer"
       >
         <div className="button-container">
@@ -30,7 +32,7 @@ const AppDrawer: React.StatelessComponent<CategoriesDrawerProps> = (props) => {
         </div>
         <Divider/>
         <List>
-          <Categories {...categories} actions={actions}/>
+          <Categories categories={categories} activated={activated}  actions={actions}/>
         </List>
         <Divider/>
       </Drawer>

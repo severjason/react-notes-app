@@ -12,13 +12,12 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { NOTES_COLORS } from '../../../../constants';
-import { AppCategoriesFirebase } from '../../../nav/interfaces';
 
 interface AppNoteModalProps {
   userId: string;
   modal: AppModal & AppTags;
   noteForUpdate: AppNote | null;
-  categories: AppCategories & AppCategoriesFirebase;
+  categories: AppCategories;
 }
 
 interface AppNoteModalDispatch {
@@ -170,7 +169,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
             </FormGroup>
           </FormControl>
 
-          <FormControl className="form-control">
+          {this.getCategoriesList().length && <FormControl className="form-control">
             <FormLabel className="form-label" component="legend">Categories:</FormLabel>
             <FormGroup row={true}>
               <CategoriesCheckboxes
@@ -179,7 +178,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                 onCategoryChange={this.handleCategoryChange}
               />
             </FormGroup>
-          </FormControl>
+          </FormControl>}
 
           <FormControl className="form-control">
             <FormLabel className="form-label" component="legend">Tags:</FormLabel>

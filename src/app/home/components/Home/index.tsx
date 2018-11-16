@@ -20,15 +20,17 @@ class Home extends React.Component<HomePropsWithFirebase & AppRoute & AppHomeDis
     const {actions, categories, notes, match} = this.props;
     const {category} = match.params;
     const routeCategory: AppCategory | undefined =
-      categories.categoriesList.filter(c => c.name === category)[0];
+      categories.categoriesList.filter((c: AppCategory) => c.id === category)[0];
     return (
       (routeCategory)
         ? (
           <HomeStyles>
-            <Helmet title={`${category[0].toUpperCase() + category.substring(1)} | ${HELMET_TITLE}`} />
+            <Helmet
+              title={`${routeCategory.name[0].toUpperCase() + routeCategory.name.substring(1)} | ${HELMET_TITLE}`}
+            />
             <div className={`home-container ${categories.expanded ? 'opened' : ''}`}>
               <NotesList
-                activatedCategory={categories.activated && categories.activated.name}
+                activatedCategory={categories.activated && categories.activated.id}
                 notes={notes}
                 actions={actions}
                 routeCategory={routeCategory.name}

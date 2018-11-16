@@ -10,13 +10,11 @@ import {
   AppState,
   AppRoute,
   HomeProps,
-  HomePropsWithFirebase,
   AppFirestore,
   AppWithFirebaseAuthProps,
 } from '../../interfaces';
 import { Home } from '../components';
 import { filterCategories } from '../../../helpers';
-import { firestoreConnect, isLoaded } from 'react-redux-firebase';
 import FullScreenLoading from '../../common/loading/FullScreen';
 import { withFirebaseAuth } from '../../hocs';
 import { ErrorPage } from '../../common';
@@ -25,7 +23,7 @@ interface AppHomeDispatch {
   actions: AppAllActions;
 }
 
-class HomeContainer extends React.Component<HomePropsWithFirebase
+class HomeContainer extends React.Component<HomeProps
   & AppRoute & AppHomeDispatch & AppWithFirebaseAuthProps, {}> {
 
   componentDidMount() {
@@ -47,17 +45,15 @@ class HomeContainer extends React.Component<HomePropsWithFirebase
 }
 export default compose(
   withFirebaseAuth,
-  firestoreConnect(),
   connect<HomeProps, AppHomeDispatch>(
     (state: AppState & AppFirestore) => {
-      const {firestore: {ordered}, categories, notes} = state;
-      // console.log(ordered.notes);
+      const {categories, notes} = state;
       return {
         categories: {
-          categoriesList: filterCategories(ordered.categories),
+          categoriesList: filterCategories(categories.categoriesList),
           activated: categories.activated,
           expanded: categories.expanded,
-          loaded: isLoaded(ordered.categories),
+          loaded: categories.loaded,
         },
         notes: notes.allNotes,
         notesAreLoaded: notes.notesAreLoaded,

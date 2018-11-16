@@ -1,5 +1,7 @@
 // if array contains value - removes it from array
 // else - adds it to array
+import { AppCategory } from '../app/nav/interfaces';
+
 export function toggleStringInArray(array: string[], value: string): string[] {
     return array.includes(value) ? array.filter((s: string) => s !== value) : array.concat(value);
 }
@@ -21,8 +23,8 @@ export const sortObjectArray = (field: string) => (a: object, b: object) => {
   return 0;
 };
 
-export function filterCategories (categories: object[]): object[] {
-    const startArray: object[] = [{id: 'all', name: 'all'}];
+export function filterCategories (categories: AppCategory[]): AppCategory[] {
+    const startArray: AppCategory[] = [{id: 'all', name: 'all'}];
     if (!Array.isArray(categories)) {
         return startArray;
     }

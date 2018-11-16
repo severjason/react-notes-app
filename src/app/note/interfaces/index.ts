@@ -22,7 +22,7 @@ export interface NoteProps {
   note: AppNote | null;
   error?: any;
   noteIsLoaded?: boolean;
-  activeCategory: string;
+  activeCategory: string | null;
 }
 
 export interface AppNotesState {

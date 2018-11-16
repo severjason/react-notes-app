@@ -9,7 +9,7 @@ interface AppCheckboxes {
   onCategoryChange(category: AppCategory): void;
 }
 
-const CategoriesCheckboxes: React.StatelessComponent<AppCheckboxes> = ({note, categories, onCategoryChange}): any =>
+const CategoriesCheckboxes: React.FunctionComponent<AppCheckboxes> = ({note, categories, onCategoryChange}): any =>
   categories.map((category: AppCategory, index: number) => {
     return (
       <Chip

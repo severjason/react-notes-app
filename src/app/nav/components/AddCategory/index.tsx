@@ -30,7 +30,7 @@ const inputStyles = (): any => ({
   },
 });
 
-const AddCategory: React.StatelessComponent<AddCategoryProps> = (
+const AddCategory: React.FunctionComponent<AddCategoryProps> = (
   {
     inputShowed,
     inputValue,
@@ -50,6 +50,7 @@ const AddCategory: React.StatelessComponent<AddCategoryProps> = (
     </Tooltip>
     <div className={`add-category-input-container ${inputShowed ? '' : 'hidden'}`}>
       <Input
+        autoFocus={true}
         value={inputValue}
         type="text"
         inputProps={{

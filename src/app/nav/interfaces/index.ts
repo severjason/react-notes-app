@@ -4,29 +4,27 @@ export interface AppActionCategory extends AppAction {
   payload: {
     id?: string;
     category?: string,
-    uuid?: string
+    uid?: string
   };
 }
 
 export interface AppCategoriesActions {
+  getCategories(uid: string): AppActionCategory;
   toggleCategories(): AppAction;
   activateCategory(category: AppCategory): AppActionCategory;
   deleteCategory(category: string): AppActionCategory;
-  addCategory(category: string, uuid: string): AppActionCategory;
+  addCategory(category: string, uid: string): AppActionCategory;
 }
 
 export interface AppCategory {
   id: string;
   name: string;
-  uuid?: string;
+  uid?: string;
 }
 
 export interface AppCategories {
-  activated: AppCategory;
+  activated: AppCategory | null;
+  categoriesList: AppCategory[];
   expanded: boolean;
   loaded?: boolean;
-}
-
-export interface AppCategoriesFirebase extends AppCategories {
-  categoriesList: AppCategory[];
 }

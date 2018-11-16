@@ -16,8 +16,6 @@ import { AppModalProps, AppModalPropsWithFirebase, AppModalActions, AppTagsActio
 import { AppNoteActions } from '../../note/interfaces';
 import { filterCategories } from '../../../helpers';
 import withFirebaseAuth from '../../hocs/withFirebaseAuth';
-import { firestoreConnect } from 'react-redux-firebase';
-import { CATEGORIES_COLLECTION } from '../../../constants';
 
 interface AppHomeDispatch {
   actions: AppTagsActions & AppModalActions & AppNoteActions;
@@ -47,22 +45,11 @@ class ModalContainer extends
 
 export default compose(
   withFirebaseAuth,
-  firestoreConnect((props: AppWithFirebaseAuthProps) => {
-    const {auth: {uid}} = props.firebaseUser;
-    return !uid ? [] : [
-      {
-        collection: CATEGORIES_COLLECTION,
-        where: [
-          ['uuid', '==', uid],
-        ],
-      },
-    ];
-  }),
   connect<AppModalProps, AppHomeDispatch>(
-    ({firestore: {ordered}, categories, notes, modal}:
-       { firestore: any, categories: AppCategories, notes: AppNotesState, modal: AppTags & AppModal }) => ({
+    ({categories, notes, modal}:
+       { categories: AppCategories, notes: AppNotesState, modal: AppTags & AppModal }) => ({
       categories: {
-        categoriesList: filterCategories(ordered.categories),
+        categoriesList: filterCategories(categories.categoriesList),
         activated: categories.activated,
         expanded: categories.expanded,
       },
