@@ -12,7 +12,7 @@ interface NoteActions {
 
 const FullNote: React.FunctionComponent<NoteProps & NoteActions> =
   ({note, activeCategory, actions, userId}) => {
-   return (note && userId === note.uid)
+    return (note && userId === note.uid)
       ? (
         <div style={{paddingTop: '.5rem'}}>
           <Helmet title={`Full note - ${note.title} | ${HELMET_TITLE}`}/>

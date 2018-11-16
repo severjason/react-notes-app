@@ -47,7 +47,7 @@ export default compose(
     ({categories, notes: {viewedNote, viewedNoteLoaded, error}}:
        { categories: AppCategories, notes: AppNotesState }) => {
       return {
-        activeCategory: categories.activated && categories.activated.name,
+        activeCategory: categories.activated && categories.activated.id,
         note: viewedNote,
         noteIsLoaded: viewedNoteLoaded,
         error,
