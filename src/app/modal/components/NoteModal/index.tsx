@@ -90,10 +90,11 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
 
   private handleCategoryChange = (category: AppCategory): void => {
     const {note} = this.state;
+    const newCategory = note.category && (category.id === note.category.id) ? null : category;
     this.setState({
       note: {
         ...note,
-        category,
+        category: newCategory,
       }
     });
   }
