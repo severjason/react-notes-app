@@ -16,7 +16,6 @@ import { NOTES_COLORS } from '../../../../constants';
 interface AppNoteModalProps {
   userId: string;
   modal: AppModal & AppTags;
-  noteForUpdate: AppNote | null;
   categories: AppCategories;
 }
 
@@ -51,10 +50,10 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
   private maxNewTagLength: number = 20;
 
   componentDidUpdate() {
-    const {noteForUpdate} = this.props;
+    const {modal} = this.props;
     const {note} = this.state;
-    if (noteForUpdate && noteForUpdate.id !== note.id) {
-      this.setState({note: noteForUpdate});
+    if (modal.note && modal.note.id !== note.id) {
+      this.setState({note: modal.note});
     }
   }
 
@@ -123,7 +122,11 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     this.setState({tags: note.tags.concat(newTag)});
   }
 
-  private addNoteIsDisabled = (): boolean => !(this.state.note.title);
+  private addNoteIsDisabled = (): boolean => {
+    const {note} = this.state;
+    const {modal} = this.props;
+    return !(note.title) || (modal.openedForUpdate && !modal.noteLoaded);
+  }
 
   private addTagIsDisabled = (tags: string[]): boolean => tags.includes(this.state.newTag.toLowerCase());
 
@@ -169,7 +172,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
             </FormGroup>
           </FormControl>
 
-          {this.getCategoriesList().length && <FormControl className="form-control">
+          {!!this.getCategoriesList().length && <FormControl className="form-control">
             <FormLabel className="form-label" component="legend">Categories:</FormLabel>
             <FormGroup row={true}>
               <CategoriesCheckboxes

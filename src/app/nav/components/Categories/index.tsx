@@ -35,7 +35,7 @@ class Categories extends React.Component<CategoriesProps
   private handleHideInput = (): void => this.setState({inputShowed: false, inputValue: ''});
 
   private handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    this.setState({inputValue: e.target.value});
+    this.setState({inputValue: e.target.value.trim()});
   }
 
   private handleAddCategory = (category: string): void => {
@@ -47,8 +47,8 @@ class Categories extends React.Component<CategoriesProps
   private inputIsDisabled = (): boolean => {
     const {inputValue} = this.state;
     const {categories} = this.props;
-    return !inputValue ||
-      !!categories.filter(category => category.name === inputValue.toLowerCase()).length;
+    return !inputValue.trim() ||
+      !!categories.filter(category => category.name === inputValue.trim().toLowerCase()).length;
   }
 
   private getCategories(): ReactNode {
@@ -67,7 +67,7 @@ class Categories extends React.Component<CategoriesProps
 
   private handleKeyPress = (e: any) => {
     const {inputValue} = this.state;
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !this.inputIsDisabled()) {
       this.handleAddCategory(inputValue);
     }
   }

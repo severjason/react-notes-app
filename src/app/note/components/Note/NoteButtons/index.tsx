@@ -32,19 +32,34 @@ class NoteButtons extends React.PureComponent<AppNoteButtonsProps, AppNoteButton
 
   closeDialog = () => this.setState(() => ({opened: false}));
 
+  deleteNote = () => {
+    const {actions, noteId} = this.props;
+    if (noteId) {
+      actions.deleteNote(noteId);
+    }
+  }
+
+  editNote = () => {
+    const {actions, noteId} = this.props;
+    if (noteId) {
+      actions.getNoteForUpdate(noteId);
+      actions.openModalForUpdate(noteId);
+    }
+  }
+
   render() {
-    const {actions, noteId, fullView, activeCategory} = this.props;
+    const {noteId, fullView, activeCategory} = this.props;
     const {opened} = this.state;
     return (
       <NoteButtonStyles>
         <AlertDialog
           title={`Are you sure? `}
           onClose={this.closeDialog}
-          onConfirm={() => actions.deleteNote(noteId)}
+          onConfirm={this.deleteNote}
           opened={opened}
         />
         <Tooltip title={`Edit note`}>
-          <IconButton onClick={() => actions.openModalForUpdate(noteId)} className="note-button">
+          <IconButton onClick={this.editNote} className="note-button">
             <EditOutlined className="note-icon app-note-edit-icon"/>
           </IconButton>
         </Tooltip>

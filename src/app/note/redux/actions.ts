@@ -11,6 +11,11 @@ export const getNote = (id: string): AppActionNote => ({
   payload: id,
 });
 
+export const getNoteForUpdate = (id: string): AppActionNote => ({
+  type: noteTypes.GET_NOTE_FOR_UPDATE_REQUEST,
+  payload: id,
+});
+
 export const toggleNote = (id: string, expanded: boolean): AppActionNote => ({
   type: noteTypes.TOGGLE_NOTE_REQUEST,
   payload: {
@@ -30,6 +35,6 @@ export const addNote = (note: AppNote): AppActionNote => ({
 });
 
 export const updateNote = (note: AppNote): AppActionNote => ({
-  type: noteTypes.UPDATE_NOTE,
+  type: noteTypes.UPDATE_NOTE_REQUEST,
   payload: note,
 });

@@ -86,6 +86,23 @@ function* getNote(action: AppActionNote) {
   }
 }
 
+function* getNoteForUpdate(action: AppActionNote) {
+  try {
+    const response = yield call([fetchCollection(NOTES_COLLECTION).doc(action.payload), 'get']);
+    yield put({
+      type: types.GET_NOTE_FOR_UPDATE_SUCCESS,
+      payload: response.data() ? {
+        ...response.data(),
+        id: action.payload,
+      } : null,
+    });
+  } catch (error) {
+    yield put({
+      type: types.GET_NOTE_FOR_UPDATE_FAILED,
+    });
+  }
+}
+
 function* addNote(action: AppActionNote) {
   try {
     yield call([fetchCollection(NOTES_COLLECTION), 'add'], {...action.payload});
@@ -95,6 +112,20 @@ function* addNote(action: AppActionNote) {
   } catch (error) {
     yield put({
       type: types.ADD_NOTE_FAILED,
+    });
+  }
+}
+
+function* updateNote(action: AppActionNote) {
+  try {
+    const {id} = action.payload;
+    yield call([fetchCollection(NOTES_COLLECTION).doc(id), 'update'], {...action.payload});
+    yield put({
+      type: types.UPDATE_NOTE_SUCCESS,
+    });
+  } catch (error) {
+    yield put({
+      type: types.UPDATE_NOTE_FAILED,
     });
   }
 }
@@ -130,7 +161,9 @@ function* deleteNote(action: AppActionNote) {
 
 function* notesSaga() {
   yield all([
+    yield takeLatest(types.UPDATE_NOTE_REQUEST, updateNote),
     yield takeLatest(types.GET_ALL_NOTES_REQUEST, getAllNotes),
+    yield takeLatest(types.GET_NOTE_FOR_UPDATE_REQUEST, getNoteForUpdate),
     yield takeLatest(types.GET_NOTE_REQUEST, getNote),
     yield takeLatest(types.ADD_NOTE_REQUEST, addNote),
     yield takeLatest(types.TOGGLE_NOTE_REQUEST, toggleNote),

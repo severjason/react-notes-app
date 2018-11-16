@@ -7,7 +7,6 @@ import {
   AppAction,
   AppCategories,
   AppModal,
-  AppNotesState,
   AppTags,
   AppWithFirebaseAuthProps
 } from '../../interfaces';
@@ -24,11 +23,6 @@ interface AppHomeDispatch {
 class ModalContainer extends
   React.Component<AppModalPropsWithFirebase & AppWithFirebaseAuthProps & AppHomeDispatch, {}> {
 
-  getNoteForUpdate = () => {
-    const {notes, modal} = this.props;
-    return modal.noteId !== null ? notes[modal.noteId] : null;
-  }
-
   render() {
     const {modal, categories, actions, firebaseUser: {auth}} = this.props;
     return (
@@ -37,7 +31,6 @@ class ModalContainer extends
         modal={modal}
         categories={categories}
         actions={actions}
-        noteForUpdate={this.getNoteForUpdate()}
       />
     );
   }
@@ -46,14 +39,13 @@ class ModalContainer extends
 export default compose(
   withFirebaseAuth,
   connect<AppModalProps, AppHomeDispatch>(
-    ({categories, notes, modal}:
-       { categories: AppCategories, notes: AppNotesState, modal: AppTags & AppModal }) => ({
+    ({categories, modal}:
+       { categories: AppCategories, modal: AppTags & AppModal }) => ({
       categories: {
         categoriesList: filterCategories(categories.categoriesList),
         activated: categories.activated,
         expanded: categories.expanded,
       },
-      notes: notes.allNotes,
       modal,
     }),
     (dispatch: Dispatch<AppAction>) => ({

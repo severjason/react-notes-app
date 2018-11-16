@@ -43,6 +43,8 @@ export interface AppNoteActions {
 
   getNote(id: string): AppActionNote;
 
+  getNoteForUpdate(id: string): AppActionNote;
+
   toggleNote(id: any, expanded: boolean): AppAction;
 
   addNote(note: AppNote): AppActionNote;

@@ -6,7 +6,6 @@ export interface AppActionTags extends AppAction {
 
 export interface AppModalProps {
   modal: AppModal & AppTags;
-  notes: AppNote[];
   categories: AppCategories;
 }
 
@@ -24,6 +23,8 @@ export interface AppModal {
   opened: boolean;
   openedForUpdate: boolean;
   noteId: string | null;
+  note: AppNote | null;
+  noteLoaded?: boolean;
 }
 
 export interface AppTags {
