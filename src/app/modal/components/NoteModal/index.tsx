@@ -142,6 +142,14 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     this.resetState();
   }
 
+  private updateNote = () => {
+    const {modal, actions} = this.props;
+    const {note} = this.state;
+    modal.openedForUpdate ? actions.updateNote(note) : this.addNote();
+    this.resetState();
+    actions.closeModal();
+  }
+
   getCategoriesList() {
     const {categories} = this.props;
     return categories.categoriesList.filter((category: AppCategory) => category.name !== 'all');
@@ -229,12 +237,10 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
           <FormControl className="form-buttons">
             <ModalButtons
               onClose={actions.closeModal}
-              addNote={this.addNote}
-              updateNote={actions.updateNote}
-              resetForm={this.resetState}
+              updateNote={this.updateNote}
               isDisabled={this.addNoteIsDisabled()}
               openedForUpdate={openedForUpdate}
-              note={note}
+              noteColor={note.color}
             />
           </FormControl>
         </NoteModalStyles>

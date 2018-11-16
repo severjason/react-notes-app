@@ -1,30 +1,24 @@
 import * as React from 'react';
-import { AppAction, AppActionNote, AppNote } from '../../../../interfaces';
+import { AppAction } from '../../../../interfaces';
 import Button from '@material-ui/core/Button';
 
 interface AppModalButtons {
   openedForUpdate: boolean;
   isDisabled: boolean;
-  note: AppNote;
+  noteColor: string;
   onClose(): AppAction;
-  addNote(): void;
-  updateNote(note: AppNote): AppActionNote;
-  resetForm(): void;
+  updateNote(): void;
 }
 
-const ModalButtons: React.StatelessComponent<AppModalButtons> =
-  ({onClose, addNote, resetForm, updateNote, note, openedForUpdate, isDisabled}) => (
+const ModalButtons: React.FunctionComponent<AppModalButtons> =
+  ({onClose, updateNote, noteColor, openedForUpdate, isDisabled}) => (
     <React.Fragment>
       <Button onClick={onClose}>
         Close
       </Button>
       <Button
-        style={{color: note.color}}
-        onClick={() => {
-          openedForUpdate ? updateNote(note) : addNote();
-          resetForm();
-          onClose();
-        }}
+        style={{color: noteColor}}
+        onClick={updateNote}
         disabled={isDisabled}
       >
         {openedForUpdate ? 'Update' : 'Add'}
