@@ -36,11 +36,18 @@ class Note extends React.PureComponent<AppNoteProps & AppNote, {}> {
       <Chip className={`note-tag`} label={tag} key={index}/>);
   }
 
+  private toggleNote = () => {
+    const {id, fullView, actions, expanded} = this.props;
+    if (!fullView) {
+      actions.toggleNote(id, !expanded);
+    }
+  }
+
   private getNoteHeader(): ReactNode {
-    const {id, title, fullView, actions, expanded} = this.props;
+    const {title} = this.props;
     return (
       <CardHeader
-        onClick={() => fullView ? null : actions.toggleNote(id, !expanded)}
+        onClick={this.toggleNote}
         className={`note-header`}
         title={title}
       />);
@@ -66,18 +73,18 @@ class Note extends React.PureComponent<AppNoteProps & AppNote, {}> {
                 {fullView ? `Tags: ` : ''}
                 {this.getTags()}
                 <Divider className={`note-divider`}/>
-                {category &&
-                <div className={`${fullView ? '' : 'hidden'} app-note-tags`}>
-                  Category:
-                  <Chip
-                    style={{borderColor: color}}
-                    className={`note-category`}
-                    label={category.name.toUpperCase()}
-                    variant="outlined"
-                  />
-                  <Divider className={`note-divider`}/>
-                </div>}
               </div>
+              {category &&
+              <div className={`${fullView ? '' : 'hidden'} app-note-tags`}>
+                Category:
+                <Chip
+                  style={{color: color, fontWeight: 700}}
+                  className={`note-category`}
+                  label={category.name.toUpperCase()}
+                  variant="outlined"
+                />
+                <Divider className={`note-divider`}/>
+              </div>}
               <div>{(fullView) ? text : text.slice(0, 300) + this.addDots()}</div>
             </Typography>
           </CardContent>

@@ -13,7 +13,7 @@ const CategoriesCheckboxes: React.FunctionComponent<AppCheckboxes> = ({note, cat
   categories.map((category: AppCategory, index: number) => {
     return (
       <Chip
-        style={{borderColor: note.color}}
+        style={{color: note.color, fontWeight: 700}}
         label={category.name.toUpperCase()}
         className={`category-chip ${(note.category && (note.category.id === category.id)) ? 'active' : ''}`}
         key={index}

@@ -20,6 +20,9 @@ const NoteModalStyles = styled.div`
   .category-chip {
     border-radius: 4px;
     margin: .2rem;
+    height: 2rem;
+    line-height: 1;
+    font-size: inherit;
     
     &.active {
       background-color: rgba(0, 0, 0, 0.08);
@@ -32,6 +35,7 @@ const NoteModalStyles = styled.div`
   
   .tag {
     margin: .1rem;
+    height: 2rem;
     &.active {
       background-color: rgb(206, 206, 206);
     }
