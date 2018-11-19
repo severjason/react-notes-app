@@ -12,10 +12,10 @@ import NoteButtonStyles from './styles';
 import { AlertDialog } from '../../../../common';
 
 interface AppNoteButtonsProps {
-  noteId: string;
+  noteId: any;
   actions: AppNoteActions & AppModalActions;
   fullView?: boolean;
-  activeCategory?: string;
+  activeCategory?: string | null;
 }
 
 interface AppNoteButtonsState {
@@ -32,19 +32,34 @@ class NoteButtons extends React.PureComponent<AppNoteButtonsProps, AppNoteButton
 
   closeDialog = () => this.setState(() => ({opened: false}));
 
+  deleteNote = () => {
+    const {actions, noteId} = this.props;
+    if (noteId) {
+      actions.deleteNote(noteId);
+    }
+  }
+
+  editNote = () => {
+    const {actions, noteId} = this.props;
+    if (noteId) {
+      actions.getNoteForUpdate(noteId);
+      actions.openModalForUpdate(noteId);
+    }
+  }
+
   render() {
-    const {actions, noteId, fullView, activeCategory} = this.props;
+    const {noteId, fullView, activeCategory} = this.props;
     const {opened} = this.state;
     return (
       <NoteButtonStyles>
         <AlertDialog
           title={`Are you sure? `}
           onClose={this.closeDialog}
-          onConfirm={() => actions.deleteNote(noteId)}
+          onConfirm={this.deleteNote}
           opened={opened}
         />
         <Tooltip title={`Edit note`}>
-          <IconButton onClick={() => actions.openModalForUpdate(noteId)} className="note-button">
+          <IconButton onClick={this.editNote} className="note-button">
             <EditOutlined className="note-icon app-note-edit-icon"/>
           </IconButton>
         </Tooltip>
@@ -61,7 +76,7 @@ class NoteButtons extends React.PureComponent<AppNoteButtonsProps, AppNoteButton
               </IconButton>
             </Tooltip>
           </Link>
-          : <Link to={`/notes/${activeCategory}`}>
+          : <Link to={`/notes/${activeCategory ? activeCategory : 'all'}`}>
             <Tooltip title={`Close note`}>
               <IconButton className="note-button">
                 <ClearOutlined className="note-icon app-note-close-icon"/>

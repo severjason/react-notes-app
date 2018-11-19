@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { ChangeEvent } from 'react';
-import * as uuid from 'uuid';
 import * as helpers from '../../../../helpers';
 import NoteModalStyles from './styles';
 import { Tags, ModalButtons, ColorCheckboxes, CategoriesCheckboxes, AddTag, ModalTitle } from '../../components';
 import { AppTagsActions, AppModalActions, AppTags, AppModal } from '../../interfaces';
 import { AppNoteActions, AppNote } from '../../../note/interfaces';
-import { AppCategories } from '../../../interfaces';
+import { AppCategories, AppCategory } from '../../../interfaces';
 import Dialog from '@material-ui/core/Dialog';
 import TextField from '@material-ui/core/TextField';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -15,8 +14,8 @@ import FormControl from '@material-ui/core/FormControl';
 import { NOTES_COLORS } from '../../../../constants';
 
 interface AppNoteModalProps {
+  userId: string;
   modal: AppModal & AppTags;
-  noteForUpdate: AppNote | null;
   categories: AppCategories;
 }
 
@@ -33,11 +32,11 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
 
   private INITIAL_STATE: AppNoteModalState = {
     note: {
-      id: '',
+      uid: '',
       title: '',
       color: '#000',
       text: '',
-      categories: [],
+      category: null,
       tags: [],
       expanded: false,
     },
@@ -51,10 +50,10 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
   private maxNewTagLength: number = 20;
 
   componentDidUpdate() {
-    const {noteForUpdate} = this.props;
+    const {modal} = this.props;
     const {note} = this.state;
-    if (noteForUpdate && noteForUpdate.id !== note.id) {
-      this.setState({note: noteForUpdate});
+    if (modal.note && modal.note.id !== note.id) {
+      this.setState({note: modal.note});
     }
   }
 
@@ -89,12 +88,13 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     }));
   }
 
-  private handleCategoryChange = (category: string): void => {
+  private handleCategoryChange = (category: AppCategory): void => {
     const {note} = this.state;
+    const newCategory = note.category && (category.id === note.category.id) ? null : category;
     this.setState({
       note: {
         ...note,
-        categories: helpers.toggleStringInArray(note.categories, category),
+        category: newCategory,
       }
     });
   }
@@ -123,18 +123,36 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     this.setState({tags: note.tags.concat(newTag)});
   }
 
-  private addNoteIsDisabled = (): boolean => !(this.state.note.title);
+  private addNoteIsDisabled = (): boolean => {
+    const {note} = this.state;
+    const {modal} = this.props;
+    return !(note.title) || (modal.openedForUpdate && !modal.noteLoaded);
+  }
 
   private addTagIsDisabled = (tags: string[]): boolean => tags.includes(this.state.newTag.toLowerCase());
 
   private addNote = (): void => {
-    const { addNote } = this.props.actions;
-    addNote({...this.state.note, id: uuid.v4()});
+    const { actions, userId } = this.props;
+    actions.addNote({...this.state.note, uid: userId});
+  }
+
+  private closeDialog = () => {
+    const {actions} = this.props;
+    actions.closeModal();
+    this.resetState();
+  }
+
+  private updateNote = () => {
+    const {modal, actions} = this.props;
+    const {note} = this.state;
+    modal.openedForUpdate ? actions.updateNote(note) : this.addNote();
+    this.resetState();
+    actions.closeModal();
   }
 
   getCategoriesList() {
     const {categories} = this.props;
-    return categories.categoriesList.filter((category: string) => category !== 'all');
+    return categories.categoriesList.filter((category: AppCategory) => category.name !== 'all');
   }
 
   public render() {
@@ -146,10 +164,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
       <Dialog
         className={`${note.color}`}
         open={modal.opened}
-        onClose={() => {
-          actions.closeModal();
-          this.resetState();
-        }}
+        onClose={this.closeDialog}
       >
         <NoteModalStyles>
           <p className="modal-header">
@@ -158,13 +173,15 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
           <FormControl className="form-padding">
             <ModalTitle title={note.title} maxLength={this.maxTitleLength} onTitleChange={this.handleTitleChange}/>
           </FormControl>
+
           <FormControl className="form-control">
             <FormLabel className="form-label" component="legend">Color:</FormLabel>
             <FormGroup row={true}>
               <ColorCheckboxes note={note} colors={NOTES_COLORS} onColorChange={this.handleColorChange}/>
             </FormGroup>
           </FormControl>
-          <FormControl className="form-control">
+
+          {!!this.getCategoriesList().length && <FormControl className="form-control">
             <FormLabel className="form-label" component="legend">Categories:</FormLabel>
             <FormGroup row={true}>
               <CategoriesCheckboxes
@@ -173,7 +190,8 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
                 onCategoryChange={this.handleCategoryChange}
               />
             </FormGroup>
-          </FormControl>
+          </FormControl>}
+
           <FormControl className="form-control">
             <FormLabel className="form-label" component="legend">Tags:</FormLabel>
             <FormGroup row={true}>
@@ -193,6 +211,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
               />
             </FormGroup>
           </FormControl>
+
           <FormControl className="form-control">
             <AddTag
               newTag={newTag}
@@ -204,6 +223,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
               resetNewTag={this.resetNewTag}
             />
           </FormControl>
+
           <FormControl className="form-control">
             <FormLabel className="form-label">Text:</FormLabel>
             <TextField
@@ -213,15 +233,14 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
               onChange={this.handleTextChange}
             />
           </FormControl>
+
           <FormControl className="form-buttons">
             <ModalButtons
               onClose={actions.closeModal}
-              addNote={this.addNote}
-              updateNote={actions.updateNote}
-              resetForm={this.resetState}
+              updateNote={this.updateNote}
               isDisabled={this.addNoteIsDisabled()}
               openedForUpdate={openedForUpdate}
-              note={note}
+              noteColor={note.color}
             />
           </FormControl>
         </NoteModalStyles>

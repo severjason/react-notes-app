@@ -1,6 +1,11 @@
 import { AppNote, AppNoteActions, AppActionNote, AppNotes, AppNotesState } from '../note/interfaces';
 import { AppTags, AppTagsActions, AppActionTags, AppModal, AppModalActions } from '../modal/interfaces';
-import { AppCategories, AppCategoriesActions, AppActionCategory } from '../nav/interfaces';
+import {
+  AppCategories,
+  AppCategoriesActions,
+  AppActionCategory,
+  AppCategory,
+} from '../nav/interfaces';
 import { RouteComponentProps, RouteProps } from 'react-router';
 import * as React from 'react';
 
@@ -18,6 +23,12 @@ export interface AppState {
 
 export interface HomeProps {
   notes: AppNote[];
+  notesAreLoaded?: boolean;
+  categories: AppCategories;
+  error?: any;
+}
+
+export interface HomePropsWithFirebase extends HomeProps {
   categories: AppCategories;
 }
 
@@ -33,6 +44,11 @@ export interface AppWithFirebaseAuthProps extends RouteProps {
     isAuthReady: boolean;
     isAuthEmpty: boolean;
   };
+  firestore?: any;
+}
+
+interface AppFirestore {
+  firestore: any;
 }
 
 export interface AppAllActions extends AppNoteActions, AppTagsActions, AppCategoriesActions, AppModalActions {
@@ -50,4 +66,6 @@ export {
   AppActionNote,
   AppActionCategory,
   AppActionTags,
+  AppFirestore,
+  AppCategory,
 };

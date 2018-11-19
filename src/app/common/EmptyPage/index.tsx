@@ -1,19 +1,20 @@
-import * as React      from 'react';
+import * as React from 'react';
 import EmptyPageStyles from './styles';
 import Paper from '@material-ui/core/Paper';
 
 interface AppEmptyPage {
-    category?: string;
+  category?: string | null;
 }
 
 const EmptyPage: React.StatelessComponent<AppEmptyPage> = (props: AppEmptyPage) => {
-    return (
-        <EmptyPageStyles>
-          <Paper className="page-message-container">
-            {(props.category === 'all') ? `No notes...` : `No notes in this category...`}
-          </Paper>
-        </EmptyPageStyles>
-    );
+  const {category} = props;
+  return (
+    <EmptyPageStyles>
+      <Paper className="page-message-container">
+        {(category === 'all') ? `No notes...` : `No notes in this category...`}
+      </Paper>
+    </EmptyPageStyles>
+  );
 };
 
 export default EmptyPage;
