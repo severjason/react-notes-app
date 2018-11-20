@@ -13,14 +13,14 @@ import LocalHospitalOutlined from '@material-ui/icons/LocalHospitalOutlined';
 import Close from '@material-ui/icons/Close';
 import CategoryItemStyles from './styles';
 import { ReactElement } from 'react';
-import { AppActionCategory, AppCategory } from '../../interfaces';
+import { AppNavAction, AppCategory } from '../../interfaces';
 
 interface CategoryItemProps {
   category: string;
   isActivated: boolean;
   categoryId: string;
-  activateCategory(category: AppCategory): AppActionCategory;
-  deleteCategory(category: string): AppActionCategory;
+  activateCategory(category: AppCategory): AppNavAction;
+  deleteCategory(category: string): AppNavAction;
 }
 
 const getIcon = (category: string): ReactElement<any> => {

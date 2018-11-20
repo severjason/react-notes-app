@@ -7,17 +7,16 @@ import {
   AppAction,
   AppCategories,
   AppModal,
-  AppTags,
   AppWithFirebaseAuthProps
 } from '../../interfaces';
 import { NoteModal } from '../components';
-import { AppModalProps, AppModalPropsWithFirebase, AppModalActions, AppTagsActions } from '../interfaces';
+import { AppModalProps, AppModalPropsWithFirebase, AppModalActions } from '../interfaces';
 import { AppNoteActions } from '../../note/interfaces';
 import { filterCategories } from '../../../helpers';
 import withFirebaseAuth from '../../hocs/withFirebaseAuth';
 
 interface AppHomeDispatch {
-  actions: AppTagsActions & AppModalActions & AppNoteActions;
+  actions: AppModalActions & AppNoteActions;
 }
 
 class ModalContainer extends
@@ -40,10 +39,11 @@ export default compose(
   withFirebaseAuth,
   connect<AppModalProps, AppHomeDispatch>(
     ({categories, modal}:
-       { categories: AppCategories, modal: AppTags & AppModal }) => ({
+       { categories: AppCategories, modal: AppModal }) => ({
       categories: {
         categoriesList: filterCategories(categories.categoriesList),
         activated: categories.activated,
+        tags: [],
         expanded: categories.expanded,
       },
       modal,

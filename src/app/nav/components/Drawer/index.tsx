@@ -5,11 +5,11 @@ import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Categories from '../Categories';
-import { AppCategoriesActions, AppCategory } from '../../interfaces';
+import { AppNavActions, AppCategory } from '../../interfaces';
 import DrawerStyles from './styles';
 
 interface CategoriesDrawerProps {
-  actions: AppCategoriesActions;
+  actions: AppNavActions;
   categories: AppCategory[];
   expanded: boolean;
   activated: AppCategory | null;

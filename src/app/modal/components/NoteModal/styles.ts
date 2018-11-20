@@ -42,7 +42,7 @@ const NoteModalStyles = styled.div`
   }
 
 @media all and (max-width: 767px) {
-
+  padding: .5rem;
 }
 `;
 

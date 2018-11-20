@@ -1,26 +1,29 @@
 import * as React from 'react';
 import Chip from '@material-ui/core/Chip';
 import Clear from '@material-ui/icons/Clear';
-import { AppActionTags, AppNote } from '../../../../interfaces';
+import { AppNote } from '../../../../interfaces';
+import { AppTag } from '../../../../nav/interfaces';
 
 interface NoteTags {
-  tagsList: string[];
+  tagsList: AppTag[];
   note: AppNote;
   deleteIcon: boolean;
-  deleteTag: (tag: string) => AppActionTags;
-  handleTagClick: (tag: string) => void;
+  deleteTag: (tag: AppTag) => any;
+  handleTagClick: (tag: AppTag) => void;
 }
 
 class Tags extends React.Component<NoteTags, {}> {
   render() {
-    const {tagsList, note, deleteIcon, handleTagClick, deleteTag} = this.props;
+    const {tagsList, deleteIcon, handleTagClick, deleteTag} = this.props;
 
-    return tagsList.map((tag: string, index: number) => (
+    return tagsList.map((tag: AppTag, index: number) => (
       <Chip
-        title={tag}
+        title={tag.name}
         key={index}
         label={tag}
+/*
         className={`tag ${note.tags.includes(tag) ? 'active' : ''}`}
+*/
         onClick={() => handleTagClick(tag)}
         onDelete={() => deleteIcon ? deleteTag(tag) : false}
         deleteIcon={deleteIcon ? undefined : <Clear style={{display: 'none'}}/>}

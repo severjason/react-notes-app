@@ -1,9 +1,9 @@
 import { AppNote, AppNoteActions, AppActionNote, AppNotes, AppNotesState } from '../note/interfaces';
-import { AppTags, AppTagsActions, AppActionTags, AppModal, AppModalActions } from '../modal/interfaces';
+import { AppModal, AppModalActions } from '../modal/interfaces';
 import {
   AppCategories,
-  AppCategoriesActions,
-  AppActionCategory,
+  AppNavActions,
+  AppNavAction,
   AppCategory,
 } from '../nav/interfaces';
 import { RouteComponentProps, RouteProps } from 'react-router';
@@ -12,12 +12,11 @@ import * as React from 'react';
 export interface AppAction {
   type: string;
   id?: string;
-  modalProps?: AppNote;
 }
 
 export interface AppState {
   notes: AppNotesState;
-  modal: AppModal & AppTags;
+  modal: AppModal;
   categories: AppCategories;
 }
 
@@ -51,21 +50,18 @@ interface AppFirestore {
   firestore: any;
 }
 
-export interface AppAllActions extends AppNoteActions, AppTagsActions, AppCategoriesActions, AppModalActions {
+export interface AppAllActions extends AppNoteActions, AppNavActions, AppModalActions {
 }
 
 export {
   AppNote,
   AppNotes,
   AppNotesState,
-  AppTags,
-  AppTagsActions,
   AppCategories,
   AppModal,
   AppModalActions,
   AppActionNote,
-  AppActionCategory,
-  AppActionTags,
+  AppNavAction,
   AppFirestore,
   AppCategory,
 };

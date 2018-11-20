@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AppCategoriesActions, AppCategory } from '../../interfaces';
+import { AppNavActions, AppCategory } from '../../interfaces';
 import { ChangeEvent, ReactNode } from 'react';
 import { CategoryItem, AddCategory } from '../../components';
 import CategoriesStyles from './styles';
@@ -9,7 +9,7 @@ import { withFirebaseAuth } from '../../../hocs';
 import { AppWithFirebaseAuthProps } from '../../../interfaces';
 
 interface AppCategoriesDispatch {
-  actions: AppCategoriesActions;
+  actions: AppNavActions;
 }
 
 interface CategoriesProps {
