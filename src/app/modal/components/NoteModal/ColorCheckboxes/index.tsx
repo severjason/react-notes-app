@@ -1,6 +1,6 @@
 import * as  React from 'react';
 import { AppNote } from '../../../../note/interfaces';
-import { Radio } from '@material-ui/core';
+import Radio from '@material-ui/core/Radio';
 import { ChangeEvent } from 'react';
 
 interface AppCheckboxes {

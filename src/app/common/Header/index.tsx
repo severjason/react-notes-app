@@ -4,7 +4,10 @@ import HeaderStyles        from './styles';
 
 const Header: React.StatelessComponent<{}> = () => (
       <HeaderStyles>
-        <NavContainer/>
+        {
+          // @ts-ignore
+          <NavContainer/>
+        }
       </HeaderStyles>
 );
 

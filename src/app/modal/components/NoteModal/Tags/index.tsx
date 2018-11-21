@@ -1,32 +1,28 @@
 import * as React from 'react';
-import { Chip } from '@material-ui/core';
-import { Clear } from '@material-ui/icons';
-import { AppActionTags, AppNote } from '../../../../interfaces';
+import Chip from '@material-ui/core/Chip';
+import Cancel from '@material-ui/icons/Cancel';
+import { AppNote } from '../../../../interfaces';
+import { AppTag } from '../../../../nav/interfaces';
 
 interface NoteTags {
-  tagsList: string[];
+  tagsList: AppTag[];
   note: AppNote;
-  deleteIcon: boolean;
-  deleteTag: (tag: string) => AppActionTags;
-  handleTagClick: (tag: string) => void;
+  isTagExists: (tags: AppTag[], tag: AppTag) => boolean;
+  handleTagClick: (tag: AppTag) => void;
+  deleteTag: (id: string) => void;
 }
 
-class Tags extends React.Component<NoteTags, {}> {
-  render() {
-    const {tagsList, note, deleteIcon, handleTagClick, deleteTag} = this.props;
-
-    return tagsList.map((tag: string, index: number) => (
-      <Chip
-        title={tag}
-        key={index}
-        label={tag}
-        className={`tag ${note.tags.includes(tag) ? 'active' : ''}`}
-        onClick={() => handleTagClick(tag)}
-        onDelete={() => deleteIcon ? deleteTag(tag) : false}
-        deleteIcon={deleteIcon ? undefined : <Clear style={{display: 'none'}}/>}
-      />
-    ));
-  }
-}
+const Tags: React.FunctionComponent<NoteTags> = ({tagsList, isTagExists, note, handleTagClick, deleteTag}): any =>
+  tagsList.map((tag: AppTag, index: number) => (
+    <Chip
+      title={tag.name}
+      key={index}
+      label={tag.name}
+      className={`tag ${isTagExists(note.tags, tag) ? 'active' : ''}`}
+      onClick={() => handleTagClick(tag)}
+      onDelete={() => tag.id ? deleteTag(tag.id) : false}
+      deleteIcon={tag.uid !== 'all' ? <Cancel/> : <Cancel style={{display: 'none'}}/>}
+    />
+  ));
 
 export default Tags;

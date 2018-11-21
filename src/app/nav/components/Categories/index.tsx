@@ -1,12 +1,20 @@
 import * as React from 'react';
-import { AppCategories, AppCategoriesActions } from '../../interfaces';
+import { AppNavActions, AppCategory } from '../../interfaces';
 import { ChangeEvent, ReactNode } from 'react';
 import { CategoryItem, AddCategory } from '../../components';
 import CategoriesStyles from './styles';
-import { MenuList, Divider } from '@material-ui/core';
+import MenuList from '@material-ui/core/MenuList';
+import Divider from '@material-ui/core/Divider';
+import { withFirebaseAuth } from '../../../hocs';
+import { AppWithFirebaseAuthProps } from '../../../interfaces';
 
 interface AppCategoriesDispatch {
-  actions: AppCategoriesActions;
+  actions: AppNavActions;
+}
+
+interface CategoriesProps {
+  categories: AppCategory[];
+  activated: AppCategory;
 }
 
 interface CategoriesListState {
@@ -14,7 +22,8 @@ interface CategoriesListState {
   inputValue: string;
 }
 
-class Categories extends React.Component<AppCategories & AppCategoriesDispatch, CategoriesListState> {
+class Categories extends React.Component<CategoriesProps
+  & AppCategoriesDispatch & AppWithFirebaseAuthProps, CategoriesListState> {
 
   public state = {
     inputShowed: false,
@@ -26,26 +35,41 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
   private handleHideInput = (): void => this.setState({inputShowed: false, inputValue: ''});
 
   private handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    this.setState({inputValue: e.target.value});
+    this.setState({inputValue: e.target.value.trim()});
   }
 
   private handleAddCategory = (category: string): void => {
-    const { addCategory } = this.props.actions;
-    addCategory(category);
+    const {actions, firebaseUser: {auth}} = this.props;
+    actions.addCategory(category, auth.uid);
     this.setState({inputShowed: false, inputValue: ''});
   }
 
   private inputIsDisabled = (): boolean => {
     const {inputValue} = this.state;
-    const {categoriesList} = this.props;
-    return !inputValue || categoriesList.includes(inputValue.toLowerCase());
+    const {categories} = this.props;
+    return !inputValue.trim() ||
+      !!categories.filter(category => category.name === inputValue.trim().toLowerCase()).length;
   }
 
   private getCategories(): ReactNode {
-    const {actions, categoriesList, expanded, activated} = this.props;
-    return categoriesList.map((category: string) => (
-      <CategoryItem key={category} category={category} activated={activated} actions={actions} expanded={expanded}/>)
+    const {actions, categories, activated} = this.props;
+    return categories.map((category: AppCategory, index: number) => (
+      <CategoryItem
+        key={index}
+        category={category.name}
+        categoryId={category.id}
+        isActivated={!!activated && activated.id === category.id}
+        activateCategory={actions.activateCategory}
+        deleteCategory={actions.deleteCategory}
+      />)
     );
+  }
+
+  private handleKeyPress = (e: any) => {
+    const {inputValue} = this.state;
+    if (e.key === 'Enter' && !this.inputIsDisabled()) {
+      this.handleAddCategory(inputValue);
+    }
   }
 
   render() {
@@ -63,6 +87,7 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
               onInputChange={this.handleInputChange}
               inputIsDisabled={this.inputIsDisabled()}
               addCategory={this.handleAddCategory}
+              onKeyPress={this.handleKeyPress}
             />
           </MenuList>
       </CategoriesStyles>
@@ -70,4 +95,4 @@ class Categories extends React.Component<AppCategories & AppCategoriesDispatch, 
   }
 }
 
-export default Categories;
+export default withFirebaseAuth(Categories);

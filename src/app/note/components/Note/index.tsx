@@ -1,15 +1,22 @@
 import * as React from 'react';
 import { AppNoteActions, AppNote } from '../../interfaces';
 import { AppModalActions } from '../../../interfaces';
-import { Card, CardHeader, CardContent, Typography, Divider, Chip, CardActionArea } from '@material-ui/core';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import Chip from '@material-ui/core/Chip';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import Card from '@material-ui/core/Card';
 import { ReactNode } from 'react';
 import NoteButtons from './NoteButtons';
 import NoteStyles from './styles';
+import { AppTag } from '../../../nav/interfaces';
 
 interface AppNoteProps {
   actions: AppNoteActions & AppModalActions;
   fullView?: boolean;
-  activeCategory?: string;
+  activeCategory?: string | null;
 }
 
 class Note extends React.PureComponent<AppNoteProps & AppNote, {}> {
@@ -26,36 +33,29 @@ class Note extends React.PureComponent<AppNoteProps & AppNote, {}> {
 
   private getTags(): ReactNode[] {
     const {tags} = this.props;
-    return tags.map((tag: string, index: number) =>
-      <Chip className={`note-tag`} label={tag} key={index}/>);
+    return tags.map((tag: AppTag, index: number) =>
+      <Chip className={`note-tag`} label={tag.name} key={index}/>);
   }
 
-  private getCategories(): ReactNode[] {
-    const {categories, color} = this.props;
-    return categories.map((category: string, index: number) => {
-      return (
-        <Chip
-          style={{borderColor: color}}
-          className={`note-category`}
-          label={category.toUpperCase()}
-          key={index}
-          variant="outlined"
-        />);
-    });
+  private toggleNote = () => {
+    const {id, fullView, actions, expanded} = this.props;
+    if (!fullView) {
+      actions.toggleNote(id, !expanded);
+    }
   }
 
   private getNoteHeader(): ReactNode {
-    const {id, title, fullView, actions} = this.props;
+    const {title} = this.props;
     return (
       <CardHeader
-        onClick={() => fullView ? null : actions.toggleNote(id)}
+        onClick={this.toggleNote}
         className={`note-header`}
         title={title}
       />);
   }
 
   render() {
-    const {fullView, color, tags, text, id, categories, actions, activeCategory} = this.props;
+    const {fullView, color, tags, text, id, category, actions, activeCategory} = this.props;
     return (
       <NoteStyles className={`${(fullView ? 'full' : '')}`}>
         <Card className="note-card">
@@ -74,11 +74,18 @@ class Note extends React.PureComponent<AppNoteProps & AppNote, {}> {
                 {fullView ? `Tags: ` : ''}
                 {this.getTags()}
                 <Divider className={`note-divider`}/>
-                <div className={`${categories.length > 0 && fullView ? '' : 'hidden'} app-note-tags`}>
-                  Categories: {this.getCategories()}
-                  <Divider className={`note-divider`}/>
-                </div>
               </div>
+              {category &&
+              <div className={`${fullView ? '' : 'hidden'} app-note-tags`}>
+                Category:
+                <Chip
+                  style={{color: color, fontWeight: 700}}
+                  className={`note-category`}
+                  label={category.name.toUpperCase()}
+                  variant="outlined"
+                />
+                <Divider className={`note-divider`}/>
+              </div>}
               <div>{(fullView) ? text : text.slice(0, 300) + this.addDots()}</div>
             </Typography>
           </CardContent>

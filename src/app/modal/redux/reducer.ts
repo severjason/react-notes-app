@@ -1,19 +1,35 @@
-import { AppActionTags, AppTags, AppModal, AppModalActions } from '../interfaces';
+import { AppModal } from '../interfaces';
 import * as  types from '../redux/types';
-import * as helpers from '../../../helpers';
+// import * as helpers from '../../../helpers';
+import * as noteTypes from '../../note/redux/types';
+import { AppActionNote } from '../../note/interfaces';
+import { AppAction } from '../../interfaces';
 
-const INITIAL_STATE: AppTags & AppModal = {
+const INITIAL_STATE: AppModal = {
   opened: false,
   openedForUpdate: false,
+  note: null,
   noteId: null,
-  basicTags: ['favourite', 'personal', 'interesting', 'later', 'important'],
-  customTags: [],
+  noteLoaded: false,
 };
 
-export default function (state: AppTags & AppModal = INITIAL_STATE,
-                         action: AppActionTags & AppModalActions) {
+export default function (state: AppModal = INITIAL_STATE,
+                         action: AppAction & AppActionNote) {
   switch (action.type) {
-    case types.ADD_CUSTOM_TAG: {
+    case noteTypes.GET_NOTE_FOR_UPDATE_REQUEST: {
+      return {
+        ...state,
+        noteLoaded: false,
+      };
+    }
+    case noteTypes.GET_NOTE_FOR_UPDATE_SUCCESS: {
+      return {
+        ...state,
+        note: action.payload,
+        noteLoaded: true,
+      };
+    }
+    /*case types.ADD_CUSTOM_TAG: {
       const customTagsArray = (!state.basicTags.includes(action.tag))
         ? helpers.concatArrayUnique(state.customTags, [action.tag])
         : state.customTags;
@@ -27,7 +43,7 @@ export default function (state: AppTags & AppModal = INITIAL_STATE,
         ...state,
         customTags: state.customTags.filter((t: string) => t !== action.tag),
       };
-    }
+    }*/
     case types.OPEN_MODAL: {
       return {
         ...state,
@@ -48,6 +64,7 @@ export default function (state: AppTags & AppModal = INITIAL_STATE,
         opened: false,
         openedForUpdate: false,
         noteId: null,
+        note: null,
       };
     }
     default: {

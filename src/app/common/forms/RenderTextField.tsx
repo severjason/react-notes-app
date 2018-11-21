@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { WrappedFieldProps } from 'redux-form';
-import { TextField } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
 
 interface TextInputProps {
   label: string;

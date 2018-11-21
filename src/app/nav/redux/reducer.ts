@@ -1,18 +1,49 @@
 import { AppAction } from '../../interfaces';
-import { AppActionCategory, AppCategories } from '../interfaces';
+import { AppNavAction, AppCategories } from '../interfaces';
 import * as types from './types';
-import * as helpers from '../../../helpers';
 
 const INITIAL_STATE: AppCategories = {
-  activated: 'all',
-  categoriesList: ['all', 'work', 'private', 'health'],
+  activated: null,
+  categoriesList: [],
+  basicTags: [],
+  customTags: [],
   expanded: false,
+  loaded: false,
 };
 
-export default function categoriesReducer(
-  state: AppCategories = INITIAL_STATE,
-  action: AppAction & AppActionCategory) {
+export default function categoriesReducer(state: AppCategories = INITIAL_STATE, action: AppAction & AppNavAction) {
   switch (action.type) {
+    case types.GET_CATEGORIES_REQUEST: {
+      return {
+        ...state,
+        loaded: false,
+      };
+    }
+    case types.GET_CATEGORIES_SUCCESS: {
+      return {
+        ...state,
+        loaded: true,
+        categoriesList: action.payload,
+      };
+    }
+    case types.GET_CUSTOM_TAGS_SUCCESS: {
+      return {
+        ...state,
+        customTags: action.payload ? action.payload : [],
+      };
+    }
+    case types.GET_BASIC_TAGS_SUCCESS: {
+      return {
+        ...state,
+        basicTags: action.payload ? action.payload : [],
+      };
+    }
+    case types.GET_CATEGORIES_FAILED: {
+      return {
+        ...state,
+        loaded: true,
+      };
+    }
     case types.TOGGLE_CATEGORIES: {
       return {
         ...state,
@@ -22,22 +53,7 @@ export default function categoriesReducer(
     case types.ACTIVATE_CATEGORY: {
       return {
         ...state,
-        activated: (state.categoriesList.includes(action.category) ? action.category : state.activated),
-      };
-    }
-    case types.DELETE_CATEGORY: {
-      return {
-        ...state,
-        categoriesList: state.categoriesList.filter((c: string) => c !== action.category),
-      };
-    }
-    case types.ADD_CATEGORY: {
-      const newCategories = (!state.categoriesList.includes(action.category))
-        ? helpers.concatArrayUnique(state.categoriesList, [action.category])
-        : state.categoriesList;
-      return {
-        ...state,
-        categoriesList: newCategories,
+        activated: (action.payload) ? action.payload : state.activated,
       };
     }
     default: {

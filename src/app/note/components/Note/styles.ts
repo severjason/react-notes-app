@@ -8,6 +8,7 @@ const NoteStyles = styled.div`
     width: 100%;
     max-width: 43rem;
     margin: 0 auto;
+    padding: .5rem;
   
     .card-action {
       &:hover {
@@ -19,7 +20,10 @@ const NoteStyles = styled.div`
   
   .note-category {
     height: 1.7rem;
-    margin: .2rem .2rem .2rem 0;
+    margin: .2rem;
+    border-radius: .2rem;
+    font-size: inherit;
+    line-height: 1;
   }
   
   .note-card {
@@ -57,6 +61,10 @@ const NoteStyles = styled.div`
   .note-tag {
     height: 1.5rem;
     margin: .1rem .1rem .1rem 0;
+  }
+  
+  .hidden {
+    display: none;
   }
 
 @media all and (max-width: 767px) {

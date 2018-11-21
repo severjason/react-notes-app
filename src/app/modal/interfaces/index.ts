@@ -1,12 +1,11 @@
-import { AppAction, AppCategories, AppNotes } from '../../interfaces';
-
-export interface AppActionTags extends AppAction {
-    tag: string;
-}
+import { AppAction, AppCategories, AppNote } from '../../interfaces';
 
 export interface AppModalProps {
-  modal: AppModal & AppTags;
-  notes: AppNotes;
+  modal: AppModal;
+  categories: AppCategories;
+}
+
+export interface AppModalPropsWithFirebase extends AppModalProps {
   categories: AppCategories;
 }
 
@@ -20,14 +19,6 @@ export interface AppModal {
   opened: boolean;
   openedForUpdate: boolean;
   noteId: string | null;
-}
-
-export interface AppTags {
-    basicTags: string[];
-    customTags: string[];
-}
-
-export interface AppTagsActions {
-   addCustomTag(tag: string): AppActionTags;
-   deleteCustomTag(tag: string): AppActionTags;
+  note: AppNote | null;
+  noteLoaded?: boolean;
 }

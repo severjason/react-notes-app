@@ -1,27 +1,37 @@
-import { AppAction } from '../../interfaces';
+import { AppAction, AppCategory } from '../../interfaces';
+import { AppTag } from '../../nav/interfaces';
 
-export interface AppActionNote extends AppAction {
-  note: AppNote;
+export interface AppActionNote {
+  type: string;
+  note?: AppNote;
+  payload: any;
 }
 
 export interface AppNote {
-  id: string;
+  id?: string;
   title: string;
-  categories: string[];
+  uid: string;
+  category: AppCategory | null;
   color: string;
-  tags: string[];
+  tags: AppTag[];
   text: string;
   expanded: boolean;
 }
 
 export interface NoteProps {
-  notes: AppNotes;
-  activeCategory: string;
+  userId?: string;
+  note: AppNote | null;
+  error?: any;
+  noteIsLoaded?: boolean;
+  activeCategory: string | null;
 }
 
 export interface AppNotesState {
-  byId: AppNotes;
-  allIds: string[];
+  allNotes: AppNote[];
+  notesAreLoaded: boolean;
+  viewedNote: AppNote | null;
+  viewedNoteLoaded: boolean;
+  error: any;
 }
 
 export interface AppNotes {
@@ -30,9 +40,13 @@ export interface AppNotes {
 
 export interface AppNoteActions {
 
-  getNotes(): AppAction;
+  getNotes(uid: string): AppAction;
 
-  toggleNote(id: string): AppAction;
+  getNote(id: string): AppActionNote;
+
+  getNoteForUpdate(id: string): AppActionNote;
+
+  toggleNote(id: any, expanded: boolean): AppAction;
 
   addNote(note: AppNote): AppActionNote;
 

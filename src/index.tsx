@@ -21,6 +21,10 @@ body {
   margin: 0;
   padding: 0;
   min-width: 300px;
+  
+  div.modal-paper {
+    margin: 1rem;
+  }
 }
 
 * {
@@ -31,18 +35,18 @@ body {
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
-    <Provider store={store}>
-        <ThemeProvider theme={mainTheme}>
-          <FirebaseAuthProvider>
-            <BrowserRouter>
-                <GlobalStyles>
-                    <Routes/>
-                </GlobalStyles>
-            </BrowserRouter>
-          </FirebaseAuthProvider>
-        </ThemeProvider>
-    </Provider>,
-    document.getElementById('root') as HTMLElement
+  <Provider store={store}>
+    <ThemeProvider theme={mainTheme}>
+      <FirebaseAuthProvider>
+        <BrowserRouter>
+          <GlobalStyles>
+            <Routes/>
+          </GlobalStyles>
+        </BrowserRouter>
+      </FirebaseAuthProvider>
+    </ThemeProvider>
+  </Provider>,
+  document.getElementById('root') as HTMLElement
 );
 
 registerServiceWorker();

@@ -1,6 +1,11 @@
 import * as React from 'react';
-import { IconButton, Input, withStyles, Tooltip } from '@material-ui/core';
-import { Add, Check, Close } from '@material-ui/icons';
+import IconButton from '@material-ui/core/IconButton';
+import Input from '@material-ui/core/Input';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Tooltip from '@material-ui/core/Tooltip';
+import Add from '@material-ui/icons/Add';
+import Check from '@material-ui/icons/Check';
+import Close from '@material-ui/icons/Close';
 import AddCategoryStyles from './styles';
 import { ChangeEvent } from 'react';
 import { mainTheme } from '../../../../styles/themes';
@@ -10,6 +15,7 @@ interface AddCategoryProps {
   inputValue: string;
   showInput: () => void;
   hideInput: () => void;
+  onKeyPress: (e: any) => void;
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   addCategory: (category: string) => void;
   inputIsDisabled: boolean;
@@ -24,7 +30,7 @@ const inputStyles = (): any => ({
   },
 });
 
-const AddCategory: React.StatelessComponent<AddCategoryProps> = (
+const AddCategory: React.FunctionComponent<AddCategoryProps> = (
   {
     inputShowed,
     inputValue,
@@ -33,7 +39,8 @@ const AddCategory: React.StatelessComponent<AddCategoryProps> = (
     onInputChange,
     inputIsDisabled,
     addCategory,
-    classes
+    classes,
+    onKeyPress,
   }) => (
   <AddCategoryStyles>
     <Tooltip title="Add new category">
@@ -43,6 +50,7 @@ const AddCategory: React.StatelessComponent<AddCategoryProps> = (
     </Tooltip>
     <div className={`add-category-input-container ${inputShowed ? '' : 'hidden'}`}>
       <Input
+        autoFocus={true}
         value={inputValue}
         type="text"
         inputProps={{
@@ -54,11 +62,7 @@ const AddCategory: React.StatelessComponent<AddCategoryProps> = (
         classes={{
           underline: classes.cssUnderline,
         }}
-        onKeyPress={(e) => {
-          if (e.key === 'Enter') {
-            addCategory(inputValue);
-          }
-        }}
+        onKeyPress={onKeyPress}
       />
       <IconButton
         onClick={() => addCategory(inputValue)}
@@ -73,5 +77,5 @@ const AddCategory: React.StatelessComponent<AddCategoryProps> = (
     </div>
   </AddCategoryStyles>
 );
-
-export default withStyles(inputStyles)(AddCategory);
+// @ts-ignore
+export default withStyles(inputStyles)(React.memo(AddCategory));
