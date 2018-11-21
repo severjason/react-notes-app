@@ -22,7 +22,7 @@ const NoteModalStyles = styled.div`
     margin: .2rem;
     height: 2rem;
     line-height: 1;
-    font-size: inherit;
+    font-size: 12px;
     
     &.active {
       background-color: rgba(0, 0, 0, 0.08);
@@ -42,7 +42,7 @@ const NoteModalStyles = styled.div`
   }
 
 @media all and (max-width: 767px) {
-
+  padding: .5rem;
 }
 `;
 

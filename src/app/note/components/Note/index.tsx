@@ -11,6 +11,7 @@ import Card from '@material-ui/core/Card';
 import { ReactNode } from 'react';
 import NoteButtons from './NoteButtons';
 import NoteStyles from './styles';
+import { AppTag } from '../../../nav/interfaces';
 
 interface AppNoteProps {
   actions: AppNoteActions & AppModalActions;
@@ -32,8 +33,8 @@ class Note extends React.PureComponent<AppNoteProps & AppNote, {}> {
 
   private getTags(): ReactNode[] {
     const {tags} = this.props;
-    return tags.map((tag: string, index: number) =>
-      <Chip className={`note-tag`} label={tag} key={index}/>);
+    return tags.map((tag: AppTag, index: number) =>
+      <Chip className={`note-tag`} label={tag.name} key={index}/>);
   }
 
   private toggleNote = () => {

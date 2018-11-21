@@ -1,4 +1,5 @@
 import { AppAction, AppCategory } from '../../interfaces';
+import { AppTag } from '../../nav/interfaces';
 
 export interface AppActionNote {
   type: string;
@@ -12,7 +13,7 @@ export interface AppNote {
   uid: string;
   category: AppCategory | null;
   color: string;
-  tags: string[];
+  tags: AppTag[];
   text: string;
   expanded: boolean;
 }

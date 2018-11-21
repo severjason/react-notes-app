@@ -2,7 +2,7 @@ import * as noteTypes from './types';
 // import * as modalTypes from '../../modal/redux/types';
 // import * as navTypes from '../../nav/redux/types';
 import { AppActionNote, AppNotesState } from '../interfaces';
-import { AppAction, AppActionCategory, AppActionTags } from '../../interfaces';
+import { AppAction, AppNavAction } from '../../interfaces';
 
 const INITIAL_STATE: AppNotesState = {
   allNotes: [],
@@ -13,7 +13,7 @@ const INITIAL_STATE: AppNotesState = {
 };
 
 export default function notesReducer(state: AppNotesState = INITIAL_STATE,
-                                     action: AppAction & AppActionNote & AppActionTags & AppActionCategory) {
+                                     action: AppAction & AppActionNote & AppNavAction) {
   switch (action.type) {
     case noteTypes.GET_ALL_NOTES_REQUEST: {
       return {

@@ -2,8 +2,8 @@ import * as React from 'react';
 import { ChangeEvent } from 'react';
 import * as helpers from '../../../../helpers';
 import NoteModalStyles from './styles';
-import { Tags, ModalButtons, ColorCheckboxes, CategoriesCheckboxes, AddTag, ModalTitle } from '../../components';
-import { AppTagsActions, AppModalActions, AppTags, AppModal } from '../../interfaces';
+import { ModalButtons, ColorCheckboxes, CategoriesCheckboxes, ModalTitle, Tags, AddTag } from '../../components';
+import { AppModalActions, AppModal } from '../../interfaces';
 import { AppNoteActions, AppNote } from '../../../note/interfaces';
 import { AppCategories, AppCategory } from '../../../interfaces';
 import Dialog from '@material-ui/core/Dialog';
@@ -12,15 +12,16 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { NOTES_COLORS } from '../../../../constants';
+import { AppNavActions, AppTag } from '../../../nav/interfaces';
 
 interface AppNoteModalProps {
   userId: string;
-  modal: AppModal & AppTags;
+  modal: AppModal;
   categories: AppCategories;
 }
 
 interface AppNoteModalDispatch {
-  actions: AppTagsActions & AppModalActions & AppNoteActions;
+  actions: AppModalActions & AppNoteActions & AppNavActions;
 }
 
 interface AppNoteModalState {
@@ -99,12 +100,12 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     });
   }
 
-  private handleTagClick = (clickedTag: string): void => {
+  private handleTagClick = (clickedTag: AppTag): void => {
     const {note} = this.state;
     this.setState({
       note: {
         ...note,
-        tags: helpers.toggleStringInArray(note.tags, clickedTag),
+        tags: helpers.toggleTagInArray(note.tags, clickedTag),
       }
     });
   }
@@ -120,7 +121,12 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
 
   private addNewTag = (): void => {
     const {note, newTag} = this.state;
-    this.setState({tags: note.tags.concat(newTag)});
+    const {userId, actions} = this.props;
+    const tag = {name: newTag, uid: userId};
+    this.setState({tags: [...note.tags, tag]}, () => {
+      actions.addTag(tag);
+      this.resetNewTag();
+    });
   }
 
   private addNoteIsDisabled = (): boolean => {
@@ -129,7 +135,9 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     return !(note.title) || (modal.openedForUpdate && !modal.noteLoaded);
   }
 
-  private addTagIsDisabled = (tags: string[]): boolean => tags.includes(this.state.newTag.toLowerCase());
+  private isTagExists = (tags: AppTag[], tagToCheck: AppTag): boolean => {
+    return tags.filter(tag => tag.name === tagToCheck.name.toLowerCase()).length !== 0;
+  }
 
   private addNote = (): void => {
     const { actions, userId } = this.props;
@@ -156,15 +164,16 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
   }
 
   public render() {
-    const {openedForUpdate, basicTags, customTags} = this.props.modal;
-    const allTags = basicTags.concat(customTags);
-    const {actions, modal} = this.props;
+    const {openedForUpdate} = this.props.modal;
+    const {actions, modal, categories} = this.props;
+    const tags = [...categories.basicTags, ...categories.customTags];
     const {note, newTag} = this.state;
     return (
       <Dialog
-        className={`${note.color}`}
         open={modal.opened}
         onClose={this.closeDialog}
+        disableBackdropClick={true}
+        classes={{paper: 'modal-paper'}}
       >
         <NoteModalStyles>
           <p className="modal-header">
@@ -196,32 +205,25 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
             <FormLabel className="form-label" component="legend">Tags:</FormLabel>
             <FormGroup row={true}>
               <Tags
-                tagsList={basicTags}
-                deleteIcon={false}
+                tagsList={tags}
                 note={note}
-                deleteTag={actions.deleteCustomTag}
+                isTagExists={this.isTagExists}
                 handleTagClick={this.handleTagClick}
-              />
-              <Tags
-                tagsList={customTags}
-                deleteIcon={true}
-                note={note}
                 deleteTag={actions.deleteCustomTag}
-                handleTagClick={this.handleTagClick}
+/*                deleteTag={actions.deleteCustomTag}
+                handleTagClick={this.handleTagClick}*/
               />
             </FormGroup>
           </FormControl>
 
           <FormControl className="form-control">
-            <AddTag
+           <AddTag
               newTag={newTag}
               maxLength={this.maxNewTagLength}
-              tagButtonDisabled={this.addTagIsDisabled(allTags) || !newTag}
+              tagButtonDisabled={this.isTagExists(tags, {name: newTag}) || !newTag}
               onTagChange={this.handleNewTagChange}
-              addCustomTag={actions.addCustomTag}
               addNewTag={this.addNewTag}
-              resetNewTag={this.resetNewTag}
-            />
+           />
           </FormControl>
 
           <FormControl className="form-control">

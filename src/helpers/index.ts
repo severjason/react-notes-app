@@ -1,9 +1,11 @@
 // if array contains value - removes it from array
 // else - adds it to array
-import { AppCategory } from '../app/nav/interfaces';
+import { AppCategory, AppTag } from '../app/nav/interfaces';
 
-export function toggleStringInArray(array: string[], value: string): string[] {
-    return array.includes(value) ? array.filter((s: string) => s !== value) : array.concat(value);
+export function toggleTagInArray(array: AppTag[], value: AppTag): any {
+  return array.filter(tag => tag.id === value.id).length !== 0
+    ? array.filter(tag => tag.id !== value.id)
+    : array.concat(value);
 }
 
 // concat two arrays without duplicate values

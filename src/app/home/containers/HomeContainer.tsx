@@ -50,10 +50,8 @@ export default compose(
       const {categories, notes} = state;
       return {
         categories: {
+          ...categories,
           categoriesList: filterCategories(categories.categoriesList),
-          activated: categories.activated,
-          expanded: categories.expanded,
-          loaded: categories.loaded,
         },
         notes: notes.allNotes,
         notesAreLoaded: notes.notesAreLoaded,

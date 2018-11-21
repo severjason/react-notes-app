@@ -4,7 +4,7 @@ import { bindActionCreators, Dispatch, compose } from 'redux';
 import * as navActions from '../redux/actions';
 import * as modalActions from '../../modal/redux/actions';
 import { logoutRequest } from '../../auth/redux/actions';
-import { AppCategories, AppCategoriesActions, AppCategory } from '../interfaces';
+import { AppCategories, AppNavActions, AppCategory } from '../interfaces';
 import { AppLoginActions } from '../../auth/interfaces';
 import { AppAction, AppModalActions, AppWithFirebaseAuthProps } from '../../interfaces';
 import { NavBar } from '../components';
@@ -18,7 +18,7 @@ interface NavContainerProps {
 }
 
 interface NavContainerDispatch {
-  actions: AppCategoriesActions & AppModalActions & AppLoginActions;
+  actions: AppNavActions & AppModalActions & AppLoginActions;
 }
 
 interface NavState {
@@ -53,7 +53,10 @@ class NavContainer extends React.Component<NavContainerProps
                      prevState: Readonly<NavState>, snapshot?: any): void {
     if (prevProps.firebaseUser.auth.uid && prevProps.firebaseUser.auth.uid !== prevState.uid) {
       const {actions, firebaseUser} = this.props;
-      this.setState({uid: firebaseUser.auth.uid}, () => actions.getCategories(this.state.uid));
+      this.setState({uid: firebaseUser.auth.uid}, () => {
+        actions.getTags(this.state.uid);
+        actions.getCategories(this.state.uid);
+      });
     }
   }
 
@@ -71,10 +74,9 @@ export default compose(
     ({ categories}: {categories: AppCategories}) => {
       return {
         categories: {
+          ...categories,
           categoriesList: filterCategories(categories.categoriesList),
-          activated: categories.activated,
-          expanded: categories.expanded,
-        }
+        },
       };
     },
     (dispatch: Dispatch<AppAction>) => ({

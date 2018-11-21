@@ -1,15 +1,17 @@
 import { AppAction } from '../../interfaces';
-import { AppActionCategory, AppCategories } from '../interfaces';
+import { AppNavAction, AppCategories } from '../interfaces';
 import * as types from './types';
 
 const INITIAL_STATE: AppCategories = {
   activated: null,
   categoriesList: [],
+  basicTags: [],
+  customTags: [],
   expanded: false,
   loaded: false,
 };
 
-export default function categoriesReducer(state: AppCategories = INITIAL_STATE, action: AppAction & AppActionCategory) {
+export default function categoriesReducer(state: AppCategories = INITIAL_STATE, action: AppAction & AppNavAction) {
   switch (action.type) {
     case types.GET_CATEGORIES_REQUEST: {
       return {
@@ -22,6 +24,18 @@ export default function categoriesReducer(state: AppCategories = INITIAL_STATE, 
         ...state,
         loaded: true,
         categoriesList: action.payload,
+      };
+    }
+    case types.GET_CUSTOM_TAGS_SUCCESS: {
+      return {
+        ...state,
+        customTags: action.payload,
+      };
+    }
+    case types.GET_BASIC_TAGS_SUCCESS: {
+      return {
+        ...state,
+        basicTags: action.payload,
       };
     }
     case types.GET_CATEGORIES_FAILED: {

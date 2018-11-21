@@ -3,21 +3,22 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch, compose } from 'redux';
 import * as modalActions from '../redux/actions';
 import * as notesActions from '../../note/redux/actions';
+import * as navActions from '../../nav/redux/actions';
 import {
   AppAction,
   AppCategories,
   AppModal,
-  AppTags,
   AppWithFirebaseAuthProps
 } from '../../interfaces';
 import { NoteModal } from '../components';
-import { AppModalProps, AppModalPropsWithFirebase, AppModalActions, AppTagsActions } from '../interfaces';
+import { AppModalProps, AppModalPropsWithFirebase, AppModalActions } from '../interfaces';
 import { AppNoteActions } from '../../note/interfaces';
 import { filterCategories } from '../../../helpers';
 import withFirebaseAuth from '../../hocs/withFirebaseAuth';
+import { AppNavActions } from '../../nav/interfaces';
 
 interface AppHomeDispatch {
-  actions: AppTagsActions & AppModalActions & AppNoteActions;
+  actions: AppModalActions & AppNoteActions & AppNavActions;
 }
 
 class ModalContainer extends
@@ -40,16 +41,15 @@ export default compose(
   withFirebaseAuth,
   connect<AppModalProps, AppHomeDispatch>(
     ({categories, modal}:
-       { categories: AppCategories, modal: AppTags & AppModal }) => ({
+       { categories: AppCategories, modal: AppModal }) => ({
       categories: {
+        ...categories,
         categoriesList: filterCategories(categories.categoriesList),
-        activated: categories.activated,
-        expanded: categories.expanded,
       },
       modal,
     }),
     (dispatch: Dispatch<AppAction>) => ({
-      actions: bindActionCreators({...notesActions, ...modalActions}, dispatch)
+      actions: bindActionCreators({...notesActions, ...modalActions, ...navActions}, dispatch)
     })
   )
 )(ModalContainer);

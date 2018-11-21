@@ -21,6 +21,10 @@ body {
   margin: 0;
   padding: 0;
   min-width: 300px;
+  
+  div.modal-paper {
+    margin: 1rem;
+  }
 }
 
 * {
