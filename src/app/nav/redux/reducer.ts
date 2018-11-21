@@ -5,7 +5,8 @@ import * as types from './types';
 const INITIAL_STATE: AppCategories = {
   activated: null,
   categoriesList: [],
-  tags: [],
+  basicTags: [],
+  customTags: [],
   expanded: false,
   loaded: false,
 };
@@ -25,10 +26,16 @@ export default function categoriesReducer(state: AppCategories = INITIAL_STATE, 
         categoriesList: action.payload,
       };
     }
-    case types.GET_TAGS_SUCCESS: {
+    case types.GET_CUSTOM_TAGS_SUCCESS: {
       return {
         ...state,
-        tags: action.payload,
+        customTags: action.payload,
+      };
+    }
+    case types.GET_BASIC_TAGS_SUCCESS: {
+      return {
+        ...state,
+        basicTags: action.payload,
       };
     }
     case types.GET_CATEGORIES_FAILED: {

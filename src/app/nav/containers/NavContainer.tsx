@@ -4,7 +4,7 @@ import { bindActionCreators, Dispatch, compose } from 'redux';
 import * as navActions from '../redux/actions';
 import * as modalActions from '../../modal/redux/actions';
 import { logoutRequest } from '../../auth/redux/actions';
-import { AppCategories, AppNavActions, AppCategory, AppTag } from '../interfaces';
+import { AppCategories, AppNavActions, AppCategory } from '../interfaces';
 import { AppLoginActions } from '../../auth/interfaces';
 import { AppAction, AppModalActions, AppWithFirebaseAuthProps } from '../../interfaces';
 import { NavBar } from '../components';
@@ -24,7 +24,6 @@ interface NavContainerDispatch {
 interface NavState {
   uid: string;
   categories: AppCategory[];
-  tags: AppTag[];
 }
 
 class NavContainer extends React.Component<NavContainerProps
@@ -47,7 +46,6 @@ class NavContainer extends React.Component<NavContainerProps
     this.state = {
       uid: this.props.firebaseUser.auth.uid,
       categories: this.props.categories.categoriesList,
-      tags: this.props.categories.tags,
     };
   }
 

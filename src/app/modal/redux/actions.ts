@@ -13,13 +13,3 @@ export const openModalForUpdate = (noteId: string): AppAction => ({
   type: types.OPEN_MODAL_FOR_UPDATE,
   id: noteId,
 });
-
-export const addCustomTag = (tag: string): any => ({
-  type: types.ADD_CUSTOM_TAG,
-  tag: tag,
-});
-
-export const deleteCustomTag = (tag: string): any => ({
-  type: types.DELETE_CUSTOM_TAG,
-  tag: tag,
-});

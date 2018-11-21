@@ -12,6 +12,7 @@ import * as React from 'react';
 export interface AppAction {
   type: string;
   id?: string;
+  payload?: any;
 }
 
 export interface AppState {

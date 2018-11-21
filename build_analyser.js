@@ -10,4 +10,4 @@ webpackConfigProd.plugins.push(
   })
 );
 
-require("react-scripts-ts/scripts/build");
+require("react-scripts-ts/scripts/build_analyser");

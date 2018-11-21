@@ -10,11 +10,13 @@ export interface AppNavAction extends AppAction {
 }
 
 export interface AppNavActions {
-  getCategories(uid: string): AppNavAction;
-  getTags(uid: string): AppNavAction;
+  getCategories(uid: string): AppAction;
+  getTags(uid: string): AppAction;
+  addTag(tag: AppTag): AppAction;
+  deleteCustomTag(id: string): AppAction;
   toggleCategories(): AppAction;
   activateCategory(category: AppCategory): AppNavAction;
-  deleteCategory(category: string): AppNavAction;
+  deleteCategory(id: string): AppAction;
   addCategory(category: string, uid: string): AppNavAction;
 }
 
@@ -25,15 +27,16 @@ export interface AppCategory {
 }
 
 export interface AppTag {
-  id: string;
+  id?: string;
   name: string;
-  uid: string;
+  uid?: string;
 }
 
 export interface AppCategories {
   activated: AppCategory | null;
   categoriesList: AppCategory[];
-  tags: AppTag[];
+  basicTags: AppTag[];
+  customTags: AppTag[];
   expanded: boolean;
   loaded?: boolean;
 }

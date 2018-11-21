@@ -1,19 +1,25 @@
 import * as types from './types';
 import { AppAction } from '../../interfaces';
-import { AppNavAction, AppCategory } from '../interfaces';
+import { AppNavAction, AppCategory, AppTag } from '../interfaces';
 
-export const getCategories = (uid: string): AppNavAction => ({
+export const getCategories = (uid: string): AppAction => ({
   type: types.GET_CATEGORIES_REQUEST,
-  payload: {
-    uid,
-  }
+  payload: uid
 });
 
-export const getTags = (uid: string): AppNavAction => ({
+export const getTags = (uid: string): AppAction => ({
   type: types.GET_TAGS_REQUEST,
-  payload: {
-    uid,
-  }
+  payload: uid
+});
+
+export const addTag = (tag: AppTag): AppAction => ({
+  type: types.ADD_TAG_REQUEST,
+  payload: tag,
+});
+
+export const deleteCustomTag = (id: string): AppAction => ({
+  type: types.DELETE_TAG_REQUEST,
+  payload: id,
 });
 
 export const toggleCategories = (): AppAction => ({
@@ -25,11 +31,9 @@ export const activateCategory = (category: AppCategory): AppNavAction => ({
   payload: category,
 });
 
-export const deleteCategory = (id: string): AppNavAction => ({
+export const deleteCategory = (id: string): AppAction => ({
   type: types.DELETE_CATEGORY_REQUEST,
-  payload: {
-    id
-  },
+  payload: id,
 });
 
 export const addCategory = (category: string, uid: string): AppNavAction => ({

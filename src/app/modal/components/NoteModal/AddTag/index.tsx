@@ -10,18 +10,12 @@ interface AppAddTag {
   newTag: string;
   maxLength: number;
   tagButtonDisabled: boolean;
-
   onTagChange(e: ChangeEvent<HTMLInputElement>): void;
-
-  addCustomTag(tag: string): any;
-
-  resetNewTag(): void;
-
   addNewTag(): void;
 }
 
 const AddTag: React.FunctionComponent<AppAddTag> =
-  ({newTag, maxLength, tagButtonDisabled, onTagChange, addCustomTag, resetNewTag, addNewTag}) => {
+  ({newTag, maxLength, tagButtonDisabled, onTagChange, addNewTag}) => {
     return (
       <AddTagStyles>
         <Grid container={true} spacing={8} alignItems="flex-end">
@@ -38,14 +32,7 @@ const AddTag: React.FunctionComponent<AppAddTag> =
                 maxLength: maxLength,
               }}
             />
-            <Button
-              disabled={tagButtonDisabled}
-              onClick={() => {
-                addCustomTag(newTag);
-                addNewTag();
-                resetNewTag();
-              }}
-            >
+            <Button disabled={tagButtonDisabled} onClick={addNewTag}>
               Add tag
             </Button>
           </Grid>

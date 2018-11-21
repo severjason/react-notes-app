@@ -14,13 +14,14 @@ import Close from '@material-ui/icons/Close';
 import CategoryItemStyles from './styles';
 import { ReactElement } from 'react';
 import { AppNavAction, AppCategory } from '../../interfaces';
+import { AppAction } from '../../../interfaces';
 
 interface CategoryItemProps {
   category: string;
   isActivated: boolean;
   categoryId: string;
   activateCategory(category: AppCategory): AppNavAction;
-  deleteCategory(category: string): AppNavAction;
+  deleteCategory(category: string): AppAction;
 }
 
 const getIcon = (category: string): ReactElement<any> => {
@@ -40,10 +41,12 @@ const getIcon = (category: string): ReactElement<any> => {
 
 class CategoryItem extends React.Component<CategoryItemProps> {
 
-  /*shouldComponentUpdate(nextProps: CategoryItemProps, nextState: any) {
-    const {isActivated, categoryId} = this.props;
-    return isActivated !== nextProps.isActivated || categoryId !== nextProps.categoryId;
-  }*/
+  shouldComponentUpdate(nextProps: CategoryItemProps, nextState: any) {
+    const {isActivated, categoryId, category} = this.props;
+    return isActivated !== nextProps.isActivated
+      || categoryId !== nextProps.categoryId
+      || category !== nextProps.category;
+  }
 
   deleteCategory = () => {
     const {categoryId, deleteCategory} = this.props;
