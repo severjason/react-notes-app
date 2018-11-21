@@ -40,9 +40,17 @@ const NoteModalStyles = styled.div`
       background-color: rgb(206, 206, 206);
     }
   }
+  .checkboxes-container {
+    justify-content: center;
+  }
 
 @media all and (max-width: 767px) {
   padding: .5rem;
+}
+@media all and (max-width: 767px) {
+  .color-checkbox {
+    padding: 1px;
+  }
 }
 `;
 

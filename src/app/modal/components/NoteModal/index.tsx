@@ -185,7 +185,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
 
           <FormControl className="form-control">
             <FormLabel className="form-label" component="legend">Color:</FormLabel>
-            <FormGroup row={true}>
+            <FormGroup row={true} className="checkboxes-container">
               <ColorCheckboxes note={note} colors={NOTES_COLORS} onColorChange={this.handleColorChange}/>
             </FormGroup>
           </FormControl>
