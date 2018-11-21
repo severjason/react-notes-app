@@ -29,13 +29,13 @@ export default function categoriesReducer(state: AppCategories = INITIAL_STATE, 
     case types.GET_CUSTOM_TAGS_SUCCESS: {
       return {
         ...state,
-        customTags: action.payload,
+        customTags: action.payload ? action.payload : [],
       };
     }
     case types.GET_BASIC_TAGS_SUCCESS: {
       return {
         ...state,
-        basicTags: action.payload,
+        basicTags: action.payload ? action.payload : [],
       };
     }
     case types.GET_CATEGORIES_FAILED: {
