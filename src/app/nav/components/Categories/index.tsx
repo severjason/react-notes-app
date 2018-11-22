@@ -2,6 +2,7 @@ import * as React from 'react';
 import { AppNavActions, AppCategory } from '../../interfaces';
 import { ChangeEvent, ReactNode } from 'react';
 import { CategoryItem, AddCategory } from '../../components';
+import { ExpandableContainer } from '../../../common';
 import CategoriesStyles from './styles';
 import MenuList from '@material-ui/core/MenuList';
 import Divider from '@material-ui/core/Divider';
@@ -77,7 +78,9 @@ class Categories extends React.Component<CategoriesProps
     return (
       <CategoriesStyles>
           <MenuList className="menu-list">
-            {this.getCategories()}
+            <ExpandableContainer>
+              {this.getCategories()}
+            </ExpandableContainer>
             <Divider/>
             <AddCategory
               inputValue={inputValue}

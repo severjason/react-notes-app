@@ -1,6 +1,7 @@
 import { AppAction } from '../../interfaces';
 import { AppNavAction, AppCategories } from '../interfaces';
 import * as types from './types';
+import * as authTypes from '../../auth/redux/types';
 
 const INITIAL_STATE: AppCategories = {
   activated: null,
@@ -54,6 +55,12 @@ export default function categoriesReducer(state: AppCategories = INITIAL_STATE, 
       return {
         ...state,
         activated: (action.payload) ? action.payload : state.activated,
+      };
+    }
+    case authTypes.USER_LOGOUT_REQUEST: {
+      return {
+        ...state,
+        expanded: false,
       };
     }
     default: {

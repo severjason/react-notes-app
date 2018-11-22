@@ -4,6 +4,7 @@ import Header from './Header';
 import NotFound from './NotFound';
 import ErrorBoundary from './ErrorBoundary';
 import ErrorPage from './ErrorPage';
+import ExpandableContainer from './ExpandableContainer';
 
 export {
   AlertDialog,
@@ -12,4 +13,5 @@ export {
   NotFound,
   ErrorBoundary,
   ErrorPage,
+  ExpandableContainer,
 };
