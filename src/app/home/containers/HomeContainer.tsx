@@ -38,7 +38,7 @@ class HomeContainer extends React.Component<HomeProps
     const {actions, categories, notes, match, notesAreLoaded, error} = this.props;
     return error
       ? <ErrorPage error={error}/>
-      : categories.loaded && notesAreLoaded
+      : categories.loaded && categories.basicTags.length !== 0 && notesAreLoaded
         ? <Home actions={actions} categories={categories} notes={notes} match={match}/>
         : <FullScreenLoading/>;
   }

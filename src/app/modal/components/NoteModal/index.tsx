@@ -2,7 +2,8 @@ import * as React from 'react';
 import { ChangeEvent } from 'react';
 import * as helpers from '../../../../helpers';
 import NoteModalStyles from './styles';
-import { ModalButtons, ColorCheckboxes, CategoriesCheckboxes, ModalTitle, Tags, AddTag } from '../../components';
+import { ModalButtons, ColorCheckboxes, CategoriesCheckboxes, ModalTitle } from '../../components';
+import { Tags } from '../../../nav/components';
 import { AppModalActions, AppModal } from '../../interfaces';
 import { AppNoteActions, AppNote } from '../../../note/interfaces';
 import { AppCategories, AppCategory } from '../../../interfaces';
@@ -26,7 +27,6 @@ interface AppNoteModalDispatch {
 
 interface AppNoteModalState {
   note: AppNote;
-  newTag: string;
 }
 
 export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalDispatch, {}> {
@@ -41,14 +41,11 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
       tags: [],
       expanded: false,
     },
-    newTag: ''
   };
 
   public state: AppNoteModalState = this.INITIAL_STATE;
 
   private maxTitleLength: number = 20;
-
-  private maxNewTagLength: number = 20;
 
   componentDidUpdate() {
     const {modal} = this.props;
@@ -110,33 +107,12 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
     });
   }
 
-  private handleNewTagChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    const value = e.target.value;
-    this.setState({newTag: value});
-  }
-
   private resetState = (): void => this.setState(this.INITIAL_STATE);
-
-  private resetNewTag = (): void => this.setState({newTag: ''});
-
-  private addNewTag = (): void => {
-    const {note, newTag} = this.state;
-    const {userId, actions} = this.props;
-    const tag = {name: newTag, uid: userId};
-    this.setState({tags: [...note.tags, tag]}, () => {
-      actions.addTag(tag);
-      this.resetNewTag();
-    });
-  }
 
   private addNoteIsDisabled = (): boolean => {
     const {note} = this.state;
     const {modal} = this.props;
     return !(note.title) || (modal.openedForUpdate && !modal.noteLoaded);
-  }
-
-  private isTagExists = (tags: AppTag[], tagToCheck: AppTag): boolean => {
-    return tags.filter(tag => tag.name === tagToCheck.name.toLowerCase()).length !== 0;
   }
 
   private addNote = (): void => {
@@ -165,9 +141,9 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
 
   public render() {
     const {openedForUpdate} = this.props.modal;
-    const {actions, modal, categories} = this.props;
+    const {actions, modal, categories, userId} = this.props;
     const tags = [...categories.basicTags, ...categories.customTags];
-    const {note, newTag} = this.state;
+    const {note} = this.state;
     return (
       <Dialog
         open={modal.opened}
@@ -205,25 +181,14 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
             <FormLabel className="form-label" component="legend">Tags:</FormLabel>
             <FormGroup row={true}>
               <Tags
-                tagsList={tags}
+                tags={tags}
                 note={note}
-                isTagExists={this.isTagExists}
-                handleTagClick={this.handleTagClick}
+                addTag={actions.addTag}
                 deleteTag={actions.deleteCustomTag}
-/*                deleteTag={actions.deleteCustomTag}
-                handleTagClick={this.handleTagClick}*/
+                handleTagClick={this.handleTagClick}
+                userId={userId}
               />
             </FormGroup>
-          </FormControl>
-
-          <FormControl className="form-control">
-           <AddTag
-              newTag={newTag}
-              maxLength={this.maxNewTagLength}
-              tagButtonDisabled={this.isTagExists(tags, {name: newTag}) || !newTag}
-              onTagChange={this.handleNewTagChange}
-              addNewTag={this.addNewTag}
-           />
           </FormControl>
 
           <FormControl className="form-control">

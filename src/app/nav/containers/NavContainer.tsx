@@ -61,10 +61,11 @@ class NavContainer extends React.Component<NavContainerProps
   }
 
   render() {
-    const {categories: {activated, expanded}, actions} = this.props;
+    const {categories: {activated, expanded, basicTags, customTags}, actions} = this.props;
     const {categories} = this.state;
+    const tags = [...basicTags, ...customTags];
     return (
-      <NavBar categories={categories} activated={activated} expanded={expanded} actions={actions}/>
+      <NavBar tags={tags} categories={categories} activated={activated} expanded={expanded} actions={actions}/>
     );
   }
 }

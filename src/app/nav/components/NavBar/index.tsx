@@ -1,7 +1,7 @@
 import * as React from 'react';
 import NavBarStyles from './styles';
 import { AppModalActions, AppWithFirebaseAuthProps, AppCategory } from '../../../interfaces';
-import { AppNavActions } from '../../interfaces';
+import { AppNavActions, AppTag } from '../../interfaces';
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -21,12 +21,13 @@ import { withFirebaseAuth } from '../../../hocs';
 interface NavBarProps {
   actions: AppNavActions & AppModalActions & AppLoginActions;
   categories: AppCategory[];
+  tags: AppTag[];
   expanded: boolean;
   activated: AppCategory | null;
 }
 
 const NavBar: React.FunctionComponent<NavBarProps & AppWithFirebaseAuthProps> =
-  ({categories, expanded, activated, actions, firebaseUser: {isAuthEmpty}}) => (
+  ({categories, tags, expanded, activated, actions, firebaseUser: {isAuthEmpty}}) => (
     <NavBarStyles>
       <AppBar
         className={`app-bar ${expanded ? 'opened' : ''}`}
@@ -34,7 +35,7 @@ const NavBar: React.FunctionComponent<NavBarProps & AppWithFirebaseAuthProps> =
       >
         <Toolbar className="toolbar">
           <div className="notes-actions">
-            {!isAuthEmpty &&
+            {!isAuthEmpty && !!categories.length && !!tags.length &&
             <IconButton
               className={`menu-button ${expanded ? 'hidden' : ''}`}
               color="inherit"
@@ -45,7 +46,7 @@ const NavBar: React.FunctionComponent<NavBarProps & AppWithFirebaseAuthProps> =
             <Typography variant="h6" color="inherit" className="header-title">
               Notes app
             </Typography>
-            {!isAuthEmpty &&
+            {!isAuthEmpty && !!categories.length && !!tags.length &&
             <Tooltip title="Create note">
               <IconButton color="inherit" aria-label="Menu" onClick={actions.openModal}>
                 <Add/>

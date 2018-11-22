@@ -33,14 +33,7 @@ const NoteModalStyles = styled.div`
     padding: .2rem 0;
   }
   
-  .tag {
-    margin: .1rem;
-    height: 2rem;
-    &.active {
-      background-color: rgb(206, 206, 206);
-    }
-  }
-  .checkboxes-container {
+   .checkboxes-container {
     justify-content: center;
   }
 

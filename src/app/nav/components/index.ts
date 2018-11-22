@@ -3,6 +3,7 @@ import AppDrawer from './Drawer';
 import Categories from './Categories';
 import CategoryItem from './CategoryItem';
 import AddCategory from './AddCategory';
+import Tags from './Tags';
 
 export {
   NavBar,
@@ -10,4 +11,5 @@ export {
   Categories,
   CategoryItem,
   AddCategory,
+  Tags,
 };
