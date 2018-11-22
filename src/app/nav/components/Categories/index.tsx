@@ -78,7 +78,7 @@ class Categories extends React.Component<CategoriesProps
     return (
       <CategoriesStyles>
           <MenuList className="menu-list">
-            <ExpandableContainer>
+            <ExpandableContainer heightLimit={320}>
               {this.getCategories()}
             </ExpandableContainer>
             <Divider/>
