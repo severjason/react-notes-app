@@ -13,6 +13,7 @@ export interface AppNavActions {
   getCategories(uid: string): AppAction;
   getTags(uid: string): AppAction;
   addTag(tag: AppTag): AppAction;
+  filterTag(tag: AppTag): AppAction;
   deleteCustomTag(id: string): AppAction;
   toggleCategories(): AppAction;
   activateCategory(category: AppCategory): AppNavAction;
@@ -37,6 +38,7 @@ export interface AppCategories {
   categoriesList: AppCategory[];
   basicTags: AppTag[];
   customTags: AppTag[];
+  filteredTags: AppTag[];
   expanded: boolean;
   loaded?: boolean;
 }

@@ -22,12 +22,13 @@ interface NavBarProps {
   actions: AppNavActions & AppModalActions & AppLoginActions;
   categories: AppCategory[];
   tags: AppTag[];
+  filteredTags: AppTag[];
   expanded: boolean;
   activated: AppCategory | null;
 }
 
 const NavBar: React.FunctionComponent<NavBarProps & AppWithFirebaseAuthProps> =
-  ({categories, tags, expanded, activated, actions, firebaseUser: {isAuthEmpty}}) => (
+  ({categories, tags, filteredTags, expanded, activated, actions, firebaseUser: {isAuthEmpty, auth}}) => (
     <NavBarStyles>
       <AppBar
         className={`app-bar ${expanded ? 'opened' : ''}`}
@@ -86,6 +87,9 @@ const NavBar: React.FunctionComponent<NavBarProps & AppWithFirebaseAuthProps> =
         categories={categories}
         expanded={expanded}
         activated={activated}
+        tags={tags}
+        filteredTags={filteredTags}
+        userId={auth.uid}
         toggleDrawer={actions.toggleCategories}
       />}
 

@@ -12,9 +12,11 @@ interface ExpandableContainerState {
   expanded: boolean;
 }
 
+const DEFAULT_HEIGHT_LIMIT: number = 300;
+
 class ExpandableContainer extends React.Component<ExpandableContainerProps, ExpandableContainerState> {
   static defaultProps = {
-    heightLimit: 300,
+    heightLimit: DEFAULT_HEIGHT_LIMIT,
   };
   private readonly containerRef: React.RefObject<any>;
 
@@ -36,8 +38,10 @@ class ExpandableContainer extends React.Component<ExpandableContainerProps, Expa
 
   private showButton = () => {
     const {expanded} = this.state;
+    const {heightLimit} = this.props;
+    const small = heightLimit < DEFAULT_HEIGHT_LIMIT / 2;
     return (
-      <IconButton onClick={this.toggleContainer}>
+      <IconButton onClick={this.toggleContainer} className={`${small ? 'small' : ''}`}>
         {expanded ? <ArrowUp /> : <ArrowDown/>}
       </IconButton>
     );

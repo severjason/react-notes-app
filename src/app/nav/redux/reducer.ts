@@ -2,12 +2,14 @@ import { AppAction } from '../../interfaces';
 import { AppNavAction, AppCategories } from '../interfaces';
 import * as types from './types';
 import * as authTypes from '../../auth/redux/types';
+import { toggleTagInArray } from '../../../helpers';
 
 const INITIAL_STATE: AppCategories = {
   activated: null,
   categoriesList: [],
   basicTags: [],
   customTags: [],
+  filteredTags: [],
   expanded: false,
   loaded: false,
 };
@@ -37,6 +39,12 @@ export default function categoriesReducer(state: AppCategories = INITIAL_STATE, 
       return {
         ...state,
         basicTags: action.payload ? action.payload : [],
+      };
+    }
+    case types.FILTER_TAG: {
+      return {
+        ...state,
+        filteredTags: toggleTagInArray(state.filteredTags, action.payload),
       };
     }
     case types.GET_CATEGORIES_FAILED: {

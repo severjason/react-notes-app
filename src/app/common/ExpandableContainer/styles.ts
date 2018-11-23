@@ -19,7 +19,11 @@ const ExpandableContainerStyles = styled<{heightLimit: number}, 'div'>('div')`
     justify-content: center;
     position: relative;
     z-index: 15;
-    background-color: rgba(255, 255, 255, .7);
+    background-color: rgba(255, 255, 255, .8);
+    
+    button.small {
+      padding: 2px;
+    }
   }
 `;
 

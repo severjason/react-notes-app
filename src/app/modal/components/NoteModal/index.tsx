@@ -14,6 +14,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { NOTES_COLORS } from '../../../../constants';
 import { AppNavActions, AppTag } from '../../../nav/interfaces';
+import { ExpandableContainer } from '../../../common';
 
 interface AppNoteModalProps {
   userId: string;
@@ -169,11 +170,13 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
           {!!this.getCategoriesList().length && <FormControl className="form-control">
             <FormLabel className="form-label" component="legend">Categories:</FormLabel>
             <FormGroup row={true}>
-              <CategoriesCheckboxes
-                note={note}
-                categories={this.getCategoriesList()}
-                onCategoryChange={this.handleCategoryChange}
-              />
+              <ExpandableContainer heightLimit={70}>
+                <CategoriesCheckboxes
+                  note={note}
+                  categories={this.getCategoriesList()}
+                  onCategoryChange={this.handleCategoryChange}
+                />
+              </ExpandableContainer>
             </FormGroup>
           </FormControl>}
 
@@ -181,12 +184,13 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
             <FormLabel className="form-label" component="legend">Tags:</FormLabel>
             <FormGroup row={true}>
               <Tags
-                tags={tags}
-                note={note}
+                allTags={tags}
+                noteTags={note.tags}
                 addTag={actions.addTag}
                 deleteTag={actions.deleteCustomTag}
-                handleTagClick={this.handleTagClick}
+                onTagClick={this.handleTagClick}
                 userId={userId}
+                heightLimit={62}
               />
             </FormGroup>
           </FormControl>

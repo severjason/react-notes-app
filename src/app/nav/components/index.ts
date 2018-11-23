@@ -4,6 +4,7 @@ import Categories from './Categories';
 import CategoryItem from './CategoryItem';
 import AddCategory from './AddCategory';
 import Tags from './Tags';
+import TagsWrapper from './TagsWrapper';
 
 export {
   NavBar,
@@ -12,4 +13,5 @@ export {
   CategoryItem,
   AddCategory,
   Tags,
+  TagsWrapper,
 };
