@@ -14,10 +14,11 @@ import {
   AppWithFirebaseAuthProps,
 } from '../../interfaces';
 import { Home } from '../components';
-import { filterCategories } from '../../../helpers';
 import FullScreenLoading from '../../common/loading/FullScreen';
 import { withFirebaseAuth } from '../../hocs';
 import { ErrorPage } from '../../common';
+import { getFilteredCategories } from '../../nav/redux/selectors';
+import { getFilteredNotes } from '../../note/redux/selectors';
 
 interface AppHomeDispatch {
   actions: AppAllActions;
@@ -35,10 +36,10 @@ class HomeContainer extends React.Component<HomeProps
   }
 
   render() {
-    const {actions, categories, notes, match, notesAreLoaded, error} = this.props;
+    const {actions, categories, tags, notes, match, notesAreLoaded, error} = this.props;
     return error
       ? <ErrorPage error={error}/>
-      : categories.loaded && categories.basicTags.length !== 0 && notesAreLoaded
+      : categories.loaded && tags.loaded && notesAreLoaded
         ? <Home actions={actions} categories={categories} notes={notes} match={match}/>
         : <FullScreenLoading/>;
   }
@@ -47,13 +48,11 @@ export default compose(
   withFirebaseAuth,
   connect<HomeProps, AppHomeDispatch>(
     (state: AppState & AppFirestore) => {
-      const {categories, notes} = state;
+      const {notes} = state;
       return {
-        categories: {
-          ...categories,
-          categoriesList: filterCategories(categories.categoriesList),
-        },
-        notes: notes.allNotes,
+        categories: getFilteredCategories(state),
+        tags: state.tags,
+        notes: getFilteredNotes(state),
         notesAreLoaded: notes.notesAreLoaded,
         error: notes.error,
       };

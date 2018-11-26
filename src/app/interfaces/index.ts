@@ -4,7 +4,7 @@ import {
   AppCategories,
   AppNavActions,
   AppNavAction,
-  AppCategory,
+  AppCategory, AppTagsState,
 } from '../nav/interfaces';
 import { RouteComponentProps, RouteProps } from 'react-router';
 import * as React from 'react';
@@ -19,17 +19,20 @@ export interface AppState {
   notes: AppNotesState;
   modal: AppModal;
   categories: AppCategories;
+  tags: AppTagsState;
 }
 
 export interface HomeProps {
   notes: AppNote[];
   notesAreLoaded?: boolean;
   categories: AppCategories;
+  tags: AppTagsState;
   error?: any;
 }
 
-export interface HomePropsWithFirebase extends HomeProps {
+export interface HomePropsWithFirebase {
   categories: AppCategories;
+  notes: AppNote[];
 }
 
 export interface AppRoute {

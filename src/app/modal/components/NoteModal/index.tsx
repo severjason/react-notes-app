@@ -13,13 +13,14 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { NOTES_COLORS } from '../../../../constants';
-import { AppNavActions, AppTag } from '../../../nav/interfaces';
+import { AppNavActions, AppTag, AppTagsState } from '../../../nav/interfaces';
 import { ExpandableContainer } from '../../../common';
 
 interface AppNoteModalProps {
   userId: string;
   modal: AppModal;
   categories: AppCategories;
+  tags: AppTagsState;
 }
 
 interface AppNoteModalDispatch {
@@ -142,8 +143,8 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
 
   public render() {
     const {openedForUpdate} = this.props.modal;
-    const {actions, modal, categories, userId} = this.props;
-    const tags = [...categories.basicTags, ...categories.customTags];
+    const {actions, modal, tags, userId} = this.props;
+    const allTags = [...tags.basicTags, ...tags.customTags];
     const {note} = this.state;
     return (
       <Dialog
@@ -184,13 +185,13 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
             <FormLabel className="form-label" component="legend">Tags:</FormLabel>
             <FormGroup row={true}>
               <Tags
-                allTags={tags}
+                allTags={allTags}
                 noteTags={note.tags}
                 addTag={actions.addTag}
                 deleteTag={actions.deleteCustomTag}
                 onTagClick={this.handleTagClick}
                 userId={userId}
-                heightLimit={62}
+                heightLimit={65}
               />
             </FormGroup>
           </FormControl>

@@ -19,8 +19,7 @@ function createAllNotesChannel(uid: string) {
         emit(notes);
       },
       (error: any) => emit(false, error));
-    return () => {
-    };
+    return () => {};
   });
 }
 
@@ -146,7 +145,6 @@ function* toggleNote(action: AppActionNote) {
 
 function* deleteNote(action: AppActionNote) {
   try {
-    // yield createNoteChannel(action.payload).close();
     yield call([fetchCollection(NOTES_COLLECTION).doc(action.payload), 'delete']);
     yield put({
       type: types.DELETE_NOTE_SUCCESS,

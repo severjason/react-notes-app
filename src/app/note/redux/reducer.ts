@@ -65,69 +65,6 @@ export default function notesReducer(state: AppNotesState = INITIAL_STATE,
         viewedNoteLoaded: false,
       };
     }
-/*    case noteTypes.TOGGLE_NOTE: {
-      // @ts-ignore
-      const toggledNote: AppNote = state.byId[action.id];
-      toggledNote.expanded = !toggledNote.expanded;
-      return {
-        ...state,
-        byId: {
-          ...state.byId,
-          [toggledNote.id]: toggledNote,
-        }
-      };
-
-    }
-    case noteTypes.DELETE_NOTE: {
-      const newObj = {};
-      Object.values(state.byId).map((note: AppNote) => {
-        if (note.id !== action.id) {
-          newObj[note.id] = note;
-        }
-      });
-      return {
-        ...state,
-        byId: newObj,
-        allIds: state.allIds.filter((id: string) => id !== action.id),
-      };
-    }
-    case noteTypes.ADD_NOTE:
-    case noteTypes.UPDATE_NOTE: {
-      return {
-        ...state,
-        byId: {
-          ...state.byId,
-          [action.payload.id]: action.payload,
-        },
-        allIds: [...state.allIds, action.payload.id]
-      };
-    }
-    case modalTypes.DELETE_CUSTOM_TAG: {
-      const filtered = {};
-      Object.values(state.byId).map((note: AppNote) => {
-        filtered[note.id] = {
-          ...note,
-          tags: note.tags.filter((tag: string) => tag !== action.tag),
-        };
-      });
-      return {
-        ...state,
-        byId: filtered,
-      };
-    }*/
-    /*case navTypes.DELETE_CATEGORY_SUCCESS: {
-      const filtered = {};
-      Object.values(state.byId).map((note: AppNote) => {
-        filtered[note.id] = {
-          ...note,
-          category: note.category === action.payload ? null : note.category,
-        };
-      });
-      return {
-        ...state,
-        byId: filtered,
-      };
-    }*/
     default: {
       return state;
     }

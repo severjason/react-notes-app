@@ -33,12 +33,18 @@ export interface AppTag {
   uid?: string;
 }
 
-export interface AppCategories {
-  activated: AppCategory | null;
-  categoriesList: AppCategory[];
+export interface AppTagsState {
   basicTags: AppTag[];
   customTags: AppTag[];
   filteredTags: AppTag[];
+  loaded?: boolean;
+  error: any;
+}
+
+export interface AppCategories {
+  activated: AppCategory | null;
+  categoriesList: AppCategory[];
   expanded: boolean;
   loaded?: boolean;
+  error: any;
 }
