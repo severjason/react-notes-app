@@ -1,7 +1,15 @@
 import styled from 'styled-components';
 
 const DrawerStyles = styled.div`
-  width: ${props => props.theme.drawer.widthRem}rem;
+  // width: ${props => props.theme.drawer.widthRem}rem;
+  .app-drawer {
+    & > div {
+      width: ${props => props.theme.drawer.widthRem}rem;
+    }
+  }
+  .list-container {
+    padding: 0;
+  }
   .button-container {
     height: 64px;
     display: flex;

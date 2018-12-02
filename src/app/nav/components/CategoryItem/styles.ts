@@ -3,6 +3,11 @@ import styled from 'styled-components';
 const CategoryItemStyles = styled.div`
   position: relative;
   width: ${props => props.theme.drawer.widthRem}rem;
+  height: ${props => props.theme.categories.menuHeightPx}px;
+ 
+  .link {
+    text-decoration: none;
+  }
  
   .category-menu-item {
     padding-right: 40px;
@@ -26,7 +31,8 @@ const CategoryItemStyles = styled.div`
     position: absolute;
     top: 50%;
     right: 0;
-    margin-top: -32px;
+    padding: 11px;
+    margin-top: -${props => props.theme.categories.menuHeightPx / 2}px;
     opacity: 0;
     
     &:hover {

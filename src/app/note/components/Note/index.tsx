@@ -12,6 +12,8 @@ import { ReactNode } from 'react';
 import NoteButtons from './NoteButtons';
 import NoteStyles from './styles';
 import { AppTag } from '../../../nav/interfaces';
+// @ts-ignore
+import _isEqual from 'lodash/isEqual';
 
 interface AppNoteProps {
   actions: AppNoteActions & AppModalActions;
@@ -19,7 +21,17 @@ interface AppNoteProps {
   activeCategory?: string | null;
 }
 
-class Note extends React.PureComponent<AppNoteProps & AppNote, {}> {
+class Note extends React.Component<AppNoteProps & AppNote, {}> {
+
+  shouldComponentUpdate(nextProps: AppNoteProps & AppNote, nextState: any) {
+    const {activeCategory, title, expanded, color, text, tags} = this.props;
+    return activeCategory !== nextProps.activeCategory
+      || title !== nextProps.title
+      || expanded !== nextProps.expanded
+      || color !== nextProps.color
+      || text !== nextProps.text
+      || !_isEqual(tags, nextProps.tags);
+  }
 
   private getNoteExpandedClass(): string {
     const {expanded, fullView} = this.props;

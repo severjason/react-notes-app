@@ -4,17 +4,18 @@ import { bindActionCreators, Dispatch, compose } from 'redux';
 import * as navActions from '../redux/actions';
 import * as modalActions from '../../modal/redux/actions';
 import { logoutRequest } from '../../auth/redux/actions';
-import { AppCategories, AppNavActions, AppCategory } from '../interfaces';
+import { AppCategories, AppNavActions, AppCategory, AppTagsState } from '../interfaces';
 import { AppLoginActions } from '../../auth/interfaces';
-import { AppAction, AppModalActions, AppWithFirebaseAuthProps } from '../../interfaces';
+import { AppAction, AppModalActions, AppState, AppWithFirebaseAuthProps } from '../../interfaces';
 import { NavBar } from '../components';
-import { filterCategories } from '../../../helpers';
+import { getFilteredCategories } from '../redux/selectors';
 import withFirebaseAuth from '../../hocs/withFirebaseAuth';
 // @ts-ignore
 import _isEqual from 'lodash/isEqual';
 
 interface NavContainerProps {
   categories: AppCategories;
+  tags: AppTagsState;
 }
 
 interface NavContainerDispatch {
@@ -61,24 +62,28 @@ class NavContainer extends React.Component<NavContainerProps
   }
 
   render() {
-    const {categories: {activated, expanded}, actions} = this.props;
+    const {categories: {activated, expanded}, tags, actions} = this.props;
     const {categories} = this.state;
+    const allTags = [...tags.basicTags, ...tags.customTags];
     return (
-      <NavBar categories={categories} activated={activated} expanded={expanded} actions={actions}/>
+      <NavBar
+        filteredTags={tags.filteredTags}
+        tags={allTags}
+        categories={categories}
+        activated={activated}
+        expanded={expanded}
+        actions={actions}
+      />
     );
   }
 }
 export default compose(
   withFirebaseAuth,
   connect<NavContainerProps, NavContainerDispatch>(
-    ({ categories}: {categories: AppCategories}) => {
-      return {
-        categories: {
-          ...categories,
-          categoriesList: filterCategories(categories.categoriesList),
-        },
-      };
-    },
+    (state: AppState) => ({
+      categories: getFilteredCategories(state),
+      tags: state.tags,
+    }),
     (dispatch: Dispatch<AppAction>) => ({
       actions: bindActionCreators({...navActions, ...modalActions, logoutRequest}, dispatch)
     })

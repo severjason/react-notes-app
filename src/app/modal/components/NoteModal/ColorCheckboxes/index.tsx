@@ -9,12 +9,13 @@ interface AppCheckboxes {
   onColorChange (e: ChangeEvent<HTMLInputElement>): void;
 }
 
-const ColorCheckboxes: React.StatelessComponent<AppCheckboxes> = ({colors, note, onColorChange}): any =>
+const ColorCheckboxes: React.FunctionComponent<AppCheckboxes> = ({colors, note, onColorChange}): any =>
   colors.map((color: string, index: number) => {
     return (
       <Radio
         key={index}
         name="color-checkbox"
+        className="color-checkbox"
         value={color}
         style={{color: color}}
         checked={note.color === color}

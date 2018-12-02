@@ -5,7 +5,7 @@ const AddCategoryStyles = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 8px 8px 0 8px; 
+    // padding: 8px 8px 0 8px; 
     
     .category-add-button {
       &.hidden {

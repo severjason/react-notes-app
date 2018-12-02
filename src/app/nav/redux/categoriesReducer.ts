@@ -1,14 +1,14 @@
 import { AppAction } from '../../interfaces';
 import { AppNavAction, AppCategories } from '../interfaces';
 import * as types from './types';
+import * as authTypes from '../../auth/redux/types';
 
 const INITIAL_STATE: AppCategories = {
   activated: null,
   categoriesList: [],
-  basicTags: [],
-  customTags: [],
   expanded: false,
   loaded: false,
+  error: null,
 };
 
 export default function categoriesReducer(state: AppCategories = INITIAL_STATE, action: AppAction & AppNavAction) {
@@ -26,21 +26,10 @@ export default function categoriesReducer(state: AppCategories = INITIAL_STATE, 
         categoriesList: action.payload,
       };
     }
-    case types.GET_CUSTOM_TAGS_SUCCESS: {
-      return {
-        ...state,
-        customTags: action.payload ? action.payload : [],
-      };
-    }
-    case types.GET_BASIC_TAGS_SUCCESS: {
-      return {
-        ...state,
-        basicTags: action.payload ? action.payload : [],
-      };
-    }
     case types.GET_CATEGORIES_FAILED: {
       return {
         ...state,
+        error: action.payload,
         loaded: true,
       };
     }
@@ -54,6 +43,12 @@ export default function categoriesReducer(state: AppCategories = INITIAL_STATE, 
       return {
         ...state,
         activated: (action.payload) ? action.payload : state.activated,
+      };
+    }
+    case authTypes.USER_LOGOUT_REQUEST: {
+      return {
+        ...state,
+        expanded: false,
       };
     }
     default: {

@@ -43,7 +43,7 @@ export const mainTheme = {
     limitedHeightRem: 7, // rem
   },
   categories: {
-    menuHeightRem: 3.5, // rem
+    menuHeightPx: 46, // px
     menuDeleteIconWidthRem: 2, // rem
     menuBorder: () => `.5px solid ${mainTheme.colors.noteAddIconBorderColor}`,
     menuBoxShadow: () => `0 0 1px 0 ${mainTheme.colors.noteAddIconBorderColor}`

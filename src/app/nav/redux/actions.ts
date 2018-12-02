@@ -17,6 +17,11 @@ export const addTag = (tag: AppTag): AppAction => ({
   payload: tag,
 });
 
+export const filterTag = (tag: AppTag): AppAction => ({
+  type: types.FILTER_TAG,
+  payload: tag,
+});
+
 export const deleteCustomTag = (id: string): AppAction => ({
   type: types.DELETE_TAG_REQUEST,
   payload: id,

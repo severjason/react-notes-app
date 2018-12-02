@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 
-const CategoriesStyles = styled.div`
-
-  .menu-list {
-    padding: 0;
-  }
-  
+const TagsWrapperStyles = styled.div`
   .title {
     text-transform: uppercase;
     font-weight: 700;
@@ -14,21 +9,12 @@ const CategoriesStyles = styled.div`
     height: ${props => props.theme.categories.menuHeightPx}px;
     line-height: ${props => props.theme.categories.menuHeightPx}px;
   }
-  
-  .categories-menu {
+  .label {
     display: none;
-    &.expanded {
-      display: flex;
-    }
   }
-  
-  @media all and (max-width: ${props => props.theme.media.mobileMaxWidthPx}px) {
-    .categories-menu {
-      ul {
-        width: 100%;
-      }
-    }
+  .tags-container {
+    padding: 16px;
   }
 `;
 
-export default CategoriesStyles;
+export default TagsWrapperStyles;

@@ -62,7 +62,7 @@ class CategoryItem extends React.Component<CategoryItemProps> {
     const {categoryId, category, isActivated} = this.props;
     return (
       <CategoryItemStyles>
-        <Link to={`/notes/${categoryId}`} onClick={this.activateCategory}>
+        <Link to={`/notes/${categoryId}`} onClick={this.activateCategory} className="link">
           <MenuItem className={`category-menu-item ${isActivated ? 'active' : ''}`}>
             <ListItemIcon>
               {getIcon(category)}
