@@ -93,7 +93,7 @@ class Note extends React.Component<AppNoteProps & AppNote, {}> {
                 <Chip
                   style={{color: color, fontWeight: 700}}
                   className={`note-category`}
-                  label={category.name.toUpperCase()}
+                  label={category.name}
                   variant="outlined"
                 />
                 <Divider className={`note-divider`}/>
