@@ -33,10 +33,10 @@ class ModalContainer extends
   }
 }
 
-export default compose(
+export default compose<any>(
   withFirebaseAuth,
   connect<AppModalProps, AppHomeDispatch>(
-    (state: AppState) => ({
+    (state: AppState & any) => ({
       categories: getFilteredCategories(state),
       tags: state.tags,
       modal: state.modal,

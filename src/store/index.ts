@@ -9,10 +9,9 @@ import { reactReduxFirebase } from 'react-redux-firebase';
 import { reduxFirestore } from 'redux-firestore';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from '../sagas';
+import { FirebaseConfig } from '../config/keys';
 
 const sagaMiddleware = createSagaMiddleware();
-
-import { FirebaseConfig } from '../config/keys';
 
 const rrfConfig = {
   userProfile: 'users',

@@ -44,10 +44,10 @@ class HomeContainer extends React.Component<HomeProps
         : <FullScreenLoading/>;
   }
 }
-export default compose(
+export default compose<any>(
   withFirebaseAuth,
   connect<HomeProps, AppHomeDispatch>(
-    (state: AppState & AppFirestore) => {
+    (state: AppState & AppFirestore & any) => {
       const {notes} = state;
       return {
         categories: getFilteredCategories(state),
