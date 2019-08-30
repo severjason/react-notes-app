@@ -77,10 +77,10 @@ class NavContainer extends React.Component<NavContainerProps
     );
   }
 }
-export default compose(
+export default compose<any>(
   withFirebaseAuth,
   connect<NavContainerProps, NavContainerDispatch>(
-    (state: AppState) => ({
+    (state: AppState & any) => ({
       categories: getFilteredCategories(state),
       tags: state.tags,
     }),

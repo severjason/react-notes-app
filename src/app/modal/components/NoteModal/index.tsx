@@ -162,14 +162,14 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
           </FormControl>
 
           <FormControl className="form-control">
-            <FormLabel className="form-label" component="legend">Color:</FormLabel>
+            <FormLabel className="form-label" >Color:</FormLabel>
             <FormGroup row={true} className="checkboxes-container">
               <ColorCheckboxes note={note} colors={NOTES_COLORS} onColorChange={this.handleColorChange}/>
             </FormGroup>
           </FormControl>
 
           {!!this.getCategoriesList().length && <FormControl className="form-control">
-            <FormLabel className="form-label" component="legend">Categories:</FormLabel>
+            <FormLabel className="form-label" >Categories:</FormLabel>
             <FormGroup row={true}>
               <ExpandableContainer heightLimit={70}>
                 <CategoriesCheckboxes
@@ -182,7 +182,7 @@ export class NoteModal extends React.Component<AppNoteModalProps & AppNoteModalD
           </FormControl>}
 
           <FormControl className="form-control">
-            <FormLabel className="form-label" component="legend">Tags:</FormLabel>
+            <FormLabel className="form-label" >Tags:</FormLabel>
             <FormGroup row={true}>
               <Tags
                 allTags={allTags}

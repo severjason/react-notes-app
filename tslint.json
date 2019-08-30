@@ -1,12 +1,6 @@
 {
     "extends": ["tslint-react"],
     "rules": {
-        "align": [
-            true,
-            "parameters",
-            "arguments",
-            "statements"
-        ],
         "ban": false,
         "class-name": true,
         "comment-format": [
@@ -23,11 +17,6 @@
         "jsx-no-multiline-js": false,
         "label-position": true,
         "max-line-length": [ true, 120 ],
-        "member-ordering": [
-            true,
-            "static-before-instance",
-            "variables-before-functions"
-        ],
         "no-any": false,
         "no-arg": true,
         "no-bitwise": true,

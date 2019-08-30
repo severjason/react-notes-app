@@ -10,6 +10,7 @@ import { mainTheme } from './styles/themes';
 import GlobalStyles from './styles/global';
 import { injectGlobal } from 'styled-components';
 import 'normalize.css';
+import registerServiceWorker from './registerServiceWorker';
 
 injectGlobal`
 html {
@@ -31,8 +32,6 @@ body {
   box-sizing: border-box;
 }
 `;
-
-import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
   <Provider store={store}>

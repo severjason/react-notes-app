@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators, compose, Dispatch } from 'redux';
 import * as notesActions from '../redux/actions';
 import * as modalActions from '../../modal/redux/actions';
-import { NoteProps, AppNoteActions, AppNotesState } from '../interfaces';
+import { NoteProps, AppNoteActions } from '../interfaces';
 import {
   AppAction,
-  AppCategories,
   AppModalActions, AppWithFirebaseAuthProps,
 } from '../../interfaces';
 import { FullNote } from '../components';
@@ -41,11 +40,10 @@ class NoteContainer extends React.Component<NoteProps & AppWithFirebaseAuthProps
   }
 }
 
-export default compose(
+export default compose<any>(
   withFirebaseAuth,
   connect<NoteProps, AppHomeDispatch>(
-    ({categories, notes: {viewedNote, viewedNoteLoaded, error}}:
-       { categories: AppCategories, notes: AppNotesState }) => {
+    ({categories, notes: {viewedNote, viewedNoteLoaded, error}}: any) => {
       return {
         activeCategory: categories.activated && categories.activated.id,
         note: viewedNote,
