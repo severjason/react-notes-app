@@ -6,12 +6,12 @@ import * as modalActions from '../../modal/redux/actions';
 import { logoutRequest } from '../../auth/redux/actions';
 import { AppCategories, AppNavActions, AppCategory, AppTagsState } from '../interfaces';
 import { AppLoginActions } from '../../auth/interfaces';
-import { AppAction, AppModalActions, AppState, AppWithFirebaseAuthProps } from '../../interfaces';
+import { AppAction, AppState, AppWithFirebaseAuthProps } from '../../interfaces';
 import { NavBar } from '../components';
 import { getFilteredCategories } from '../redux/selectors';
 import withFirebaseAuth from '../../hocs/withFirebaseAuth';
-// @ts-ignore
 import _isEqual from 'lodash/isEqual';
+import { AppModalActions } from '../../modal/interfaces';
 
 interface NavContainerProps {
   categories: AppCategories;

@@ -1,10 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet';
-import { AppAllActions, AppCategory, HomePropsWithFirebase } from '../../../interfaces';
+import { AppAllActions, HomePropsWithFirebase } from '../../../interfaces';
 import NotesList from '../../components/NotesList';
 import HomeStyles from './styles';
 import { Redirect } from 'react-router';
 import { HELMET_TITLE } from '../../../../constants';
+import { AppCategory } from '../../../nav/interfaces';
 
 interface AppHomeDispatch {
   actions: AppAllActions;

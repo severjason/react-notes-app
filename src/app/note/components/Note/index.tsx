@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { AppNoteActions, AppNote } from '../../interfaces';
-import { AppModalActions } from '../../../interfaces';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -12,8 +11,8 @@ import { ReactNode } from 'react';
 import NoteButtons from './NoteButtons';
 import NoteStyles from './styles';
 import { AppTag } from '../../../nav/interfaces';
-// @ts-ignore
 import _isEqual from 'lodash/isEqual';
+import { AppModalActions } from '../../../modal/interfaces';
 
 interface AppNoteProps {
   actions: AppNoteActions & AppModalActions;

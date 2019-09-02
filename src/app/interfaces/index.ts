@@ -1,10 +1,9 @@
-import { AppNote, AppNoteActions, AppActionNote, AppNotes, AppNotesState } from '../note/interfaces';
+import { AppNote, AppNoteActions, AppNotesState } from '../note/interfaces';
 import { AppModal, AppModalActions } from '../modal/interfaces';
 import {
   AppCategories,
   AppNavActions,
-  AppNavAction,
-  AppCategory, AppTagsState,
+  AppTagsState,
 } from '../nav/interfaces';
 import { RouteComponentProps, RouteProps } from 'react-router';
 import * as React from 'react';
@@ -50,22 +49,5 @@ export interface AppWithFirebaseAuthProps extends RouteProps {
   firestore?: any;
 }
 
-interface AppFirestore {
-  firestore: any;
-}
-
 export interface AppAllActions extends AppNoteActions, AppNavActions, AppModalActions {
 }
-
-export {
-  AppNote,
-  AppNotes,
-  AppNotesState,
-  AppCategories,
-  AppModal,
-  AppModalActions,
-  AppActionNote,
-  AppNavAction,
-  AppFirestore,
-  AppCategory,
-};

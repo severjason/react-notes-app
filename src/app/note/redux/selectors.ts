@@ -1,7 +1,8 @@
 import { createSelector } from 'reselect';
-import { AppNote, AppState } from '../../interfaces';
+import { AppState } from '../../interfaces';
 // @ts-ignore
 import _difference from 'lodash/difference';
+import { AppNote } from '../interfaces';
 
 const getNotesState = (state: AppState) => state.notes.allNotes;
 

@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import { Note } from '../../components';
-import { AppModalActions } from '../../../interfaces';
 import { Helmet } from 'react-helmet';
 import { Redirect } from 'react-router';
 import { AppNoteActions, NoteProps } from '../../interfaces';
 import { HELMET_TITLE } from '../../../../constants';
+import { AppModalActions } from '../../../modal/interfaces';
 
 interface NoteActions {
   actions: AppNoteActions & AppModalActions;

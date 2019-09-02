@@ -1,5 +1,5 @@
-import { AppAction, AppCategory } from '../../interfaces';
-import { AppTag } from '../../nav/interfaces';
+import { AppAction } from '../../interfaces';
+import { AppCategory, AppTag } from '../../nav/interfaces';
 
 export interface AppActionNote {
   type: string;

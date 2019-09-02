@@ -6,14 +6,13 @@ import { ModalButtons, ColorCheckboxes, CategoriesCheckboxes, ModalTitle } from 
 import { Tags } from '../../../nav/components';
 import { AppModalActions, AppModal } from '../../interfaces';
 import { AppNoteActions, AppNote } from '../../../note/interfaces';
-import { AppCategories, AppCategory } from '../../../interfaces';
 import Dialog from '@material-ui/core/Dialog';
 import TextField from '@material-ui/core/TextField';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { NOTES_COLORS } from '../../../../constants';
-import { AppNavActions, AppTag, AppTagsState } from '../../../nav/interfaces';
+import { AppCategories, AppCategory, AppNavActions, AppTag, AppTagsState } from '../../../nav/interfaces';
 import { ExpandableContainer } from '../../../common';
 
 interface AppNoteModalProps {

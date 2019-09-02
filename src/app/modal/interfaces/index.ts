@@ -1,5 +1,6 @@
-import { AppAction, AppCategories, AppNote } from '../../interfaces';
-import { AppTagsState } from '../../nav/interfaces';
+import { AppAction } from '../../interfaces';
+import { AppCategories, AppTagsState } from '../../nav/interfaces';
+import { AppNote } from '../../note/interfaces';
 
 export interface AppModalProps {
   modal: AppModal;

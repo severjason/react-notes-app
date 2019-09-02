@@ -5,13 +5,13 @@ import * as notesActions from '../redux/actions';
 import * as modalActions from '../../modal/redux/actions';
 import { NoteProps, AppNoteActions } from '../interfaces';
 import {
-  AppAction,
-  AppModalActions, AppWithFirebaseAuthProps,
+  AppAction, AppWithFirebaseAuthProps,
 } from '../../interfaces';
 import { FullNote } from '../components';
 import withFirebaseAuth from '../../hocs/withFirebaseAuth';
 import FullScreenLoading from '../../common/loading/FullScreen';
 import { ErrorPage } from '../../common';
+import { AppModalActions } from '../../modal/interfaces';
 
 interface AppHomeDispatch {
   actions: AppNoteActions & AppModalActions;

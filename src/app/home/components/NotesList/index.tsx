@@ -1,9 +1,10 @@
-import * as React from 'react';
-import { AppAllActions, AppNote } from '../../../interfaces';
+import React from 'react';
+import { AppAllActions } from '../../../interfaces';
 import { EmptyPage } from '../../../common';
 import { Note } from '../../../note/components';
 import { ReactNode } from 'react';
 import NotesListStyles from './styles';
+import { AppNote } from '../../../note/interfaces';
 
 interface AppNoteListProps {
   notes: AppNote[];

@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
-import { AppCategories, AppState } from '../../interfaces';
+import { AppState } from '../../interfaces';
 import { filterCategories } from '../../../helpers';
+import { AppCategories } from '../interfaces';
 
 const getCategoriesState = (state: AppState) => state.categories;
 

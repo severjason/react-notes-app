@@ -2,7 +2,8 @@ import * as noteTypes from './types';
 // import * as modalTypes from '../../modal/redux/types';
 // import * as navTypes from '../../nav/redux/types';
 import { AppActionNote, AppNotesState } from '../interfaces';
-import { AppAction, AppNavAction } from '../../interfaces';
+import { AppAction } from '../../interfaces';
+import { AppNavAction } from '../../nav/interfaces';
 
 const INITIAL_STATE: AppNotesState = {
   allNotes: [],

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { AppNoteActions } from '../../../interfaces';
-import { AppModalActions } from '../../../../interfaces';
 import { Link } from 'react-router-dom';
 import DeleteForeverOutlined from '@material-ui/icons/DeleteForeverOutlined';
 import EditOutlined from '@material-ui/icons/EditOutlined';
@@ -10,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import NoteButtonStyles from './styles';
 import { AlertDialog } from '../../../../common';
+import { AppModalActions } from '../../../../modal/interfaces';
 
 interface AppNoteButtonsProps {
   noteId: any;

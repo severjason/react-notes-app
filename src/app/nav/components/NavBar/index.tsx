@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import NavBarStyles from './styles';
-import { AppModalActions, AppWithFirebaseAuthProps, AppCategory } from '../../../interfaces';
-import { AppNavActions, AppTag } from '../../interfaces';
+import { AppWithFirebaseAuthProps } from '../../../interfaces';
+import { AppCategory, AppNavActions, AppTag } from '../../interfaces';
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -17,6 +17,7 @@ import { AppDrawer } from '../../components';
 import { Link } from 'react-router-dom';
 import { AppLoginActions } from '../../../auth/interfaces';
 import { withFirebaseAuth } from '../../../hocs';
+import { AppModalActions } from '../../../modal/interfaces';
 
 interface NavBarProps {
   actions: AppNavActions & AppModalActions & AppLoginActions;

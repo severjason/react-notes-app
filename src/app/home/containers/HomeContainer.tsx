@@ -10,7 +10,6 @@ import {
   AppState,
   AppRoute,
   HomeProps,
-  AppFirestore,
   AppWithFirebaseAuthProps,
 } from '../../interfaces';
 import { Home } from '../components';
@@ -47,7 +46,7 @@ class HomeContainer extends React.Component<HomeProps
 export default compose<any>(
   withFirebaseAuth,
   connect<HomeProps, AppHomeDispatch>(
-    (state: AppState & AppFirestore & any) => {
+    (state: AppState & any) => {
       const {notes} = state;
       return {
         categories: getFilteredCategories(state),
